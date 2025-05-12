@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250221-1747-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.22.1"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="HuaweiGomezAmaro"
+	OSRelease="5.15.167.4-microsoft-standard-WSL2"
+	OSVersion="#1 SMP Tue Nov 5 00:21:55 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="24"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="2048"
+	TotalPhysicalMemory="7410"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2295.61"
+	>
+	<Testing>
+		<StartDateTime>Feb 21 19:33 CET</StartDateTime>
+		<StartTestTime>1740162826</StartTestTime>
+		<TestList>
+			<Test>/home/ale/ed/p32goama/vector2d/TestVector2D</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>TestVector2D</Name>
+			<Path>/home/ale/ed/p32goama/vector2d</Path>
+			<FullName>/home/ale/ed/p32goama/vector2d/TestVector2D</FullName>
+			<FullCommandLine>/usr/bin/python3.10 "run_tests.py" "/home/ale/ed/p32goama/vector2d/build//test_vector2d" "tests_vector2d"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0757702</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3.10 "run_tests.py" "/home/ale/ed/p32goama/vector2d/build//test_vector2d" "tests_vector2d"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJwLSS0uUSgqzcvLzEu3UigB8orjy1KTS/KLjFL0DQwU9PT0FKSjjY1yQ0AKCxKLi1NT9KSjDXK5QvDqNMSj00jfCKIeJsoFANvzK8Q=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Feb 21 19:33 CET</EndDateTime>
+		<EndTestTime>1740162826</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

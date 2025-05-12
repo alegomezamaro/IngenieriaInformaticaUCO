@@ -1,0 +1,1 @@
+El usuario isa tiene una clave privada de ssh en FicherosEjercicio3/home/isa/ ssh/id_rsa que no está protegida. La clave debe ser accesible unicamente por el propietario.

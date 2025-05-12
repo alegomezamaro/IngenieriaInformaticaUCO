@@ -1,0 +1,1 @@
+El usuario victor tiene una clave privada de ssh en FicherosEjercicio3/home/victor/ ssh/id_rsa que no está protegida. La clave debe ser accesible unicamente por el propietario.

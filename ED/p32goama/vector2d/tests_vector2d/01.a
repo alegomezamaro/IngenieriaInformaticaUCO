@@ -1,0 +1,6 @@
+Creating vector 0 ... ok.
+Vector 0 [1,2]
+Creating vector 1 ... ok.
+Vector 1 [-1,-2]
+Adding vector 1 to vector 0 ... ok.
+Vector 0 [0,0]

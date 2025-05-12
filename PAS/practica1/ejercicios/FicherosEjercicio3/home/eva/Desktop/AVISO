@@ -1,0 +1,1 @@
+El usuario eva tiene una clave privada de ssh en FicherosEjercicio3/home/eva/ ssh/id_rsa que no está protegida. La clave debe ser accesible unicamente por el propietario.

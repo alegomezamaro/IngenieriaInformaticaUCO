@@ -1,0 +1,21 @@
+Start testing: Feb 21 19:33 CET
+----------------------------------------------------------
+1/1 Testing: TestVector2D
+1/1 Test: TestVector2D
+Command: "/usr/bin/python3.10" "run_tests.py" "/home/ale/ed/p32goama/vector2d/build//test_vector2d" "tests_vector2d"
+Directory: /home/ale/ed/p32goama/vector2d
+"TestVector2D" start time: Feb 21 19:33 CET
+Output:
+----------------------------------------------------------
+Test running: tests_vector2d/00 ... [32mTest passed.[0m
+Test running: tests_vector2d/01 ... [32mTest passed.[0m
+2/2 tests passed.
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"TestVector2D" end time: Feb 21 19:33 CET
+"TestVector2D" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 21 19:33 CET

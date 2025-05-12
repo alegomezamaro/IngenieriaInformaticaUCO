@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/ale/ed/p32goama/vector2d/build",
+  "command": "/usr/bin/g++ -I/home/ale/ed/p32goama/vector2d -g -std=gnu++11 -o CMakeFiles/test_vector2d.dir/test_vector2d.cpp.o -c /home/ale/ed/p32goama/vector2d/test_vector2d.cpp",
+  "file": "/home/ale/ed/p32goama/vector2d/test_vector2d.cpp"
+}
+]
