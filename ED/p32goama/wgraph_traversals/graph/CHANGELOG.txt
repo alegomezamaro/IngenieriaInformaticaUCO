@@ -1,0 +1,6 @@
+* 1.0
+- Start release.
+* 1.1
+- Fixed bug in post-c of goto_edge(EdgeRef e)
+- Added tests for goto_edge(EdgeRef e)
+- Rewritten docs.

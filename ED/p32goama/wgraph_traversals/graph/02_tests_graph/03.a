@@ -1,0 +1,11 @@
+Creating a directed graph ...  ok.
+Adding vertex with data item: 'A' ... ok.
+Adding vertex with data item: 'B' ... ok.
+Adding edge 0 for vertices ('A','B') with data item: '0.5' ... ok.
+Current vertex with label 0 visited flag: F data: 'A' data key: 'A'.
+Current edge ('A','B'), visited flag: F, data: 0.5
+Number of vertices: 2
+Number of edges: 1
+Checking visited flags:
+	Vertex 'A':F incident edges: (A,B):F
+	Vertex 'B':F incident edges:
