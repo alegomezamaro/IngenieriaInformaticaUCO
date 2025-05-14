@@ -6,6 +6,16 @@
 #define MAX_SIZE 1024
 #define MSG_STOP "exit"
 
+#include <errno.h>
+#include <mqueue.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include <signal.h>
+
 #endif 
 
 /*
