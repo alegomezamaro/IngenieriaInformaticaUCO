@@ -7,81 +7,99 @@ tes y envie la suma de ellos al otro proceso para que este muestre su resultado.
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <errno.h> //Gestion de errores
-#include <string.h> //Empleada en strerror(), para definir el valor de errno.
+#include <errno.h> 
+#include <string.h>
 #include <time.h>
 #include <sys/wait.h>
 
 int main(){
 
-    pid_t pid; // Permite realizar el fork
-	int flag, status; 
+    pid_t pid; //Variable que almacenara el pid del proceso
+	int flag, status; //Sirve para obtener info
 	int result; //Permite gestionar errores
+	int fildes[2]; //Variable de la tuberia
 	float random1;
 	float random2;
 	float sum;
-	int fildes[2]; //Extremos de la tubería
-
 	result=pipe(fildes); //Creacion de la tuberia
+	srand(time(NULL)); //Inicializamos los numeros aleatorios
 
-	if(status==-1) { //Comprobacion de errores
-		printf("\nERROR en la creacion.\n");
+	if(status==-1){ //Comprobamos que la tuberia se ha creado correctamente
+
+		printf("\nError en la creacion de la tuberia.\n");
 		exit(1);
 	}
 
     pid=fork(); //Creacion del proceso hijo
 
 	switch(pid) {
-  
-        case -1:
-	    	printf("No se ha podido crear el proceso hijo...\n"); //Error en la creacion del proceso hijo
+
+        case -1: //Si hay un error al crear el proceso
+
+	    	printf("No se ha podido crear el proceso hijo...\n");
 	    	exit(EXIT_FAILURE);
             break;
 
-	    case 0:
-	    	printf("[HIJO]: Mi PID es %d y mi PPID es %d\n", getpid(), getppid()); //Informacion acerca del hijo
-	    	close(fildes[1]); //Cerramos el extremo usado
-            result=read(fildes[0], &sum, sizeof(int));//Recibimos mensaje
-            if(result!= sizeof(int)) { //Se comprueba mensaje
-	    		printf("\n[HIJO]: ERROR al leer de la tubería...\n");//Mensaje de error
-	    		exit(EXIT_FAILURE);//Error en la lectura de la tubería
+	    case 0: //Proceso creado correctamente
+
+	    	printf("[HIJO]: Mi PID es %d y mi PPID es %d\n", getpid(), getppid()); //Imprimimos la información del proceso
+	    	close(fildes[1]); //Cerramos el extremo de escritura
+            result=read(fildes[0], &sum, sizeof(int)); //Leemos el mensaje
+
+            if(result != sizeof(int)){ //Si el mensaje no tiene el tamaño correcto
+
+	    		printf("\n[HIJO]: ERROR al leer de la tubería...\n");
+	    		exit(EXIT_FAILURE);
 	    	}
+
             printf("[HIJO]: El resultado de la suma leido de la tubería es: %f.\n", sum); //Imprimimos el valor enviado		
-	    	printf("[HIJO]: Tubería cerrada ...\n"); //Cerramos la tuberia
-	    	close(fildes[0]);//Cerramos el extremo usado
+	    	close(fildes[0]);//Cerramos el extremo de lectura
+			printf("[HIJO]: Tubería cerrada ...\n"); //Cerramos la tuberia
 	    	break;
 
 	    default:
-	    	printf("[PADRE]: Mi PID es %d y el PID de mi hijo es %d \n", getpid(),pid); //Informacion acerca del padre
-	    	close(fildes[0]); //Cerramos el extremo usado
-	    	srand(time(NULL)); //Inicializacion del generador de numeros aleatorios
-            random1=rand()%5000;//Generacion de los numeros aleatorios
+
+	    	printf("[PADRE]: Mi PID es %d y el PID de mi hijo es %d \n", getpid(),pid); //Imprimimos la información del padre
+	    	close(fildes[0]); //Cerramos el extremo de lectura
+            random1=rand()%5000; //Generacion de los numeros aleatorios
 	    	random2=rand()%5000;
-	    	sum=random1+random2;
+	    	sum=random1+random2; //Sumamos los números
             printf("[PADRE]: Escribo el resultado de la suma de los números aleatorios %f y %f en la tubería...\n", random1, random2); //Se escribe en la tuberia
-	    	result=write(fildes[1], &sum, sizeof(int)); //Se envía el mensaje
-	    	if(result!=sizeof(int)) { //Comprobacion del mensaje
+	    	result=write(fildes[1], &sum, sizeof(int)); //Escribimos el mensaje
+
+	    	if(result!=sizeof(int)){ //Comprobamos que el tamaño sea correcto
+
 	    		printf("\n[PADRE]: ERROR al escribir en la tubería...\n");
 	    		exit(EXIT_FAILURE);
 	    	}
-	    	close(fildes[1]); // Se cierra el extremo usado
+
+	    	close(fildes[1]); //Cerramos el extremo de escritura
 	    	printf("[PADRE]: Tubería cerrada...\n");
-            //Espera a que el hijo termine
-	        while((flag=wait(&status))>0){//El padre pasa a esperar al hijo
-	            if(WIFEXITED(status)) {
+
+			while((flag=wait(&status))>0){ //Mientras el padre espere hijos
+
+	            if(WIFEXITED(status)){ //El proceso a finalizado correctamente
+
 	    	        printf("Proceso Padre, Hijo con PID %ld finalizado, status = %d\n", (long int)flag, WEXITSTATUS(status));
 	            } 
-	            else if(WIFSIGNALED(status)) {
+
+	            else if(WIFSIGNALED(status)){ //EL proceso ha finalizado por una señal
+
 	    	        printf("Proceso Padre, Hijo con PID %ld finalizado al recibir la señal %d\n", (long int)flag, WTERMSIG(status));
 	            } 		
 	        }
-	        if(flag==(pid_t)-1 && errno==ECHILD) { //Si no hay mas hijos que esperar
+
+	        if(flag==(pid_t)-1 && errno==ECHILD){ //Si no hay que esperar más hijos
+
 	            printf("Proceso Padre %d, no hay mas hijos que esperar. Valor de errno = %d, definido como: %s\n", getpid(), errno, strerror(errno));
-	        } else {
+	        }
+			
+			else{ //Si hay mas hijos que esperar
+
 	            printf("Error en la invocacion de wait o waitpid. Valor de errno = %d, definido como: %s\n", errno, strerror(errno));
 	            exit(EXIT_FAILURE);
 	        }			 
-	}
-	exit(EXIT_SUCCESS);//Finalizacion del proceso
+		}
+	
+	exit(EXIT_SUCCESS);
 }
-
