@@ -60,9 +60,10 @@ Tenga tambien en cuenta el siguiente control de errores:
 
 
 //Funcion que recibe un valor de tipo struct passwd la cual muestra la informacion del usuario
-void Usuario(struct passwd *pw) {
+void Usuario(struct passwd *pw){
+
     printf("Usuario:\n");
-    printf("Nombre: %s\n", (pw->pw_gecos)); // Nombre de usuario asociado a un login (strtok elimina las comas)
+    printf("Nombre: %s\n", (pw->pw_gecos)); // Nombre de usuario asociado a un login
     printf("Login: %s\n", pw->pw_name);//Login
     printf("Password: %s\n", pw->pw_passwd);//Contraseña
     printf("UID: %d\n", pw->pw_uid);//UID
@@ -72,7 +73,8 @@ void Usuario(struct passwd *pw) {
 }
 
 //Funcion que recibe un valor de tipo struct group la cual muestra la informacion del grupo
-void Grupo(struct group *gr) {
+void Grupo(struct group *gr){
+
     printf("Grupo:\n");
     printf("Nombre del grupo: %s\n", gr->gr_name);//Nombre del grupo principal
     printf("GID: %d\n",gr->gr_gid); //Numero del grupo principal (GID propio)
@@ -81,7 +83,8 @@ void Grupo(struct group *gr) {
 }
 
 //Imprime las principales opciones del programa
-void Opciones() { 
+void Opciones(){
+
     printf("Uso del programa: ./ej1.c [opciones]:\n");
     printf("-h, --help Imprimir esta ayuda.\n");
     printf("-u, --user (<nombre>|<uid>) Información sobre el usuario.\n");
@@ -92,19 +95,19 @@ void Opciones() {
 }      
 
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv){
 
     int gid; //Variable que almacena el GID
     int c; //Variable que ve las flags se han activado
     int uid; //Variable que almacena el UID
-    char *nombre; //Variable que almacena el nombre del usuario
-    char *gname; //Variable que almacenar el nombre del grupo
+    char *nombre; //Variable que almacena el nombre del usuario (PUNTERO)
+    char *gname; //Variable que almacenar el nombre del grupo (PUNTERO)
     struct passwd *pw; //Variable que almacena la informacion del usuario
     struct group *gr; //Variable que almacena la informacion del grupo
 
-    /* Estructura a utilizar por getoptlong */
+    //Estructura a utilizar por getoptlong
     static struct option long_options[] = {
-        /* Opciones que no van a actuar sobre un flag */
+
         //{<nombre largo>, <recibe/no recibe argumento>, NULL, <nombre corto>}
         {"user", required_argument, NULL, 'u'},
         {"group", required_argument, NULL, 'g'},
@@ -112,28 +115,28 @@ int main(int argc, char **argv) {
         {"maingroup", no_argument, NULL, 'm'},
         {"allgroups", no_argument, NULL, 's'},
         {"help", no_argument, NULL, 'h'},
-        /* Necesario para indicar el final de las opciones */
-        {0, 0, 0, 0} 
+        {0, 0, 0, 0} //Fin de la lista de opciones
     };
 
-    //Estas variables servirán para almacenar el resultado de procesar la línea de comandos 
-    char *uvalue = NULL; //almacenamos el valor de u
-    char *gvalue = NULL; //almacenamos el valor de g
-    bool aflag = false; //almacenamos el valor de a
-    bool mflag = false; //almacenamos el valor de m
-    bool sflag = false; //almacenamos el valor de s
-    bool hflag = false; //almacenamos el valor de h
-    bool errorflag = false; //almacenamos el valor si se introduce una opcion no valida
+    //Estas variables que almacenar el resultado de procesar la línea de comandos 
+    char *uvalue = NULL; //Almacena el valor de u (PUNTERO)
+    char *gvalue = NULL; //Almacena el valor de g (PUNTERO)
+    bool aflag = false; //Almacena el valor de a
+    bool mflag = false; //Almacena el valor de m
+    bool sflag = false; //Almacena el valor de s
+    bool hflag = false; //Almacena el valor de h
+    bool errorflag = false; //Almacena el valor si se introduce una opcion no valida
 
-    while((c = getopt_long(argc, argv, "u:g:amsh", long_options, NULL)) != -1) { //en el while se activan las flags
-        //ponemos : para que se active la flag al tener un argumento
+    while((c = getopt_long(argc, argv, "u:g:amsh", long_options, NULL)) != -1){
+    //Durante el while ponemos : para que se active la flag al tener un argumento
+
         switch(c) {
             case 'u':
-                uvalue=optarg;
+                uvalue=optarg; //Espera argumentos
                 break;
             
             case 'g':
-                gvalue=optarg;
+                gvalue=optarg; //Espera argumentos
                 break;
             
             case 'a':
@@ -153,116 +156,169 @@ int main(int argc, char **argv) {
                 break;
 
             case '?':
-                errorflag=true; //si se introduce una opcion no valida, se activa la flag linea 265
-
+                errorflag=true; //Si se introduce una opcion no valida
 
         }
     }
     
-    //entramos a este if si se activa el valor de h, da igual las demas flags
-    if(hflag == true) {
+    //Entramos a este if si se activa el valor de h, da igual las demas flags
+    if(hflag == true){
+
         Opciones(); 
         exit(0);
     }
-      //entramos a este if si no se activa ningun valor
-    if((uvalue == NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == false)&&(mflag == false)&&(sflag == false)&&(errorflag == false)) {
-        if((nombre=getenv("USER"))==NULL || (pw=getpwnam(nombre))==NULL) { //si no existe el login
+
+    //Si no se activa ningun valor
+    if((uvalue == NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == false)&&(mflag == false)&&(sflag == false)&&(errorflag == false)){
+
+        if((nombre=getenv("USER"))==NULL || (pw=getpwnam(nombre))==NULL) { //Si no existe el login
+
             printf("Error al intentar acceder a la información de usuario.\n");
             exit(-1);
-        } else {
-            Usuario(pw); //si existe el login, imprimimos la info
         }
-        if((gr=getgrgid(pw->pw_gid))==NULL) { //si no existe el gid
+
+        else { //Si existe, lo imprimimos
+
+            Usuario(pw);
+        }
+
+        if((gr=getgrgid(pw->pw_gid))==NULL) { //SI no existe el GID
+
             printf("Error al intentar acceder a la información de grupo.\n");
             exit(-1);
-        } else {
-            Grupo(gr); //si existe el gid, imprimimos la info
+        }
+        
+        else{ //Si existe el GID, lo imprimimos
+
+            Grupo(gr); 
             exit(0);
         }
     }
     
-    //entramos a este if si se activa el valor de u
-    if((uvalue != NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == false)&&(sflag == false)) {
-        if(isdigit(*uvalue)!=0) { //comprobamos que uvalue sea el uid y no el login
-            uid=atoi(uvalue); //convertimos el uid a int
-            if((pw=getpwuid(uid))==NULL) { //si no existe el uid
+    //Si se activa u
+    if((uvalue != NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == false)&&(sflag == false)){
+
+        if(isdigit(*uvalue)!=0){ //Si u es el UID
+
+            uid=atoi(uvalue); //Convertimos el UID a entero
+
+            if((pw=getpwuid(uid))==NULL){ //Si no existe el UID
+
                 printf("Error al intentar acceder a la información de usuario.\n");
                 exit(-1);
-            } else {
-                Usuario(pw); //si existe el uid, imprimimos la info
             }
-        } else { //si uvalue es el login
-            nombre=uvalue;//guardamos el login en nombre
-            if((pw=getpwnam(nombre))==NULL) { //si no existe el login
+            
+            else{ //Si existe el UID, lo imprimimos
+
+                Usuario(pw); //si existe el UID, imprimimos la info
+            }
+        }
+        
+        else{ //Si u es el login
+
+            nombre=uvalue;//Guardamos el login en nombre
+
+            if((pw=getpwnam(nombre))==NULL){ //Si no existe el login
+
                 printf("Error al intentar acceder a la información de usuario.\n");
                 exit(-1);
-            } else {
+
+            }
+            
+            else{
+            
                 Usuario(pw); //si existe el login, imprimimos la info
             }
         }
-        if(mflag == true) { //si se activa el valor de m, imprimimos la info del grupo principal
-            if((gr=getgrgid(pw->pw_gid))==NULL) { //si no existe el gid
+
+        if(mflag == true) { //Si se activa m, imprimimos la info del grupo principal
+        
+            if((gr=getgrgid(pw->pw_gid))==NULL){ //Si no existe el GID
+
                 printf("Error al intentar acceder a la información de grupo.\n");
                 exit(-1);
-            } else {
-                Grupo(gr); //si existe el gid, imprimimos la info
+            }
+            
+            else { //Si existe el GID, lo imprimimos
+
+                Grupo(gr);
                 exit(0);
             }
         }
+
         exit(0);
     }
 
-    //entramos a este if si se activa el valor de a
+    //Si se activa a
     if((uvalue == NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == true)&&(sflag == false)) {
-        if((nombre=getenv("USER"))==NULL || (pw=getpwnam(nombre))==NULL) { //si no existe el login
+
+        if((nombre=getenv("USER"))==NULL || (pw=getpwnam(nombre))==NULL){ //Si no existe el login
+
             printf("Error al intentar acceder a la información de usuario.\n");
             exit(-1);
-        } else {
-            Usuario(pw); //si existe el login, imprimimos la info
         }
-        if(mflag==true) { //si se activa el valor de m, imprimimos la info del grupo principal
-            if((gr=getgrgid(pw->pw_gid))==NULL) { //si no existe el gid
+
+        else{ //Si existe el login, lo imprimimos
+
+            Usuario(pw);
+        }
+
+        if(mflag==true) { //Si se activa m, imprimimos la info del grupo principal
+
+            if((gr=getgrgid(pw->pw_gid))==NULL) { //Si no existe el GID
+
                 printf("Error al intentar acceder a la información de grupo.\n");
                 exit(-1);
-            } else {
-                Grupo(gr); //si existe el gid, imprimimos la info
+            }
+            
+            else { //Si existe el gid, imprimimos la info
+                Grupo(gr); 
                 exit(0);
             }
         }
+
         exit(0);
     }
 
 
-    //entramos a este if si se activa el valor de s
-    if((uvalue == NULL)&&(gvalue == NULL)&&(mflag == false)&&(hflag == false)&&(aflag == false)&&(sflag == true)) {
-        FILE *f;
-        f=fopen("/etc/group", "r"); //PUEDE VARIAR SEGUN EL SO
-        if(f==NULL) {
+    //Si se activa el valor de s
+    if((uvalue == NULL)&&(gvalue == NULL)&&(mflag == false)&&(hflag == false)&&(aflag == false)&&(sflag == true)){
+
+        FILE *f; 
+        f=fopen("/etc/group", "r"); //Abrimos la carpeta de grupos (Puede variar dependiendo del SO)
+
+        if(f==NULL){ //Si no existe el fichero
+
             printf("Error al intentar acceder a la información de usuario.\n");
             exit(-1);
         }
-        char buffer[256]; //buffer para almacenar la linea
+
+        char buffer[256]; //Buffer que almacena la linea
         char *nombre;
+        char *psw;
         char *gid;
         char *miembros;
         printf("Grupo:\n\n");
 
-        while(fgets(buffer, 256, f) != NULL) {
-            nombre=strtok(buffer, ":"); //separamos el nombre del grupo
-            strtok(NULL, ":"); //saltamos el password            
-            gid=strtok(NULL, ":"); //separamos el gid
-            miembros=strtok(NULL, ":"); //separamos los miembros
+        while(fgets(buffer, 256, f) != NULL){ //Mientras no llegue al final del fichero
+
+            nombre=strtok(buffer, ":"); //Separamos el nombre
+            psw=strtok(NULL, ":"); //Separamos la contraseña           
+            gid=strtok(NULL, ":"); //Separamos el GID
+            miembros=strtok(NULL, ":"); //Separamos los miembros
             printf("Nombre del grupo principal: %s\n", nombre);
+            printf("Contraseña: %s\n", psw);
             printf("GID: %s\n", gid);
             printf("Miembros secundarios: %s\n", miembros);
         }
-        fclose(f);
+
+        fclose(f); //Cerramos el fichero
         exit(0);
     }
 
 
   
-        //entramos a este if si se activa el valor de g
+    //entramos a este if si se activa el valor de g
     if((uvalue == NULL)&&(gvalue != NULL)&&(mflag == false)&&(hflag == false)&&(aflag == false)&&(sflag == false)) {
         if(isdigit(*gvalue)!=0) { //comprobamos que gvalue sea el gid y no el nombre del grupo
             gid=atoi(gvalue);
