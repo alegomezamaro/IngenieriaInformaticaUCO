@@ -357,5 +357,5 @@ int main(int argc, char **argv){
     }
 
     Opciones(); //Mostramos las opciones
-    exit(0); //Salir
+    exit(0);
 }
