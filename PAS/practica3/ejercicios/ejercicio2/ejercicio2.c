@@ -1,3 +1,9 @@
+/*
+Implemente un programa en C usando tuber´ıas similar a los existentes en los ficheros
+pipe.c y pipe2.c, pero en este caso que un proceso genere dos numeros aleatorios flotan- ´
+tes y envie la suma de ellos al otro proceso para que este muestre su resultado.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
