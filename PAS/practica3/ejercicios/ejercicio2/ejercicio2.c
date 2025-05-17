@@ -14,7 +14,7 @@ tes y envie la suma de ellos al otro proceso para que este muestre su resultado.
 
 int main(){
 
-    pid_t pid; //Variable que almacenara el pid del proceso
+    pid_t pid; //Variable que almacenara el PID del proceso
 	int flag, status; //Sirve para obtener info
 	int result; //Permite gestionar errores
 	int fildes[2]; //Variable de la tuberia
@@ -40,7 +40,7 @@ int main(){
 	    	exit(EXIT_FAILURE);
             break;
 
-	    case 0: //Proceso creado correctamente
+	    case 0: //Proceso creado correctamente, lee
 
 	    	printf("[HIJO]: Mi PID es %d y mi PPID es %d\n", getpid(), getppid()); //Imprimimos la información del proceso
 	    	close(fildes[1]); //Cerramos el extremo de escritura
@@ -57,7 +57,7 @@ int main(){
 			printf("[HIJO]: Tubería cerrada ...\n"); //Cerramos la tuberia
 	    	break;
 
-	    default:
+	    default: //Proceso padre, escribe
 
 	    	printf("[PADRE]: Mi PID es %d y el PID de mi hijo es %d \n", getpid(),pid); //Imprimimos la información del padre
 	    	close(fildes[0]); //Cerramos el extremo de lectura
