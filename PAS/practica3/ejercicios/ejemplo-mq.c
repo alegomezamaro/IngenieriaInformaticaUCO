@@ -87,7 +87,7 @@ int main() {
             printf("[PADRE]: Recibiendo mensaje (espera bloqueante)...\n");
             resultado = mq_receive(mq, buffer, MAX_SIZE, NULL); //Recibimos el mensaje
 
-            if (resultado <= 0){ //SI no se recibe el mensaje correctamente
+            if (resultado <= 0){ //Si no se recibe el mensaje correctamente
 
                 perror("[PADRE]: Error al recibir el mensaje");
                 exit(-1);
@@ -108,28 +108,26 @@ int main() {
                 perror("[PADRE]: Error eliminando la cola");
                 exit(-1);
             }
+            
+            while ((flag = wait(&status)) > 0){ //Espera del padre a los hijos
 
-            ////////////////////////////////////
-            /*Espera del padre a los hijos*/
-            while ((flag = wait(&status)) > 0){
-
-                if (WIFEXITED(status)){
+                if (WIFEXITED(status)){ //El proceso a finalizado correctamente
 
                     printf("Proceso Padre, Hijo con PID %ld finalizado, status = %d\n", (long int)flag, WEXITSTATUS(status));
                 }
                 
-                else if (WIFSIGNALED(status)){ // Para seniales como las de finalizar o matar
+                else if (WIFSIGNALED(status)){ //EL proceso ha finalizado por una señal
                 
                     printf("Proceso Padre, Hijo con PID %ld finalizado al recibir la señal %d\n", (long int)flag, WTERMSIG(status));
                 }
             }
 
-            if (flag == (pid_t)-1 && errno == ECHILD){
+            if (flag == (pid_t)-1 && errno == ECHILD){ //Si no hay que esperar más hijos
 
                 printf("Proceso Padre %d, no hay mas hijos que esperar. Valor de errno = %d, definido como: %s\n", getpid(), errno, strerror(errno));
             }
             
-            else{
+            else{ //Si hay mas hijos que esperar
 
                 printf("Error en la invocacion de wait o waitpid. Valor de errno = %d, definido como: %s\n", errno, strerror(errno));
                 exit(EXIT_FAILURE);
