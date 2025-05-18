@@ -1,3 +1,7 @@
+/*
+El proceso hijo generara los numeros aleatorios y el padre recibira la suma de ellos. 
+*/
+
 #include <errno.h>
 #include <mqueue.h>
 #include <stdio.h>
