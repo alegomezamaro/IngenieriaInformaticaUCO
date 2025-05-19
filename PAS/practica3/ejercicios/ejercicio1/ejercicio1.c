@@ -249,7 +249,7 @@ int main(int argc, char **argv){
         exit(0);
     }
 
-    //Si se activa a
+    //Si se activa a y (o no) m
     if((uvalue == NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == true)&&(sflag == false)) {
 
         if((nombre=getenv("USER"))==NULL || (pw=getpwnam(nombre))==NULL){ //Si no existe el login
