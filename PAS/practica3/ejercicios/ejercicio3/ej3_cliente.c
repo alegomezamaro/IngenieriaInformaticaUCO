@@ -5,152 +5,119 @@ recogida por teclado, mientras el valor de esa cadena sea distinto a la palabra 
 
 #include "ej3_common.h"
 
-/* Función auxiliar, escritura de un log.
-No se usa en este ejemplo, pero le puede servir para algun
-ejercicio resumen */
-void funcionLog(char *mensaje);
+void funcionLog(char *mensaje); // Función auxiliar para errores
 
-// Apuntador al fichero de log.
-FILE *fLog = NULL;
-mqd_t mq_server; // Cola del servidor
-mqd_t mq_client; // Cola del cliente
-
-// Buffers para intercambiar mensajes
-char readbuffer[MAX_SIZE];
-char writebuffer[MAX_SIZE];
-
-// Nombre para las colas
-char serverCola[100];
-char clienteCola[100];
+FILE *fLog = NULL; //Apuntador al fichero de log
+mqd_t mq_server; //Cola del servidor
+mqd_t mq_client; //Cola del cliente
+char readbuffer[MAX_SIZE]; //Buffer para recibir mensajes
+char writebuffer[MAX_SIZE]; //Buffer para enviar mensajes
+char serverCola[100]; //Nombre de la cola del servidor
+char clienteCola[100]; //Nombre de la cola del cliente
 
 int main(int argc, char **argv) {
 
-    // Nombre para la cola del servidor. Al concatenar el login sera unica en un sistema compartido.
-    sprintf(serverCola, "%s-%s", SERVER_QUEUE, getenv("USER"));
-    printf("[Cliente]: El nombre de la cola del servidor es: %s\n", serverCola);
+    sprintf(serverCola, "%s-%s", SERVER_QUEUE, getenv("USER")); //Nombre para la cola del servidor
+    printf("[Cliente]: El nombre de la cola del servidor es: %s\n", serverCola); 
+    mq_server = mq_open(serverCola, O_WRONLY); //Abrir la cola del servidor solo para escritura
 
-    // Abrir la cola del servidor. La cola CLIENTE_COLA le servira en ejercicio resumen.
-    mq_server = mq_open(serverCola, O_WRONLY);
-
-    if (mq_server == (mqd_t)-1){ // Comprobamos que se haya abierto correctamente
+    if (mq_server == (mqd_t)-1){ //Comprobamos que se haya abierto correctamente
 
         perror("Error al abrir la cola del servidor");
-        funcionLog("Error al abrir la cola del servidor");
+        funcionLog("Error al abrir la cola del servidor"); //Escribimos el error en el log
         exit(-1);
     }
 
-    printf("[Cliente]: El descriptor de la cola del servidor es: %d\n", (int)mq_server);
-
-    // Nombre para la cola del cliente
-    sprintf(clienteCola, "%s-%s", CLIENT_QUEUE, getenv("USER"));
+    printf("[Cliente]: El descriptor de la cola del servidor es: %d\n", (int)mq_server); //Imprimimos el descriptor de la cola del servidor
+    sprintf(clienteCola, "%s-%s", CLIENT_QUEUE, getenv("USER")); //Nombre de la cola del cliente
     printf("[Cliente]: El nombre de la cola del cliente es: %s\n", clienteCola);
+    mq_client = mq_open(clienteCola, O_RDONLY); //Abrir la cola del cliente solo para lectura
 
-    // Abrir la cola del cliente
-    mq_client = mq_open(clienteCola, O_RDONLY);
-
-    // mq_server = mq_open(SERVER_QUEUE, O_WRONLY);
-    if (mq_client == (mqd_t)-1){ // Comprobamos que se haya abierto correctamente
+    if (mq_client == (mqd_t)-1){ //Comprobamos que se haya abierto correctamente
 
         perror("Error al abrir la cola del cliente");
         funcionLog("Error al abrir la cola del cliente");
         exit(-1);
     }
 
-    printf("[Cliente]: El descriptor de la cola del cliente es: %d\n", (int)mq_client);
-
-    // Bucle de envío de mensajes
+    printf("[Cliente]: El descriptor de la cola del cliente es: %d\n", (int)mq_client); //Imprimimos el descriptor de la cola del cliente
     printf("Mandando mensajes al servidor (escribir \"%s\" para parar):\n", MSG_STOP);
 
-    do{
+    do{ //Bucle para enviar mensajes al servidor (do while)
 
-        printf("> ");
+        printf("> "); //Imprimimos el prompt para que el usuario escriba el mensaje
         ssize_t bytes_read;
 
-        /* Leer por teclado. Según la documentación, fgets lo hace de esta manera:
-        It stops when either (n-1) characters are read, the newline character is read,
-        or the end-of-file is reached, whichever comes first.
-        Automáticamente fgets inserta el fin de cadena '\0'
-        */
-        fgets(writebuffer, MAX_SIZE, stdin); // Leemos el mensaje que queremos enviar
+        fgets(writebuffer, MAX_SIZE, stdin); //Leemos el mensaje que queremos enviar e inserta automaticamente '\0'
 
-        // Enviar y comprobar si el mensaje se manda
-        if(mq_send(mq_server, writebuffer, MAX_SIZE, 0) != 0){
+        if(mq_send(mq_server, writebuffer, MAX_SIZE, 0) != 0){ //Enviamos el mensaje al servidor
 
             perror("Error al enviar el mensaje");
-            funcionLog("Error al enviar el mensaje");
+            funcionLog("Error al enviar el mensaje"); //Escribimos el error en el log
             exit(-1);
         }
 
-        // Recibir y comprobar si el mensaje se recibe
-        bytes_read=mq_receive(mq_client, readbuffer, MAX_SIZE, NULL);
+        bytes_read=mq_receive(mq_client, readbuffer, MAX_SIZE, NULL); //Recibimos el mensaje del servidor
 
-        if (bytes_read < 0){
+        if (bytes_read < 0){ //Comprobamos que la recepción es correcta (bytes leidos no son negativos)
 
-            perror("Error al recibir el mensaje");
-            funcionLog("Error al recibir el mensaje");
+            perror("Error al recibir el mensaje"); 
+            funcionLog("Error al recibir el mensaje"); //Escribimos el error en el log
             exit(-1);
         }
 
-        printf("Recibido: %s\n", readbuffer);
-    } while(strncmp(writebuffer, MSG_STOP, strlen(MSG_STOP))); // Iterar hasta escribir el código de salida
+        printf("Recibido: %s\n", readbuffer); //Imprimimos el mensaje recibido del servidor
+    } while(strncmp(writebuffer, MSG_STOP, strlen(MSG_STOP))); //Iterar hasta escribir el código de salida
 
-    // Cerrar la cola del servidor
-    if (mq_close(mq_server) == (mqd_t)-1){
+    if (mq_close(mq_server) == (mqd_t)-1){ //Cerrar la cola del servidor
 
         perror("Error al cerrar la cola del servidor");
-        funcionLog("Error al cerrar la cola del servidor");
+        funcionLog("Error al cerrar la cola del servidor"); //Escribimos el error en el log
         exit(-1);
     }
 
-    // Cerrar la cola del cliente
-    if (mq_close(mq_client) == (mqd_t)-1){
+    if (mq_close(mq_client) == (mqd_t)-1){ //Cerrar la cola del cliente
 
         perror("Error al cerrar la cola del cliente");
-        funcionLog("Error al cerrar la cola del cliente");
+        funcionLog("Error al cerrar la cola del cliente"); //Escribimos el error en el log
         exit(-1);
     }
 
     return 0;
 }
 
-void funcionLog(char *mensaje){
+void funcionLog(char *mensaje){ //Función que almacena los errores
 
-    int resultado;
-    char nombreFichero[100];
-    char fecha[100];
-    char mensajeAEscribir[300];
+    int resultado; //Variable que almacena el resultado de la escritura
+    char nombreFichero[100]; //Nombre del fichero de log
+    char fecha[100]; //Fecha y hora
+    char mensajeAEscribir[300]; //Mensaje a escribir en el log
     time_t t;
 
-    // Abrir el fichero
-    sprintf(nombreFichero, "log-cliente.txt");
+    sprintf(nombreFichero, "log-cliente.txt"); //Nombre del fichero de log
 
-    if (fLog == NULL){
+    if (fLog == NULL){ //Si el al fichero no esta abierto
 
-        fLog = fopen(nombreFichero, "at");
+        fLog = fopen(nombreFichero, "at"); //Abrimos el fichero en modo append
 
-        if (fLog == NULL){
+        if (fLog == NULL){ //Si no se ha abierto correctamente
 
-            perror("Error abriendo el fichero de log");
+            perror("Error abriendo el fichero de log"); 
             exit(1);
         }
     }
 
-    // Obtener la hora actual
-    t = time(NULL);
-    struct tm *p = localtime(&t);
-    strftime(fecha, 1000, "[%Y-%m-%d, %H:%M:%S]", p);
+    t = time(NULL); //Obtenemos la hora actual
+    struct tm *p = localtime(&t); //Convertimos la hora a formato local
+    strftime(fecha, 1000, "[%Y-%m-%d, %H:%M:%S]", p); //Formateamos la fecha y hora
+    sprintf(mensajeAEscribir, "%s ==> %s\n", fecha, mensaje); //Formateamos el mensaje a escribir en el log
+    resultado = fputs(mensajeAEscribir, fLog); //Escribimos el mensaje en el log
 
-    // Vamos a incluir la hora y el mensaje que nos pasan
-    sprintf(mensajeAEscribir, "%s ==> %s\n", fecha, mensaje);
-
-    // Escribir finalmente en el fichero
-    resultado = fputs(mensajeAEscribir, fLog);
-
-    if (resultado < 0)
+    if (resultado < 0){ //Si no se ha escrito correctamente
 
         perror("Error escribiendo en el fichero de log");
-        
+    }
 
-    fclose(fLog);
-    fLog = NULL;
+    fclose(fLog); //Cerramos el fichero de log
+    fLog = NULL; //Ponemos el puntero a NULL para que se vuelva a abrir la proxima vez
 }

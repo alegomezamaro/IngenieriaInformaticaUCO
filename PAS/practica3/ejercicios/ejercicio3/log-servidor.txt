@@ -1,3 +1,7 @@
 [2025-05-19, 17:49:31] ==> Número de caracteres leídos: 4
 [2025-05-19, 17:49:32] ==> Número de caracteres leídos: 4
 [2025-05-19, 17:49:34] ==> exit
+[2025-05-19, 22:54:19] ==> Número de caracteres leídos: 3
+[2025-05-19, 22:54:20] ==> Número de caracteres leídos: 1
+[2025-05-19, 22:54:20] ==> Número de caracteres leídos: 1
+[2025-05-19, 22:54:22] ==> exit
