@@ -1,0 +1,1 @@
+/usr/bin/g++ -Wall -O0 -ggdb3 CMakeFiles/test_graph.dir/test_graph.cpp.o CMakeFiles/test_graph.dir/city.cpp.o -o test_graph  libgraph.a 

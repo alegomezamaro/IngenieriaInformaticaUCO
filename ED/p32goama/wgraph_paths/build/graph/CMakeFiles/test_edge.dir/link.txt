@@ -1,0 +1,1 @@
+/usr/bin/g++ -Wall -O0 -ggdb3 CMakeFiles/test_edge.dir/test_edge.cpp.o -o test_edge  libgraph.a 
