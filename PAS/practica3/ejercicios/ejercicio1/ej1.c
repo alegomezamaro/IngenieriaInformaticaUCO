@@ -162,41 +162,20 @@ int main(int argc, char **argv){
         }
     }
     
+    if (argc == 1){ //Si no se pasan argumentos, se asume -a -m
+
+        aflag = true;
+        mflag = true;
+    }
+
     //Entramos a este if si se activa el valor de h, da igual las demas flags
     if(hflag == true){
 
         Opciones(); 
         exit(0);
     }
-
-    //Si no se activa ningun valor
-    if((uvalue == NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == false)&&(mflag == false)&&(sflag == false)){
-
-        if((nombre=getenv("USER"))==NULL || (pw=getpwnam(nombre))==NULL) { //Si no existe el login
-
-            printf("Error al intentar acceder a la información de usuario.\n");
-            exit(-1);
-        }
-
-        else { //Si existe, lo imprimimos
-
-            Usuario(pw);
-        }
-
-        if((gr=getgrgid(pw->pw_gid))==NULL) { //SI no existe el GID
-
-            printf("Error al intentar acceder a la información de grupo.\n");
-            exit(-1);
-        }
-        
-        else{ //Si existe el GID, lo imprimimos
-
-            Grupo(gr); 
-            exit(0);
-        }
-    }
-    
-    //Si se activa u
+   
+    //Si se activa u y (o no) m
     if((uvalue != NULL)&&(gvalue == NULL)&&(hflag == false)&&(aflag == false)&&(sflag == false)){
 
         if(isdigit(*uvalue)!=0){ //Si u es el UID
@@ -357,6 +336,5 @@ int main(int argc, char **argv){
         }
     }
 
-    Opciones(); //Mostramos las opciones
     exit(0);
 }
