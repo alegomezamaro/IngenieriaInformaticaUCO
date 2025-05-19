@@ -78,17 +78,22 @@ int main(){
 	    	close(fildes[1]); //Cerramos el extremo de escritura
 	    	printf("[PADRE]: Tubería cerrada...\n");
 
-			while((flag=wait(&status))>0){ //Mientras el padre espere hijos
+			while((flag=waitpid(-1, &status, WUNTRACED | WCONTINUED))>0){ //Mientras el padre espere hijos
 
 	            if(WIFEXITED(status)){ //El proceso a finalizado correctamente
 
 	    	        printf("Proceso Padre, Hijo con PID %ld finalizado, status = %d\n", (long int)flag, WEXITSTATUS(status));
 	            } 
 
-	            else if(WIFSIGNALED(status)){ //EL proceso ha finalizado por una señal
+	            else if(WIFSIGNALED(status)){ //El proceso ha finalizado por una señal
 
 	    	        printf("Proceso Padre, Hijo con PID %ld finalizado al recibir la señal %d\n", (long int)flag, WTERMSIG(status));
-	            } 		
+	            }
+				
+				else if (WIFCONTINUED(status)){ //Hay un proceso parado
+					
+        			printf("Proceso Padre %d, hijo con PID %ld reanudado\n", getpid(), (long int)flag);
+    			}
 	        }
 
 	        if(flag==(pid_t)-1 && errno==ECHILD){ //Si no hay que esperar más hijos
