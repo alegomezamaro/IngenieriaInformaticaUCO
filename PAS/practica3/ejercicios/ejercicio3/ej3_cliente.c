@@ -5,7 +5,7 @@ recogida por teclado, mientras el valor de esa cadena sea distinto a la palabra 
 
 #include "ej3_common.h"
 
-void funcionLog(char *mensaje); // Función auxiliar para errores
+void funcionLog(char *mensaje); //Función para almacenar errores
 
 FILE *fLog = NULL; //Apuntador al fichero de log
 mqd_t mq_server; //Cola del servidor
@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     if (mq_client == (mqd_t)-1){ //Comprobamos que se haya abierto correctamente
 
         perror("Error al abrir la cola del cliente");
-        funcionLog("Error al abrir la cola del cliente");
+        funcionLog("Error al abrir la cola del cliente"); //Escribimos el error en el log
         exit(-1);
     }
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     do{ //Bucle para enviar mensajes al servidor (do while)
 
         printf("> "); //Imprimimos el prompt para que el usuario escriba el mensaje
-        ssize_t bytes_read;
+        ssize_t bytes_read; //Número de bytes leidos
 
         fgets(writebuffer, MAX_SIZE, stdin); //Leemos el mensaje que queremos enviar e inserta automaticamente '\0'
 
@@ -92,8 +92,7 @@ void funcionLog(char *mensaje){ //Función que almacena los errores
     char nombreFichero[100]; //Nombre del fichero de log
     char fecha[100]; //Fecha y hora
     char mensajeAEscribir[300]; //Mensaje a escribir en el log
-    time_t t;
-
+    time_t t; //Variable para almacenar la hora actual
     sprintf(nombreFichero, "log-cliente.txt"); //Nombre del fichero de log
 
     if (fLog == NULL){ //Si el al fichero no esta abierto
