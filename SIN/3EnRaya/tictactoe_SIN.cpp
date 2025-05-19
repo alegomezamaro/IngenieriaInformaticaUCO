@@ -718,6 +718,60 @@ int main(int argc, char *argv[0]) {
 				 *     ii....
 				 *
 				 */
+
+				//Se actualizan las decisiones de la memoria que se han usado en esta partida
+
+				if (pair.second) {
+					Decision* d = pair.first;
+					int total = d->numWins + d->numLost + d->numTies;
+
+					if (iWon) {
+						if (d->numWins < MAXOCCURRENCES)
+							d->numWins++;
+						else if (total > MAXOCCURRENCES) {
+							// Reducir numTies o numLost aleatoriamente (si son mayores que MINOCCURRENCES)
+							if (d->numTies > MINOCCURRENCES && d->numLost > MINOCCURRENCES) {
+								if (rand() % 2 == 0) d->numTies--;
+								else d->numLost--;
+							} else if (d->numTies > MINOCCURRENCES) {
+								d->numTies--;
+							} else if (d->numLost > MINOCCURRENCES) {
+								d->numLost--;
+							}
+						}
+					}
+					else if (iLost) {
+						if (d->numLost < MAXOCCURRENCES)
+							d->numLost++;
+						else if (total > MAXOCCURRENCES) {
+							if (d->numTies > MINOCCURRENCES && d->numWins > MINOCCURRENCES) {
+								if (rand() % 2 == 0) d->numTies--;
+								else d->numWins--;
+							} else if (d->numTies > MINOCCURRENCES) {
+								d->numTies--;
+							} else if (d->numWins > MINOCCURRENCES) {
+								d->numWins--;
+							}
+						}
+					}
+					else { // Empate
+						if (d->numTies < MAXOCCURRENCES)
+							d->numTies++;
+						else if (total > MAXOCCURRENCES) {
+							if (d->numWins > MINOCCURRENCES && d->numLost > MINOCCURRENCES) {
+								if (rand() % 2 == 0) d->numWins--;
+								else d->numLost--;
+							} else if (d->numWins > MINOCCURRENCES) {
+								d->numWins--;
+							} else if (d->numLost > MINOCCURRENCES) {
+								d->numLost--;
+							}
+						}
+					}
+				}
+
+			///////////////////FIN
+
 			}
 		}
 
