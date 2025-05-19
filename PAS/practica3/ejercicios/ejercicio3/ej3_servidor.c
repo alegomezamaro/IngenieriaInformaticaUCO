@@ -1,14 +1,12 @@
 /*
 Servidor que lee de una cola abierta para lectura una cadena de caracteres y la
 imprime por pantalla.
-
-Lo hace mientras que el valor de esa cadena sea distinto a la palabra exit.
 */
 
 #include "ej3_common.h"
 
-// Prototipo de funcion auxiliar
-void funcionLog(char *);
+// Función auxiliar
+void funcionLog(char *mensaje);
 
 // Apuntador al fichero de log. Se usa para que la funcion auxiliar pueda escribir en el fichero
 FILE *fLog = NULL;
@@ -17,13 +15,11 @@ int main(int argc, char **argv) {
 
     mqd_t mq_server; // Cola del servidor
     mqd_t mq_client; // Cola del cliente
-
     struct mq_attr attr; // Atributos de la cola
 
     // Buffers para intercambiar mensajes
     char readbuffer[MAX_SIZE];
     char writebuffer[MAX_SIZE];
-
     int must_stop = 0; // flag que indica cuando hay que parar. Se escribe palabra exit
     
     // Inicializar los atributos de la cola
@@ -44,7 +40,8 @@ int main(int argc, char **argv) {
     y de sólo lectura para el grupo y para otros*/
 
 
-    if (mq_server == (mqd_t)-1) {
+    if (mq_server == (mqd_t)-1){
+
         perror("Error al abrir la cola del servidor");
         funcionLog("Error al abrir la cola del servidor");
         exit(-1);
@@ -60,6 +57,7 @@ int main(int argc, char **argv) {
     mq_client = mq_open(clienteCola, O_CREAT | O_WRONLY, 0644, &attr);
 
     if (mq_client == (mqd_t)-1){
+
         perror("Error al abrir la cola del cliente");
         funcionLog("Error al abrir la cola del cliente");
         exit(-1);
@@ -67,7 +65,8 @@ int main(int argc, char **argv) {
     
     printf("[Servidor]: El descriptor de la cola del cliente es: %d\n\n", (int)mq_client);
 
-    do {
+    do{
+
         // Número de bytes leidos
         ssize_t bytes_read;
 
@@ -75,7 +74,8 @@ int main(int argc, char **argv) {
         bytes_read = mq_receive(mq_server, readbuffer, MAX_SIZE, NULL);
 
         // Comprobar que la recepción es correcta (bytes leidos no son negativos)
-        if (bytes_read < 0) {
+        if (bytes_read < 0){
+
             perror("Error al recibir el mensaje");
             funcionLog("Error al recibir el mensaje");
             exit(-1);
@@ -85,43 +85,56 @@ int main(int argc, char **argv) {
         // buffer[bytes_read] = '\0';
 
         // Comprobar el fin del bucle
-        if (strncmp(readbuffer, MSG_STOP, strlen(MSG_STOP)) == 0)
+        if(strncmp(readbuffer, MSG_STOP, strlen(MSG_STOP)) == 0){
+
             must_stop = 1;
-        else
+        }
+
+        else{
+
             printf("Recibido el mensaje: %s\n", readbuffer);
             //sprintf sirve para escribir en un buffer (fichero log)
             sprintf(writebuffer,"Número de caracteres leídos: %ld",(strlen(readbuffer)-1));
             funcionLog(writebuffer);
-            
-        if (mq_send(mq_client, writebuffer, MAX_SIZE, 0) != 0) {
+        }
+
+        if(mq_send(mq_client, writebuffer, MAX_SIZE, 0) != 0){
+
             perror("Error al enviar el mensaje");
             funcionLog("Error al enviar el mensaje");
             exit(-1);
         }
     } while (!must_stop); // Iterar hasta que llegue el código de salida, es decir, la palabra exit
+
     funcionLog("exit");
 
     // Cerrar la cola del servidor
-    if (mq_close(mq_server) == (mqd_t)-1) {
+    if (mq_close(mq_server) == (mqd_t)-1){
+
         perror("Error al cerrar la cola del servidor");
         funcionLog("Error al cerrar la cola del servidor");
         exit(-1);
     }
+
     // Cerrar la cola del cliente
     if(mq_close(mq_client)==(mqd_t)-1 ){
+        
         perror("Error al cerrar la cola del cliente");
         funcionLog("Error al cerrar la cola del cliente");
         exit(-1);
     }
 
     // Eliminar la cola del servidor
-    if (mq_unlink(serverCola) == (mqd_t)-1) {
+    if (mq_unlink(serverCola) == (mqd_t)-1){
+
         perror("Error al eliminar la cola del servidor");
         funcionLog("Error al eliminar la cola del servidor");
         exit(-1);
     }
+
     // Cerrar la cola del cliente
-    if(mq_unlink(clienteCola) == (mqd_t)-1) {
+    if(mq_unlink(clienteCola) == (mqd_t)-1){
+
         perror("Error al eliminar la cola del cliente");
         funcionLog("Error al eliminar la cola del cliente");
         exit(-1);
@@ -130,18 +143,23 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-// Función auxiliar
-void funcionLog(char *mensaje) {
+void funcionLog(char *mensaje){
+    
     int resultado;
     char nombreFichero[100];
+    char fecha[100];
     char mensajeAEscribir[300];
     time_t t;
 
     // Abrir el fichero
     sprintf(nombreFichero, "log-servidor.txt");
-    if (fLog == NULL) {
+
+    if (fLog == NULL){
+
         fLog = fopen(nombreFichero, "at");
-        if (fLog == NULL) {
+
+        if (fLog == NULL){
+
             perror("Error abriendo el fichero de log");
             exit(1);
         }
@@ -150,17 +168,19 @@ void funcionLog(char *mensaje) {
     // Obtener la hora actual
     t = time(NULL);
     struct tm *p = localtime(&t);
-    strftime(mensajeAEscribir, 1000, "[%Y-%m-%d, %H:%M:%S]", p);
+    strftime(fecha, 1000, "[%Y-%m-%d, %H:%M:%S]", p);
 
     // Vamos a incluir la hora y el mensaje que nos pasan
-    sprintf(mensajeAEscribir, "%s ==> %s\n", mensajeAEscribir, mensaje);
+    sprintf(mensajeAEscribir, "%s ==> %s\n", fecha, mensaje);
 
     // Escribir finalmente en el fichero
     resultado = fputs(mensajeAEscribir, fLog);
-    if (resultado < 0)
+
+    if (resultado < 0){
+
         perror("Error escribiendo en el fichero de log");
+    }
 
     fclose(fLog);
     fLog = NULL;
 }
-

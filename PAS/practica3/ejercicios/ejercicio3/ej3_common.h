@@ -1,23 +1,3 @@
-#ifndef EJ3_COMMON_H
-#define EJ3_COMMON_H
-
-#define SERVER_QUEUE "/server_queue"
-#define CLIENT_QUEUE "/client_queue"
-#define MAX_SIZE 1024
-#define MSG_STOP "exit"
-
-#include <errno.h>
-#include <mqueue.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <time.h>
-#include <signal.h>
-
-#endif 
-
 /*
 Los ficheros de código de este ejercicio se llamarán ((ej3 servidor.c)), ((ej3 cliente.c))
 y ((ej3 common.h)).
@@ -79,18 +59,23 @@ cheros common.h, servidor.c y cliente.c que se le han proporcionado como ejemplo
     Utilice estas llamadas para dejar registro en fichero de texto de todos los mensajes que
     se muestren por pantalla en la ejecución del cliente y el servidor, incluidos los errores
     que se imprimen por consola. 
-
-5.  El programa cliente capturará las señales SIGTERM y SIGINT para gestionar adecua-
-    damente el fin del programa servidor y de él mismo. Puede asociar estas señales con
-    una misma función que pare el programa.
-
-    Dicha función deberá, en primer lugar, registrar la señal capturada (y su número
-    entero) en el fichero de log del cliente.
-
-    El cliente, antes de salir, deberá mandar a la cola correspondiente, un mensaje de
-    fin de sesión (que debe interpretar el servidor), que hará que el otro extremo deje
-    de esperar mensajes. Este mensaje también se registrará en los logs.
-
-    Se deberá cerrar, en caso de que estuvieran abiertas, aquellas colas que se estén
-    utilizando y el fichero de log.
 */
+
+#ifndef EJ3_COMMON_H
+#define EJ3_COMMON_H
+
+#define SERVER_QUEUE "/server_queue"
+#define CLIENT_QUEUE "/client_queue"
+#define MAX_SIZE 1024
+#define MSG_STOP "exit"
+
+#include <errno.h>
+#include <mqueue.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+
+#endif 

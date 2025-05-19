@@ -1,0 +1,1 @@
+[2025-05-19, 17:51:13] ==> Error al abrir la cola del servidor
