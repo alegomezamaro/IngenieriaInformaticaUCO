@@ -54,7 +54,7 @@ int main(){
 	    		exit(EXIT_FAILURE);
 	    	}
 
-            printf("[HIJO]: El resultado de la suma leido de la tubería es: %f.\n", sum); //Imprimimos el valor enviado		
+            printf("[HIJO]: El resultado de la suma leido de la tubería es: %.2f.\n", sum); //Imprimimos el valor enviado		
 	    	close(fildes[0]);//Cerramos el extremo de lectura
 			printf("[HIJO]: Tubería cerrada ...\n"); //Cerramos la tuberia
 	    	break;
@@ -63,10 +63,10 @@ int main(){
 
 	    	printf("[PADRE]: Mi PID es %d y el PID de mi hijo es %d \n", getpid(),pid); //Imprimimos la información del padre
 	    	close(fildes[0]); //Cerramos el extremo de lectura
-            random1=rand()%5000; //Generacion de los numeros aleatorios
-	    	random2=rand()%5000;
+            random1=(float)rand() / RAND_MAX * 100.0f; //Generacion de los numeros aleatorios
+	    	random2=(float)rand() / RAND_MAX * 100.0f;
 	    	sum=random1+random2; //Sumamos los números
-            printf("[PADRE]: Escribo el resultado de la suma de los números aleatorios %f y %f en la tubería...\n", random1, random2); //Se escribe en la tuberia
+            printf("[PADRE]: Escribo el resultado de la suma de los números aleatorios %.2f y %.2f en la tubería...\n", random1, random2); //Se escribe en la tuberia
 	    	result=write(fildes[1], &sum, sizeof(int)); //Escribimos el mensaje
 
 	    	if(result!=sizeof(int)){ //Comprobamos que el tamaño sea correcto
