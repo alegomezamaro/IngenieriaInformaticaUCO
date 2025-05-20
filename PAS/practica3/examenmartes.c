@@ -308,7 +308,9 @@ int main(int argc, char **argv){
 
         struct passwd *gidUsuario= NULL;
 
-        gidUsuario= getpwuid(uid);
+        int aux2=(int)atoi(buffer);
+
+        gidUsuario= getpwuid(aux2);
 
         if(aux > (gidUsuario->pw_gid)){
 
@@ -318,7 +320,7 @@ int main(int argc, char **argv){
 
             if(nuevo){
             
-                printf("\nNombre: %s\nLogin: %s\nPassword: %s\nUID: %d\nHome: %s\nShell: %s\nNumero de grupo principal(GID): %d\n",nuevo->pw_gecos,nuevo->pw_name,nuevo->pw_passwd,nuevo->pw_uid,nuevo->pw_dir,nuevo->pw_shell,nuevo->pw_gid);
+                printf("Nombre: %s\nLogin: %s\nPassword: %s\nUID: %d\nHome: %s\nShell: %s\nNumero de grupo principal(GID): %d\n",nuevo->pw_gecos,nuevo->pw_name,nuevo->pw_passwd,nuevo->pw_uid,nuevo->pw_dir,nuevo->pw_shell,nuevo->pw_gid);
 
             }
 
