@@ -38,6 +38,7 @@ bool Graph<T, E>::is_empty() const
     
         return true; //Retornamos true
     }
+
     else{
 
         return false; //Sino retornamos false
@@ -71,7 +72,16 @@ size_t Graph<T, E>::num_edges() const
     // Remember: is the graph is undirected the edge (u:v) was duplicated in
     // the incident list of u an v.
 
-    AAAAA
+    for(auto it = vertices_.begin(); it != vertices_.end(); ++it){ //Recorremos la lista de vertices
+
+        ret_v += it->second.size(); //Sumamos el tamaño de la lista de aristas del vertice apuntado por el iterador a ret_v
+    }
+    
+    if(!is_directed()){ //Si el grafo es no dirigido
+    
+        ret_v /= 2; //Dividimos ret_v entre 2 ya que las aristas (u,v) y (v,u) son la misma arista en un grafo no dirigido
+    }
+
     //
     return ret_v;
 }
@@ -137,14 +147,14 @@ typename Graph<T, E>::EdgeRef Graph<T, E>::edge(VertexRef const &u,
     // Hint: use vertex and edge iterators.
 
     auto iter = vertices_begin(); //Obtenemos un iterador que apunta al primer vertice
-    while ((iter != vertices_end) && (*iter) != u) { //Mientras el iterador no apunte al final y el vertice apuntado por el iterador no sea u
+    while (iter != vertices_end() && (*iter) != u) { //Mientras el iterador no apunte al final y el vertice apuntado por el iterador no sea u
 
         ++iter; //Aumentamos el iterador
     }
 
     auto edge_iter = edges_begin(iter); //Obtenemos un iterador que apunta a la primera arista
 
-    while ((iter != vertices_end) && (*edge_iter)->other != v){ //Mientras el iterador no apunte al final y la arista apuntada por el iterador no sea v 
+    while (edge_iter != edges_end(iter) && (*edge_iter)->other(u) != v){ //Mientras el iterador no apunte al final y la arista apuntada por el iterador no sea v 
 
         ++edge_iter; //Aumentamos el iterador
     }
@@ -190,11 +200,12 @@ typename Graph<T, E>::VertexRef Graph<T, E>::find_vertex(typename T::key_t const
     VertexRef ret_v = nullptr;
     // TODO
 
-    for(auto iter = vertices_begin; iter != vertices_end && !ret_v; ++iter){ //Recorremos la lista de vertices
+    for(auto iter = vertices_begin(); iter!= vertices_end(); iter++){ //Recorremos la lista de vertices
 
         if((*iter)->item().key() == value){ //Si el vertice apuntado por el iterador tiene la misma clave que value
 
             ret_v = *iter; //Retornamos el vertice apuntado por el iterador
+            return ret_v;
         }
     }
     //
