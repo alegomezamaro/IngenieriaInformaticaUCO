@@ -8,9 +8,14 @@
 
    (deffacts coordenadasInicio ;Define la posición incial de Willy (0,0)
       (coordenadas 0 0)
+   )
+
+   (deffacts visitado ;Registra las coordenadas visitadas
       (coordenadaX 0)
       (coordenadaY 0)
+      (desplazamientos 0) ;Contador de desplazamientos
    )
+
 
 ;Movimientos
 
@@ -23,15 +28,18 @@
       ?p1<-(coordenadas ?x ?y) ;Guarda las coordendas actuales en la variable ?p1
       ?p2<-(coordenadaX ?z) ;Guarda la última coordenada X en la variable ?p2
       ?p3<-(coordenadaY ?t) ;Guarda la última coordenada Y en la variable ?p3
+      ?p4<-(desplazamientos ?s) ;Guarda el contador de movimientos en la variable ?p4
       (not(test(=(- ?y 1) ?t))) ;Verifica que al moverse no se repita la coordenada Y
       => ;Si se cumplen todas las condiciones entonces
       (moveWilly north) ;Ejecuta la acción de mover a Willy al norte
       (retract ?p1) ;Elimina la coordenada actual
       (retract ?p2) ;Elimina la coordenada X 
       (retract ?p3) ;Elimina la coordenada Y
+      (retract ?p4) ;Elimina el contador de movimientos
       (assert(coordenadas ?x (- ?y 1))) ;Actualiza coordenadas (y-1)
       (assert(coordenadaX ?x)) ;Guarda X actual (no cambia)
       (assert(coordenadaY ?y)) ;Guarda la nueva Y
+      (assert(desplazamientos (+ ?s 1)))  ;Incrementa el contador de movimientos
    )
 
    (defrule moveSouth ;Mueve a Willy al sur (una casilla hacia abajo)
@@ -43,15 +51,18 @@
       ?p1<-(coordenadas ?x ?y) ;Guarda las coordendas actuales en la variable ?p1
       ?p2<-(coordenadaX ?z) ;Guarda la última coordenada X en la variable ?p2
       ?p3<-(coordenadaY ?t) ;Guarda la última coordenada Y en la variable ?p3
+      ?p4<-(desplazamientos ?s) ;Guarda el contador de movimientos en la variable ?p4
       (not(test(=(+ ?y 1) ?t))) ;Verifica que al moverse no se repita la coordenada Y
       => ;Si se cumplen todas las condiciones entonces
       (moveWilly south) ;Ejecuta la acción de mover a Willy al sur
       (retract ?p1) ;Elimina la coordenada actual
       (retract ?p2) ;Elimina la coordenada X
       (retract ?p3) ;Elimina la coordenada Y
+      (retract ?p4) ;Elimina el contador de movimientos
       (assert(coordenadas ?x (+ ?y 1))) ;Actualiza coordenadas (y+1)
       (assert(coordenadaX ?x)) ;Guarda X actual (no cambia)
       (assert(coordenadaY ?y)) ;Guarda la nueva Y
+      (assert(desplazamientos (+ ?s 1))) ;Incrementa el contador de movimientos
    )
 
    (defrule moveEast ;Mueve a Willy al este (una casilla hacia la derecha)
@@ -60,19 +71,21 @@
       (not(percepts Pull)) ;Si no hay ningun agujero
       (not(percepts Noise Pull)) ;Si no hay ruido de alien y agujero
       (not(percepts Pull Noise)) ;Si no hay ruido de agujero y alien
-      
       ?p1<-(coordenadas ?x ?y) ;Guarda las coordendas actuales en la variable ?p1
       ?p2<-(coordenadaX ?z) ;Guarda la última coordenada X en la variable ?p2
       ?p3<-(coordenadaY ?t) ;Guarda la última coordenada Y en la variable ?p3
+      ?p4<-(desplazamientos ?s) ;Guarda el contador de movimientos en la variable ?p4
       (not(test(=(+ ?x 1) ?z))) ;Verifica que al moverse no se repita la coordenada X
       => ;Si se cumplen todas las condiciones entonces
       (moveWilly east) ;Ejecuta la acción de mover a Willy al este
       (retract ?p1) ;Elimina la coordenada actual
       (retract ?p2) ;Elimina la coordenada X
       (retract ?p3) ;Elimina la coordenada Y
+      (retract ?p4) ;Elimina el contador de movimientos
       (assert(coordenadas (+ ?x 1) ?y)) ;Actualiza coordenadas (x+1)
       (assert(coordenadaX ?x)) ;Guarda X actual (no cambia)
       (assert(coordenadaY ?y)) ;Guarda la nueva Y
+      (assert(desplazamientos (+ ?s 1))) ;Incrementa el contador de movimientos
    )
 
    (defrule moveWest ;Mueve a Willy al oeste (una casilla hacia la izquierda)
