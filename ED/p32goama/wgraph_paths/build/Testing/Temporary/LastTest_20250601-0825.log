@@ -1,0 +1,40 @@
+Start testing: Jun 01 11:11 CEST
+----------------------------------------------------------
+11/11 Testing: TestGraphFoldUnfold
+11/11 Test: TestGraphFoldUnfold
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph//test_graph" "03_tests_graph_fold_unfold"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph
+"TestGraphFoldUnfold" start time: Jun 01 11:11 CEST
+Output:
+----------------------------------------------------------
+Test running: 03_tests_graph_fold_unfold/00 ... [31mTest finished with error code -6[0m
+test_graph: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/graph_imp.hpp:500: VertexIterator<T, E> Graph<T, E>::get_iterator(const VertexRef&) const [with T = Item<char, char>; E = float; VertexRef = std::shared_ptr<Vertex<Item<char, char> > >]: Assertion `(*iter) == v' failed.
+
+Test running: 03_tests_graph_fold_unfold/01 ... [31mTest finished with error code -6[0m
+test_graph: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/graph_imp.hpp:500: VertexIterator<T, E> Graph<T, E>::get_iterator(const VertexRef&) const [with T = Item<char, char>; E = float; VertexRef = std::shared_ptr<Vertex<Item<char, char> > >]: Assertion `(*iter) == v' failed.
+
+Test running: 03_tests_graph_fold_unfold/02 ... [31mTest finished with error code 1[0m
+Error: command unknown 'DIRECTED'.
+
+Test running: 03_tests_graph_fold_unfold/03 ... [31mTest finished with error code 1[0m
+Error: command unknown 'UNDIRECTED'.
+
+Test running: 03_tests_graph_fold_unfold/04 ... [31mTest finished with error code 1[0m
+Error: command unknown 'DIRECTED'.
+
+Test running: 03_tests_graph_fold_unfold/05 ... [31mTest finished with error code 1[0m
+Error: command unknown 'UNDIRECTED'.
+
+Test running: 03_tests_graph_fold_unfold/06 ... [31mTest finished with error code 1[0m
+Error: command unknown 'UNDIRECTED'.
+
+0/7 tests passed.
+<end of output>
+Test time =   0.44 sec
+----------------------------------------------------------
+Test Failed.
+"TestGraphFoldUnfold" end time: Jun 01 11:11 CEST
+"TestGraphFoldUnfold" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 01 11:11 CEST
