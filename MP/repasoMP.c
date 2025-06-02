@@ -296,3 +296,9 @@ while(fread(&p, sizeof(struct producto), 1, ficheroBinario) == 1){ //Mientras se
 
 
 //LISTAS, PILAS Y COLAS
+
+struct lista{
+
+int dato; //Dato de la lista
+struct lista *sig; //Puntero al siguiente elemento de la lista
+};
