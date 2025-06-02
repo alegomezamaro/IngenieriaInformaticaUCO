@@ -114,11 +114,11 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "matrix::@23c283fdd1b78e1a8728"
+			"id" : "graph::@24f0212b3bb5eb7e3fe6"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "graph::@24f0212b3bb5eb7e3fe6"
+			"id" : "matrix::@23c283fdd1b78e1a8728"
 		}
 	],
 	"id" : "test_floyd::@6890427a1f51a3e7e1df",
