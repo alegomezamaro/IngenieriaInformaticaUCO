@@ -1,12 +1,12 @@
 TestDijkstra 0 0
 TestFloyd 0 0
 TestAStar 0 0
-TestHeapEditing 4 0.0876565
-TestHeapify 4 0.086587
-TestHeapsort 4 0.142438
-TestPQueue 4 0.071395
-TestVertex 4 0.0654254
-TestEdge 3 0.0704358
-TestGraph 1 0.158199
-TestGraphFoldUnfold 1 0.0810477
+TestHeapEditing 5 0.0772966
+TestHeapify 5 0.0754802
+TestHeapsort 5 0.12557
+TestPQueue 5 0.0625255
+TestVertex 5 0.0576082
+TestEdge 4 0.0601472
+TestGraph 2 0.105604
+TestGraphFoldUnfold 2 0.0571866
 ---
