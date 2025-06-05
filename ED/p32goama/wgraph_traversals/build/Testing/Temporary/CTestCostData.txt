@@ -1,0 +1,10 @@
+TestDeepFirst 0 0
+TestBreathFirst 0 0
+TestTopologicalSorting 0 0
+TestPrim 0 0
+TestKruskal 0 0
+TestVertex 1 0.0281301
+TestEdge 1 0.0362996
+TestGraph 1 0.0564459
+TestGraphFoldUnfold 1 0.0363841
+---

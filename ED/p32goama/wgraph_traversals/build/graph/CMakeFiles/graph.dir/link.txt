@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgraph.a CMakeFiles/graph.dir/city.cpp.o
+/usr/bin/ranlib libgraph.a

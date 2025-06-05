@@ -1,0 +1,129 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "graph",
+					"jsonFile" : "directory-graph-Debug-7116db9aed92aea6d3f1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "graph",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "graph_traversals",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "graph-al",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "graph::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-graph-Debug-f0233f471f1ec7247e15.json",
+					"name" : "graph",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_edge::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-test_edge-Debug-6f38b53b3fe7c2bd5a9f.json",
+					"name" : "test_edge",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_graph::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-test_graph-Debug-2ec4170c6345f4cf0696.json",
+					"name" : "test_graph",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_traversals::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_traversals-Debug-e64f04d0ee23e07f54ca.json",
+					"name" : "test_traversals",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_vertex::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-test_vertex-Debug-f402e40f673277bd4a27.json",
+					"name" : "test_vertex",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build",
+		"source" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

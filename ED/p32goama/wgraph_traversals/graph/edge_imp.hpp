@@ -17,6 +17,10 @@ Edge<T, E>::Edge(VertexRef const &u, VertexRef const &v, E const &data)
 {
     // TODO
 
+    u_ = u; //Asignamos u
+    v_ = v; //Asignamos v
+    item_ = data; //Asignamos el valor de data
+    is_visited_ = false; //Asignamos el valor de is_visited_ a false
     //
     assert(has(u));
     assert(has(v));
@@ -41,7 +45,8 @@ template <class T, class E>
 bool Edge<T, E>::is_visited() const
 {
     // TODO: fixme
-    return false;
+
+    return is_visited_; //Retornamos el valor de is_visited_
     //
 }
 
@@ -49,7 +54,8 @@ template <class T, class E>
 E const &Edge<T, E>::item() const
 {
     // TODO: fixme
-    return E();
+
+    return item_; //Retornamos el valor de item
     //
 }
 
@@ -57,7 +63,8 @@ template <class T, class E>
 bool Edge<T, E>::has(VertexRef const &n) const
 {
     // TODO: fixme
-    return false;
+
+    return (n == u_) || (n == v_); //Retornamos true si n es igual a u o v
     //
 }
 
@@ -66,8 +73,16 @@ typename Edge<T, E>::VertexRef const &Edge<T, E>::other(VertexRef const &n) cons
 {
     assert(has(n));
     // TODO: fixme
-    VertexRef retv;
-    return retv;
+    
+    if (n == u_){ //Si n es igual a u
+
+        return v_;
+    }
+
+    else{ //Sino
+
+        return u_;
+    }
     //
 }
 
@@ -76,8 +91,16 @@ typename Edge<T, E>::VertexRef &Edge<T, E>::other(VertexRef const &n)
 {
     assert(has(n));
     // TODO: fixme
-    VertexRef retv;
-    return retv;
+    
+    if (n == u_){ //Si n es igual a u
+
+        return v_;
+    }
+
+    else{ //Sino
+
+        return u_;
+    }
     //
 }
 
@@ -85,8 +108,8 @@ template <class T, class E>
 typename Edge<T, E>::VertexRef const &Edge<T, E>::first() const
 {
     // TODO: fixme
-    VertexRef retv;
-    return retv;
+    
+    return u_; //Retornamos el valor de u
     //
 }
 
@@ -94,8 +117,8 @@ template <class T, class E>
 typename Edge<T, E>::VertexRef &Edge<T, E>::first()
 {
     // TODO: fixme
-    VertexRef retv;
-    return retv;
+    
+    return u_; //Retornamos el valor de u
     //
 }
 
@@ -103,8 +126,8 @@ template <class T, class E>
 typename Edge<T, E>::VertexRef const &Edge<T, E>::second() const
 {
     // TODO: fixme
-    VertexRef retv;
-    return retv;
+    
+    return v_; //Retornamos el valor de v
     //
 }
 
@@ -112,8 +135,8 @@ template <class T, class E>
 typename Edge<T, E>::VertexRef &Edge<T, E>::second()
 {
     // TODO: fixme
-    VertexRef retv;
-    return retv;
+
+    return v_; //Retornamos el valor de v
     //
 }
 
@@ -122,6 +145,7 @@ void Edge<T, E>::set_visited(bool new_st)
 {
     // TODO
 
+    is_visited_ = new_st; //Ponemos el nuevo estado de visitado
     //
     assert(new_st || !is_visited());
     assert(!new_st || is_visited());
@@ -132,6 +156,7 @@ void Edge<T, E>::set_item(E const &v)
 {
     // TODO
 
+    item_ = v; //Ponemos el nuevo valor del item
     //
     assert(item() == v);
 }

@@ -1,0 +1,11 @@
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/CMakeFiles/test_traversals.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/CMakeFiles/test.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/CMakeFiles/edit_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/CMakeFiles/rebuild_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph/CMakeFiles/graph.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph/CMakeFiles/test_vertex.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph/CMakeFiles/test_edge.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph/CMakeFiles/test_graph.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph/CMakeFiles/test.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph/CMakeFiles/edit_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph/CMakeFiles/rebuild_cache.dir

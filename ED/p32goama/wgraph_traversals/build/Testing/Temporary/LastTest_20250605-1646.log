@@ -1,0 +1,26 @@
+Start testing: Jun 05 19:09 CEST
+----------------------------------------------------------
+9/9 Testing: TestGraphFoldUnfold
+9/9 Test: TestGraphFoldUnfold
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph//test_graph" "03_tests_graph_fold_unfold"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph
+"TestGraphFoldUnfold" start time: Jun 05 19:09 CEST
+Output:
+----------------------------------------------------------
+Test running: 03_tests_graph_fold_unfold/00 ... [32mTest passed.[0m
+Test running: 03_tests_graph_fold_unfold/01 ... [32mTest passed.[0m
+Test running: 03_tests_graph_fold_unfold/02 ... [32mTest passed.[0m
+Test running: 03_tests_graph_fold_unfold/03 ... [32mTest passed.[0m
+Test running: 03_tests_graph_fold_unfold/04 ... [32mTest passed.[0m
+Test running: 03_tests_graph_fold_unfold/05 ... [32mTest passed.[0m
+Test running: 03_tests_graph_fold_unfold/06 ... [32mTest passed.[0m
+7/7 tests passed.
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"TestGraphFoldUnfold" end time: Jun 05 19:09 CEST
+"TestGraphFoldUnfold" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 05 19:09 CEST

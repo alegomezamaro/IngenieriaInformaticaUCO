@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build",
+  "command": "/usr/bin/g++ -D__VERBOSE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph -Wall -O0 -ggdb3 -o CMakeFiles/test_traversals.dir/test_traversals.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/test_traversals.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/test_traversals.cpp",
+  "output": "CMakeFiles/test_traversals.dir/test_traversals.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/graph.dir/city.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/city.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/city.cpp",
+  "output": "graph/CMakeFiles/graph.dir/city.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_vertex.dir/test_vertex.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/test_vertex.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/test_vertex.cpp",
+  "output": "graph/CMakeFiles/test_vertex.dir/test_vertex.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_edge.dir/test_edge.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/test_edge.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/test_edge.cpp",
+  "output": "graph/CMakeFiles/test_edge.dir/test_edge.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_graph.dir/test_graph.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/test_graph.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/test_graph.cpp",
+  "output": "graph/CMakeFiles/test_graph.dir/test_graph.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_graph.dir/city.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/city.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_traversals/graph/city.cpp",
+  "output": "graph/CMakeFiles/test_graph.dir/city.cpp.o"
+}
+]
