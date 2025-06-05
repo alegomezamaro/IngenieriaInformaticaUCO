@@ -1,26 +1,23 @@
-Start testing: Jun 05 18:20 CEST
+Start testing: Jun 05 18:44 CEST
 ----------------------------------------------------------
-11/11 Testing: TestGraphFoldUnfold
-11/11 Test: TestGraphFoldUnfold
-Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph//test_graph" "03_tests_graph_fold_unfold"
-Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph
-"TestGraphFoldUnfold" start time: Jun 05 18:20 CEST
+2/11 Testing: TestFloyd
+2/11 Test: TestFloyd
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build//test_floyd" "02_tests_floyd"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths
+"TestFloyd" start time: Jun 05 18:44 CEST
 Output:
 ----------------------------------------------------------
-Test running: 03_tests_graph_fold_unfold/00 ... [32mTest passed.[0m
-Test running: 03_tests_graph_fold_unfold/01 ... [32mTest passed.[0m
-Test running: 03_tests_graph_fold_unfold/02 ... [32mTest passed.[0m
-Test running: 03_tests_graph_fold_unfold/03 ... [32mTest passed.[0m
-Test running: 03_tests_graph_fold_unfold/04 ... [32mTest passed.[0m
-Test running: 03_tests_graph_fold_unfold/05 ... [32mTest passed.[0m
-Test running: 03_tests_graph_fold_unfold/06 ... [32mTest passed.[0m
-7/7 tests passed.
+Test running: 02_tests_floyd/00 ... [32mTest passed.[0m
+Test running: 02_tests_floyd/01 ... [32mTest passed.[0m
+Test running: 02_tests_floyd/02 ... [32mTest passed.[0m
+Test running: 02_tests_floyd/04 ... [32mTest passed.[0m
+4/4 tests passed.
 <end of output>
-Test time =   0.03 sec
+Test time =   0.05 sec
 ----------------------------------------------------------
 Test Passed.
-"TestGraphFoldUnfold" end time: Jun 05 18:20 CEST
-"TestGraphFoldUnfold" time elapsed: 00:00:00
+"TestFloyd" end time: Jun 05 18:44 CEST
+"TestFloyd" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jun 05 18:20 CEST
+End testing: Jun 05 18:44 CEST

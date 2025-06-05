@@ -1,6 +1,6 @@
-TestDijkstra 0 0
-TestFloyd 0 0
-TestAStar 0 0
+TestDijkstra 1 0.0422443
+TestFloyd 1 0.0511969
+TestAStar 1 0.0407007
 TestHeapEditing 5 0.0772966
 TestHeapify 5 0.0754802
 TestHeapsort 5 0.12557

@@ -21,22 +21,22 @@
 	TotalVirtualMemory="2047"
 	TotalPhysicalMemory="15199"
 	LogicalProcessorsPerPhysical="2"
-	ProcessorClockFrequency="5040.85"
+	ProcessorClockFrequency="2976.01"
 	>
 	<Testing>
-		<StartDateTime>Jun 05 18:20 CEST</StartDateTime>
-		<StartTestTime>1749140400</StartTestTime>
+		<StartDateTime>Jun 05 18:44 CEST</StartDateTime>
+		<StartTestTime>1749141899</StartTestTime>
 		<TestList>
-			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/TestGraphFoldUnfold</Test>
+			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/TestFloyd</Test>
 		</TestList>
 		<Test Status="passed">
-			<Name>TestGraphFoldUnfold</Name>
-			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph</Path>
-			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/TestGraphFoldUnfold</FullName>
-			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph//test_graph" "03_tests_graph_fold_unfold"</FullCommandLine>
+			<Name>TestFloyd</Name>
+			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths</Path>
+			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/TestFloyd</FullName>
+			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build//test_floyd" "02_tests_floyd"</FullCommandLine>
 			<Results>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.0333254</Value>
+					<Value>0.0511969</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -45,18 +45,18 @@
 					<Value>Completed</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Command Line">
-					<Value>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph//test_graph" "03_tests_graph_fold_unfold"</Value>
+					<Value>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build//test_floyd" "02_tests_floyd"</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Environment">
 					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
 				</NamedMeasurement>
 				<Measurement>
-					<Value encoding="base64" compression="gzip">eJwLSS0uUSgqzcvLzEu3UjAwji8BChTHpxclFmTEp+XnpMSX5oEofQMDBT09PQXpaGOj3BCQpoLE4uLUFD3paINcrhCiTTGkiilGVDHFmCqmmFDFFFOqmGKGxxRzfXMFsEaYKBcAoCKrBg==</Value>
+					<Value encoding="base64" compression="gzip">eJwLSS0uUSgqzcvLzEu3UjAwii8BChTHp+XkV6boGxgo6OnpKUhHGxvlhoAUFiQWF6em6ElHG+RyheDVaUi2TiOydZrg0Wmib6IAVgwT5QIACKxQqg==</Value>
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>Jun 05 18:20 CEST</EndDateTime>
-		<EndTestTime>1749140401</EndTestTime>
+		<EndDateTime>Jun 05 18:44 CEST</EndDateTime>
+		<EndTestTime>1749141899</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>
