@@ -1,0 +1,1 @@
+/usr/bin/g++ -Wall -O0 -ggdb3 CMakeFiles/test_dnode.dir/test_list.cpp.o -o test_dnode 

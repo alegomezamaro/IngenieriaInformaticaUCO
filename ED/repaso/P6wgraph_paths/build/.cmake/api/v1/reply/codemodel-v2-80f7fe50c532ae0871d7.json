@@ -1,0 +1,228 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						5
+					]
+				},
+				{
+					"build" : "priority_queue",
+					"jsonFile" : "directory-priority_queue-Debug-802cafc9e17c19f43ad7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "priority_queue",
+					"targetIndexes" : 
+					[
+						7,
+						8
+					]
+				},
+				{
+					"build" : "graph",
+					"jsonFile" : "directory-graph-Debug-7116db9aed92aea6d3f1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "graph",
+					"targetIndexes" : 
+					[
+						0,
+						4,
+						6,
+						9
+					]
+				},
+				{
+					"build" : "matrix",
+					"jsonFile" : "directory-matrix-Debug-441d68b6a5adc258f93f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "matrix",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "wgraph_paths",
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "avl_tree",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						7,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "graph-al",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						4,
+						6,
+						9
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "matrix",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "graph::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-graph-Debug-a0a6fcfe972dbec9f9a4.json",
+					"name" : "graph",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "matrix::@23c283fdd1b78e1a8728",
+					"jsonFile" : "target-matrix-Debug-5a696b45170dde5e56ca.json",
+					"name" : "matrix",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_astar::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_astar-Debug-4cb323127866121f1d5d.json",
+					"name" : "test_astar",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_dijkstra::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_dijkstra-Debug-7bc4f0edc53be2887b25.json",
+					"name" : "test_dijkstra",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test_edge::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-test_edge-Debug-a453687e09a98af634ed.json",
+					"name" : "test_edge",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_floyd::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_floyd-Debug-bfb13917dd7f52be01f4.json",
+					"name" : "test_floyd",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test_graph::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-test_graph-Debug-a7fe91f14cbeafe2de5c.json",
+					"name" : "test_graph",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_heap::@21f9f231e6871b1be224",
+					"jsonFile" : "target-test_heap-Debug-a593d7347d79df9492be.json",
+					"name" : "test_heap",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_pqueue::@21f9f231e6871b1be224",
+					"jsonFile" : "target-test_pqueue-Debug-a6f5dffbcb473636dc21.json",
+					"name" : "test_pqueue",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test_vertex::@24f0212b3bb5eb7e3fe6",
+					"jsonFile" : "target-test_vertex-Debug-2e7d090b45c28adb4a4c.json",
+					"name" : "test_vertex",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build",
+		"source" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

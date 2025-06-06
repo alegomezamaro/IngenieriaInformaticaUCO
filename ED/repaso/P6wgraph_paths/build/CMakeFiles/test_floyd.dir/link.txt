@@ -1,0 +1,1 @@
+/usr/bin/g++ -Wall -O0 -ggdb3 CMakeFiles/test_floyd.dir/test_floyd.cpp.o -o test_floyd  matrix/libmatrix.a graph/libgraph.a 
