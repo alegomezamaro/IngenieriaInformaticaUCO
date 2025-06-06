@@ -85,14 +85,9 @@ HashTableIterator<K, V> &
 HashTableIterator<K, V>::operator++()
 {
     assert(is_valid());
-    // TODO
+    // REPASO
 
-    do{ 
 
-        ++idx_; // Aumentamos el índice
-    }
-    
-    while (idx_ < ht_->size() && !ht_->entry(idx_).is_valid()); //Mientras el índice sea menor que el tamaño de la tabla y la entrada no sea válida, aumentamos el índice
 
     //
     return *this;
@@ -112,9 +107,9 @@ template <class K, class V>
 bool HashTableIterator<K, V>::operator==(HashTableIterator<K, V> const &other) const
 {
     bool ret_v = false;
-    // TODO
+    // REPASO
 
-    ret_v = table() == other.table() && index() == other.index(); //Comprobamos que la tabla es la misma y que el índice es el mismo
+
 
     //
     return ret_v;

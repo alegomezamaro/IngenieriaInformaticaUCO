@@ -323,22 +323,15 @@ typename Graph<T, E>::EdgeRef Graph<T, E>::add_edge(VertexRef const &u, VertexRe
 
     EdgeRef ret_v = nullptr;
 
-    // TODO
+    // REPASO
     // Remember: if the graph is directed, the edge only is incident on
     // the u end but if it is not directed, the edge is incident on both u and v ends.
     // Hint: use get_iterator() to get the iterator to
     //   the adjacent list of vertices u and v.
     // Remember: We add the new edge to the end of adjacent lists.
     
-    ret_v = Edge<T, E>::create(u, v, item); // Crea un nuevo borde entre u y v con el ítem dado
-    auto u_iter = get_iterator(u); // Obtiene el iterador al vértice u
-    u_iter.it_->second.push_back(ret_v); // Añade el borde a la lista de bordes incidentes en u
     
-    if(!is_directed()){ // Si el grafo es no dirigido, también debemos añadir el borde a la lista de bordes incidentes en v
 
-        auto v_iter = get_iterator(v); // Obtiene el iterador al vértice v
-        v_iter.it_->second.push_back(ret_v); // Añade el borde a la lista de bordes incidentes en v
-    }
     //
     assert(num_edges() == (old_num_edges + 1));
     assert(!ret_v->is_visited());
@@ -362,46 +355,12 @@ void Graph<T, E>::remove_edge(VertexRef const &u, VertexRef const &v)
 #ifndef NDEBUG
     auto old_num_edges = num_edges();
 #endif
-    // TODO
+    // REPASO
     // Remember: if the graph is undirected, the edge u-v was duplicated as
     // incident in the u and v adjacent lists.
     
-    auto u_iter = get_iterator(u); // Obtiene el iterador al vértice u
-    auto edge_iter = edges_begin(u_iter); // Obtiene el iterador al principio de la lista de bordes incidentes en u
-
-    while(edge_iter != edges_end(u_iter)){ // Recorre los bordes incidentes en u desde el principio hasta el final
     
-        if((*edge_iter)->other(u) == v){ // Si el borde actual tiene v como otro extremo
 
-            edge_iter.it_ = u_iter.it_->second.erase(edge_iter.it_); // Elimina el borde de la lista de bordes incidentes en u
-            break;
-        }
-        
-        else{
-
-            edge_iter++; // Avanza al siguiente borde
-        }
-    }
-    
-    if(!is_directed()){ // Si el grafo es no dirigido, también debemos eliminar el borde de la lista de bordes incidentes en v
-
-        auto v_iter = get_iterator(v); // Obtiene el iterador al vértice v
-        edge_iter = edges_begin(v_iter); // Obtiene el iterador al principio de la lista de bordes incidentes en v
-        
-        while(edge_iter != edges_end(v_iter)){ // Recorre los bordes incidentes en v desde el principio hasta el final
-
-            if((*edge_iter)->other(v) == u){ // Si el borde actual tiene u como otro extremo
-                
-                edge_iter.it_ = v_iter.it_->second.erase(edge_iter.it_); // Elimina el borde de la lista de bordes incidentes en v
-                break;
-            }
-            
-            else{ // Sino, avanza al siguiente borde 
-
-                edge_iter++; 
-            }
-        }
-    }
     //
     assert(!is_adjacent(u, v));
     assert(num_edges() == (old_num_edges - 1));
@@ -605,10 +564,11 @@ void Graph<T, E>::remove_vertex(const VertexIterator<T, E> &iter)
 #ifndef NDEBUG
     auto old_num_vertices = num_vertices();
 #endif
-    // TODO
+    // REPASO
     // Hint: use remove_vertex(const VertexRef &v) method.
     
-    remove_vertex(*iter); //Elimina el vértice actual del iterador
+
+
     //
     assert(!has(*iter));
     assert(num_vertices() == (old_num_vertices - 1));
@@ -632,10 +592,8 @@ EdgeIterator<T, E> Graph<T, E>::find_first(VertexIterator<T, E> u_iter, typename
     auto edge_iter = edges_begin(u_iter);
     // TODO
 
-    while(edge_iter != edges_end(u_iter) && (*edge_iter)->other(*u_iter)->item().key() != value){ //Recorre los bordes desde el principio hasta el final
     
-        edge_iter++; //Avanza al siguiente borde
-    }
+
     //
     assert(edge_iter == edges_end(u_iter) || (*edge_iter)->has(*u_iter));
     assert(edge_iter == edges_end(u_iter) || (*edge_iter)->other(*u_iter)->item().key() == value);
@@ -663,21 +621,13 @@ std::vector<typename Graph<T, E>::EdgeRef>
 get_edges(const Graph<T, E> &g)
 {
     std::vector<typename Graph<T, E>::EdgeRef> es;
-    // TODO
+    // REPASO
     // Hint: use VertexIterator and EdgeIterator iterators to traverse the graph.
     // Remember: if the graph is undirected, the edge (u,v) was duplicated as (v, u) into
     // the incident list of u and v but we only want one copy in the returned vector.
     
-    for(auto v_iter = g.vertices_begin(); v_iter != g.vertices_end(); ++v_iter){ //Recorre los vértices desde el principio hasta el final
-
-        for(auto e_iter = g.edges_begin(v_iter); e_iter != g.edges_end(v_iter); ++e_iter){ //Recorre los bordes desde el principio hasta el final
-
-            if (g.is_directed() || (*e_iter)->first() == *v_iter){ //Si el grafo es dirigido o el borde comienza en el vértice actual
-
-                es.push_back(*e_iter); //Añade el borde al vector de bordes       
-            }
-        }
-    }
+    
+    
     //
     return es;
 }

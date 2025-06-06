@@ -35,11 +35,10 @@ bool IP::operator<(IP const &b) const
 std::ostream &
 operator<<(std::ostream &out, const IP &ip)
 {
-    // TODO
+    // REPASO
     // Remember: we want to output the ascii code, not the char.
 
-    out << static_cast<int>(ip.bytes[0]) << "." << static_cast<int>(ip.bytes[1]) << "." << static_cast<int>(ip.bytes[2]) << "."
-    << static_cast<int>(ip.bytes[3]); //Salida de la dirección IP en formato decimal
+    
 
     //
     return out;
@@ -48,26 +47,12 @@ operator<<(std::ostream &out, const IP &ip)
 std::istream &
 operator>>(std::istream &in, IP &ip) noexcept(false)
 {
-    // TODO
+    // REPASO
     // Hint: you can use a std::istringstream to convert from text to uint8_t.
     // Hint: you can use the std::replace algorithm to replace '.' by ' '.
     // Remember: if a wrong format is detected, throw an runtime_error exception.
 
-    std::string input; //Variable para almacenar la cadena de entrada
-    in >> input; //Leemos la cadena de entrada
-    std::replace(input.begin(), input.end(), '.', ' '); //Reemplazamos los '.' por espacios para poder leer los números
-    std::istringstream iss(input); //Creamos un istringstream para poder leer los números separados por espacios
-    int a, b, c, d; //Variables para almacenar los números leídos
-     
-    if (!(iss >> a >> b >> c >> d) || a < 0 || a > 255 || b < 0 || b > 255 || c < 0 || c > 255 || d < 0 || d > 255) { //Comprobamos que los números leídos son válidos sino muestra un error
-        throw std::runtime_error("Ip: wrong input format."); //Lanzamos una excepción si el formato es incorrecto
-    }
-     
-     // Convertimos los números a uint8_t
-     ip.bytes[0] = static_cast<uint8_t>(a); //Convertimos el número a uint8_t
-     ip.bytes[1] = static_cast<uint8_t>(b); //Convertimos el número a uint8_t
-     ip.bytes[2] = static_cast<uint8_t>(c); //Convertimos el número a uint8_t
-     ip.bytes[3] = static_cast<uint8_t>(d); //Convertimos el número a uint8_t
+    
 
     //
     return in;

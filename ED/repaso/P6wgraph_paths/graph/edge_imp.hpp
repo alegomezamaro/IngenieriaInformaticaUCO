@@ -72,17 +72,10 @@ template <class T, class E>
 typename Edge<T, E>::VertexRef const &Edge<T, E>::other(VertexRef const &n) const
 {
     assert(has(n));
-    // TODO: fixme
+    // REPASO: fixme
 
-    if (n == u_){ //Si n es igual a u
+    
 
-        return v_;
-    }
-
-    else{ //Sino
-
-        return u_;
-    }
     //
 }
 
