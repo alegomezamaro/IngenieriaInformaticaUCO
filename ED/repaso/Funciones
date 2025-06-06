@@ -1,0 +1,41 @@
+Todas las funciones que hay que rellenar tiene //REPASO al principio parsa poder buscarlas más facilmente. Son:
+
+    Practica 1: Linear DS
+        unhook (List)
+        ⁠⁠enque (Queue)
+        ⁠⁠push_front (CDArray y List)
+        ⁠⁠grow (CDArray)
+        ⁠⁠hook (List)
+
+    Practica 2: KDTree
+        ⁠compute_size (BTree Utils)
+        ⁠⁠fold (BTree)
+        ⁠⁠prefix_process (BTree Utils)
+        ⁠⁠infix_process (BTree Utils)
+        ⁠⁠postfix_process (BTree Utils)
+        compute_height (BTree Utils)
+
+    Practica 3: AVLTree
+        ⁠set_child (AVLNode)
+        ⁠⁠insert (AVLTree)
+        ⁠⁠rotate (AVLTree)
+        ⁠⁠make_balanced (AVLTree)
+        ⁠⁠find_inorder_sucesor (AVLTree)
+        ⁠⁠balance_factor (AVLTree)
+
+    Practica 4: Priority Queue
+        ⁠Entera, entrará alguna priority_queue o heap
+
+    Practica 5: Dos detector open adressing
+        operator<< (IP Utils)
+        ⁠operator>> (IP Utils)
+        ⁠operator++ (Hash Table Iterator)
+        ⁠operator== (Hash Table Iterator)
+
+    Practica 6: WGraph Path
+        other (Edge)
+        ⁠add_edge (Graph)
+        ⁠remove_edge (Graph)
+        ⁠remove_vertex (Graph)
+        ⁠find_first (Graph)
+        ⁠get_edges (Graph)
