@@ -1,0 +1,15 @@
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/CMakeFiles/kdtree.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/CMakeFiles/test_kdtree.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/CMakeFiles/test.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/CMakeFiles/edit_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/CMakeFiles/rebuild_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern/CMakeFiles/pattern.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern/CMakeFiles/test_pattern.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern/CMakeFiles/test.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern/CMakeFiles/edit_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern/CMakeFiles/rebuild_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/binary_tree/CMakeFiles/test_btree_node.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/binary_tree/CMakeFiles/test_btree.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/binary_tree/CMakeFiles/test.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/binary_tree/CMakeFiles/edit_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/binary_tree/CMakeFiles/rebuild_cache.dir

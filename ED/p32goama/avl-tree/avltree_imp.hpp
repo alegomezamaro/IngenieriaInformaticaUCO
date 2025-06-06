@@ -313,12 +313,22 @@ int AVLTree<T>::balance_factor() const
     // TODO
     // Remember: this operation is only necessary for the AVLTree.
 
-    if (root_ != nullptr) { //Si la raíz no es nula, calcular el factor de equilibrio.
-    
-        int left_height = root_->left() ? root_->left()->height() : -1; //Factor de equilibrio izquierdo.
-        int right_height = root_->right() ? root_->right()->height() : -1; //Factor de equilibrio derecho.
-        bf = left_height - right_height; //Calcular el factor de equilibrio.
-    }
+    if (root_ != nullptr) { //Si root existe
+                int left_height, right_height;
+                if(root_->left()){
+                    left_height=root_->left()->height();
+                }
+                else{
+                    left_height=-1;
+                }
+                if(root_->right()){
+                    right_height=root_->right()->height();
+                }
+                else{
+                    right_height=-1;
+                }
+                bf = left_height - right_height; //Devolvemos factor izquierdo menos factor derecho
+            }
     //
     return bf;
 }

@@ -248,11 +248,9 @@ KDTree::KDTree(std::istream &in) noexcept(false)
 
 std::ostream &KDTree::fold(std::ostream &out) const
 {
-    // TODO
+    // REPASO
 
-    std::string k_str = std::to_string(k_) + " "; //Convertimos la dimension del espacio a string
-    out.write(k_str.c_str(), k_str.size()); //Escribimos la dimension del espacio
-    tree_.fold(out); //Escribimos el arbol binario
+    
 
     //
     return out;

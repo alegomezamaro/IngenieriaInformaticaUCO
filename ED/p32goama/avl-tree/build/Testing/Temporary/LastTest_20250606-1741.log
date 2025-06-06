@@ -1,0 +1,25 @@
+Start testing: Jun 06 20:01 CEST
+----------------------------------------------------------
+7/7 Testing: TestAVLTreeMinMax
+7/7 Test: TestAVLTreeMinMax
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_avltree" "06_tests_compute_min_max_branch_length"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree
+"TestAVLTreeMinMax" start time: Jun 06 20:01 CEST
+Output:
+----------------------------------------------------------
+Test running: 06_tests_compute_min_max_branch_length/00 ... [32mTest passed.[0m
+Test running: 06_tests_compute_min_max_branch_length/01 ... [32mTest passed.[0m
+Test running: 06_tests_compute_min_max_branch_length/02 ... [32mTest passed.[0m
+Test running: 06_tests_compute_min_max_branch_length/03 ... [32mTest passed.[0m
+Test running: 06_tests_compute_min_max_branch_length/04 ... [32mTest passed.[0m
+Test running: 06_tests_compute_min_max_branch_length/05 ... [32mTest passed.[0m
+6/6 tests passed.
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"TestAVLTreeMinMax" end time: Jun 06 20:01 CEST
+"TestAVLTreeMinMax" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 06 20:01 CEST

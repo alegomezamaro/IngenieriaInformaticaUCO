@@ -1,0 +1,46 @@
+Start testing: Jun 06 19:59 CEST
+----------------------------------------------------------
+5/7 Testing: TestAVLTree
+5/7 Test: TestAVLTree
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build//test_avltree" "05_tests_avltree"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree
+"TestAVLTree" start time: Jun 06 19:59 CEST
+Output:
+----------------------------------------------------------
+Test running: 05_tests_avltree/00 ... [32mTest passed.[0m
+Test running: 05_tests_avltree/01 ... [32mTest passed.[0m
+Test running: 05_tests_avltree/02 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/03 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/04 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/05 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/12 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/13 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/14 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/15 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/16 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/17 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+Test running: 05_tests_avltree/18 ... [31mTest finished with error code -6[0m
+test_avltree: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/avltree_imp.hpp:518: void AVLTree<T>::insert(const T&) [with T = int]: Assertion `current_exists()' failed.
+
+2/13 tests passed.
+<end of output>

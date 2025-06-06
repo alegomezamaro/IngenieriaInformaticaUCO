@@ -1,0 +1,5 @@
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/priority_queue/build/CMakeFiles/test_heap.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/priority_queue/build/CMakeFiles/test_pqueue.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/priority_queue/build/CMakeFiles/test.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/priority_queue/build/CMakeFiles/edit_cache.dir
+/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/priority_queue/build/CMakeFiles/rebuild_cache.dir

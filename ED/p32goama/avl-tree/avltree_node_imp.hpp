@@ -308,11 +308,6 @@ void AVLTNode<T>::set_child(int dir, Ref new_child)
         set_right(new_child); //Añade el hijo derecho
     }
 
-    if(new_child != nullptr){ //Si el nuevo hijo no es nullptr
-
-        new_child->parent_ = This(); //Cambia el padre del nuevo hijo
-    }
-
     //
     assert(check_height_invariant());
     assert(dir == 0 || right() == new_child);

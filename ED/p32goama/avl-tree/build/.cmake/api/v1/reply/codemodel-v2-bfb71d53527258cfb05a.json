@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "avl_tree",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "test_avltnode::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_avltnode-Debug-2989bc4c4df9adf60b0c.json",
+					"name" : "test_avltnode",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_avltree::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_avltree-Debug-8665bbbb6d24cfba2e21.json",
+					"name" : "test_avltree",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_bstnode::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_bstnode-Debug-9105066ba1e840d97fa9.json",
+					"name" : "test_bstnode",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_bstree::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_bstree-Debug-22af188f7c245af85a89.json",
+					"name" : "test_bstree",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build",
+		"source" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

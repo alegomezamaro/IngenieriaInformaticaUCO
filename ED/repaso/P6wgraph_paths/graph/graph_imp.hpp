@@ -530,12 +530,10 @@ template <class T, class E>
 VertexIterator<T, E> Graph<T, E>::find_first(typename T::key_t const &value) const
 {
     auto iter = vertices_begin();
-    // TODO
+    // REPASO
 
-    while(iter != vertices_end() && (*iter)->item().key() != value){ //Recorre los vértices desde el principio hasta el final
+
     
-        iter++; //Avanza al siguiente vértice
-    }
     //
     assert(iter == vertices_end() || (*iter)->item().key() == value);
     return iter;
@@ -590,7 +588,7 @@ template <class T, class E>
 EdgeIterator<T, E> Graph<T, E>::find_first(VertexIterator<T, E> u_iter, typename T::key_t const &value) const
 {
     auto edge_iter = edges_begin(u_iter);
-    // TODO
+    // REPASO
 
     
 

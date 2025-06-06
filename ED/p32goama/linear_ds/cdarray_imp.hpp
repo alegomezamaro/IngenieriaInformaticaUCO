@@ -224,9 +224,6 @@ void CDArray<T>::push_front(T const &new_it)
         for(size_t i=size_; i>0; i--){
             data_[i]=data_[i-1];
         }
-
-        data_[0]=new_it;
-        size_++; //Se incrementa el tamaño
     }
 
     //

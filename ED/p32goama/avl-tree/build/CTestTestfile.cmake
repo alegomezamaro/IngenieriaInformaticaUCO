@@ -1,0 +1,20 @@
+# CMake generated Testfile for 
+# Source directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree
+# Build directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(TestBSTreeNode "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_bstnode" "01_tests_bstnode")
+set_tests_properties(TestBSTreeNode PROPERTIES  WORKING_DIRECTORY "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree" _BACKTRACE_TRIPLES "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;30;add_test;/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;0;")
+add_test(TestBSTree "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_bstree" "02_tests_bstree")
+set_tests_properties(TestBSTree PROPERTIES  WORKING_DIRECTORY "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree" _BACKTRACE_TRIPLES "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;31;add_test;/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;0;")
+add_test(TestBSTreePB "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_bstree" "03_tests_bstree_perfectly_balanced")
+set_tests_properties(TestBSTreePB PROPERTIES  WORKING_DIRECTORY "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree" _BACKTRACE_TRIPLES "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;32;add_test;/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;0;")
+add_test(TestAVLTreeNode "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_avltnode" "04_tests_avltnode")
+set_tests_properties(TestAVLTreeNode PROPERTIES  WORKING_DIRECTORY "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree" _BACKTRACE_TRIPLES "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;33;add_test;/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;0;")
+add_test(TestAVLTree "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_avltree" "05_tests_avltree")
+set_tests_properties(TestAVLTree PROPERTIES  WORKING_DIRECTORY "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree" _BACKTRACE_TRIPLES "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;34;add_test;/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;0;")
+add_test(TestAVLTreeIterator "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_avltree" "07_tests_avltree_iterator")
+set_tests_properties(TestAVLTreeIterator PROPERTIES  WORKING_DIRECTORY "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree" _BACKTRACE_TRIPLES "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;35;add_test;/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;0;")
+add_test(TestAVLTreeMinMax "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/build//test_avltree" "06_tests_compute_min_max_branch_length")
+set_tests_properties(TestAVLTreeMinMax PROPERTIES  WORKING_DIRECTORY "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree" _BACKTRACE_TRIPLES "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;36;add_test;/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/avl-tree/CMakeLists.txt;0;")

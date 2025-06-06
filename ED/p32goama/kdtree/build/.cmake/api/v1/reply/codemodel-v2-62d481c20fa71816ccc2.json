@@ -1,0 +1,165 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						4
+					]
+				},
+				{
+					"build" : "pattern",
+					"jsonFile" : "directory-pattern-Debug-747b2f3dc9b541298e2a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "pattern",
+					"targetIndexes" : 
+					[
+						1,
+						5
+					]
+				},
+				{
+					"build" : "binary_tree",
+					"jsonFile" : "directory-binary_tree-Debug-c337022cbe12482a2d52.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "binary_tree",
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "kdtree",
+					"targetIndexes" : 
+					[
+						0,
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "pattern",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "binary_tree",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "kdtree::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-kdtree-Debug-ea1d57b6b75c63cf3e78.json",
+					"name" : "kdtree",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pattern::@23dec4317ae84d4358e4",
+					"jsonFile" : "target-pattern-Debug-9fea0c6e51879d4597a2.json",
+					"name" : "pattern",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test_btree::@0ff430b592aa9aa45753",
+					"jsonFile" : "target-test_btree-Debug-09062fbf807903d8b10b.json",
+					"name" : "test_btree",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test_btree_node::@0ff430b592aa9aa45753",
+					"jsonFile" : "target-test_btree_node-Debug-3bf3a477879ed9ba0fc7.json",
+					"name" : "test_btree_node",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_kdtree::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_kdtree-Debug-a9afede7ef4613630d8b.json",
+					"name" : "test_kdtree",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_pattern::@23dec4317ae84d4358e4",
+					"jsonFile" : "target-test_pattern-Debug-aa211fee4ed0b3e52f88.json",
+					"name" : "test_pattern",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build",
+		"source" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

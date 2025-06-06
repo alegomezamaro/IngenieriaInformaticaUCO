@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/kdtree.dir/kdtree.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/kdtree.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/kdtree.cpp",
+  "output": "CMakeFiles/kdtree.dir/kdtree.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_kdtree.dir/test_kdtree.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/test_kdtree.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/test_kdtree.cpp",
+  "output": "CMakeFiles/test_kdtree.dir/test_kdtree.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/pattern.dir/pattern.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern/pattern.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern/pattern.cpp",
+  "output": "pattern/CMakeFiles/pattern.dir/pattern.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_pattern.dir/test_pattern.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern/test_pattern.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern/test_pattern.cpp",
+  "output": "pattern/CMakeFiles/test_pattern.dir/test_pattern.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/pattern",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_pattern.dir/pattern.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern/pattern.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern/pattern.cpp",
+  "output": "pattern/CMakeFiles/test_pattern.dir/pattern.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/binary_tree",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_btree_node.dir/test_btree_node.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree/test_btree_node.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree/test_btree_node.cpp",
+  "output": "binary_tree/CMakeFiles/test_btree_node.dir/test_btree_node.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/build/binary_tree",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/pattern -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_btree.dir/test_btree.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree/test_btree.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/kdtree/binary_tree/test_btree.cpp",
+  "output": "binary_tree/CMakeFiles/test_btree.dir/test_btree.cpp.o"
+}
+]
