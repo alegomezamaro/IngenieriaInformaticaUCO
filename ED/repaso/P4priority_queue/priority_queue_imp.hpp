@@ -5,8 +5,7 @@ template <class T>
 bool PriorityQueue<T>::is_empty() const
 {
     // TODO: fixme
-
-    return heap_.is_empty(); //Devolvemos si el heap está vacío
+    return true;
     //
 }
 
@@ -16,7 +15,6 @@ size_t PriorityQueue<T>::size() const
     size_t ret_v = 0;
     // TODO
 
-    return heap_.size(); //Devolvemos el tamaño del heap
     //
     assert(!heap_.is_empty() || ret_v == 0);
     return ret_v;
@@ -36,8 +34,7 @@ template <class T>
 const T &PriorityQueue<T>::front() const
 {
     // TODO: fixme
-
-    return heap_.item(); //Devolvemos el primer elemento del heap
+    return T{};
     //
 }
 
@@ -49,7 +46,6 @@ void PriorityQueue<T>::enqueue(const T &new_v)
 #endif
     // TODO
 
-    heap_.insert(new_v); //Insertamos el nuevo elemento en el heap
     //
     assert(size() == old_size + 1);
 }
@@ -63,7 +59,6 @@ void PriorityQueue<T>::dequeue()
 #endif
     // TODO
 
-    heap_.remove(); //Eliminamos el primer elemento del heap
     //
     assert(size() == old_size - 1);
 }

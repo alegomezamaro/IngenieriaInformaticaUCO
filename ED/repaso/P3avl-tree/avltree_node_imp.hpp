@@ -295,23 +295,10 @@ template <class T>
 void AVLTNode<T>::set_child(int dir, Ref new_child)
 {
     assert(dir == 0 || dir == 1);
-    // TODO
+    // REPASO
     // Remember: this operation is only necessary for the AVLTree.
 
-    if(dir == 0){ //Si el hijo es izquierdo
 
-        set_left(new_child); //Añade el hijo izquierdo
-    }
-
-    else{ //Si el hijo es derecho
-
-        set_right(new_child); //Añade el hijo derecho
-    }
-
-    if(new_child != nullptr){ //Si el nuevo hijo no es nullptr
-
-        new_child->parent_ = This(); //Cambia el padre del nuevo hijo
-    }
 
     //
     assert(check_height_invariant());

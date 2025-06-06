@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build",
+  "command": "/usr/bin/g++ -D__ONLY_BSTREE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_bstnode.dir/test_avltnode.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltnode.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltnode.cpp",
+  "output": "CMakeFiles/test_bstnode.dir/test_avltnode.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_avltnode.dir/test_avltnode.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltnode.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltnode.cpp",
+  "output": "CMakeFiles/test_avltnode.dir/test_avltnode.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build",
+  "command": "/usr/bin/g++ -D__ONLY_BSTREE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_bstree.dir/test_avltree.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltree.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltree.cpp",
+  "output": "CMakeFiles/test_bstree.dir/test_avltree.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_avltree.dir/test_avltree.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltree.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/test_avltree.cpp",
+  "output": "CMakeFiles/test_avltree.dir/test_avltree.cpp.o"
+}
+]

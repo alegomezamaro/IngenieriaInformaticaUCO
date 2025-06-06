@@ -73,9 +73,9 @@ void Queue<T>::enque(const T &new_it)
 #ifndef NDEBUG
     size_t old_size = size();
 #endif
-    // TODO
+    // REPASO
     
-    data_.push_back(new_it); //Se añade el elemento al final
+    
 
     //
     assert(back() == new_it);

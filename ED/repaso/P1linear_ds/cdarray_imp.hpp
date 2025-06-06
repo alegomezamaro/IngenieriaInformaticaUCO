@@ -209,25 +209,9 @@ void CDArray<T>::push_front(T const &new_it)
     bool old_is_empty = is_empty();
     T old_front = is_empty() ? T() : get(0);
 #endif
-    // TODO
+    // REPASO
 
-    if (is_full()){ //Si esta lleno crece 1
-        grow();
-    }
-
-    if(is_empty()){ //Si esta vacio se añade el elemento en la primera posicion
-        data_[0]=new_it;
-        size_++;
-    }
     
-    else{ //Se añade el elemento en la primera posicion y se desplazan los demas
-        for(size_t i=size_; i>0; i--){
-            data_[i]=data_[i-1];
-        }
-
-        data_[0]=new_it;
-        size_++; //Se incrementa el tamaño
-    }
 
     //
     assert(size() == old_size + 1);
@@ -364,19 +348,9 @@ void CDArray<T>::grow()
     T old_front = get(0);
     T old_back = get(size() - 1);
 #endif
-    // TODO
+    // REPASO
 
-    size_t new_capacity = 2 * capacity_; //Se duplica la capacidad
-    std::shared_ptr<T[]> new_data(new T[new_capacity], std::default_delete<T[]>()); //Se asigna a new_data un puntero compartido de tamaño new_capacity
-
-    for (size_t i = 0; i < size_; i++) { //Se copian los elementos al nuevo array
-        new_data[i] = data_[(front_ + i) % capacity_];
-    }
-
-    data_ = new_data; //Se asigna el nuevo array a data_
-    capacity_ = new_capacity; //Se asigna la nueva capacidad
-    front_ = 0; //Se asigna el primer elemento a 0
-    back_ = size_ - 1; //Se asigna el ultimo elemento a size_ - 1
+    
 
     //
     assert(capacity() == 2 * old_capacity);

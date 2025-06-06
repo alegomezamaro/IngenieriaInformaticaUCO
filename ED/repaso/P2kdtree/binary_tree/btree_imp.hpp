@@ -131,21 +131,9 @@ BTree<T> BTree<T>::right() const
 template <class T>
 std::ostream &BTree<T>::fold(std::ostream &out) const
 {
-    // TODO
+    // REPASO
 
-    if (is_empty()){ //Si el arbol esta vacio lo representamos con []
 
-        out << "[]";
-    }
-    
-    else { //Si el arbol no esta vacio
-
-        out << "[ " << item() << " "; //Añadimos el root
-        left().fold(out); //Mostramos el subarbol izquierdo
-        out << " "; //Espacio
-        right().fold(out); //Mostramos el subarbol derecho
-        out << " ]"; //Cerramos corchete
-    }
 
     //
     return out;

@@ -310,15 +310,11 @@ template <class T>
 int AVLTree<T>::balance_factor() const
 {
     int bf = 0;
-    // TODO
+    // REPASO
     // Remember: this operation is only necessary for the AVLTree.
 
-    if (root_ != nullptr) { //Si la raíz no es nula, calcular el factor de equilibrio.
     
-        int left_height = root_->left() ? root_->left()->height() : -1; //Factor de equilibrio izquierdo.
-        int right_height = root_->right() ? root_->right()->height() : -1; //Factor de equilibrio derecho.
-        bf = left_height - right_height; //Calcular el factor de equilibrio.
-    }
+
     //
     return bf;
 }
@@ -505,32 +501,10 @@ void AVLTree<T>::insert(T const &k)
 
     if (!search(k))
     {
-        // TODO
+        // REPASO
 
-        current_ = AVLTNode<T>::create(k); //Crear un nuevo nodo con el valor k.
-
-        if (parent_ == nullptr) { //Si el nodo padre es nulo, asignar el nodo actual a la raíz.
-
-            root_ = current_; //Asignar el nodo raíz al nodo actual.
-            current_->set_parent(nullptr); //Asignar el nodo padre a nullptr.
-        }
         
-        else { //Sino
 
-            current_->set_parent(parent_); //Asignar el nodo padre al nodo actual.
-
-            if (parent_->item() > k) { //Si el valor del nodo padre es mayor que el valor k, asignar el subárbol izquierdo al nodo padre.
-
-                parent_->set_left(current_); //Asignar el subárbol izquierdo al nodo padre.
-            }
-            
-            else { //Sino
-
-                parent_->set_right(current_); //Asignar el subárbol derecho al nodo padre.
-            }
-        }
-        height_ = std::max(height_, current_level());
-        size_++;
         //
         assert(check_parent_chains());
         make_balanced();
@@ -795,16 +769,10 @@ void AVLTree<T>::find_inorder_sucessor()
 #ifndef NDEBUG
     T old_curr = current();
 #endif
-    // TODO
+    // REPASO
 
-    parent_ = current_; //Asignar el nodo padre al nodo actual.
-    current_ = current_->right(); //Asignar el subárbol derecho al nodo actual.
+    
 
-    while (current_->left() != nullptr){ //Mientras el subárbol izquierdo no sea nulo.
-
-        parent_ = current_; //Asignar el nodo padre al nodo actual.
-        current_ = current_->left(); //Asignar el subárbol izquierdo al nodo actual.
-    }
     //
     assert(current_exists() && current_node()->left() == nullptr);
 #ifndef NDEBUG
@@ -823,40 +791,14 @@ typename AVLTNode<T>::Ref AVLTree<T>::rotate(typename AVLTNode<T>::Ref &P, int d
     if (__DEBUG__ > 1)
         std::clog << "Rotating to " << (dir == 0 ? "left" : "right") << " on key " << P->item() << std::endl;
 #endif
-    // TODO
+    // REPASO
     // Remember: this operation is only necessary for the AVLTree.
     // Remember: if P has not a parent (it is the tree's current root),
     // the promoted node N will be the new root of the tree.
     // Hint: you can see wikipedia: https://en.wikipedia.org/wiki/Tree_rotation
 
-    typename AVLTNode<T>::Ref G;
-    typename AVLTNode<T>::Ref CN;
-    int gpDir;
-    G = P->parent(); //Nodo padre del nodo P.
-    N = P->child(1 - dir); //Nodo hijo del nodo P.
-    CN = N->child(dir); //Nodo hijo del nodo N.
-    P->set_child(1 - dir, CN); //Asignar el hijo del nodo P al nodo hijo del nodo N.
-
-    if (CN != nullptr){ //Si el hijo del nodo N no es nulo
-
-        CN->set_parent(P); //Asignar el nodo padre al nodo P.
-    }
-
-    N->set_child(dir, P); //Asignar el hijo del nodo N al nodo P.
-    P->set_parent(N); //Asignar el nodo padre al nodo N.
-
-    if (G != nullptr){ //Si el nodo padre no es nulo
     
-        gpDir = (G->child(0) == P) ? 0 : 1; //Asignar el hijo del nodo padre al nodo P.
-        G->set_child(gpDir, N); //Asignar el hijo del nodo padre al nodo N.
-    }
-    
-    else{ //Sino
 
-        set_root_node(N); //Asignar el nodo raíz al nodo N.
-    }
-
-    N->set_parent(G); //Asignar el nodo padre al nodo N.
     //
     return N;
 }
@@ -871,7 +813,7 @@ void AVLTree<T>::make_balanced()
 
     while (P)
     {
-        // TODO
+        // REPASO
         // Check the subtree balance factor to do rotations if needed.
 
         typename AVLTNode<T>::Ref N; //Hijo del nodo padre.
@@ -881,25 +823,8 @@ void AVLTree<T>::make_balanced()
         // First, update subtree root node height because we have just done
         // an insertion/deletion in the subtree.
         
-        bfP = P->balance_factor(); //Factor de equilibrio del nodo padre.
+        
 
-        if (std::abs(bfP) > 1){ //Si el factor de equilibrio del nodo padre es mayor que 1, el árbol está desbalanceado.
-
-            dir = (bfP < 0) ? 0 : 1; //Asignar la dirección del nodo padre.
-            N = P->child(dir); //Asignar el hijo del nodo padre.
-            bfN = N->balance_factor(); //Factor de equilibrio del hijo del nodo padre.
-
-            if (bfP*bfN >= 0){ //Si el producto de los factores de equilibrio es mayor o igual a 0, el árbol está desbalanceado.
-
-                P = rotate(P, 1 - dir); //Asignar el nodo padre al hijo del nodo padre.
-            }
-            
-            else{ //Sino
-
-                rotate(N, dir); //Asignar el hijo del nodo padre al nodo padre.
-                P = rotate(P, 1 - dir); //Asignar el nodo padre al hijo del nodo padre.
-            }
-        }
         //
 
         // Second, compute balance factor.

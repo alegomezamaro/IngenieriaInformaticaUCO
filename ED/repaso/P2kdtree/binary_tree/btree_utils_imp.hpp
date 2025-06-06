@@ -20,19 +20,9 @@ template <class T>
 int compute_height(const BTree<T> &t)
 {
     int height = 0;
-    // TODO
+    // REPASO
     // Hint: when you call a template into other template maybe you need
     //  to specialize the call.
-
-    if(t.is_empty()){ //Si el arbol esta vacio retornamos -1
-
-        height = -1;
-    }
-    
-    else { //Si el arbol no esta vacio
-
-        height = 1 + std::max(compute_height(t.left()), compute_height(t.right())); //Calculamos la altura del arbol desarrollando por hijos
-    }
 
     //
     return height;
@@ -42,19 +32,11 @@ template <class T>
 size_t compute_size(const BTree<T> &t)
 {
     size_t ret_val = 0;
-    // TODO
+    // REPASO
     // Hint: when you call a template into other template maybe you need
     //  to specialize the call.
 
-    if(t.is_empty()){ //Si el arbol esta vacio retornamos -1
 
-        ret_val = 0;
-    }
-    
-    else { //Si el arbol no esta vacio
-
-        ret_val = 1 + compute_size(t.left()) + compute_size(t.right()); //Calculamos la altura del arbol desarrollando por hijos
-    }
 
     //
     return ret_val;
@@ -64,16 +46,11 @@ template <class T, typename Processor>
 bool prefix_process(const BTree<T> &tree, Processor &p)
 {
     bool retVal = true;
-    // TODO
+    // REPASO
     // Hint: when you call a template into other template maybe you need
     //  to specialize the call.
 
-    if(!tree.is_empty()){ //Si el arbol no esta vacio
 
-        retVal = p(tree.item()); //Procesamos el item
-        retVal = retVal && prefix_process(tree.left(), p); //Procesamos el hijo izquierdo
-        retVal = retVal && prefix_process(tree.right(), p); //Procesamos el hijo derecho
-    }
 
     //
     return retVal;
@@ -83,16 +60,11 @@ template <class T, class Processor>
 bool infix_process(const BTree<T> &tree, Processor &p)
 {
     bool retVal = true;
-    // TODO
+    // REPASO
     // Hint: when you call a template into other template maybe you need
     //  to specialize the call.
 
-    if(!tree.is_empty()){ //Si el arbol no esta vacio
 
-        retVal = infix_process(tree.left(), p); //Procesamos el hijo izquierdo
-        retVal = retVal && p(tree.item()); //Procesamos el item
-        retVal = retVal && infix_process(tree.right(), p); //Procesamos el hijo derecho
-    }
 
     //
     return retVal;
@@ -102,16 +74,11 @@ template <class T, class Processor>
 bool postfix_process(const BTree<T> &tree, Processor &p)
 {
     bool retVal = true;
-    // TODO
+    // REPASO
     // Hint: when you call a template into other template maybe you need
     //  to specialize the call.
 
-    if(!tree.is_empty()){ //Si el arbol no esta vacio
 
-        retVal = postfix_process(tree.left(), p); //Procesamos el hijo izquierdo
-        retVal = retVal && postfix_process(tree.right(), p); //Procesamos el item
-        retVal = retVal && p(tree.item()); //Procesamos el hijo derecho
-    }
 
     //
     return retVal;

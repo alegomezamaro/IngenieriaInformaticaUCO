@@ -1,0 +1,1 @@
+/usr/bin/g++ -Wall -O0 -ggdb3 CMakeFiles/test_kdtree.dir/test_kdtree.cpp.o -o test_kdtree  libkdtree.a pattern/libpattern.a 

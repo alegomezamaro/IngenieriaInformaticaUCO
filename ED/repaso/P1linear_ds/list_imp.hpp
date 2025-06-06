@@ -189,14 +189,10 @@ void List<T>::hook(typename DNode<T>::Ref n, typename DNode<T>::Ref pos)
 #ifndef NDEBUG
     auto old_size = size();
 #endif
-    // TODO
+    // REPASO
     // Remember updating the size.
 
-    n->set_next(pos); //Asigna el siguiente nodo
-    n->set_prev(pos->prev()); //Asigna el nodo anterior
-    pos->prev()->set_next(n); //Asigna el nodo anterior al siguiente nodo
-    pos->set_prev(n); //Asigna el nodo al anterior a pos
-    set_size(old_size + 1); //Aumenta el tamaño
+    
 
     //
     assert(size() == old_size + 1);
@@ -208,12 +204,10 @@ void List<T>::unhook(typename DNode<T>::Ref pos)
 #ifndef NDEBUG
     auto old_size = size();
 #endif
-    // TODO
+    // REPASO
     // Remember updating the size.
 
-    pos->prev()->set_next(pos->next()); //Asigna el siguiente nodo al anterior
-    pos->next()->set_prev(pos->prev()); //Asigna el anterior nodo al siguiente
-    set_size(old_size - 1); //Disminuye el tamaño
+
 
     //
     assert(size() == old_size - 1);
@@ -273,10 +267,10 @@ void List<T>::push_front(T const &new_it)
 #ifndef NDEBUG
     size_t old_size = size();
 #endif
-    // TODO
+    // REPASO
     //  Hint: delegate in insert();
 
-    insert(begin(), new_it); //Inserta el nuevo elemento al principio
+
 
     //
     assert(front() == new_it);
