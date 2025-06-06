@@ -1,15 +1,17 @@
 Todas las funciones que hay que rellenar tiene //REPASO al principio parsa poder buscarlas más facilmente. Son:
 
     Practica 1: Linear DS
-        unhook (List)
-        ⁠⁠enque (Queue)
-        ⁠⁠push_front (CDArray y List)
         ⁠⁠grow (CDArray)
-        ⁠⁠hook (List)
+        ⁠⁠push_front (CDArray)        
+        ⁠⁠push_front (List)
+        unhook (List)
+        hook (List)
+        enque (Queue)
+        ⁠⁠
 
     Practica 2: KDTree
-        ⁠compute_size (BTree Utils)
         ⁠⁠fold (BTree)
+        compute_size (BTree Utils)
         ⁠⁠prefix_process (BTree Utils)
         ⁠⁠infix_process (BTree Utils)
         ⁠⁠postfix_process (BTree Utils)
