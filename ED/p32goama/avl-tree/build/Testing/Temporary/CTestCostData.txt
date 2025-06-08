@@ -1,8 +1,8 @@
-TestBSTreeNode 4 0.070316
-TestBSTree 4 0.0937194
-TestBSTreePB 4 0.0634603
-TestAVLTreeNode 4 0.0836336
-TestAVLTree 4 0.130946
-TestAVLTreeIterator 4 0.0616716
-TestAVLTreeMinMax 4 0.0909839
+TestBSTreeNode 6 0.071344
+TestBSTree 6 0.0924819
+TestBSTreePB 6 0.0630588
+TestAVLTreeNode 6 0.0830628
+TestAVLTree 6 0.126041
+TestAVLTreeIterator 6 0.0624473
+TestAVLTreeMinMax 6 0.09219
 ---

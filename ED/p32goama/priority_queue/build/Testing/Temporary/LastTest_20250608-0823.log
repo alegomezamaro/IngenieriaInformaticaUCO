@@ -1,0 +1,24 @@
+Start testing: Jun 08 11:20 CEST
+----------------------------------------------------------
+4/4 Testing: TestPQueue
+4/4 Test: TestPQueue
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/priority_queue/build//test_pqueue" "04_pqueue"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/priority_queue
+"TestPQueue" start time: Jun 08 11:20 CEST
+Output:
+----------------------------------------------------------
+Test running: 04_pqueue/00 ... [32mTest passed.[0m
+Test running: 04_pqueue/01 ... [32mTest passed.[0m
+Test running: 04_pqueue/02 ... [32mTest passed.[0m
+Test running: 04_pqueue/03 ... [32mTest passed.[0m
+Test running: 04_pqueue/04 ... [32mTest passed.[0m
+5/5 tests passed.
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"TestPQueue" end time: Jun 08 11:20 CEST
+"TestPQueue" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 08 11:20 CEST

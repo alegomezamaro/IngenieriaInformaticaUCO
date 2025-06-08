@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250608-0956-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.28.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="AleLinuxMint2"
+	OSRelease="6.8.0-51-generic"
+	OSVersion="#52-Ubuntu SMP PREEMPT_DYNAMIC Thu Dec  5 13:09:44 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="24"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="14918"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1538.97"
+	>
+	<Testing>
+		<StartDateTime>Jun 08 11:56 CEST</StartDateTime>
+		<StartTestTime>1749376570</StartTestTime>
+		<TestList/>
+		<EndDateTime>Jun 08 11:56 CEST</EndDateTime>
+		<EndTestTime>1749376570</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

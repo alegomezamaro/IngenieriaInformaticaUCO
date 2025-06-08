@@ -116,7 +116,7 @@ bool Heap<T>::is_a_heap(size_t root) const
         }
     }
 
-    else if(rC < last_item_){ //Si el índice del hijo derecho es menor que el último elemento del montículo
+    if(rC < last_item_){ //Si el índice del hijo derecho es menor que el último elemento del montículo
     
         if (!comp_((*values_)[root], (*values_)[rC]) || !is_a_heap(rC)){ //Si el elemento actual no es menor que el hijo derecho y el hijo derecho no es un heap
     

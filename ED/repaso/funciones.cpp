@@ -136,140 +136,143 @@
                 bf = left_height - right_height; //Devolvemos la altura izquierda menos la derecha
             }
 
-        ///////////////////////////////////////
+        
         ⁠⁠insert (AVLTree)
-            current_ = AVLTNode<T>::create(k); //Crear un nuevo nodo con el valor k.
-            if (parent_ == nullptr) { //Si el nodo padre es nulo, asignar el nodo actual a la raíz.
-                root_ = current_; //Asignar el nodo raíz al nodo actual.
-                current_->set_parent(nullptr); //Asignar el nodo padre a nullptr.
+            current_ = AVLTNode<T>::create(k); //Creamos un nuevo nodo con el k y lo almacenamos en current_
+            if (parent_ == nullptr) { //Si el nodo padre es nulo, asignar el nodo current_ a root_
+                root_ = current_; 
+                current_->set_parent(nullptr); //Asignar como padre de current_ nullptr.
             }
-            else { //Sino
-                current_->set_parent(parent_); //Asignar el nodo padre al nodo actual.
-                if (parent_->item() > k) { //Si el valor del nodo padre es mayor que el valor k, asignar el subárbol izquierdo al nodo padre.
-                    parent_->set_left(current_); //Asignar el subárbol izquierdo al nodo padre.
+            else { //Si el padre no es nulo
+                current_->set_parent(parent_); //Asignar como padre a parent_
+                if (parent_->item() > k) { //Si el nodo padre es mayor k asignamos el arbol izquierdo
+                    parent_->set_left(current_);
                 }
-                else { //Sino
-                    parent_->set_right(current_); //Asignar el subárbol derecho al nodo padre.
+                else { //Sino asignamos el arbol derecho
+                    parent_->set_right(current_); 
                 }
             }
-            height_ = std::max(height_, current_level());
-            size_++;
+            height_ = std::max(height_, current_level()); //Almacenamos la altura del nodo
+            size_++; //Sumamos uno al tamaño
 
 
-        ⁠⁠find_inorder_sucesor (AVLTree)
-            parent_ = current_; //Asignar el nodo padre al nodo actual.
-            current_ = current_->right(); //Asignar el subárbol derecho al nodo actual.
-            while (current_->left() != nullptr){ //Mientras el subárbol izquierdo no sea nulo.
-                parent_ = current_; //Asignar el nodo padre al nodo actual.
-                current_ = current_->left(); //Asignar el subárbol izquierdo al nodo actual.
+        ⁠⁠find_inorder_sucesor (AVLTree) //Derecha y maximo izquierda
+            parent_ = current_; //Asignar current_ a parent_
+            current_ = current_->right(); //Asignar el hijo de derecho a current_
+            while (current_->left() != nullptr){ //Mientras tenga hijos izquierdos
+                parent_ = current_; //Asignar current_ a parent_
+                current_ = current_->left(); //Asignar el hijo izquierdo a current_
             }
         
-        ⁠⁠rotate (AVLTree)
+
+        ⁠⁠rotate (AVLTree) //dir==0 (izquierda) dir==1 (derecha)
             typename AVLTNode<T>::Ref G;
             typename AVLTNode<T>::Ref CN;
             int gpDir;
-            G = P->parent(); //Nodo padre del nodo P.
-            N = P->child(1 - dir); //Nodo hijo del nodo P.
-            CN = N->child(dir); //Nodo hijo del nodo N.
-            P->set_child(1 - dir, CN); //Asignar el hijo del nodo P al nodo hijo del nodo N.
-            if (CN != nullptr){ //Si el hijo del nodo N no es nulo
-                CN->set_parent(P); //Asignar el nodo padre al nodo P.
+            G = P->parent(); //Asignamos padre de P (abuelo) a G
+            N = P->child(1 - dir); //Obtenemos N (si es izquierda hijo derecho, sino al reves)
+            CN = N->child(dir); //Asignamos el hijo derecho de N a CN
+            P->set_child(1 - dir, CN); //Asignar a CN como hijo de P
+            if (CN != nullptr){ //Si CN no es nulo le asignamos como padre a P
+                CN->set_parent(P);
             }
-            N->set_child(dir, P); //Asignar el hijo del nodo N al nodo P.
-            P->set_parent(N); //Asignar el nodo padre al nodo N.
-            if (G != nullptr){ //Si el nodo padre no es nulo
-                gpDir = (G->child(0) == P) ? 0 : 1; //Asignar el hijo del nodo padre al nodo P.
-                G->set_child(gpDir, N); //Asignar el hijo del nodo padre al nodo N.
+            N->set_child(dir, P); //Asignar a P como hijo de N
+            P->set_parent(N); //Asignar a N como padre de P
+            if (G != nullptr){ //Si G no es nulo
+                if(G->child(0) == P){ //Si el hijo izquierdo de G es P lo almacenamos
+                    gpDir = 0;
+                }
+                else{ //Si es el derecho lo almacenamos
+                    gpDir = 1;
+                } 
+                G->set_child(gpDir, N); //Asignamos N como hijo de G en la posicion de P
             }
-            else{ //Sino
-                set_root_node(N); //Asignar el nodo raíz al nodo N.
+            else{ //Si G es nulo
+                set_root_node(N); //Asignar N como nodo raiz
             }
-            N->set_parent(G); //Asignar el nodo padre al nodo N.
+            N->set_parent(G); //Asignamos a G como padre de N
 
         ⁠⁠make_balanced (AVLTree)
-            typename AVLTNode<T>::Ref N; //Hijo del nodo padre.
-            int bfP, bfN, dir; //Factor de equilibrio del nodo padre, hijo y dirección.
-            P->update_height(); //Actualizar la altura del nodo padre.
-            // First, update subtree root node height because we have just done
-            // an insertion/deletion in the subtree.
-            bfP = P->balance_factor(); //Factor de equilibrio del nodo padre.
-            if (std::abs(bfP) > 1){ //Si el factor de equilibrio del nodo padre es mayor que 1, el árbol está desbalanceado.
-                dir = (bfP < 0) ? 0 : 1; //Asignar la dirección del nodo padre.
-                N = P->child(dir); //Asignar el hijo del nodo padre.
-                bfN = N->balance_factor(); //Factor de equilibrio del hijo del nodo padre.
-                if (bfP*bfN >= 0){ //Si el producto de los factores de equilibrio es mayor o igual a 0, el árbol está desbalanceado.
-                    P = rotate(P, 1 - dir); //Asignar el nodo padre al hijo del nodo padre.
+            typename AVLTNode<T>::Ref N;
+            int bfP, bfN, dir;
+            P->update_height(); //Actualizamos la altura del nodo P
+            bfP = P->balance_factor(); //Obtenemos el factor de equilibrio de P
+            if (std::abs(bfP) > 1){ //Si esta desbalanceado (FE valor absoluto > 1)
+                if(bfP < 0){ //Si el fe es menor que cero rotamos a la izquierda, sino derecha
+                    dir = 0;
                 }
-                else{ //Sino
-                    rotate(N, dir); //Asignar el hijo del nodo padre al nodo padre.
-                    P = rotate(P, 1 - dir); //Asignar el nodo padre al hijo del nodo padre.
+                else{
+                    dir = 1;
                 }
-            }
-            // Second, compute balance factor.
-            // Third, check the balance factor to do rotations if needed.
-            // Remember: update subtree_root if any rotation is done.        
-            
+                N = P->child(dir); //Asignar a N como hijo de P
+                bfN = N->balance_factor(); //Obtenemos el factor de equilibrio de N
+                if (bfP*bfN >= 0){ //Si estan desbalanceados en la misma dirección
+                    P = rotate(P, 1 - dir); //Rotamos P en la direccion contraria al desbalanceo
+                }
+                else{ //Si estan desbalanceados en direcciones contraria
+                    rotate(N, dir); //Rotamos N en la direccion de desbalanceo
+                    P = rotate(P, 1 - dir); //Rotamos P en la direccion contraria al desbalanceo
+                }
+            }       
 
     //Practica 4: Priority Queue
-        //⁠Entera, entrará alguna priority_queue o heap
+        parent (Heap) //(i-1)/2
+                return (i - 1) / 2;
 
-        parent (Heap)
-                return (i - 1) / 2; //Devolvemos el padre
+        left (Heap) //2i+1
+            return (2 * i + 1);
 
-        left (Heap)
-            return (2 * i + 1); //Devolvemos el hijo izquierdo
-
-        right (Heap)
-            return (2 * i + 2); //Devolvemos el hijo derecho
+        right (Heap) //2i+2
+            return (2 * i + 2);
         
         shift_up (Heap)
-            if(i > 0 && comp_((*values_)[i], (*values_)[parent(i)])){ //Mientras el padre es mayor que el hijo
-                std::swap((*values_)[i], (*values_)[parent(i)]); //Cambiamos el padre por el hijo
-                shift_up(parent(i)); //Llamamos recursivamente a la función para seguir subiendo el hijo
+            if(i > 0 && comp_((*values_)[i], (*values_)[parent(i)])){ //Mientras el hijo es menor que el padre
+                std::swap((*values_)[i], (*values_)[parent(i)]); //Intercambiamos al padre y el hijo
+                shift_up(parent(i)); //Repetimos el proceso con el padre
             }
 
         shift_down (Heap)
-            size_t n = i; //Indice del padre
-            size_t lC = left(i);  //Indice del hijo izquierdo
-            size_t rC = right(i); //Indice del hijo derecho
+            size_t n = i; //Almacenamos el indice de n
+            size_t lC = left(i);  //Obtenemos el indice de su hijo izquierdo
+            size_t rC = right(i); //Obtenemos el indice de su hijo derecho
             if (lC < last_item_ && comp_((*values_)[lC], (*values_)[n])){ //Si el hijo izquierdo es menor que el padre
-                n = lC; //Actualizamos el índice del padre
+                n = lC; //Almacenamos el hijo izquierdo en el padre
             }
             if (rC < last_item_ && comp_((*values_)[rC], (*values_)[n])){ //Si el hijo derecho es menor que el padre
-                n = rC; //Actualizamos el índice del padre
+                n = rC; //Almacenamos el hijo derecho en el padre
             }
-            if (i != n){ //Si el padre no es el menor
-                std::swap((*values_)[i], (*values_)[n]); //Cambiamos el padre por el hijo
-                shift_down(n); //Llamamos recursivamente a la función para seguir bajando el padre
+            if (i != n){ //Si finalmente el padre no es el menor
+                std::swap((*values_)[i], (*values_)[n]); //Cambiamos el padre por el hijo menor
+                shift_down(n); //Repetimos el proceso con el nuevo padre
             }
         
         is_a_heap (Heap)
-            size_t lC = left(root);  //Indice del hijo izquierdo
-            size_t rC = right(root); //Indice del hijo derecho
+            size_t lC = left(root);  //Obtenemos el indice de su hijo izquierdo
+            size_t rC = right(root); //Obtenemos el indice de su hijo derecho
             if (lC < last_item_){ //Si el indice del hijo izquierdo es menor que el último elemento del montículo
-                if (!comp_((*values_)[root], (*values_)[lC]) || !is_a_heap(lC)){ // Si el elemento actual no es menor que el hijo izquierdo y el hijo izquierdo no es un heap
+                if (!comp_((*values_)[root], (*values_)[lC]) || !is_a_heap(lC)){ //Si el root no es menor que el hijo izquierdo y el hijo izquierdo no es un heap
                     ret_val=false; 
                 }
             }
-            else if(rC < last_item_){ //Si el índice del hijo derecho es menor que el último elemento del montículo
-                if (!comp_((*values_)[root], (*values_)[rC]) || !is_a_heap(rC)){ //Si el elemento actual no es menor que el hijo derecho y el hijo derecho no es un heap
+            if(rC < last_item_){ //Si el índice del hijo derecho es menor que el último elemento del montículo
+                if (!comp_((*values_)[root], (*values_)[rC]) || !is_a_heap(rC)){ //Si el root no es menor que el hijo derecho y el hijo derecho no es un heap
                     ret_val=false;
                 }
             }
         
         ⁠⁠heapify (Heap)
             if (size() > 0){ //Si el tamaño del array es mayor que 0
-                for (size_t i = (size() / 2) - 1; i < size(); --i){ //Recorremos el array desde la mitad hasta el principio
-                    shift_down(i); //Llamamos a la función shift_down para bajar el padre
+                for (size_t i = (size() / 2) - 1; i < size(); --i){ //Recorremos desde el primer padre con dos hijos
+                    shift_down(i); //Llamamos a la función shift_down para equilibrar desde i
                 }
             } 
 
         Heap (Heap)
-            last_item_ = values.size(); //Guardamos el tamaño del array
-            heapify(); //Construimos el heap
+            last_item_ = values.size(); //Almacenamos el tamaño en last_item_
+            heapify(); //Cosntruimos el heap
 
         is_empty (Heap)
-            return last_item_ == 0; //Si el último elemento es 0, el heap está vacío
+            return last_item_ == 0; //Si last_item_ es 0 true
         
         size (Heap)
             return last_item_; //Devolvemos el tamaño del array
@@ -278,13 +281,13 @@
             return (*values_)[0]; //Devolvemos el primer elemento del array
 
         insert (Heap)
-            if (last_item_ == values_->size()){ //Si el tamaño del array es igual al tamaño del heap
-                values_->push_back(new_it); //Añadimos el nuevo elemento al final del array
+            if (last_item_ == values_->size()){ //Si esta lleno añadimos un elemento al final
+                values_->push_back(new_it);
             }
-            else{ //Sino
-                (*values_)[last_item_] = new_it; //Añadimos el nuevo elemento al final del heap
+            else{ //Si no esta lleno añadimos el elemento en la primera posicion libre
+                (*values_)[last_item_] = new_it;
             }
-            last_item_++; //Aumentamos el tamaño del array
+            last_item_++; //Aumentamos el tamaño
             shift_up(last_item_ - 1); //Llamamos a la función shift_up para subir el nuevo elemento
 
         remove (Heap)
@@ -295,32 +298,31 @@
             }
         
         heapsort (Heap)
-            Heap<T> heap(values, comp); //Creamos un heap con el array
+            Heap<T> heap(values, comp); //Creamos un heap con los valores
             for (size_t i = values.size(); i > 0; i--){ //Recorremos el array desde el final hasta el principio
-
-                heap.remove(); //Llamamos a la función remove para eliminar el primer elemento del heap
+                heap.remove(); //Eliminamos el primer elemento
             }
 
         is_empty (Priority Queue)
             return heap_.is_empty(); //Devolvemos si el heap está vacío
 
         size (Priority Queue)
-            return heap_.size(); //Devolvemos el tamaño del heap
+            return heap_.size(); //Devolvemos el tamaño
 
         front (Priority Queue)
-            return heap_.item(); //Devolvemos el primer elemento del heap
+            return heap_.item(); //Devolvemos el primer elemento
 
         enqueue (Priority Queue)
-            heap_.insert(new_v); //Insertamos el nuevo elemento en el heap
+            heap_.insert(new_v); //Insertamos el nuevo elemento
         
         dequeue (Priority Queue)
-            heap_.remove(); //Eliminamos el primer elemento del heap
+            heap_.remove(); //Eliminamos el primer elemento
 
 
     //Practica 5: Dos detector open adressing
-        operator<< (IP Utils)
+        operator<< (IP Utils) //ip.bytes[0] . ip.bytes[1] . ip.bytes[2] . ip.bytes[3]
             out << static_cast<int>(ip.bytes[0]) << "." << static_cast<int>(ip.bytes[1]) << "." << static_cast<int>(ip.bytes[2]) << "."
-            << static_cast<int>(ip.bytes[3]); //Salida de la dirección IP en formato decimal
+            << static_cast<int>(ip.bytes[3]); //Salida de la IP en formato decimal
         
         ⁠operator>> (IP Utils)
             std::string input; //Variable para almacenar la cadena de entrada
@@ -328,19 +330,18 @@
             std::replace(input.begin(), input.end(), '.', ' '); //Reemplazamos los '.' por espacios para poder leer los números
             std::istringstream iss(input); //Creamos un istringstream para poder leer los números separados por espacios
             int a, b, c, d; //Variables para almacenar los números leídos
-            if (!(iss >> a >> b >> c >> d) || a < 0 || a > 255 || b < 0 || b > 255 || c < 0 || c > 255 || d < 0 || d > 255) { //Comprobamos que los números leídos son válidos sino muestra un error
-                throw std::runtime_error("Ip: wrong input format."); //Lanzamos una excepción si el formato es incorrecto
+            if (!(iss >> a >> b >> c >> d) || a < 0 || a > 255 || b < 0 || b > 255 || c < 0 || c > 255 || d < 0 || d > 255) {
+                throw std::runtime_error("Ip: wrong input format."); //Comprobamos que los números leídos son válidos
             }
-            //Convertimos los números a uint8_t
-            ip.bytes[0] = static_cast<uint8_t>(a); //Convertimos el número a uint8_t
-            ip.bytes[1] = static_cast<uint8_t>(b); //Convertimos el número a uint8_t
-            ip.bytes[2] = static_cast<uint8_t>(c); //Convertimos el número a uint8_t
-            ip.bytes[3] = static_cast<uint8_t>(d); //Convertimos el número a uint8_t
+            ip.bytes[0] = static_cast<uint8_t>(a); //Convertimos los números a uint8_t
+            ip.bytes[1] = static_cast<uint8_t>(b); 
+            ip.bytes[2] = static_cast<uint8_t>(c); 
+            ip.bytes[3] = static_cast<uint8_t>(d); 
 
         ⁠operator++ (Hash Table Iterator)
             do{ 
-                ++idx_; // Aumentamos el índice
-            }while (idx_ < ht_->size() && !ht_->entry(idx_).is_valid()); //Mientras el índice sea menor que el tamaño de la tabla y la entrada no sea válida, aumentamos el índice
+                ++idx_; //Aumentamos el índice
+            }while(idx_ < ht_->size() && !ht_->entry(idx_).is_valid()); //Mientras el índice sea menor que el tamaño de la tabla y la entrada no sea válida
 
         ⁠operator== (Hash Table Iterator)
             ret_v = table() == other.table() && index() == other.index(); //Comprobamos que la tabla es la misma y que el índice es el mismo

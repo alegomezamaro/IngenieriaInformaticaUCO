@@ -27,7 +27,25 @@ Todas las funciones que hay que rellenar tiene //REPASO al principio parsa poder
         ⁠⁠make_balanced (AVLTree)
         ⁠
     Practica 4: Priority Queue
-        ⁠Entera, entrará alguna priority_queue o heap
+        parent (Heap)
+        left (Heap)
+        right (Heap)
+        shift_up (Heap)
+        shift_down (Heap)
+        is_a_heap (Heap)
+        ⁠⁠heapify (Heap)
+        Heap (Heap)
+        is_empty (Heap)
+        size (Heap)
+        item (Heap)
+        insert (Heap)
+        remove (Heap)
+        heapsort (Heap)
+        is_empty (Priority Queue)
+        size (Priority Queue)
+        front (Priority Queue)
+        enqueue (Priority Queue)
+        dequeue (Priority Queue)
 
     Practica 5: Dos detector open adressing
         operator<< (IP Utils)
