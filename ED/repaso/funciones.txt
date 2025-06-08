@@ -57,8 +57,8 @@ Todas las funciones que hay que rellenar tiene //REPASO al principio parsa poder
         other (Edge)
         ⁠add_edge (Graph)
         ⁠remove_edge (Graph)
-        ⁠remove_vertex (Graph)
         VertexIterator ⁠find_first (Graph)
+        ⁠remove_vertex (Graph)
         EdgeIterator ⁠find_first (Graph)
         ⁠get_edges (Graph)
         

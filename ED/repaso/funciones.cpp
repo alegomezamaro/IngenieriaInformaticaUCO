@@ -192,6 +192,7 @@
             }
             N->set_parent(G); //Asignamos a G como padre de N
 
+
         ⁠⁠make_balanced (AVLTree)
             typename AVLTNode<T>::Ref N;
             int bfP, bfN, dir;
@@ -215,6 +216,7 @@
                 }
             }       
 
+
     //Practica 4: Priority Queue
         parent (Heap) //(i-1)/2
                 return (i - 1) / 2;
@@ -231,6 +233,7 @@
                 shift_up(parent(i)); //Repetimos el proceso con el padre
             }
 
+
         shift_down (Heap)
             size_t n = i; //Almacenamos el indice de n
             size_t lC = left(i);  //Obtenemos el indice de su hijo izquierdo
@@ -246,6 +249,7 @@
                 shift_down(n); //Repetimos el proceso con el nuevo padre
             }
         
+
         is_a_heap (Heap)
             size_t lC = left(root);  //Obtenemos el indice de su hijo izquierdo
             size_t rC = right(root); //Obtenemos el indice de su hijo derecho
@@ -260,6 +264,7 @@
                 }
             }
         
+
         ⁠⁠heapify (Heap)
             if (size() > 0){ //Si el tamaño del array es mayor que 0
                 for (size_t i = (size() / 2) - 1; i < size(); --i){ //Recorremos desde el primer padre con dos hijos
@@ -267,9 +272,11 @@
                 }
             } 
 
+
         Heap (Heap)
             last_item_ = values.size(); //Almacenamos el tamaño en last_item_
             heapify(); //Cosntruimos el heap
+
 
         is_empty (Heap)
             return last_item_ == 0; //Si last_item_ es 0 true
@@ -277,8 +284,10 @@
         size (Heap)
             return last_item_; //Devolvemos el tamaño del array
         
+
         item (Heap)
             return (*values_)[0]; //Devolvemos el primer elemento del array
+
 
         insert (Heap)
             if (last_item_ == values_->size()){ //Si esta lleno añadimos un elemento al final
@@ -290,6 +299,7 @@
             last_item_++; //Aumentamos el tamaño
             shift_up(last_item_ - 1); //Llamamos a la función shift_up para subir el nuevo elemento
 
+
         remove (Heap)
             last_item_--; //Disminuimos el tamaño del array
             if (last_item_ > 0){ //Si el tamaño del array es mayor que 0
@@ -297,24 +307,30 @@
                 shift_down(0); //Llamamos a la función shift_down para bajar el primer elemento
             }
         
+
         heapsort (Heap)
             Heap<T> heap(values, comp); //Creamos un heap con los valores
             for (size_t i = values.size(); i > 0; i--){ //Recorremos el array desde el final hasta el principio
                 heap.remove(); //Eliminamos el primer elemento
             }
 
+
         is_empty (Priority Queue)
             return heap_.is_empty(); //Devolvemos si el heap está vacío
+
 
         size (Priority Queue)
             return heap_.size(); //Devolvemos el tamaño
 
+
         front (Priority Queue)
             return heap_.item(); //Devolvemos el primer elemento
+
 
         enqueue (Priority Queue)
             heap_.insert(new_v); //Insertamos el nuevo elemento
         
+
         dequeue (Priority Queue)
             heap_.remove(); //Eliminamos el primer elemento
 
@@ -324,6 +340,7 @@
             out << static_cast<int>(ip.bytes[0]) << "." << static_cast<int>(ip.bytes[1]) << "." << static_cast<int>(ip.bytes[2]) << "."
             << static_cast<int>(ip.bytes[3]); //Salida de la IP en formato decimal
         
+
         ⁠operator>> (IP Utils)
             std::string input; //Variable para almacenar la cadena de entrada
             in >> input; //Leemos la cadena de entrada
@@ -338,10 +355,12 @@
             ip.bytes[2] = static_cast<uint8_t>(c); 
             ip.bytes[3] = static_cast<uint8_t>(d); 
 
+
         ⁠operator++ (Hash Table Iterator)
             do{ 
                 ++idx_; //Aumentamos el índice
             }while(idx_ < ht_->size() && !ht_->entry(idx_).is_valid()); //Mientras el índice sea menor que el tamaño de la tabla y la entrada no sea válida
+
 
         ⁠operator== (Hash Table Iterator)
             ret_v = table() == other.table() && index() == other.index(); //Comprobamos que la tabla es la misma y que el índice es el mismo
@@ -356,78 +375,84 @@
                 return u_;
             }
 
+
         ⁠add_edge (Graph)
-            ret_v = Edge<T, E>::create(u, v, item); // Crea un nuevo borde entre u y v con el ítem dado
-            auto u_iter = get_iterator(u); // Obtiene el iterador al vértice u
-            u_iter.it_->second.push_back(ret_v); // Añade el borde a la lista de bordes incidentes en u
-            if(!is_directed()){ // Si el grafo es no dirigido, también debemos añadir el borde a la lista de bordes incidentes en v
-                auto v_iter = get_iterator(v); // Obtiene el iterador al vértice v
-                v_iter.it_->second.push_back(ret_v); // Añade el borde a la lista de bordes incidentes en v
+            ret_v = Edge<T, E>::create(u, v, item); //Creamos una arista entre u y v con valor item
+            auto u_iter = get_iterator(u); //Almacenamos la lista de aristas de u
+            u_iter.it_->second.push_back(ret_v); //Añadimos la arista nueva a la lista
+            if(!is_directed()){ //Si el grafo es no dirigido hacemos lo mismo con v
+                auto v_iter = get_iterator(v);
+                v_iter.it_->second.push_back(ret_v);
             }
 
+
         ⁠remove_edge (Graph)
-            auto u_iter = get_iterator(u); // Obtiene el iterador al vértice u
-            auto edge_iter = edges_begin(u_iter); // Obtiene el iterador al principio de la lista de bordes incidentes en u
-            while(edge_iter != edges_end(u_iter)){ // Recorre los bordes incidentes en u desde el principio hasta el final
-                if((*edge_iter)->other(u) == v){ // Si el borde actual tiene v como otro extremo
-                    edge_iter.it_ = u_iter.it_->second.erase(edge_iter.it_); // Elimina el borde de la lista de bordes incidentes en u
+            auto u_iter = get_iterator(u); //Almacenamos la lista de aristas de u
+            auto edge_iter = edges_begin(u_iter); //Obtienemos el iterador de la lista de aristas de u
+            while(edge_iter != edges_end(u_iter)){ //Recorre la lista de aristas de u
+                if((*edge_iter)->other(u) == v){ //Si la arista contrario es v lo borramos
+                    edge_iter.it_ = u_iter.it_->second.erase(edge_iter.it_);
                     break;
                 }
-                else{
-                    edge_iter++; // Avanza al siguiente borde
+                else{ //Sino continua con la siguiente arista
+                    edge_iter++;
                 }
             }
-            if(!is_directed()){ // Si el grafo es no dirigido, también debemos eliminar el borde de la lista de bordes incidentes en v
-                auto v_iter = get_iterator(v); // Obtiene el iterador al vértice v
-                edge_iter = edges_begin(v_iter); // Obtiene el iterador al principio de la lista de bordes incidentes en v
-                while(edge_iter != edges_end(v_iter)){ // Recorre los bordes incidentes en v desde el principio hasta el final
-                    if((*edge_iter)->other(v) == u){ // Si el borde actual tiene u como otro extremo
-                        edge_iter.it_ = v_iter.it_->second.erase(edge_iter.it_); // Elimina el borde de la lista de bordes incidentes en v
+            if(!is_directed()){ //Si el grafo es no dirigido eliminamos tambien en v
+                auto v_iter = get_iterator(v);
+                edge_iter = edges_begin(v_iter);
+                while(edge_iter != edges_end(v_iter)){ 
+                    if((*edge_iter)->other(v) == u){ 
+                        edge_iter.it_ = v_iter.it_->second.erase(edge_iter.it_); 
                         break;
                     }
-                    else{ // Sino, avanza al siguiente borde 
+                    else{ 
                         edge_iter++; 
                     }
                 }
             }
 
+
+        VertexIterator ⁠find_first (Graph)
+            while(iter != vertices_end() && (*iter)->item().key() != value){ //Mientras no encuentre el vertice value avanza 
+                iter++;
+            } 
+
+
         ⁠remove_vertex (Graph)
-            auto iter = vertices_.begin(); // Obtiene el iterador al principio de la lista de vértices
-            while(iter != vertices_.end() && iter->first != v){ // Recorre los vértices desde el principio hasta el final
+            auto iter = vertices_.begin(); //Definimos un iterador al principio de la lista de vértices
+            while(iter != vertices_.end() && iter->first != v){ //Recorremos los vértices hasta encontrar v
                 iter++;
             }
-            if(iter != vertices_.end()){ // Si se encontró el vértice v en la lista de vértices
-                for(auto& vertex_pair : vertices_){ // Recorre todos los pares de vértices y sus listas de bordes
-                    if(vertex_pair.first != v){ // Si el vértice actual no es v
-                        auto edge_iter = vertex_pair.second.begin(); // Obtiene el iterador al principio de la lista de bordes incidentes en el vértice actual
-                        while(edge_iter != vertex_pair.second.end()){ // Recorre los bordes incidentes en el vértice actual desde el principio hasta el final
-                            if((*edge_iter)->has(v)){ // Si el borde actual tiene v como uno de sus extremos
-                                edge_iter = vertex_pair.second.erase(edge_iter); // Elimina el borde de la lista de bordes incidentes en el vértice actual                    
+            if(iter != vertices_.end()){ //Si se encontró v
+                for(auto& vertex_pair : vertices_){ //Recorre todos los vertices
+                    if(vertex_pair.first != v){ //Si es distinto de v
+                        auto edge_iter = vertex_pair.second.begin(); //Definimos un iterador al principio de la lista de vértices
+                        while(edge_iter != vertex_pair.second.end()){ //Mientras no llegue al final de la lista de vertices
+                            if((*edge_iter)->has(v)){ //Si el vertice tiene v en un extremo lo eliminamos
+                                edge_iter = vertex_pair.second.erase(edge_iter);
                             }
-                            else{ // Sino, avanza al siguiente borde
+                            else{ //Si no avanza al siguiente vertice
                                 edge_iter++;
                             }
                         }
                     }
                 }
-                vertices_.erase(iter); // Elimina el vértice v de la lista de vértices
-            }
+                vertices_.erase(iter); //Elimina v
+            }   
 
-        VertexIterator ⁠find_first (Graph)
-            while(iter != vertices_end() && (*iter)->item().key() != value){ //Recorre los vértices desde el principio hasta el final
-                iter++; //Avanza al siguiente vértice
-            }    
 
         EdgeIterator ⁠find_first (Graph)
-            while(edge_iter != edges_end(u_iter) && (*edge_iter)->other(*u_iter)->item().key() != value){ //Recorre los bordes desde el principio hasta el final
-                edge_iter++; //Avanza al siguiente borde
+            while(edge_iter != edges_end(u_iter) && (*edge_iter)->other(*u_iter)->item().key() != value){ //Mientras no encuentre el vertice value avanza 
+                edge_iter++;
             }
 
+
         ⁠get_edges (Graph)
-            for(auto v_iter = g.vertices_begin(); v_iter != g.vertices_end(); ++v_iter){ //Recorre los vértices desde el principio hasta el final
-                for(auto e_iter = g.edges_begin(v_iter); e_iter != g.edges_end(v_iter); ++e_iter){ //Recorre los bordes desde el principio hasta el final
-                    if (g.is_directed() || (*e_iter)->first() == *v_iter){ //Si el grafo es dirigido o el borde comienza en el vértice actual
-                      es.push_back(*e_iter); //Añade el borde al vector de bordes       
+            for(auto v_iter = g.vertices_begin(); v_iter != g.vertices_end(); ++v_iter){ //Recorre los vértices del grafo
+                for(auto e_iter = g.edges_begin(v_iter); e_iter != g.edges_end(v_iter); ++e_iter){ //Recorre las aristas de todos los vertices
+                    if (g.is_directed() || (*e_iter)->first() == *v_iter){ //Si es dirigido o el vertice actual es el extremo izquierdo (no repetir u-v y v-u)
+                      es.push_back(*e_iter); //Añade la arista al vector    
                     }
                 }
             }
