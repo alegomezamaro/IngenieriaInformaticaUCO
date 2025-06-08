@@ -349,10 +349,10 @@
 
     //Practica 6: WGraph Path
         other (Edge)
-            if (n == u_){ //Si n es igual a u
+            if (n == u_){ //Si n es igual a u devolvemos v
                 return v_;
             }
-            else{ //Sino
+            else{ //Si no lo es devolvemos u
                 return u_;
             }
 
