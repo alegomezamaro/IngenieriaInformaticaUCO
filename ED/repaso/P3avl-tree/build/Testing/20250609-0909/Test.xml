@@ -21,22 +21,28 @@
 	TotalVirtualMemory="0"
 	TotalPhysicalMemory="14918"
 	LogicalProcessorsPerPhysical="2"
-	ProcessorClockFrequency="1441.83"
+	ProcessorClockFrequency="2395.66"
 	>
 	<Testing>
-		<StartDateTime>Jun 09 12:37 CEST</StartDateTime>
-		<StartTestTime>1749465470</StartTestTime>
+		<StartDateTime>Jun 09 12:40 CEST</StartDateTime>
+		<StartTestTime>1749465642</StartTestTime>
 		<TestList>
 			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/TestAVLTreeMinMax</Test>
 		</TestList>
-		<Test Status="passed">
+		<Test Status="failed">
 			<Name>TestAVLTreeMinMax</Name>
 			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree</Path>
 			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/TestAVLTreeMinMax</FullName>
 			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build//test_avltree" "06_tests_compute_min_max_branch_length"</FullCommandLine>
 			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.110244</Value>
+					<Value>0.988025</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -51,12 +57,12 @@
 					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
 				</NamedMeasurement>
 				<Measurement>
-					<Value encoding="base64" compression="gzip">eJytzDkOgCAQAMDeL9jsCxAvCt9BZ7FBJWrirkYg8fkeia2FoZ1itHUe9sA889iAVOgvcNivtAVvkWZGMgd2u+F+wsXy6KdMShBCQNqWBek72IxzdhBpKynRv8Y8+lhEH8voYxV9rD9GlSl4kleTE/2msTw=</Value>
+					<Value encoding="base64" compression="gzip">eJzt1MFPwjAUx/E7/wKXd1I8sG4gxCxqQsQoiYkeqhdiatke7CXr69J2yJ9vh3InXOXaNd/98jlUog/gWmbiTQ7pVIV44FVhTdMGVIZYGb1TK6e5qFSNvAmVSFNIkgT6y/HIyC7QaO+xTPrL1PTkScXsUMx+i2ti8hWW8E2hAnTOOihsiTCc7v/SRZXe1sEh5iAqa1DoGsXcFq1BDl48UXhuV2LBG2RCR3rBa+uMDlTo94dX8TgXDuNwK97GMTTsSuKvqMg0SdU0+SS7yWFrqYTZx4uMX27lfZ4Te3RhUFiOS+XFFSz3KyXcAXH4zGHmuwtkGb6K1rm4R+GOIsPg6hLWmuqI1TtRanSWOlJqfJY6Uur6LHWk1OQfSmViCnucwzvf+wFfPC0t====</Value>
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>Jun 09 12:37 CEST</EndDateTime>
-		<EndTestTime>1749465470</EndTestTime>
+		<EndDateTime>Jun 09 12:40 CEST</EndDateTime>
+		<EndTestTime>1749465643</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>
