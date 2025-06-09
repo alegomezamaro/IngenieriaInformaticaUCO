@@ -1,5 +1,5 @@
 graph/CMakeFiles/graph.dir/city.cpp.o: \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/city.cpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/city.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/13/cmath \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -58,7 +58,7 @@ graph/CMakeFiles/graph.dir/city.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/city.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/city.hpp \
  /usr/include/c++/13/exception /usr/include/c++/13/bits/exception.h \
  /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/exception_defines.h \
@@ -157,7 +157,7 @@ graph/CMakeFiles/graph.dir/city.cpp.o: \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/item.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/item.hpp \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_uninitialized.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \

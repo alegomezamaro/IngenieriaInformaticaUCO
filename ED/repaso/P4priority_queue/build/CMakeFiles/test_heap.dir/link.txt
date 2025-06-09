@@ -1,0 +1,1 @@
+/usr/bin/g++ -Wall -O0 -ggdb3 CMakeFiles/test_heap.dir/test_heap.cpp.o -o test_heap 

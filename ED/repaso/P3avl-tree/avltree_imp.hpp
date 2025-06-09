@@ -313,7 +313,7 @@ int AVLTree<T>::balance_factor() const
     // REPASO
     // Remember: this operation is only necessary for the AVLTree.
 
-    
+z    
 
     //
     return bf;
@@ -816,14 +816,10 @@ void AVLTree<T>::make_balanced()
         // REPASO
         // Check the subtree balance factor to do rotations if needed.
 
-        typename AVLTNode<T>::Ref N; //Hijo del nodo padre.
-        int bfP, bfN, dir; //Factor de equilibrio del nodo padre, hijo y dirección.
-        P->update_height(); //Actualizar la altura del nodo padre.
+        
 
         // First, update subtree root node height because we have just done
         // an insertion/deletion in the subtree.
-        
-        
 
         //
 

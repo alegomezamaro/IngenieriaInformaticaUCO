@@ -1,5 +1,5 @@
 CMakeFiles/test_stack.dir/test_stack.cpp.o: \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/test_stack.cpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/test_stack.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/13/exception \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -149,12 +149,12 @@ CMakeFiles/test_stack.dir/test_stack.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/stack.hpp \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/list.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/stack.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list.hpp \
  /usr/include/c++/13/functional /usr/include/c++/13/tuple \
  /usr/include/c++/13/bits/uses_allocator.h \
  /usr/include/c++/13/bits/std_function.h \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/list_node.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list_node.hpp \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_uninitialized.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
@@ -172,10 +172,10 @@ CMakeFiles/test_stack.dir/test_stack.cpp.o: \
  /usr/include/c++/13/bits/atomic_base.h \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/backward/auto_ptr.h \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/list_node_imp.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list_node_imp.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/list_iterator.hpp \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/list_iterator_imp.hpp \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/list_imp.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list_iterator.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list_iterator_imp.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list_imp.hpp \
  /usr/include/c++/13/sstream /usr/include/c++/13/bits/sstream.tcc \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/stack_imp.hpp
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/stack_imp.hpp

@@ -1,5 +1,5 @@
 matrix/CMakeFiles/matrix.dir/matrix.cpp.o: \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/matrix/matrix.cpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/matrix/matrix.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/13/string \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -110,7 +110,7 @@ matrix/CMakeFiles/matrix.dir/matrix.cpp.o: \
  /usr/include/c++/13/bits/functional_hash.h \
  /usr/include/c++/13/bits/hash_bytes.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/matrix/matrix.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/matrix/matrix.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/cxxabi_init_exception.h \

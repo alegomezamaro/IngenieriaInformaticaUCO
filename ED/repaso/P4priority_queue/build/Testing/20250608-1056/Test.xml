@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250608-1056-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.28.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="AleLinuxMint2"
+	OSRelease="6.8.0-51-generic"
+	OSVersion="#52-Ubuntu SMP PREEMPT_DYNAMIC Thu Dec  5 13:09:44 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="24"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="14918"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="3367.01"
+	>
+	<Testing>
+		<StartDateTime>Jun 08 12:57 CEST</StartDateTime>
+		<StartTestTime>1749380228</StartTestTime>
+		<TestList>
+			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/TestPQueue</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>TestPQueue</Name>
+			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue</Path>
+			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/TestPQueue</FullName>
+			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/build//test_pqueue" "04_pqueue"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.699067</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/build//test_pqueue" "04_pqueue"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJztlE9Pg0AQxe98hV7mpG2MLLTUw0ZMjDXakzXBEzGIMJRJ2D/uLhr99AJtTTw0/QIcJ++9yZvfYRK0DkwrJckthyDK9EeLLbIgAN/3YZIu5iLpPTq3Fkt/kgbCS46FwkMo3IUqkmRrLOGLXA1ojDJQqBLh8mpY5DrTPsyB1UogyxtkK1W0AqWz7IHcY/vO1nKLktBQvpaVMiJ3VOQvd0/sfsUMdtUU20TakDLkvrNdmf9jRkL7tdZ8GXD4VFTCZq8/9/J1csM5ysE6LZTsuidnM0iH3gnEQNK9crjtGBhHSsKbpR+cziCOQTVl1k9wAeE5VDk1HSfvOKT5COk0pMUI6TSkaIT0BylkS+jvs4dP5f0CkmKtXQ==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jun 08 12:57 CEST</EndDateTime>
+		<EndTestTime>1749380229</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

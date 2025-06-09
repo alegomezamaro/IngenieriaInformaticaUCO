@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/city.cpp" "graph/CMakeFiles/graph.dir/city.cpp.o" "gcc" "graph/CMakeFiles/graph.dir/city.cpp.o.d"
+  "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/city.cpp" "graph/CMakeFiles/graph.dir/city.cpp.o" "gcc" "graph/CMakeFiles/graph.dir/city.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

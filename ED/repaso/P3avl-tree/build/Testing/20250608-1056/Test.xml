@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250608-1056-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.28.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="AleLinuxMint2"
+	OSRelease="6.8.0-51-generic"
+	OSVersion="#52-Ubuntu SMP PREEMPT_DYNAMIC Thu Dec  5 13:09:44 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="24"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="14918"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2936.44"
+	>
+	<Testing>
+		<StartDateTime>Jun 08 12:56 CEST</StartDateTime>
+		<StartTestTime>1749380198</StartTestTime>
+		<TestList>
+			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/TestAVLTreeMinMax</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>TestAVLTreeMinMax</Name>
+			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree</Path>
+			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/TestAVLTreeMinMax</FullName>
+			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build//test_avltree" "06_tests_compute_min_max_branch_length"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.864752</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P3avl-tree/build//test_avltree" "06_tests_compute_min_max_branch_length"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJzt1MFPwjAUx/E7/wKXd1I8sG4gxCxqQsQoiYkeqhdiatke7CXr69J2yJ9vh3InXOXaNd/98jlUog/gWmbiTQ7pVIV44FVhTdMGVIZYGb1TK6e5qFSNvAmVSFNIkgT6y/HIyC7QaO+xTPrL1PTkScXsUMx+i2ti8hWW8E2hAnTOOihsiTCc7v/SRZXe1sEh5iAqa1DoGsXcFq1BDl48UXhuV2LBG2RCR3rBa+uMDlTo94dX8TgXDuNwK97GMTTsSuKvqMg0SdU0+SS7yWFrqYTZx4uMX27lfZ4Te3RhUFiOS+XFFSz3KyXcAXH4zGHmuwtkGb6K1rm4R+GOIsPg6hLWmuqI1TtRanSWOlJqfJY6Uur6LHWk1OQfSmViCnucwzvf+wFfPC0t====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jun 08 12:56 CEST</EndDateTime>
+		<EndTestTime>1749380198</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

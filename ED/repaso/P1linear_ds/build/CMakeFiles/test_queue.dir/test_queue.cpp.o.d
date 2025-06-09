@@ -1,5 +1,5 @@
 CMakeFiles/test_queue.dir/test_queue.cpp.o: \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/test_queue.cpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/test_queue.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/13/exception \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -153,9 +153,9 @@ CMakeFiles/test_queue.dir/test_queue.cpp.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/queue.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/queue.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/cdarray.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/cdarray.hpp \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/align.h /usr/include/c++/13/bit \
@@ -173,6 +173,6 @@ CMakeFiles/test_queue.dir/test_queue.cpp.o: \
  /usr/include/c++/13/bits/atomic_base.h \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/backward/auto_ptr.h \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/cdarray_imp.hpp \
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/cdarray_imp.hpp \
  /usr/include/c++/13/sstream /usr/include/c++/13/bits/sstream.tcc \
- /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds/queue_imp.hpp
+ /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/queue_imp.hpp

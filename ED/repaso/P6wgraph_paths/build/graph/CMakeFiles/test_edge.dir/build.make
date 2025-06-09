@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths
+CMAKE_SOURCE_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build
+CMAKE_BINARY_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build
 
 # Include any dependencies generated for this target.
 include graph/CMakeFiles/test_edge.dir/depend.make
@@ -70,18 +70,18 @@ include graph/CMakeFiles/test_edge.dir/progress.make
 include graph/CMakeFiles/test_edge.dir/flags.make
 
 graph/CMakeFiles/test_edge.dir/test_edge.cpp.o: graph/CMakeFiles/test_edge.dir/flags.make
-graph/CMakeFiles/test_edge.dir/test_edge.cpp.o: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_edge.cpp
+graph/CMakeFiles/test_edge.dir/test_edge.cpp.o: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_edge.cpp
 graph/CMakeFiles/test_edge.dir/test_edge.cpp.o: graph/CMakeFiles/test_edge.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object graph/CMakeFiles/test_edge.dir/test_edge.cpp.o"
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT graph/CMakeFiles/test_edge.dir/test_edge.cpp.o -MF CMakeFiles/test_edge.dir/test_edge.cpp.o.d -o CMakeFiles/test_edge.dir/test_edge.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_edge.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object graph/CMakeFiles/test_edge.dir/test_edge.cpp.o"
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT graph/CMakeFiles/test_edge.dir/test_edge.cpp.o -MF CMakeFiles/test_edge.dir/test_edge.cpp.o.d -o CMakeFiles/test_edge.dir/test_edge.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_edge.cpp
 
 graph/CMakeFiles/test_edge.dir/test_edge.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_edge.dir/test_edge.cpp.i"
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_edge.cpp > CMakeFiles/test_edge.dir/test_edge.cpp.i
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_edge.cpp > CMakeFiles/test_edge.dir/test_edge.cpp.i
 
 graph/CMakeFiles/test_edge.dir/test_edge.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_edge.dir/test_edge.cpp.s"
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_edge.cpp -o CMakeFiles/test_edge.dir/test_edge.cpp.s
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_edge.cpp -o CMakeFiles/test_edge.dir/test_edge.cpp.s
 
 # Object files for target test_edge
 test_edge_OBJECTS = \
@@ -94,18 +94,18 @@ graph/test_edge: graph/CMakeFiles/test_edge.dir/test_edge.cpp.o
 graph/test_edge: graph/CMakeFiles/test_edge.dir/build.make
 graph/test_edge: graph/libgraph.a
 graph/test_edge: graph/CMakeFiles/test_edge.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_edge"
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_edge.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_edge"
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_edge.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 graph/CMakeFiles/test_edge.dir/build: graph/test_edge
 .PHONY : graph/CMakeFiles/test_edge.dir/build
 
 graph/CMakeFiles/test_edge.dir/clean:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph && $(CMAKE_COMMAND) -P CMakeFiles/test_edge.dir/cmake_clean.cmake
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph && $(CMAKE_COMMAND) -P CMakeFiles/test_edge.dir/cmake_clean.cmake
 .PHONY : graph/CMakeFiles/test_edge.dir/clean
 
 graph/CMakeFiles/test_edge.dir/depend:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph/CMakeFiles/test_edge.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph/CMakeFiles/test_edge.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : graph/CMakeFiles/test_edge.dir/depend
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250609-0755-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.28.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="AleLinuxMint2"
+	OSRelease="6.8.0-51-generic"
+	OSVersion="#52-Ubuntu SMP PREEMPT_DYNAMIC Thu Dec  5 13:09:44 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="24"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="14918"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1540.78"
+	>
+	<Testing>
+		<StartDateTime>Jun 09 11:08 CEST</StartDateTime>
+		<StartTestTime>1749460122</StartTestTime>
+		<TestList>
+			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P2kdtree/binary_tree/TestBTreeInOrder</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>TestBTreeInOrder</Name>
+			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P2kdtree/binary_tree</Path>
+			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P2kdtree/binary_tree/TestBTreeInOrder</FullName>
+			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P2kdtree/build/binary_tree//test_btree" "05_tests_inorder"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0979259</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P2kdtree/build/binary_tree//test_btree" "05_tests_inorder"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJztV8lOG0EQvfsXuNQXmN57mkuUQyJxyYkcohJCCJvIEhjkRcrn51U1gz2DxYyxInGIAPf0Ul3vvVrGXM3XG1ptl8vF8vcFmXizwcL6ZrF8Ws3mq3NvaDqd0hl793glR59v1+v5bHrG5nFyNWBrW1tbbe9vFw+t7bc/z/O7zXxGT9vN83ZzMeGfy/unhxmuEqvJ5ZoWG1osSe/6Qj8m15Ovd5vt7cNYi1+wGELoPj1Cf4L+4bOzC+YohJfL9Xy1EX+tF7LkCBIdcP79BRrjDF9jcHXwOlyT/hwg9SEnI6geVwwHUXjgGEXVv9IVlnwU1SEnI6geV1UHUDjF8T5V90pXOe7HdRzVYScjqPrTqXrg+OdUh5yMoHpcNzmAwmshvU/V9+u1FiqPpjrsZATVeDpVNxhV/zayx1IdcjKCajqVKvIiZEqBUpbfQg1wobISNXlAAZgyDGq029aV9vuzHMp1Ax7q+DJv/MuYOwZHVMWHkY+QNZ8qa2oCxVgouUK2OGCLlJOnbDJ5rBfKDnBzphwDNQanC9YMKDlKxpAvibwNWIoUmoTLrPCyOeh2E3A3rKPPeMbdjjKmxSayNlLJCRdj2UAWsAn4MhdCQ000BD8F6Kz6xpEC+YDIBjEHAMHVNFQSKjFFSrLvC0XoHdEwM0A5PFsASjlSFBvYNw3SWUIALwaPGOWv4Eta9FSMBQWcxM05JjD35KGJxzxZAHTA59RBgyUXIROCWQQsKGLqighgQA865QJKUMGRrIpURe6BDyAuBs9+6AUkEWKNEWuEXlMZPlhY6CRKmYe9l7FA6Wa4ZLDoX9O50/Y0XKwRYdGdBW63XajurFKxcutvR9vzJ4FTX7bxb2tHalA5SW6xRpA1XrVMO+hZw7A/l4xjDX89Xmx328tt3vVItJUuIkresoZ1J5lkH2tisQZqf8d0HEiOsmbC3plYejRZK6LGR+TRKmDNRNYM62kYtVNJbu2FMZqurl0NpW5Za5I1p3aGUn21k9msnwfFSKp+0khI9bBmZA+XlE/3JdmmlOos/YK1Y7C2AdZa7N2RXT3UJq8NHUGlu9SNGNuH1JNTPRqRKLepJU2Btcx2xKWqDyjG2otYu1AtgdDNMelJrJ2H61SiJN2CtZ53DqRHsJZ/vaek7j2mOexfmh1rv2JtN9WNz31tWfte3S39nDrixfO/t3/u3o4ounPrSd/p7X/ck7+bYakg====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jun 09 11:08 CEST</EndDateTime>
+		<EndTestTime>1749460122</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

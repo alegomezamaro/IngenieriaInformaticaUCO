@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/test_dijkstra.cpp" "CMakeFiles/test_dijkstra.dir/test_dijkstra.cpp.o" "gcc" "CMakeFiles/test_dijkstra.dir/test_dijkstra.cpp.o.d"
+  "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/test_dijkstra.cpp" "CMakeFiles/test_dijkstra.dir/test_dijkstra.cpp.o" "gcc" "CMakeFiles/test_dijkstra.dir/test_dijkstra.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

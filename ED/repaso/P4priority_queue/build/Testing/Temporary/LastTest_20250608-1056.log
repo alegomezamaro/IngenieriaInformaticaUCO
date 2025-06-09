@@ -1,0 +1,32 @@
+Start testing: Jun 08 12:57 CEST
+----------------------------------------------------------
+4/4 Testing: TestPQueue
+4/4 Test: TestPQueue
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/build//test_pqueue" "04_pqueue"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue
+"TestPQueue" start time: Jun 08 12:57 CEST
+Output:
+----------------------------------------------------------
+Test running: 04_pqueue/00 ... [32mTest passed.[0m
+Test running: 04_pqueue/01 ... [31mTest finished with error code -6[0m
+test_pqueue: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/priority_queue_imp.hpp:50: void PriorityQueue<T>::enqueue(const T&) [with T = int]: Assertion `size() == old_size + 1' failed.
+
+Test running: 04_pqueue/02 ... [31mTest finished with error code -6[0m
+test_pqueue: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/priority_queue_imp.hpp:50: void PriorityQueue<T>::enqueue(const T&) [with T = int]: Assertion `size() == old_size + 1' failed.
+
+Test running: 04_pqueue/03 ... [31mTest finished with error code -6[0m
+test_pqueue: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/priority_queue_imp.hpp:50: void PriorityQueue<T>::enqueue(const T&) [with T = int]: Assertion `size() == old_size + 1' failed.
+
+Test running: 04_pqueue/04 ... [31mTest finished with error code -6[0m
+test_pqueue: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/priority_queue_imp.hpp:50: void PriorityQueue<T>::enqueue(const T&) [with T = int]: Assertion `size() == old_size + 1' failed.
+
+1/5 tests passed.
+<end of output>
+Test time =   0.70 sec
+----------------------------------------------------------
+Test Failed.
+"TestPQueue" end time: Jun 08 12:57 CEST
+"TestPQueue" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 08 12:57 CEST

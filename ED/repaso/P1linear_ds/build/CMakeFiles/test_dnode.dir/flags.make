@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/linear_ds
+CXX_INCLUDES = -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds
 
 CXX_FLAGS = -Wall -O0 -ggdb3 -std=gnu++11
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250608-1058-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.28.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="AleLinuxMint2"
+	OSRelease="6.8.0-51-generic"
+	OSVersion="#52-Ubuntu SMP PREEMPT_DYNAMIC Thu Dec  5 13:09:44 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="24"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="14918"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1778.38"
+	>
+	<Testing>
+		<StartDateTime>Jun 08 12:58 CEST</StartDateTime>
+		<StartTestTime>1749380306</StartTestTime>
+		<TestList>
+			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/TestGraphFoldUnfold</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>TestGraphFoldUnfold</Name>
+			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph</Path>
+			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/TestGraphFoldUnfold</FullName>
+			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph//test_graph" "03_tests_graph_fold_unfold"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>1.51926</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph//test_graph" "03_tests_graph_fold_unfold"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJztlEuL2zAUhff5C7O5q2lCU8uupymoTqDMmGlWLYPbTSiqxrqOBbFkJJlJ/33lB4G+aJNOZxNjkM25Ovda/g7O0DowjVJSbSmEMXNesGxreF2yQu8Ea1R7I2EIQRDAxSaOqqw1FVJJW6KAB+lKQGO0gVwLhBeLi01YTdpGfR8KpNQVEr5DcqPzpkLlLLmV7l1zT9Zqi0qikXztB5mKO5nzj9fvSXpDDNbcavJh8dC/T81daUn33K9MVnVQ1jWN4wWF21ZKsjmkK0pTscU7LL4XuRAMfWGaa+WP8AmNw73fdTmH3ynp5Qw23REzWMLaYZXkJTe+7NfVG0i9Wuw0d/5xGLkE6wSl1m9AwWpnkraS/Oid974V+C6Hub8w97Wf7OCvzxTeWuvrUiv4opqqO52dzmC5hGlL76DBc4hmz6DgcocimEyyvwYfjeDPE/zLEfx5go9H8OcJ/moEP4DvyDCW7/dRROk9tzJn1hn/BZOB6J92wPGJeYyhp0TtMeY+WUZfjRkdMiqVm4Nfjg/awXlKWg7mJ0O+GJEPyK+l+8oEd/y//H+O6n5KdI4a8I/xCslr6BIFnqRtpW8OBxWK====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jun 08 12:58 CEST</EndDateTime>
+		<EndTestTime>1749380308</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

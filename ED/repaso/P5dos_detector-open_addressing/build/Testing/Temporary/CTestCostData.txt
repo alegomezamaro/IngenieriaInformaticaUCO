@@ -1,0 +1,10 @@
+TestHashFunction 1 0.0683283
+TestHashFunctionLP 1 0.0685583
+TestHashFunctionRP 1 0.0618612
+TestHashFunctionQP 1 0.060779
+TestHashFunctionRH 1 0.0606223
+TestHashTable 0 0
+TestIpUtils 0 0
+TestDosDetector 0 0
+---
+TestDosDetector

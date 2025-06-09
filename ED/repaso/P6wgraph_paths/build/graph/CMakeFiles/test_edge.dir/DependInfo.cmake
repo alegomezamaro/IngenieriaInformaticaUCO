@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_edge.cpp" "graph/CMakeFiles/test_edge.dir/test_edge.cpp.o" "gcc" "graph/CMakeFiles/test_edge.dir/test_edge.cpp.o.d"
+  "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_edge.cpp" "graph/CMakeFiles/test_edge.dir/test_edge.cpp.o" "gcc" "graph/CMakeFiles/test_edge.dir/test_edge.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

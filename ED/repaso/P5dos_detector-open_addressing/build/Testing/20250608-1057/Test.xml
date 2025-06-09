@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20250608-1057-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.28.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="AleLinuxMint2"
+	OSRelease="6.8.0-51-generic"
+	OSVersion="#52-Ubuntu SMP PREEMPT_DYNAMIC Thu Dec  5 13:09:44 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="24"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="14918"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1267.34"
+	>
+	<Testing>
+		<StartDateTime>Jun 08 12:57 CEST</StartDateTime>
+		<StartTestTime>1749380254</StartTestTime>
+		<TestList>
+			<Test>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing/TestDosDetector</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>TestDosDetector</Name>
+			<Path>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing</Path>
+			<FullName>/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing/TestDosDetector</FullName>
+			<FullCommandLine>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing/build//test_dos_detector" "08_tests_dos_detector"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.378163</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing/build//test_dos_detector" "08_tests_dos_detector"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJztkE1PwzAMhu/7C7v4BJvGmg4ETOFDQgyxagd2KLtMKGSN11pqnSpJ4e+TThzggITElYNl2a/12n5y9AFcx0xcSkjnKsSGV8bGwIBFsE6kKSRJAsPt2azJ+/k9MfkKDbxTqACdsw4KaxCmF8Nt2gx6j28WEkRlGxS6RrGwRdcgBy8eKSy7nci4RCZ0pDPeW9foQIV+vn8SDwvhsNXeivX5V7epbZGVNsah9/FuUWlfqaB3NSoK6HScUdS0SdW2cn4pYRn1vJezT/V6dQKb26OfBCnjhkM9mYzGsD28uYIbyNZXsIm5tlxCx55KjhSIw4uEO+/RBbIMr+TVm67JjMbHsNdUo0kGg/w3pGf/pP9OOhWncIAL8SXftz4A2QgDVw==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jun 08 12:57 CEST</EndDateTime>
+		<EndTestTime>1749380254</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

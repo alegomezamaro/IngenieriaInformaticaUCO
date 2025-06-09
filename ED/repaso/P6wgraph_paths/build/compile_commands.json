@@ -1,68 +1,68 @@
 [
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build",
-  "command": "/usr/bin/g++ -D__VERBOSE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./matrix -Wall -O0 -ggdb3 -o CMakeFiles/test_dijkstra.dir/test_dijkstra.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/test_dijkstra.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/test_dijkstra.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build",
+  "command": "/usr/bin/g++ -D__VERBOSE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./matrix -Wall -O0 -ggdb3 -o CMakeFiles/test_dijkstra.dir/test_dijkstra.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/test_dijkstra.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/test_dijkstra.cpp",
   "output": "CMakeFiles/test_dijkstra.dir/test_dijkstra.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build",
-  "command": "/usr/bin/g++ -D__VERBOSE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./matrix -Wall -O0 -ggdb3 -o CMakeFiles/test_floyd.dir/test_floyd.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/test_floyd.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/test_floyd.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build",
+  "command": "/usr/bin/g++ -D__VERBOSE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./matrix -Wall -O0 -ggdb3 -o CMakeFiles/test_floyd.dir/test_floyd.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/test_floyd.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/test_floyd.cpp",
   "output": "CMakeFiles/test_floyd.dir/test_floyd.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build",
-  "command": "/usr/bin/g++ -D__VERBOSE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./matrix -Wall -O0 -ggdb3 -o CMakeFiles/test_astar.dir/test_astar.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/test_astar.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/test_astar.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build",
+  "command": "/usr/bin/g++ -D__VERBOSE__=1 -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./matrix -Wall -O0 -ggdb3 -o CMakeFiles/test_astar.dir/test_astar.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/test_astar.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/test_astar.cpp",
   "output": "CMakeFiles/test_astar.dir/test_astar.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/priority_queue",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/priority_queue -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_heap.dir/test_heap.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/priority_queue/test_heap.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/priority_queue/test_heap.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/priority_queue",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/priority_queue -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_heap.dir/test_heap.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/priority_queue/test_heap.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/priority_queue/test_heap.cpp",
   "output": "priority_queue/CMakeFiles/test_heap.dir/test_heap.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/priority_queue",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/priority_queue -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_pqueue.dir/test_pqueue.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/priority_queue/test_pqueue.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/priority_queue/test_pqueue.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/priority_queue",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/priority_queue -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_pqueue.dir/test_pqueue.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/priority_queue/test_pqueue.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/priority_queue/test_pqueue.cpp",
   "output": "priority_queue/CMakeFiles/test_pqueue.dir/test_pqueue.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/graph.dir/city.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/city.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/city.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/graph.dir/city.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/city.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/city.cpp",
   "output": "graph/CMakeFiles/graph.dir/city.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_vertex.dir/test_vertex.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_vertex.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_vertex.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_vertex.dir/test_vertex.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_vertex.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_vertex.cpp",
   "output": "graph/CMakeFiles/test_vertex.dir/test_vertex.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_edge.dir/test_edge.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_edge.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_edge.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_edge.dir/test_edge.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_edge.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_edge.cpp",
   "output": "graph/CMakeFiles/test_edge.dir/test_edge.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_graph.dir/test_graph.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_graph.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/test_graph.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_graph.dir/test_graph.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_graph.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/test_graph.cpp",
   "output": "graph/CMakeFiles/test_graph.dir/test_graph.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/graph",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_graph.dir/city.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/city.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/graph/city.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/graph",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_graph.dir/city.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/city.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/graph/city.cpp",
   "output": "graph/CMakeFiles/test_graph.dir/city.cpp.o"
 },
 {
-  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/matrix",
-  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/matrix -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/matrix.dir/matrix.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/matrix/matrix.cpp",
-  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/matrix/matrix.cpp",
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/matrix",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./priority_queue -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/./graph -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/matrix -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/matrix.dir/matrix.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/matrix/matrix.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/matrix/matrix.cpp",
   "output": "matrix/CMakeFiles/matrix.dir/matrix.cpp.o"
 }
 ]

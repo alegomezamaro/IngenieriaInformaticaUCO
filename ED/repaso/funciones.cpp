@@ -39,7 +39,7 @@
         unhook (List)
             pos->prev()->set_next(pos->next()); //El anterior de pos apunta al siguiente de pos como siguiente
             pos->next()->set_prev(pos->prev()); //El siguiente de pos apunta al anterior de pos como anterior
-            size--; //Reducimos el tamaño
+            size_--; //Reducimos el tamaño
 
 
         ⁠push_front (List)
@@ -80,25 +80,19 @@
 
         ⁠⁠prefix_process (BTree Utils) //Root left right
             if(!tree.is_empty()){ //Si el arbol no esta vacio
-                retVal = p(tree.item()); //Devolvemos root
-                retVal = retVal && prefix_process(tree.left(), p); //Devolvemos anterior + el hijo izquierdo (y sus hijos)
-                retVal = retVal && prefix_process(tree.right(), p); //Devolvemos anterior + el hijo derecho (y sus hijos)
+                retVal = p(tree.item()) && prefix_process(tree.left(), p) && prefix_process(tree.right(), p); //Devolvemos 
             }
 
 
         ⁠⁠infix_process (BTree Utils) //Left root right
             if(!tree.is_empty()){ //Si el arbol no esta vacio
-                retVal = infix_process(tree.left(), p); //Devolvemos anterior + el hijo izquierdo (y sus hijos)
-                retVal = retVal && p(tree.item()); //Devolvemos root
-                retVal = retVal && infix_process(tree.right(), p); //Devolvemos anterior + el hijo derecho (y sus hijos)
+                retVal = infix_process(tree.left(), p) && p(tree.item()) && infix_process(tree.right(), p); //Devolvemos
             }
 
 
         ⁠⁠postfix_process (BTree Utils) //Left right root
             if(!tree.is_empty()){ //Si el arbol no esta vacio
-                retVal = postfix_process(tree.left(), p); //Devolvemos anterior + el hijo izquierdo (y sus hijos)
-                retVal = retVal && postfix_process(tree.right(), p); //Devolvemos root
-                retVal = retVal && p(tree.item()); //Devolvemos anterior + el hijo derecho (y sus hijos)
+                retVal = postfix_process(tree.left(), p) && postfix_process(tree.right(), p) && p(tree.item()); //Devolvemos
             }
 
 
@@ -207,13 +201,10 @@
                 }
                 N = P->child(dir); //Asignar a N como hijo de P
                 bfN = N->balance_factor(); //Obtenemos el factor de equilibrio de N
-                if (bfP*bfN >= 0){ //Si estan desbalanceados en la misma dirección
-                    P = rotate(P, 1 - dir); //Rotamos P en la direccion contraria al desbalanceo
-                }
-                else{ //Si estan desbalanceados en direcciones contraria
+                if (bfP*bfN < 0){ //Si estan desbalanceados en distinta dirección
                     rotate(N, dir); //Rotamos N en la direccion de desbalanceo
-                    P = rotate(P, 1 - dir); //Rotamos P en la direccion contraria al desbalanceo
                 }
+                P = rotate(P, 1 - dir); //Rotamos P en la direccion contraria al desbalanceo
             }       
 
 

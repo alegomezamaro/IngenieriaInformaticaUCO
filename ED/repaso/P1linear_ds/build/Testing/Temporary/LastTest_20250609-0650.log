@@ -1,0 +1,26 @@
+Start testing: Jun 09 09:54 CEST
+----------------------------------------------------------
+11/11 Testing: TestStack
+11/11 Test: TestStack
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/build//test_stack" "11_tests_stack"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds
+"TestStack" start time: Jun 09 09:54 CEST
+Output:
+----------------------------------------------------------
+Test running: 11_tests_stack/00 ... [32mTest passed.[0m
+Test running: 11_tests_stack/01 ... [31mTest finished with error code -6[0m
+test_stack: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list_imp.hpp:145: const T& List<T>::front() const [with T = int]: Assertion `!is_empty()' failed.
+
+Test running: 11_tests_stack/02 ... [31mTest finished with error code -6[0m
+test_stack: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/list_imp.hpp:145: const T& List<T>::front() const [with T = int]: Assertion `!is_empty()' failed.
+
+1/3 tests passed.
+<end of output>
+Test time =   0.46 sec
+----------------------------------------------------------
+Test Failed.
+"TestStack" end time: Jun 09 09:54 CEST
+"TestStack" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 09 09:54 CEST

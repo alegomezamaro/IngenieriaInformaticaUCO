@@ -1,0 +1,25 @@
+Start testing: Jun 08 12:57 CEST
+----------------------------------------------------------
+8/8 Testing: TestDosDetector
+8/8 Test: TestDosDetector
+Command: "/usr/bin/python3" "run_tests.py" "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing/build//test_dos_detector" "08_tests_dos_detector"
+Directory: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing
+"TestDosDetector" start time: Jun 08 12:57 CEST
+Output:
+----------------------------------------------------------
+Test running: 08_tests_dos_detector/00 ... [31mTest finished with error code -6[0m
+test_dos_detector: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing/hash_table_iterator_imp.hpp:87: HashTableIterator<K, V>& HashTableIterator<K, V>::operator++() [with K = IP; V = long unsigned int]: Assertion `is_valid()' failed.
+
+Test running: 08_tests_dos_detector/01 ... [31mTest finished with error code -6[0m
+test_dos_detector: /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P5dos_detector-open_addressing/hash_table_iterator_imp.hpp:87: HashTableIterator<K, V>& HashTableIterator<K, V>::operator++() [with K = IP; V = long unsigned int]: Assertion `is_valid()' failed.
+
+0/2 tests passed.
+<end of output>
+Test time =   0.38 sec
+----------------------------------------------------------
+Test Failed.
+"TestDosDetector" end time: Jun 08 12:57 CEST
+"TestDosDetector" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 08 12:57 CEST

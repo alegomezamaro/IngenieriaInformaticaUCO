@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/build",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_heap.dir/test_heap.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/test_heap.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/test_heap.cpp",
+  "output": "CMakeFiles/test_heap.dir/test_heap.cpp.o"
+},
+{
+  "directory": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/build",
+  "command": "/usr/bin/g++  -I/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue -Wall -O0 -ggdb3 -std=gnu++11 -o CMakeFiles/test_pqueue.dir/test_pqueue.cpp.o -c /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/test_pqueue.cpp",
+  "file": "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/test_pqueue.cpp",
+  "output": "CMakeFiles/test_pqueue.dir/test_pqueue.cpp.o"
+}
+]

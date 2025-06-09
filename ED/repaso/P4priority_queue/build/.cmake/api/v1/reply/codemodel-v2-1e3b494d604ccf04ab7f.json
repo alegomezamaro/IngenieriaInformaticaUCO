@@ -1,0 +1,69 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "avl_tree",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "test_heap::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_heap-Debug-17213cb80e52819e5148.json",
+					"name" : "test_heap",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_pqueue::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_pqueue-Debug-d34b403a3f55582026c9.json",
+					"name" : "test_pqueue",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue/build",
+		"source" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P4priority_queue"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

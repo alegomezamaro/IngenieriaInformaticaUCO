@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "linear_ds",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "test_cdarray::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_cdarray-Debug-46fe4adae2993633f8e4.json",
+					"name" : "test_cdarray",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_dnode::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_dnode-Debug-57ffa35a8b5d726bf263.json",
+					"name" : "test_dnode",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_iterator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_iterator-Debug-5791efb5fc81de3e3f50.json",
+					"name" : "test_iterator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_list::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_list-Debug-f2ff1c3b149e5c4860c8.json",
+					"name" : "test_list",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_queue::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_queue-Debug-a4be0a33ba4ef793e721.json",
+					"name" : "test_queue",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_stack::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_stack-Debug-15bfd68a891fb91008ca.json",
+					"name" : "test_stack",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds/build",
+		"source" : "/home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P1linear_ds"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

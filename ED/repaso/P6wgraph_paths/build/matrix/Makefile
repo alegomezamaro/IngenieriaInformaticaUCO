@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths
+CMAKE_SOURCE_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build
+CMAKE_BINARY_DIR = /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -97,14 +97,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/CMakeFiles /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/matrix//CMakeFiles/progress.marks
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build/CMakeFiles 0
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/CMakeFiles /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/matrix//CMakeFiles/progress.marks
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/clean
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/clean
 .PHONY : clean
 
 # The main clean target
@@ -113,22 +113,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/preinstall
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/preinstall
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 matrix/CMakeFiles/matrix.dir/rule:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/CMakeFiles/matrix.dir/rule
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matrix/CMakeFiles/matrix.dir/rule
 .PHONY : matrix/CMakeFiles/matrix.dir/rule
 
 # Convenience name for target.
@@ -137,7 +137,7 @@ matrix: matrix/CMakeFiles/matrix.dir/rule
 
 # fast build rule for target.
 matrix/fast:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/build
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/build
 .PHONY : matrix/fast
 
 matrix.o: matrix.cpp.o
@@ -145,7 +145,7 @@ matrix.o: matrix.cpp.o
 
 # target to build an object file
 matrix.cpp.o:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/matrix.cpp.o
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/matrix.cpp.o
 .PHONY : matrix.cpp.o
 
 matrix.i: matrix.cpp.i
@@ -153,7 +153,7 @@ matrix.i: matrix.cpp.i
 
 # target to preprocess a source file
 matrix.cpp.i:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/matrix.cpp.i
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/matrix.cpp.i
 .PHONY : matrix.cpp.i
 
 matrix.s: matrix.cpp.s
@@ -161,7 +161,7 @@ matrix.s: matrix.cpp.s
 
 # target to generate assembly for a file
 matrix.cpp.s:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/matrix.cpp.s
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(MAKE) $(MAKESILENT) -f matrix/CMakeFiles/matrix.dir/build.make matrix/CMakeFiles/matrix.dir/matrix.cpp.s
 .PHONY : matrix.cpp.s
 
 # Help Target
@@ -188,6 +188,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/p32goama/wgraph_paths/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ale/Documents/GitHub/IngenieriaInformaticaUCO/ED/repaso/P6wgraph_paths/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
