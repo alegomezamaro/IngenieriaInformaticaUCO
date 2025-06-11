@@ -34,7 +34,7 @@ if [[ "$modo" == "repite-si" ]]; then #Si repite-si
 
 else #Si repite-no
 
-    echo "$datos" | sort | uniq -c | awk '{print $2, $3, "-->", $1, "veces"}'
+    uniq -c $datos | sed -E 's/^[[:space:]]*([0-9]) (.*)/\2 --> \1 veces/'
     #Imprime datos sin repetir y poniendo al final "---> x veces" donde x es las veces que repite
 fi
 

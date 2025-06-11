@@ -65,7 +65,7 @@ grep -B3 ",99€" "$fichero" | grep "Título:"
 #grep "Título:"     Filtra las líneas que contienen la palabra "Título:"
 
 echo -e "\n8) Número de libros con año de publicación anterior a 2000:"
-grep -o "Año: [0-9]\{4\}" "$fichero" | awk '{if ($2<2000) c++} END{print c}' #[0-1][0-9]\{3\}
+grep -o "Año: [0-9]\{4\}" "$fichero" | awk '{if ($2<2000) c++} END{print c}'
 #"Año: [0-9]\{4\}"      Extrae "Año: "y 4 digitos entre 0 y 9
 #{if ($2<2000) c++}     Si el año es menos de 2000 c++
 #END {print c}          Muestra el total
