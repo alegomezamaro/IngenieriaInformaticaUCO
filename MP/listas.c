@@ -170,9 +170,7 @@ void insertarOrden(struct lista **cabeza, int n){
     *cabeza = nuevo;
     }
     else{ /*lista no vacía o insercion en el medio de la lista*/
-    /*busqueda de la posicion de insercion, se interrumpe cuando se
-    encuentra el primer elemento mayor que n o cuando se llega al
-    final de la lista*/
+    /*busqueda de la posicion de insercion, se interrumpe cuando se encuentra el primer elemento mayor que n o cuando se llega al final de la lista*/
     aux = *cabeza;
     while (aux != NULL && encontrado == 0)
     {
@@ -184,14 +182,45 @@ void insertarOrden(struct lista **cabeza, int n){
     aux = aux->sig;
     }
     }//while
-    /* ubicamos el elemento nuevo entre ant y aux. Estas acciones
-    son válidas aunque aux sea igual a NULL */
+    /* ubicamos el elemento nuevo entre ant y aux. Estas acciones son válidas aunque aux sea igual a NULL */
     nuevo->sig = aux;
     ant->sig = nuevo;
     } //else
 }
 
-Listas 45
-Busqueda
-Ordenacion
-Ordenacion interna
+void insertarOrdenRecursivo(struct lista **cabeza, int n){
+    if( (*cabeza==NULL) || ((*cabeza)->n > n)){
+        nuevo = nuevoElemento();
+        nuevo->n = n;
+        nuevo->sig = (*cabeza);
+        *cabeza = nuevo;
+    }
+    else{
+        insertarOrdenRecursivo( &((*cabeza)->sig), n);
+    }
+}
+
+void ordenarLista(struct lista *cabeza){
+    struct lista *aux;
+    struct lista *aux1;
+    struct lista *minimo;
+    int minimo_n;
+    aux = cabeza;
+    //Recorrer toda la lista
+    while(aux->sig != NULL){ //while1
+        aux1 = aux->sig;
+        minimo = aux;
+        while(aux1 != NULL){//while2
+            if (aux1->n < minimo->n){
+                minimo = aux1; //seleccionar minimo
+            }
+            aux1 = aux1->sig;
+        }//while 2
+        //Intercambio aux y minimo
+        minimo_n = minimo->n;
+        minimo->n = aux->n;
+        aux->n = minimo_n;
+        //Preparar siguiente iteración
+        aux = aux->sig;
+    }//While1
+}

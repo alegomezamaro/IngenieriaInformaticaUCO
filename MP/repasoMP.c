@@ -299,6 +299,24 @@ while(fread(&p, sizeof(struct producto), 1, ficheroBinario) == 1){ //Mientras se
 
 struct lista{
 
-int dato; //Dato de la lista
-struct lista *sig; //Puntero al siguiente elemento de la lista
+    int dato; //Dato de la lista
+    struct lista *sig; //Puntero al siguiente elemento de la lista
+};
+
+struct pila{
+
+    char nombre[20];
+    struct pila *sig;
+};
+
+struct punto{
+    
+    float x;
+    float y;
+};
+
+struct cola{
+
+    struct punto p;
+    struct cola *sig;
 };
