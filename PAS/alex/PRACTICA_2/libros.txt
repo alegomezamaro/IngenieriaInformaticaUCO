@@ -1,0 +1,96 @@
+Título: El problema de los tres cuerpos
+Autor: Cixin Liu
+Año: 2014
+Precio: 24,50€
+[Género: Ciencia-ficción]
+
+Título: La chica del tren
+Autor: Paula Hawkins
+Año: 2015
+Precio: 22,75€
+[Género: Misterio]
+
+Título: Historia mínima de España
+Autor: Juan Pablo Fusi
+Año: 2012
+Precio: 19,99€
+[Género: Historia]
+
+Título: El nombre del viento
+Autor: Patrick Rothfuss
+Año: 2007
+Precio: 35,99€
+[Género: Fantasía]
+
+Título: El marciano
+Autor: Andy Weir
+Año: 2011
+Precio: 18,00€
+[Género: Ciencia-ficción]
+
+Título: El silencio de la ciudad blanca
+Autor: Eva García Sáenz de Urturi
+Año: 2016
+Precio: 16,50€
+[Género: Misterio]
+
+Título: Los secretos que jamás te contaron
+Autor: Albert Espinosa
+Año: 2020
+Precio: 14,95€
+[Género: Auto-ayuda]
+
+Título: La verdad sobre el caso Harry Quebert
+Autor: Joël Dicker
+Año: 2012
+Precio: 21,00€
+[Género: Misterio]
+
+Título: Fundación
+Autor: Isaac Asimov
+Año: 1951
+Precio: 25,99€
+[Género: Ciencia-ficción]
+
+Título: 1984
+Autor: George Orwell
+Año: 1949
+Precio: 17,50€
+[Género: Distopía]
+
+Título: Dune
+Autor: Frank Herbert
+Año: 1965
+Precio: 27,99€
+[Género: Ciencia-ficción]
+
+Título: Cien años de soledad
+Autor: Gabriel García Márquez
+Año: 1967
+Precio: 23,75€
+[Género: Realismo mágico]
+
+Título: El código Da Vinci
+Autor: Dan Brown
+Año: 2003
+Precio: 20,99€
+[Género: Thriller]
+
+Título: Los pilares de la Tierra
+Autor: Ken Follett
+Año: 1989
+Precio: 19,50€
+[Género: Novela histórica]
+
+Título: El psicoanalista
+Autor: John Katzenbach
+Año: 2002
+Precio: 18,99€
+[Género: Thriller psicológico]
+
+Título: El Hobbit
+Autor: J.R.R. Tolkien
+Año: 1937
+Precio: 15,99€
+[Género: Fantasía]
+
