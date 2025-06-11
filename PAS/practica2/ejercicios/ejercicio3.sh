@@ -34,8 +34,10 @@ if [[ "$modo" == "repite-si" ]]; then #Si repite-si
 
 else #Si repite-no
 
-    uniq -c $datos | sed -E 's/^[[:space:]]*([0-9]) (.*)/\2 --> \1 veces/'
-    #Imprime datos sin repetir y poniendo al final "---> x veces" donde x es las veces que repite
+    echo "$datos" | sort | uniq -c | sed -E "s/([0-9]+) (.+) (.+)$/\2 \3 --> \1 veces/"
+    #$datos" | sort     Muestra los datos ordenados alfabéticamente 
+    #uniq -c    Elimina las lineas duplicadas y cuenta cuantas veces aparece cada linea
+    #sed -E "s/([0-9]+) (.+) (.+)$/\2 \3 --> \1 veces/"     Imprime el numero de veces
 fi
 
 exit 0

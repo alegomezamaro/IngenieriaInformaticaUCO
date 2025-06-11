@@ -8,7 +8,7 @@ declare -A max_args #Array asociativo "diccionario" maximo argumentos
 
 while read -r linea; do #Lee linea por linea hasta el final
 
-    comando=$(echo "$linea" | awk '{print $1}') #Almacena el nombre del comando
+    comando=$(echo "$linea" | cut -d '' -f 1) #Almacena el nombre del comando
     num_args=$(echo "$linea" | wc -w) #Cuenta el numero de palabras de la linea
     cuenta["$comando"]=$((cuenta["$comando"] + 1)) #Incrementa 1 las veces que se ha usado el comando
 

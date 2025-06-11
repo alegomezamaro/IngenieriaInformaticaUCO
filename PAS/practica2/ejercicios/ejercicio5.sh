@@ -3,104 +3,91 @@
 # Utilizar el comando ifconfig para mostrar las interfaces de red disponibles. En base a su resultado, para cada interfaz, queremos extraer:
 
 # 1. La direccion IP que tiene asignada.
-# 2. La direccion de broadcast y la mascara de red. Para la m ´ ascara de red, queremos obtener el numero de unos a la izquierda de la IP que estamos utilizando (tıpicamente, 8, 16 o 24, pero debes hacerlo convirtiendo la mascara de red
+# 2. La direccion de broadcast y la mascara de red. Para la mascara de red, queremos obtener el numero de unos a la izquierda de la IP que estamos utilizando (tıpicamente, 8, 16 o 24, pero debes hacerlo convirtiendo la mascara de red
 # 3. Comprobar si tiene el cable conectado. Para ello, utilizar la herramienta ethtool y comprobar si la opcion “Link detected = yes” aparece como afirmativa.
 # 4. De nuevo, utilizando ethtool, enumerar las velocidades a las que puede trabajar la interfaz y cuales de ellas est ´ an anunciadas como disponibles. ´
 # A continuacion, se muestra un ejemplo de la salida de este ´ script :
 
-function show(){
-  echo "Interfaz: $intfz"
-  echo "-> Dirección IP: $ip"
-  echo "-> Broadcast: ${bc:-0.0.0.0}"
-  # Pasamos la netmask a bytes
-  echo "-> Máscara de red: $(count_ones_ip "$netmask") bits"
-  echo "-> Cable conectado: $link"
-  echo "-> Velocidades soportadas: ${vs:-No disponible}"
-  echo "-> Velocidades anunciadas como disponibles: ${vd:-No disponible}"
-  echo " "
-}
+# Comprobamos que tenemos la herramienta 'ip' instalada
+if ! command -v ip &> /dev/null; then
+    echo "El comando 'ip' no está instalado. Instálalo y vuelve a intentarlo."
+    exit 1
+fi
 
-function count_ones_ip() {
-    bin_ip=$(convert_ip_to_bin $1)
-    #quito el \n de bin_ip para evitar un caracter
-    echo -n "$bin_ip" | sed 's/[^1]//g' | wc -c
-}
+# Comprobamos que tenemos la herramienta 'ethtool' instalada
+if ! command -v ethtool &> /dev/null; then
+    echo "El comando 'ethtool' no está instalado. Instálalo y vuelve a intentarlo."
+    exit 1
+fi
 
-function convert_to_bin() {
-    echo "obase=2; $1" | bc | awk '{printf "%08d", $1}'
-}
+# Obtenemos la lista de interfaces de red disponibles
+interfaces=$(ip -o link show | grep -oP '^\d+: \K[^:]+')
 
-function convert_ip_to_bin() {
-    ip=$1
-    IFS='.' read -r octet1 octet2 octet3 octet4 <<< "$ip"
+# Si no se encuentran interfaces, mostramos un mensaje
+if [ -z "$interfaces" ]; then
+    #-z     Longitud cero 
+    echo "No se han encontrado interfaces de red."
+    exit 1
+fi
 
-    bin_octet1=$(convert_to_bin $octet1)
-    bin_octet2=$(convert_to_bin $octet2)
-    bin_octet3=$(convert_to_bin $octet3)
-    bin_octet4=$(convert_to_bin $octet4)
+#Para cada interfaz
+for iface in $interfaces; do
 
-  echo "$bin_octet1.$bin_octet2.$bin_octet3.$bin_octet4"
-}
+    # Verificamos si la interfaz tiene una dirección IP asignada
+    ip=$(ip addr show $iface | grep -oP 'inet \K[^/]+')
+    #ip addr show $iface    Muestra la interfaz
+    #grep -oP 'inet \K[^/]+'    Almacena la IP sin máscara
 
-#metemos en $file solo las lineas que nos interesan de ifconfig
-file="ifconfig.txt"
-ifconfig | grep -E 'flags|inet ' > "$file"
+    #Si no tiene 
+    if [ -n "$ip" ]; then
 
-#iteramos por las lineas de $file
-while read -r line; do
-  # Caso de que la linea contenga 'flags' -> Interfaz : 
-  if [[ $line == *flags* ]]; then
-    # Guardamos interfaz en $intfz
-    intfz=$(echo "$line" | awk '{
-      gsub(":","",$1);
-      print $1
-    }')
-  # Caso de que sea 'inet '
-  else
-    # Sacamos IP, Netmask y Broadcast
-    ip=$(echo "$line" | awk '{print $2}')
-    netmask=$(echo "$line" | awk '{print $4}')
-    bc=$(echo "$line" | awk '{print $6}')
+        #1. Mostramos el nombre de la interfaz
+        echo "Interfaz: $iface"
 
-    # Sacar Link, SV, SC
-    eth_file="eth.txt"
-    ethtool $intfz > $eth_file
-    # Link traducimos ya el si o el no
-    link=$(awk -F': ' '/Link detected/{
-      if ($2 == "yes")
-        print "Si"
-      else
-        print "No"
-    }' $eth_file)
-    # Supported Modes : Seguimos cogiendo info hasta llegar
-    # a una línea que tenga XXX: XXX
-    # A cada info que pillamos le quitamos las tabulaciones
-    vs=$(awk -F': ' '/Supported link modes/{
-      gsub("^[[:space:]]+","",$2)
-      list = $2
-      while(getline && $2 == ""){
-        gsub("^[[:space:]]+","",$1)
-        list = list " " $1
-      }
-      print list
-    }' $eth_file)
-    # Avertides Modes : Igual que Supported Modes
-    vd=$(awk -F': ' '/Advertised link modes/{
-      gsub("^[[:space:]]+","",$2)
-      list = $2
-      while(getline && $2 == ""){
-        gsub("^[[:space:]]+","",$1)
-        list = list " " $1
-      }
-      print list
-    }' $eth_file)
-    # Comprobamos vs y vd
+        #2. Extraemos la dirección IP
+        echo " -> Dirección IP: $ip"
+        
+        #3. Extraemos la dirección de broadcast y la máscara de red utilizando IP
+        broadcast=$(ip addr show $iface | grep -oP 'broadcast \K[^ ]+')
+            #Busca el broadcast asociado a la IP
+        echo " -> Broadcast: $broadcast"
+        
+        #4. Calculamos el número de unos en la máscara de red OPCION DIRECTA
+        #mask=$(ip addr show $iface | grep -oP 'inet [^/]+/\K[0-9]+')
+            #Obtenemos la mascara de red desde la IP
+        #echo " -> Máscara de red: $mask bits"
 
-    # Imprimos info
-    show
-  fi
-done < $file
+        #4. Calculamos el número de unos en la máscara de red
+        #Obtenemos el CIDR de la interfaz
+        cidr=$(ip addr show $iface | grep -oP 'inet \K[^ ]+' | cut -d/ -f2) 
+        #Construimos la mascara binaria
+        binary_mask=$(printf "%*s" "$cidr" "" | tr ' ' '1')
+        #Contamos los unos
+        ones=$(echo "$binary_mask" | tr -cd '1' | wc -c) 
+        echo " -> Máscara de red: $ones bits"
+        
+        #5. Comprobamos si el cable está conectado con ethtool
+        cable_connected=$(ethtool $iface | grep -i 'Link detected' | grep -oP '\w+$')
+        if [ "$cable_connected" == "yes" ]; then
+            echo " -> Cable conectado: Sí"
+        else
+            echo " -> Cable conectado: No"
+        fi
+        
+        #6. Obtenemos las velocidades soportadas y anunciadas con ethtool
+        supported_speeds=$(ethtool $iface | grep -i 'Supported ports' | sed 's/^.*Supported ports: //')
+        advertised_speeds=$(ethtool $iface | grep -i 'Advertised speeds' | sed 's/^.*Advertised speeds: //')
+        #Si no hay velocidades soportadas o anunciadas, mostramos "No disponible"
+        if [ -z "$supported_speeds" ]; then
+            supported_speeds="No disponible"
+        fi
+        if [ -z "$advertised_speeds" ]; then
+            advertised_speeds="No disponible"
+        fi 
+        echo " -> Velocidades soportadas: $supported_speeds"
+        echo " -> Velocidades anunciadas como disponibles: $advertised_speeds"
 
-rm "$file"
-rm "$eth_file"
-
+    else
+        echo "Interfaz $iface no tiene dirección IP asignada."
+    fi
+done

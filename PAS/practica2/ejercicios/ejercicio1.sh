@@ -65,11 +65,11 @@ grep -B3 ",99€" "$fichero" | grep "Título:"
 #grep "Título:"     Filtra las líneas que contienen la palabra "Título:"
 
 echo -e "\n8) Número de libros con año de publicación anterior a 2000:"
-grep -o "Año: [0-9]\{4\}" "$fichero" | awk '{if ($2<2000) c++} END{print c}'
-#"Año: [0-9]\{4\}"      Extrae "Año: "y 4 digitos entre 0 y 9
-#{if ($2<2000) c++}     Si el año es menos de 2000 c++
-#END {print c}          Muestra el total
-
+cat $fichero | sed -rne "s/^Año: ([0-1][0-9][0-9][0-9]|1[0-9][0-9][0-9])//p" | uniq -c | sed -rne "s/      (.*)/\1/p"
+#sed -rne "s/^Año:  Que empiece por "Año: "
+#([0-1][0-9][0-9][0-9]|1[0-9][0-9][0-9])//p"    Rango desde 0000 hasta el 1999
+#No pongo \1 para que uniq -c cuente
+#sed -rne "s/      (.*)/\1/p"   Coloca el resultado
 
 echo -e "\n9) Líneas con dos o más palabras con mayúscula consecutivas:"
 grep -P "([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+ ){2,}" "$fichero"
