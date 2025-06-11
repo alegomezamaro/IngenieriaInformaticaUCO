@@ -201,7 +201,7 @@
                 }
                 N = P->child(dir); //Asignar a N como hijo de P
                 bfN = N->balance_factor(); //Obtenemos el factor de equilibrio de N
-                if (bfP*bfN < 0){ //Si estan desbalanceados en distinta dirección
+                if (bfP*bfN < 0){ //Si estan desbalanceados en distinta  dirección
                     rotate(N, dir); //Rotamos N en la direccion de desbalanceo
                 }
                 P = rotate(P, 1 - dir); //Rotamos P en la direccion contraria al desbalanceo
