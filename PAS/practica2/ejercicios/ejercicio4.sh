@@ -14,15 +14,27 @@ grep -vE '(/false|/nologin)$' /etc/passwd | cut -d: -f1
 #/etc/passwd            Entrada
 
 echo -e "\n3. UID de los usuarios cuyo directorio home no está en home:"
-cat /etc/passwd | grep -vE "home" | sed -rne "s/.*:x:(.*):.*:.*:.*:.*/\1/p"
+grep -vE '^([^:]*:){5}/home' /etc/passwd | cut -d: -f3
+    #([^:]*:){5}: Salta los 5 primeros campos (usuario:contraseña:uid:gid:gecos:).
+    #/home: Detecta si el campo home empieza por /home.
+    #-v: Inversa, para quedarte con los que no están en /home.
+    #cut -d: -f3: Extrae el UID de esas líneas.
 
 echo -e "\n4. Usuarios con GID mayor que 1000:"
-grep -E '^([^:]*:){3}([1-9][0-9]{3,}|[1-9][0-9]{4,})' /etc/passwd | sed -rne "s/(.*):x:.*:.*:.*:.*:.*/\1/p"
-#grep -E '^([^:]*:){3}([1-9][0-9]{3,}|[1-9][0-9]{4,})' /etc/passwd      GID entre 1000-99999
-#sed -rne "s/(.*):x:.*:.*:.*:.*:.*/\1/p"    Imprime el nombre de usuario
+while IFS=: read -r user _ _ gid _; do
+     #read -r user _ _ gid _      Guarda el primer y cuarto campo
+
+    if [ "$gid" -gt 1000 ]; then
+        echo "$user"
+    fi
+    #Si gid es mayor de 1000 imprime el usuario
+done < /etc/passwd
 
 echo -e "\n5. Usuarios y su UID con una ',' en su gecos:"
-grep -E '^([^:]*:){4}[^:]*,.*' /etc/passwd | sed -rne "s/(.*):x:(.*):.*:.*:.*:.*/\1, \2/p"
-#^([^:]*:){4}   Avanza hasta despues del cuarto : (GECOS)
-#[^:]*,.*   El quinto campo contiene una coma
-#sed -rne "s/(.*):x:(.*):.*:.*:.*:.*/\1, \2/p"  Imprime Usuario, UID
+while IFS=: read -r user _ uid _ gecos _; do
+    #read -r user _ uid _ gecos _   Guarda el primer, tercer y quinto campo
+    if [[ "$gecos" == *,* ]]; then
+        echo "$user, $uid"
+    fi
+    #Si el gecos tiene una coma imprime usuario, uid
+done < /etc/passwd

@@ -8,20 +8,8 @@
 # 4. De nuevo, utilizando ethtool, enumerar las velocidades a las que puede trabajar la interfaz y cuales de ellas est ´ an anunciadas como disponibles. ´
 # A continuacion, se muestra un ejemplo de la salida de este ´ script :
 
-# Comprobamos que tenemos la herramienta 'ip' instalada
-if ! command -v ip &> /dev/null; then
-    echo "El comando 'ip' no está instalado. Instálalo y vuelve a intentarlo."
-    exit 1
-fi
-
-# Comprobamos que tenemos la herramienta 'ethtool' instalada
-if ! command -v ethtool &> /dev/null; then
-    echo "El comando 'ethtool' no está instalado. Instálalo y vuelve a intentarlo."
-    exit 1
-fi
-
 # Obtenemos la lista de interfaces de red disponibles
-interfaces=$(ip -o link show | grep -oP '^\d+: \K[^:]+')
+interfaces=$(ifconfig | grep -oE '^[a-zA-Z0-9]+')
 
 # Si no se encuentran interfaces, mostramos un mensaje
 if [ -z "$interfaces" ]; then
@@ -34,9 +22,7 @@ fi
 for iface in $interfaces; do
 
     # Verificamos si la interfaz tiene una dirección IP asignada
-    ip=$(ip addr show $iface | grep -oP 'inet \K[^/]+')
-    #ip addr show $iface    Muestra la interfaz
-    #grep -oP 'inet \K[^/]+'    Almacena la IP sin máscara
+    ip=$(ifconfig "$iface" | grep 'inet addr' | sed -E 's/.*inet addr:([0-9.]+).*/\1/')
 
     #Si no tiene 
     if [ -n "$ip" ]; then
@@ -48,26 +34,26 @@ for iface in $interfaces; do
         echo " -> Dirección IP: $ip"
         
         #3. Extraemos la dirección de broadcast y la máscara de red utilizando IP
-        broadcast=$(ip addr show $iface | grep -oP 'broadcast \K[^ ]+')
+        broadcast=$(ifconfig "$iface" | grep 'Bcast' | sed -E 's/.*Bcast:([0-9.]+).*/\1/')
             #Busca el broadcast asociado a la IP
         echo " -> Broadcast: $broadcast"
         
         #4. Calculamos el número de unos en la máscara de red OPCION DIRECTA
-        #mask=$(ip addr show $iface | grep -oP 'inet [^/]+/\K[0-9]+')
-            #Obtenemos la mascara de red desde la IP
-        #echo " -> Máscara de red: $mask bits"
-
-        #4. Calculamos el número de unos en la máscara de red
-        #Obtenemos el CIDR de la interfaz
-        cidr=$(ip addr show $iface | grep -oP 'inet \K[^ ]+' | cut -d/ -f2) 
-        #Construimos la mascara binaria
-        binary_mask=$(printf "%*s" "$cidr" "" | tr ' ' '1')
-        #Contamos los unos
-        ones=$(echo "$binary_mask" | tr -cd '1' | wc -c) 
+        # Máscara decimal
+        mask=$(ifconfig "$iface" | grep 'Mask' | sed -E 's/.*Mask:([0-9.]+).*/\1/')
+        # Convertimos a binario y contamos los 1
+        binary_mask=$(echo $mask | tr '.' ' ' | while read a b c d; do
+          printf "%08d%08d%08d%08d\n" \
+            "$(echo "obase=2; $a" | bc)" \
+            "$(echo "obase=2; $b" | bc)" \
+            "$(echo "obase=2; $c" | bc)" \
+            "$(echo "obase=2; $d" | bc)"
+        done)
+        ones=$(echo "$binary_mask" | tr -cd '1' | wc -c)
         echo " -> Máscara de red: $ones bits"
         
         #5. Comprobamos si el cable está conectado con ethtool
-        cable_connected=$(ethtool $iface | grep -i 'Link detected' | grep -oP '\w+$')
+        cable_connected=$(ethtool "$iface" 2>/dev/null | grep -i 'Link detected' | grep -o 'yes')
         if [ "$cable_connected" == "yes" ]; then
             echo " -> Cable conectado: Sí"
         else
@@ -75,8 +61,14 @@ for iface in $interfaces; do
         fi
         
         #6. Obtenemos las velocidades soportadas y anunciadas con ethtool
-        supported_speeds=$(ethtool $iface | grep -i 'Supported ports' | sed 's/^.*Supported ports: //')
-        advertised_speeds=$(ethtool $iface | grep -i 'Advertised speeds' | sed 's/^.*Advertised speeds: //')
+        supported_speeds=$(ethtool "$iface" 2>/dev/null | sed -n '/Supported link modes:/,/^[A-Za-z]/p' | grep -oE '[0-9]+baseT/[A-Za-z]+' | sort -u | tr '\n' ' ')
+        advertised_speeds=$(ethtool "$iface" 2>/dev/null | sed -n '/Advertised link modes:/,/^[A-Za-z]/p' | grep -oE '[0-9]+baseT/[A-Za-z]+' | sort -u | tr '\n' ' ')
+            #ethtool "$iface"   Muestra la interfaz
+            #sed -n '/Supported link modes:/,/^[A-Za-z]/p'  Coge solo cuando empieza por..
+            #grep -oE '[0-9]+baseT/[A-Za-z]+'   Extrae solo velocidades
+            #sort -u    Elimina duplicados
+            #tr '\n' ' '     Pone todo en la misma línea.
+
         #Si no hay velocidades soportadas o anunciadas, mostramos "No disponible"
         if [ -z "$supported_speeds" ]; then
             supported_speeds="No disponible"

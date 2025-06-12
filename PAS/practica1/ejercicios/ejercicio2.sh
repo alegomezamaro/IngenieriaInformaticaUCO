@@ -32,7 +32,7 @@ fi
 mkdir -p "$destino" #Crea el directorio destino con la ruta dada
 usuario=$(whoami) #Almacena el nombre del usuario
 fecha=$(date +%Y%m%d) #Almacena la fecha en la que estamos
-nombrecopia=$origen"_"$usuario"_"$fecha #Formato "nombreOrigen_usuario_fecha" para la copia
+nombrecopia=$(basename "$origen")"_"$usuario"_"$fecha #Formato "nombreOrigen_usuario_fecha" para la copia
 
 if [ "$comprimir" -eq 1 ]; then #Si comprimir=1
 

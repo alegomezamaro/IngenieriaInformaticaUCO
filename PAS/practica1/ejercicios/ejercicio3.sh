@@ -13,10 +13,24 @@ echo $usuarios #Imprime los usuarios encontrados
 for usuario in $usuarios; do #Recorre todos los usuarios
 
     permhome=$(stat -c %a $usuario) #Permisos en la carpeta usuario
-    permisosdir=$(stat -c %a $usuario/.ssh) #Permisos en la carpeta ssh del usuario
-    permisosfich=$(stat -c %a $usuario/.ssh/id_rsa) #Permisos en el fichero id_rsa del usuario
-    #stat       Obtiene informacion sobre un archivo o directorio
-    #-c %a      Devuelve los permisos del archivo o directorio en formato octal
+
+    if [ -e "$usuario/.ssh" ]; then
+
+        permisosdir=$(stat -c %a $usuario/.ssh) #Permisos en la carpeta ssh del usuario
+    else
+
+        permisosdir=0
+    fi
+
+    if [ -e "$usuario/.ssh/id_rsa" ]; then
+
+        permisosfich=$(stat -c %a $usuario/.ssh/id_rsa) #Permisos en el fichero id_rsa del usuario
+        #stat       Obtiene informacion sobre un archivo o directorio
+        #-c %a      Devuelve los permisos del archivo o directorio en formato octal
+    else
+    
+        permisosfich=0
+    fi    
 
     if [ $permhome -gt 700 ] || [ $permisosdir -gt 700 ] || [ $permisosfich -gt 600 ]; then #Si los permisos no son los correctos
 
