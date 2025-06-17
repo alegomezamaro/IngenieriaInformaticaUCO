@@ -1,6 +1,0 @@
-[2025-05-19, 23:22:08] ==> Número de caracteres leídos: 4
-[2025-05-19, 23:22:10] ==> Número de caracteres leídos: 3
-[2025-05-19, 23:22:13] ==> exit
-[2025-05-19, 23:36:37] ==> Número de caracteres leídos: 1
-[2025-05-19, 23:36:38] ==> Número de caracteres leídos: 1
-[2025-05-19, 23:36:39] ==> exit

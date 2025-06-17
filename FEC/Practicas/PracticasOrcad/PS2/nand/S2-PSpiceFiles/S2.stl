@@ -1,0 +1,28 @@
+* C:\Users\gomez\Desktop\s2\nand\S2-PSpiceFiles\S2.stl written on Wed Apr 03 13:07:48 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! A Digital B Digital C Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 900ns
+;!AutoUniverse
+;!XminRes 1ns
+;!YminRes 1n
+;!Ok
+.STIMULUS A STIM (1, 1)
++   +0s 0
++   400ns 1
+.STIMULUS B STIM (1, 1)
++   +0s 0
++   200ns 1
++   401ns 0
++   601ns 1
+.STIMULUS C STIM (1, 1)
++   +0s 0
++   101ns 1
++   202ns 0
++   301ns 1
++   401ns 0
++   499ns 1
++   601ns 0
++   700ns 1

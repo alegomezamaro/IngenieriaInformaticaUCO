@@ -1,0 +1,10 @@
+0 FFFF
+1 6
+@
+2
+@
+CRA
+ADD 0
+JEG11 1
+ADD 1
+HALT

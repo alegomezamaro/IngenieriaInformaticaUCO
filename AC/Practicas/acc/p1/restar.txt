@@ -1,0 +1,13 @@
+0 7
+1 3
+2 0
+@
+3
+@
+CRA; limpiador
+ADD 1; sumamos 3
+CTA; complementamos
+ITA; sumamos 1 para complemeto 2
+ADD 0; sumamos 7
+STA 2; subimos resultado a 2
+HALT; fin

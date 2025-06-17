@@ -1,0 +1,20 @@
+** Profile: "SCHEMATIC1-P5"  [ c:\users\gomez\downloads\practica4-pspicefiles\schematic1\p5.sim ] 
+
+** Creating circuit file "P5.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.STMLIB "../../../practica4-pspicefiles/practica4.stl" 
+* From [PSPICE NETLIST] section of C:\Users\gomez\AppData\Roaming\SPB_16.6\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.TRAN  0 1600ns 0 200ns 
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+.END

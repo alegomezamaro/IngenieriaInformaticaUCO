@@ -1,0 +1,11 @@
+0 0
+1 FFFF
+2 0
+@
+3
+@
+ZEROS32 0
+LDA 1
+LDQ 1
+ZEROS32 2
+HALT

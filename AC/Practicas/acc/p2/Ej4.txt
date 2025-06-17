@@ -1,0 +1,11 @@
+0 0
+1 0
+@
+2
+@
+CRA
+ADDV11 4
+STA 0
+SUBV11 5
+STA 1
+HALT

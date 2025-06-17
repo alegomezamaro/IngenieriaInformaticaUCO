@@ -1,0 +1,150 @@
+
+**** 03/13/24 13:15:47 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-PS1"  [ C:\PracticasOrcad\PS1\PS1-PSpiceFiles\SCHEMATIC1\PS1.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "PS1.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.STMLIB "../../../ps1-pspicefiles/ps1.stl" 
+* From [PSPICE NETLIST] section of C:\Users\Usuario\AppData\Roaming\SPB_16.6\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.TRAN  0 800ns 0 200ns 
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source PS1
+X_U1A         N00169 N00174 XOR $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U1B         N00943 N00908 N00169 $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U1C         N00901 NOT N00174 $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U1D         N00450 N00450 OR $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U2A         N00901 NOT N00450 $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U2B         N00943 N00908 AND $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U2C         NOT NOT N00908 $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U2D         N00901 N00901 N00943 $G_DPWR $G_DGND 74LS02 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+U_A         STIM(1,0) $G_DPWR $G_DGND NOT IO_STM STIMULUS=A
+U_B         STIM(1,0) $G_DPWR $G_DGND N00901 IO_STM STIMULUS=B
+
+**** RESUMING PS1.cir ****
+.END
+
+* C:\PracticasOrcad\PS1\PS1-PSpiceFiles\PS1.stl written on Wed Mar 13 12:52:57 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! A Digital B Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 800ns
+;!AutoUniverse
+;!XminRes 50ns
+;!YminRes 1n
+;!Ok
+.STIMULUS A STIM (1, 1)
++   +0s 0
++   400ns 1
+.STIMULUS B STIM (1, 1)
++   +0s 0
++   200ns 1
++   400ns 0
++   600ns 1
+
+**** 03/13/24 13:15:47 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-PS1"  [ C:\PracticasOrcad\PS1\PS1-PSpiceFiles\SCHEMATIC1\PS1.sim ] 
+
+
+ ****     Digital Gate MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               D_LS02          
+      TPLHMN    4.000000E-09 
+      TPLHTY   10.000000E-09 
+      TPLHMX   15.000000E-09 
+      TPHLMN    4.000000E-09 
+      TPHLTY   10.000000E-09 
+      TPHLMX   15.000000E-09 
+
+
+**** 03/13/24 13:15:47 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-PS1"  [ C:\PracticasOrcad\PS1\PS1-PSpiceFiles\SCHEMATIC1\PS1.sim ] 
+
+
+ ****     Digital IO  MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               IO_STM          IO_LS           
+        DRVL    0             157            
+        DRVH    0             108            
+       AtoD1                 AtoD_LS         
+       AtoD2                 AtoD_LS_NX      
+       AtoD3                 AtoD_LS         
+       AtoD4                 AtoD_LS_NX      
+       DtoA1 DtoA_STM        DtoA_LS         
+       DtoA2 DtoA_STM        DtoA_LS         
+       DtoA3 DtoA_STM        DtoA_LS         
+       DtoA4 DtoA_STM        DtoA_LS         
+      TSWHL1                    2.724000E-09 
+      TSWHL2                    2.724000E-09 
+      TSWHL3                    2.724000E-09 
+      TSWHL4                    2.724000E-09 
+      TSWLH1                    2.104000E-09 
+      TSWLH2                    2.104000E-09 
+      TSWLH3                    2.104000E-09 
+      TSWLH4                    2.104000E-09 
+       TPWRT  100.000000E+03  100.000000E+03 
+
+
+
+          JOB CONCLUDED
+
+**** 03/13/24 13:15:47 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-PS1"  [ C:\PracticasOrcad\PS1\PS1-PSpiceFiles\SCHEMATIC1\PS1.sim ] 
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  Total job time                    =         .02
+

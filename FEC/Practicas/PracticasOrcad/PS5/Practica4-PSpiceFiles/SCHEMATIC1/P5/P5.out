@@ -1,0 +1,229 @@
+
+**** 04/29/24 16:50:54 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-P5"  [ c:\users\gomez\downloads\practica4-pspicefiles\schematic1\p5.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "P5.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.STMLIB "../../../practica4-pspicefiles/practica4.stl" 
+* From [PSPICE NETLIST] section of C:\Users\gomez\AppData\Roaming\SPB_16.6\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.TRAN  0 1600ns 0 200ns 
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source PRACTICA4
+.EXTERNAL OUTPUT S3
+.EXTERNAL OUTPUT S2
+.EXTERNAL OUTPUT S1
+.EXTERNAL OUTPUT S0
+X_SumaCom_Semisum_U2A         A0 N01110 SumaCom_N00170 $G_DPWR $G_DGND 74LS86A
++  PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom_Semisum_U1A         N01110 A0 SumaCom_N00250 $G_DPWR $G_DGND 74LS08
++  PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom_Semisum1_U2A         SumaCom_N00170 M S0 $G_DPWR $G_DGND 74LS86A
++  PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom_Semisum1_U1A         M SumaCom_N00170 SumaCom_N00337 $G_DPWR $G_DGND
++  74LS08 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom_U1A         SumaCom_N00337 SumaCom_N00250 N00964 $G_DPWR $G_DGND
++  74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom1_U1A         SumaCom1_N00337 SumaCom1_N00250 N00939 $G_DPWR $G_DGND
++  74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom1_Semisum1_U2A         SumaCom1_N00170 N00964 S1 $G_DPWR $G_DGND
++  74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom1_Semisum1_U1A         N00964 SumaCom1_N00170 SumaCom1_N00337 $G_DPWR
++  $G_DGND 74LS08 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom1_Semisum_U2A         A1 N01230 SumaCom1_N00170 $G_DPWR $G_DGND
++  74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom1_Semisum_U1A         N01230 A1 SumaCom1_N00250 $G_DPWR $G_DGND 74LS08
++  PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom2_U1A         SumaCom2_N00337 SumaCom2_N00250 N00908 $G_DPWR $G_DGND
++  74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom2_Semisum1_U2A         SumaCom2_N00170 N00939 S2 $G_DPWR $G_DGND
++  74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom2_Semisum1_U1A         N00939 SumaCom2_N00170 SumaCom2_N00337 $G_DPWR
++  $G_DGND 74LS08 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom2_Semisum_U2A         A2 N01472 SumaCom2_N00170 $G_DPWR $G_DGND
++  74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom2_Semisum_U1A         N01472 A2 SumaCom2_N00250 $G_DPWR $G_DGND 74LS08
++  PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom3_U1A         SumaCom3_N00337 SumaCom3_N00250 C4 $G_DPWR $G_DGND
++  74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom3_Semisum1_U2A         SumaCom3_N00170 N00908 S3 $G_DPWR $G_DGND
++  74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom3_Semisum1_U1A         N00908 SumaCom3_N00170 SumaCom3_N00337 $G_DPWR
++  $G_DGND 74LS08 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom3_Semisum_U2A         A3 N00555 SumaCom3_N00170 $G_DPWR $G_DGND
++  74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_SumaCom3_Semisum_U1A         N00555 A3 SumaCom3_N00250 $G_DPWR $G_DGND 74LS08
++  PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+U_DSTM1         STIM(4,0) $G_DPWR $G_DGND A3 A2 A1 A0 IO_STM STIMULUS=A
+U_DSTM2         STIM(4,0) $G_DPWR $G_DGND B3 B2 B1 B0 IO_STM STIMULUS=B
+U_DSTM3         STIM(1,0) $G_DPWR $G_DGND M IO_STM STIMULUS=M
+X_U1A         B3 M N00555 $G_DPWR $G_DGND 74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U1B         B0 M N01110 $G_DPWR $G_DGND 74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U1C         B1 M N01230 $G_DPWR $G_DGND 74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U1D         B2 M N01472 $G_DPWR $G_DGND 74LS86A PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+
+**** RESUMING P5.cir ****
+.END
+
+* d:\p4\practica4-PSpiceFiles\PRACTICA4.stl written on Mon Apr 22 17:03:36 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! A Digital B Digital M Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 1.6us
+;!AutoUniverse
+;!XminRes 200ns
+;!YminRes 1n
+;!Ok
+.STIMULUS A STIM (4, 1111) ;! Decimal
++   +0s 0010
++   200ns 0110
++   400ns 1001
++   600ns 1010
++   800ns 1000
++   1us 0011
++   1.2us 0101
++   1.4us 1011
+.STIMULUS B STIM (4, 1111) ;! Decimal
++   +0s 0011
++   200ns 1100
++   400ns 0100
++   600ns 1100
++   800ns 0011
++   1us 1110
++   1.2us 1100
++   1.4us 0100
+.STIMULUS M STIM (1, 1)
++   +0s 0
++   800ns 1
+
+**** 04/29/24 16:50:54 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-P5"  [ c:\users\gomez\downloads\practica4-pspicefiles\schematic1\p5.sim ] 
+
+
+ ****     Digital Gate MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               D0_GATE         D_LS86_1        D_LS86_2        D_LS86_3        
+      TPLHMN    0               4.800000E-09    8.000000E-09    0            
+      TPLHTY    0              12.000000E-09   20.000000E-09    0            
+      TPLHMX    0              23.000000E-09   30.000000E-09    0            
+      TPHLMN    0               0               1.200000E-09    4.000000E-09 
+      TPHLTY    0               0               3.000000E-09   10.000000E-09 
+      TPHLMX    0               0               5.000000E-09   17.000000E-09 
+
+
+               D_LS08          D_LS32          
+      TPLHMN    3.200000E-09    5.600000E-09 
+      TPLHTY    8.000000E-09   14.000000E-09 
+      TPLHMX   15.000000E-09   22.000000E-09 
+      TPHLMN    4.000000E-09    5.600000E-09 
+      TPHLTY   10.000000E-09   14.000000E-09 
+      TPHLMX   20.000000E-09   22.000000E-09 
+
+
+**** 04/29/24 16:50:54 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-P5"  [ c:\users\gomez\downloads\practica4-pspicefiles\schematic1\p5.sim ] 
+
+
+ ****     Digital IO  MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               IO_STM          IO_LS           
+        DRVL    0             157            
+        DRVH    0             108            
+       AtoD1                 AtoD_LS         
+       AtoD2                 AtoD_LS_NX      
+       AtoD3                 AtoD_LS         
+       AtoD4                 AtoD_LS_NX      
+       DtoA1 DtoA_STM        DtoA_LS         
+       DtoA2 DtoA_STM        DtoA_LS         
+       DtoA3 DtoA_STM        DtoA_LS         
+       DtoA4 DtoA_STM        DtoA_LS         
+      TSWHL1                    2.724000E-09 
+      TSWHL2                    2.724000E-09 
+      TSWHL3                    2.724000E-09 
+      TSWHL4                    2.724000E-09 
+      TSWLH1                    2.104000E-09 
+      TSWLH2                    2.104000E-09 
+      TSWLH3                    2.104000E-09 
+      TSWLH4                    2.104000E-09 
+       TPWRT  100.000000E+03  100.000000E+03 
+
+
+
+          JOB CONCLUDED
+
+**** 04/29/24 16:50:54 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-P5"  [ c:\users\gomez\downloads\practica4-pspicefiles\schematic1\p5.sim ] 
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  Total job time                    =         .03
+

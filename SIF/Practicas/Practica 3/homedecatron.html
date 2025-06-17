@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decatrón</title>
+  <link rel="icon" href="Decatrón Cuadrado.png" type="image/png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000;
+    }
+    header {
+      background-color: #ffffff;
+      padding: 40px 0 20px;
+      text-align: center;
+    }
+    header img {
+      max-width: 250px;
+    }
+    nav {
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px;
+    }
+    .product {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      width: 300px;
+      padding: 20px;
+      cursor: pointer;
+    }
+    .product img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+    }
+    .product h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 8px;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal img {
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .modal h2 {
+      margin-bottom: 10px;
+    }
+
+    .modal p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .modal select, .modal button {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .modal button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .modal button:hover {
+      background-color: #005f9e;
+    }
+
+    .close {
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Decatrón.png" alt="Logo Decatrón">
+  </header>
+
+  <section style="text-align: center; padding: 40px 20px;">
+    <h2 style="font-size: 28px; margin-bottom: 15px;">¿Quiénes somos?</h2>
+    <img src="Empresarios.png" alt="Jóvenes emprendedores de Córdoba" style="max-width: 100%; max-height: 400px; margin: 20px 0; border-radius: 10px;">
+    <p style="max-width: 800px; margin: 0 auto; font-size: 18px; line-height: 1.5;">
+      Decatrón nace de la iniciativa de tres jóvenes emprendedores de Córdoba que comparten una misma visión: acercar el deporte a todas las personas, sin importar su nivel económico o su experiencia. Nos mueve la pasión por el deporte y el compromiso de crear una tienda cercana, asequible y comprometida con la comunidad local.
+    </p>
+  </section>
+
+  <nav>PRODUCTOS</nav>
+
+  <div class="container">
+    <div class="product" onclick="openModal('Balon.png', 'Balón Joma Fútbol Clásico', 'Balón clásico ideal para entrenamientos y partidos. Resistente y ligero.', ['Talla 5 (Adulto)', 'Talla 4 (Junior)'])">
+      <img src="Balon.png" alt="Balón Joma">
+      <h3>Balón Joma Fútbol Clásico</h3>
+    </div>
+
+    <div class="product" onclick="openModal('Camiseta.png', 'Camiseta Joma Azul', 'Camiseta técnica transpirable perfecta para entrenamientos o uso casual.', ['XS', 'S', 'M', 'L', 'XL', 'XXL'])">
+      <img src="Camiseta.png" alt="Camiseta Joma">
+      <h3>Camiseta Joma Azul</h3>
+    </div>
+
+    <div class="product" onclick="openModal('Zapatillas.png', 'Zapatillas Joma Running Azul', 'Zapatillas deportivas ligeras y cómodas para correr en cualquier terreno.', ['36','37','38','39','40','41','42','43','44','45'])">
+      <img src="Zapatillas.png" alt="Zapatillas Joma">
+      <h3>Zapatillas Joma Running Azul</h3>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modalImg" src="" alt="Producto">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <select id="modalTallas"></select>
+      <button onclick="alert('Producto añadido al carrito (simulado)')">Comprar</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal(imagen, titulo, descripcion, tallas) {
+      document.getElementById('modalImg').src = imagen;
+      document.getElementById('modalTitle').textContent = titulo;
+      document.getElementById('modalDesc').textContent = descripcion;
+
+      const select = document.getElementById('modalTallas');
+      select.innerHTML = '';
+      tallas.forEach(t => {
+        const option = document.createElement('option');
+        option.textContent = t;
+        select.appendChild(option);
+      });
+
+      document.getElementById('productModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('productModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+</body>
+</html>

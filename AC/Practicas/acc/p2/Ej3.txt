@@ -1,0 +1,15 @@
+0 5
+1 0
+2 0
+3 0
+4 3
+@
+5
+@
+CRA
+ADD 0
+PUSH 0
+POP 1
+PUSHI 2
+POPI 4
+HALT

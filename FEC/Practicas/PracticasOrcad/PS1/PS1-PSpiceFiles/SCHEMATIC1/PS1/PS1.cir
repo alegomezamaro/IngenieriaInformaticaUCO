@@ -1,0 +1,20 @@
+** Profile: "SCHEMATIC1-PS1"  [ C:\PracticasOrcad\PS1\PS1-PSpiceFiles\SCHEMATIC1\PS1.sim ] 
+
+** Creating circuit file "PS1.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.STMLIB "../../../ps1-pspicefiles/ps1.stl" 
+* From [PSPICE NETLIST] section of C:\Users\Usuario\AppData\Roaming\SPB_16.6\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.TRAN  0 800ns 0 200ns 
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+.END

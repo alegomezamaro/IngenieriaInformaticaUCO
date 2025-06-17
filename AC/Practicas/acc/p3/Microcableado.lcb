@@ -1,0 +1,31 @@
+$
+PC+1->PC:t1
+PC->MAR:t0
+GPR(AD)->MAR:t3·q1 + t3·q2 + t3·q3 + t3·q4 + t3·q5 + t4·q5 + t4·q6 + t7·q6 + t3·q7 + t3·q9 + t13·q8 + t23·q8
+GPR->M:t5·q3 + t3·q6 + t4·q6 + t8·q6 + t12·q7 + t5·q9·Zac + t7·q9·F·Zsc' + t7·q9·F·Zsc + t5·q8 + t8·q8
+QR->M:t4·q4 + t4·q6 + t4·q7
+GPR(OP)->OPR:t2
+M->GPR:t1 + t4·q1 + t11·q8 + t14·q8 + t19·q8·F' + t19·q8·F + t22·q8 + t24·q8
+ACC->GPR:t4·q3 + t7·q6 + t7·q8 + t16·q8
+GPR+1->GPR:t3·q5 + t3·q6 + t9·q7·Zsc'·F' + t9·q7·Zsc·F' + t11·q7·F' + t6·q9 + t12·q8
+QR->GPR:t4·q5 + t6·q7 + t4·q9 + t9·q8
+GPR'->GPR:t6·q6
+Co2 GPR:t5·q6
+0->QR:t5·q7
+0->ACC:t4·q1 + t4·q5 + t8·q8 + t17·q8 + t4·q1
+M->QR:t4·q2 + t3·q5 + t5·q5 + t7·q7
+GPR+ACC->ACC:t5·q1 + t5·q5 + t10·q8 + t15·q8 + t20·q8 + t25·q8
+ROL FAQ:t8·q7 + t10·q7 + t12·q7
+ROL FA:t6·q9 + t8·q9·Zsc'
+SP-1->SP:t3·q8 + t6·q8 + t17·q8
+0->F:t3·q8 + t21·q8
+SP->MAR:t4·q8 + t7·q8 + t10·q8 + t18·q8 + t21·q8
+SP+1->SP:t9·q8 + t20·q8
+GPR->QR:t17·q8
+ACC+1->ACC:t19·q8·F
+$
+SR+1->SR:t0 + t1 + t2 + t3·q1 + t4·q1 + t3·q2 + t3·q3 + t4·q3 + t3·q4 + t3·q5 + t4·q5 + t3·q6 + t4·q6 + t5·q6 + t6·q6 + t7·q6 + t3·q7 + t4·q7 + t5·q7 + t6·q7 + t7·q7 + t8·q7 + t9·q7·Zsc·F + t9·q7·Zsc·F' + t10·q7 + t11·q7·F' + t11·q7·F + t3·q9 + t4·q9 + t5·q9·Zac' + t6·q9 + t7·q9·F·Zsc' + t3·q8 + t4·q8 + t5·q8 + t6·q8 + t7·q8 + t8·q8 + t9·q8 + t10·q8 + t11·q8 + t12·q8 + t13·q8 + t14·q8 + t15·q8 + t16·q8 + t17·q8 + t18·q8 + t19·q8·F' + t19·q8·F + t20·q8 + t21·q8 + t22·q8 + t23·q8 + t24·q8
+LOAD SR:t5·q1-0 + t4·q2-0 + t5·q3-0 + t4·q4-0 + t5·q5-0 + t8·q6-0 + t9·q7·Zsc'·F'-8 + t9·q7·Zsc'·F-8 + t12·q7-0 + t5·q9·Zac-0 + t7·q9·F'·Zsc'-6 + t7·q9·F'·Zsc-0 + t7·q9·F·Zsc-0 + t8·q9·Zsc'-8 + t8·q9·Zsc-0 + t25·q8·-0
+SC-1->SC:t8·q7 + t6·q9 + t8·q9·Zsc'
+LOAD SC:t3·q7-31 + t3·q9-17
+$

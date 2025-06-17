@@ -1,0 +1,148 @@
+
+**** 04/03/24 12:45:13 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-S2"  [ C:\Users\gomez\Desktop\s2\P2-PSpiceFiles\SCHEMATIC1\S2.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "S2.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.STMLIB "../../../p2-pspicefiles/p2.stl" 
+* From [PSPICE NETLIST] section of C:\Users\gomez\AppData\Roaming\SPB_16.6\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.TRAN  0 900ns 0 100ns 
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source P2
+X_U1A         N00130 N00134 N00126 $G_DPWR $G_DGND 74ALS08 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U1B         N00126 N00359 SALIDA $G_DPWR $G_DGND 74ALS08 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+U_A         STIM(1,0) $G_DPWR $G_DGND N00130 IO_STM STIMULUS=A
+U_B         STIM(1,0) $G_DPWR $G_DGND N00134 IO_STM STIMULUS=B
+U_C         STIM(1,0) $G_DPWR $G_DGND N00359 IO_STM STIMULUS=C
+
+**** RESUMING S2.cir ****
+.END
+
+* C:\Users\gomez\Desktop\s2\P2-PSpiceFiles\P2.stl written on Wed Apr 03 12:39:08 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! A Digital B Digital C Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 900ns
+;!AutoUniverse
+;!XminRes 1ns
+;!YminRes 1n
+;!Ok
+.STIMULUS A STIM (1, 1)
++   +0s 0
++   401ns 1
+.STIMULUS B STIM (1, 1)
++   +0s 0
++   201ns 1
++   401ns 0
++   600ns 1
+.STIMULUS C STIM (1, 1)
++   +0s 0
++   101ns 1
++   200ns 0
++   300ns 1
++   401ns 0
++   500ns 1
++   600ns 0
++   700ns 1
+
+**** 04/03/24 12:45:13 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-S2"  [ C:\Users\gomez\Desktop\s2\P2-PSpiceFiles\SCHEMATIC1\S2.sim ] 
+
+
+ ****     Digital Gate MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               D_ALS08         
+      TPLHMN    4.000000E-09 
+      TPLHTY    8.000000E-09 
+      TPLHMX   14.000000E-09 
+      TPHLMN    3.000000E-09 
+      TPHLTY    6.500000E-09 
+      TPHLMX   10.000000E-09 
+
+
+**** 04/03/24 12:45:13 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-S2"  [ C:\Users\gomez\Desktop\s2\P2-PSpiceFiles\SCHEMATIC1\S2.sim ] 
+
+
+ ****     Digital IO  MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               IO_STM          IO_ALS00        
+        DRVL    0              46.9          
+        DRVH    0              35.3          
+       AtoD1                 AtoD_ALS00      
+       AtoD2                 AtoD_ALS00_NX   
+       AtoD3                 AtoD_ALS00      
+       AtoD4                 AtoD_ALS00_NX   
+       DtoA1 DtoA_STM        DtoA_ALS00      
+       DtoA2 DtoA_STM        DtoA_ALS00      
+       DtoA3 DtoA_STM        DtoA_ALS00      
+       DtoA4 DtoA_STM        DtoA_ALS00      
+      TSWHL1                  529.000000E-12 
+      TSWHL2                  513.000000E-12 
+      TSWHL3                  529.000000E-12 
+      TSWHL4                  513.000000E-12 
+      TSWLH1                  695.000000E-12 
+      TSWLH2                  718.000000E-12 
+      TSWLH3                  695.000000E-12 
+      TSWLH4                  718.000000E-12 
+       TPWRT  100.000000E+03    2.900000E-09 
+
+
+
+          JOB CONCLUDED
+
+**** 04/03/24 12:45:13 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-S2"  [ C:\Users\gomez\Desktop\s2\P2-PSpiceFiles\SCHEMATIC1\S2.sim ] 
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  Total job time                    =         .05
+

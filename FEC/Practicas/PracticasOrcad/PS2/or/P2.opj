@@ -1,0 +1,55 @@
+(ExpressProject "P2"
+  (ProjectVersion "19981106")
+  (ProjectType "PCB - PSpice")
+  (Folder "Design Resources"
+    (Folder "Library"
+      (File "D:\tools\capture\LIBRARY\PSPICE\74als.olb"
+        (Type "Schematic Library"))
+      (File "D:\tools\capture\LIBRARY\PSPICE\sourcstm.olb"
+        (Type "Schematic Library")))
+    (NoModify)
+    (File ".\p2.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (PSPICE_Regenerate_Netlist_Flag "FALSE"))
+  (Folder "Outputs"
+    (File ".\p2-pspicefiles\schematic1\schematic1.net"
+      (Type "Report")))
+  (Folder "PSpice Resources"
+    (Folder "Simulation Profiles"
+      (ActiveProfile ".\p2-pspicefiles\schematic1\s2.sim")
+      (File.PSpice.{09528990-3187-11D2-BC7B-00A0C90CBF91}
+         ".\p2-pspicefiles\schematic1\s2.sim"
+        (DisplayName "SCHEMATIC1-S2")
+        (Type "PSpice Profile")))
+    (Folder "Model Libraries"
+      (Sort User))
+    (Folder "Stimulus Files"
+      (Sort User)
+      (File ".\p2-pspicefiles\p2.stl"
+        (Type "PSpiceLibrary")
+        (DisplayName ".\p2-pspicefiles\p2.stl")))
+    (Folder "Include Files"
+      (Sort User)))
+  (DefaultLibraryBrowseDirectory "library\PSpice")
+  (PartMRUSelector
+    (DigStim1
+      (FullPartName "DigStim1.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\SOURCSTM.OLB")
+      (DeviceIndex "0"))
+    (74ALS32
+      (FullPartName "74ALS32.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\74ALS.OLB")
+      (DeviceIndex "1")))
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Outputs")
+      (Select "Design Resources"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -11 -45 0 200 0 605"))
+      (Tab 0))))

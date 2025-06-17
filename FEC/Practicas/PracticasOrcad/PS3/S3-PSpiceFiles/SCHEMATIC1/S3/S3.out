@@ -1,0 +1,58 @@
+
+**** 04/10/24 12:58:44 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-S3"  [ C:\Users\gomez\Desktop\S3\S3-PSpiceFiles\SCHEMATIC1\S3.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "S3.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.STMLIB "../../../S3-PSpiceFiles/S3.stl" 
+* From [PSPICE NETLIST] section of C:\Users\gomez\AppData\Roaming\SPB_16.6\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.TRAN  0 3200ns 0 200ns 
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source S3
+U_BCD[3:0]         STIM(4,0) $G_DPWR $G_DGND BCD3 BCD2 BCD1 BCD0 IO_STM
+------$
+ERROR(ORPSIM-16484): Missing primitive type
++  STIMULUS=BCD
+X_U4A         B3 B2 N01615 $G_DPWR $G_DGND 74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U4B         B1 B3 N01622 $G_DPWR $G_DGND 74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U4C         B3 B0 N01640 $G_DPWR $G_DGND 74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U6B         B2 B1 N01633 $G_DPWR $G_DGND 74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U5B         B3 N01206 N01629 $G_DPWR $G_DGND 74LS32 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U3A         B1 N01206 $G_DPWR $G_DGND 74LS04 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U7A         N01615 N01622 X $G_DPWR $G_DGND 74LS08 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+X_U8A         N01640 N01629 N01633 Y $G_DPWR $G_DGND 74LS11 PARAMS:
++ IO_LEVEL=0 MNTYMXDLY=0
+
+**** RESUMING S3.cir ****
+.END
+

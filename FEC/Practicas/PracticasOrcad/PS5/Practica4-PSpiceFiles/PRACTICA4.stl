@@ -1,0 +1,32 @@
+* d:\p4\practica4-PSpiceFiles\PRACTICA4.stl written on Mon Apr 22 17:03:36 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! A Digital B Digital M Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 1.6us
+;!AutoUniverse
+;!XminRes 200ns
+;!YminRes 1n
+;!Ok
+.STIMULUS A STIM (4, 1111) ;! Decimal
++   +0s 0010
++   200ns 0110
++   400ns 1001
++   600ns 1010
++   800ns 1000
++   1us 0011
++   1.2us 0101
++   1.4us 1011
+.STIMULUS B STIM (4, 1111) ;! Decimal
++   +0s 0011
++   200ns 1100
++   400ns 0100
++   600ns 1100
++   800ns 0011
++   1us 1110
++   1.2us 1100
++   1.4us 0100
+.STIMULUS M STIM (1, 1)
++   +0s 0
++   800ns 1

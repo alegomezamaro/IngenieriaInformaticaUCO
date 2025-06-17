@@ -1,0 +1,31 @@
+* C:\Users\gomez\Desktop\S7\S7-PSpiceFiles\S7.stl written on Wed May 29 12:37:31 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! CLK Digital RESET Digital UNO Digital A Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 4us
+;!AutoUniverse
+;!XminRes 50ns
+;!YminRes 1n
+;!Ok
+.STIMULUS CLK STIM (1, 1) ;! CLOCKP 200ns 100ns 0 0
++   +0s 0
++   +100ns 1
++   Repeat Forever
++      +100ns 0
++      +100ns 1
++   EndRepeat
+.STIMULUS RESET STIM (1, 1)
++   +0s 0
++   100ns 1
++   3us 0
++   3.2us 1
+.STIMULUS UNO STIM (1, 1)
++   +0s 1
+.STIMULUS A STIM (1, 1)
++   +0s 0
++   1.4us 1
++   2.2us 0
++   3us 1
++   3.2us 0

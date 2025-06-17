@@ -1,0 +1,28 @@
+* C:\Users\gomez\Desktop\S3\S3-PSpiceFiles\S3.stl written on Wed Apr 10 12:46:56 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! BCD Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 3.2us
+;!AutoUniverse
+;!XminRes 1ns
+;!YminRes 1n
+;!Ok
+.STIMULUS BCD STIM (4, 1111) ;! Hex
++   +0s 0000
++   200ns 0001
++   400ns 0010
++   600ns 0011
++   800ns 0100
++   0.998us 0101
++   1.2us 0110
++   1.398us 0111
++   1.6us 1000
++   1.798us 1001
++   2us 1010
++   2.198us 1011
++   2.4us 1100
++   2.6us 1101
++   2.8us 1110
++   2.998us 1111

@@ -1,0 +1,64 @@
+(ExpressProject "S2"
+  (ProjectVersion "19981106")
+  (ProjectType "PCB - PSpice")
+  (Folder "Design Resources"
+    (Folder "Library"
+      (File "D:\tools\capture\LIBRARY\PSPICE\74als.olb"
+        (Type "Schematic Library"))
+      (File "D:\tools\capture\LIBRARY\PSPICE\sourcstm.olb"
+        (Type "Schematic Library")))
+    (NoModify)
+    (File ".\s2.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (PSPICE_Regenerate_Netlist_Flag "FALSE"))
+  (Folder "Outputs"
+    (File ".\s2-pspicefiles\schematic1\schematic1.net"
+      (Type "Report")))
+  (Folder "PSpice Resources"
+    (Folder "Simulation Profiles"
+      (ActiveProfile ".\s2-pspicefiles\schematic1\s2.sim")
+      (File.PSpice.{09528990-3187-11D2-BC7B-00A0C90CBF91}
+         ".\s2-pspicefiles\schematic1\s2.sim"
+        (DisplayName "SCHEMATIC1-S2")
+        (Type "PSpice Profile")))
+    (Folder "Model Libraries"
+      (Sort User))
+    (Folder "Stimulus Files"
+      (Sort User)
+      (File ".\s2-pspicefiles\s2.stl"
+        (Type "PSpiceLibrary")
+        (DisplayName ".\s2-pspicefiles\s2.stl")))
+    (Folder "Include Files"
+      (Sort User)))
+  (DefaultLibraryBrowseDirectory "library\PSpice")
+  (PartMRUSelector
+    (DigStim1
+      (FullPartName "DigStim1.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\SOURCSTM.OLB")
+      (DeviceIndex "0"))
+    (74ALS00A
+      (FullPartName "74ALS00A.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\74ALS.OLB")
+      (DeviceIndex "3")))
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Outputs"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -11 -45 0 200 0 579"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -11 -45 38 1437 38 673")
+        (Scroll "418 337")
+        (Zoom "246")
+        (Occurrence "/"))
+      (Path "C:\USERS\GOMEZ\DESKTOP\S2\NAND\S2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE1"))))

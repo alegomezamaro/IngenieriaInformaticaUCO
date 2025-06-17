@@ -1,0 +1,19 @@
+* C:\PracticasOrcad\PS1\PS1-PSpiceFiles\PS1.stl written on Wed Mar 13 12:52:57 2024
+* by Stimulus Editor -- Lite Version 16.6.0
+;!Stimulus Get
+;! A Digital B Digital
+;!Ok
+;!Plot Axis_Settings
+;!Xrange 0s 800ns
+;!AutoUniverse
+;!XminRes 50ns
+;!YminRes 1n
+;!Ok
+.STIMULUS A STIM (1, 1)
++   +0s 0
++   400ns 1
+.STIMULUS B STIM (1, 1)
++   +0s 0
++   200ns 1
++   400ns 0
++   600ns 1

@@ -1,0 +1,80 @@
+(ExpressProject "S7"
+  (ProjectVersion "19981106")
+  (ProjectType "PCB - PSpice")
+  (Folder "Design Resources"
+    (Folder "Library"
+      (File "D:\tools\capture\LIBRARY\PSPICE\74ls.olb"
+        (Type "Schematic Library"))
+      (File "D:\tools\capture\LIBRARY\PSPICE\sourcstm.olb"
+        (Type "Schematic Library")))
+    (NoModify)
+    (File ".\s7.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (PSPICE_Regenerate_Netlist_Flag "FALSE"))
+  (Folder "Outputs"
+    (File ".\s7-pspicefiles\schematic1\schematic1.net"
+      (Type "Report")))
+  (Folder "PSpice Resources"
+    (Folder "Simulation Profiles"
+      (ActiveProfile ".\s7-pspicefiles\schematic1\s7.sim")
+      (File.PSpice.{09528990-3187-11D2-BC7B-00A0C90CBF91}
+         ".\s7-pspicefiles\schematic1\s7.sim"
+        (DisplayName "SCHEMATIC1-S7")
+        (Type "PSpice Profile")))
+    (Folder "Model Libraries"
+      (Sort User))
+    (Folder "Stimulus Files"
+      (Sort User)
+      (File ".\s7-pspicefiles\s7.stl"
+        (Type "PSpiceLibrary")
+        (DisplayName ".\s7-pspicefiles\s7.stl")))
+    (Folder "Include Files"
+      (Sort User)))
+  (DefaultLibraryBrowseDirectory "library\PSpice")
+  (PartMRUSelector
+    (74LS74A
+      (FullPartName "74LS74A.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\74LS.OLB")
+      (DeviceIndex "1"))
+    (74LS32
+      (FullPartName "74LS32.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\74LS.OLB")
+      (DeviceIndex "2"))
+    (74LS11
+      (FullPartName "74LS11.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\74LS.OLB")
+      (DeviceIndex "1"))
+    (74LS08
+      (FullPartName "74LS08.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\74LS.OLB")
+      (DeviceIndex "2"))
+    (74LS04
+      (FullPartName "74LS04.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\74LS.OLB")
+      (DeviceIndex "0"))
+    (DigStim1
+      (FullPartName "DigStim1.Normal")
+      (LibraryName "D:\TOOLS\CAPTURE\LIBRARY\PSPICE\SOURCSTM.OLB")
+      (DeviceIndex "0")))
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Outputs"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -11 -45 0 200 0 609"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -11 -45 76 1885 76 741")
+        (Scroll "794 50")
+        (Zoom "254")
+        (Occurrence "/"))
+      (Path "C:\USERS\GOMEZ\DESKTOP\S7\S7.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE1"))))
