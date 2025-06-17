@@ -3,8 +3,7 @@ struct cola *nuevoElemento(){
 }
 
 int contiene(struct cola *cabeza){
-    if (cabeza == NULL)
-    return 0;
+    if (cabeza == NULL) return 0;
     return 1;
 }
 

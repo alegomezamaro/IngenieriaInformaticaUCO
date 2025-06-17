@@ -320,3 +320,16 @@ struct cola{
     struct punto p;
     struct cola *sig;
 };
+
+
+
+//QSORT
+
+int compararEnteros(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
+
+void qsort(void *vector, size_t tamaño, size_t sizeof, int (*comparar)(const void *, const void *));
+//Ordenar arrays usando quicksort
+
+
