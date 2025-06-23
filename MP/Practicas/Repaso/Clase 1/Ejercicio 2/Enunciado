@@ -1,0 +1,10 @@
+Crear un programa que reciba por línea de argumentos el nombre de un fichero. Se tratará de un fichero de libros (titulo autor unidades precio).
+El programa debe de contener la siguiente funcionalidad: 
+- Mostrar fichero | HECHO
+- Borrar un libro dado un título | HECHO
+- Dado un título modificar un precio | HECHO
+- Volcar el fichero a una lista
+- Mostrar lista
+- DIFÍCIL: Buscar libro en la lista
+- Volcar la lista a un fichero llamado "libros.bin"
+- Mostrar "libros.bin"

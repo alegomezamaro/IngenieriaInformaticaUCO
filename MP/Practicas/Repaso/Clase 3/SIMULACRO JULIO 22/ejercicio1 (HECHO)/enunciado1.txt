@@ -1,0 +1,2 @@
+1. Vuelca fichero a la cola y almacena en la variable elementos el número de elementos volcados del fichero a la cola
+2. Borra el último elemento de la cola
