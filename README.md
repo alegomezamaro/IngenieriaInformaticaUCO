@@ -19,7 +19,7 @@ El fin de este repositorio es **poner a disposición material de estudio y traba
 
 ## 🗂️ Estructura del contenido
 
-Los documentos están organizados por curso y asignatura, y abarcan todo tipo de materiales: apuntes propios, prácticas, ejercicios, resúmenes, exámenes y más.
+Los documentos están organizados asignaturas y abarcan todo tipo de materiales: apuntes propios, prácticas, ejercicios, resúmenes, exámenes y más.
 
 
 
