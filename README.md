@@ -3,7 +3,7 @@
 Este repositorio recopila todos los documentos que he utilizado durante mis estudios del **Grado en Ingeniería Informática** en la **Universidad de Córdoba**.
 El contenido está organizado por asignaturas, y tiene como objetivo servir como recurso de apoyo para estudiantes actuales y cualquier persona interesada en esta carrera.
 
-> 🔗 [Plan oficial de asignaturas – UCO](https://www.uco.es/eps/es/programas-asignaturas-ing-informatica)
+> 🔗 [Plan oficial de asignaturas](https://www.uco.es/eps/es/programas-asignaturas-ing-informatica)
 
 
 
