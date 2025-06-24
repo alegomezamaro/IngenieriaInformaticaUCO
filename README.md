@@ -6,6 +6,7 @@ El contenido está organizado por asignaturas, y tiene como objetivo servir como
 > 🔗 [Plan oficial de asignaturas – UCO](https://www.uco.es/eps/es/programas-asignaturas-ing-informatica)
 
 
+
 ## 🎯 Objetivo del repositorio
 
 El fin de este repositorio es **poner a disposición material de estudio y trabajo** que pueda ser útil para:
@@ -15,9 +16,11 @@ El fin de este repositorio es **poner a disposición material de estudio y traba
 - Quienes busquen referencias prácticas, ejercicios, resúmenes, exámenes o apuntes reales.
 
 
+
 ## 🗂️ Estructura del contenido
 
 Los documentos están organizados por curso y asignatura, y abarcan todo tipo de materiales: apuntes propios, prácticas, ejercicios, resúmenes, exámenes y más.
+
 
 
 ## ⚖️ Licencia y derechos de autor
@@ -30,12 +33,14 @@ Este repositorio contiene:
 > Todo el contenido se comparte bajo un enfoque educativo. Si eres autor de alguno de los documentos y deseas que sea retirado o citado de otro modo, no dudes en contactar.
 
 
-## 🙋‍♂️ Autor
+
+## ✒️​ Autor
 
 **Alejandro Gómez Amaro**  
 Estudiante del Grado en Ingeniería Informática en la Universidad de Córdoba
 
 
+
 ## ⭐ ¿Te ha sido útil?
 
-Si este repositorio te ha ayudado, considera dejar una ⭐ estrella y compartirlo con otros estudiantes.
+Si este repositorio te ha ayudado, considera dejar una estrella y compartirlo con otros estudiantes.
