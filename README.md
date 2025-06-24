@@ -30,7 +30,7 @@ Este repositorio contiene:
 - Documentos de **elaboración propia**, compartidos con fines educativos y sin ánimo de lucro.
 - Materiales elaborados por **profesores de la Universidad de Córdoba** o extraídos de fuentes universitarias, cuyos derechos pertenecen a sus respectivos autores.
 
-> Todo el contenido se comparte bajo un enfoque educativo. Si eres autor de alguno de los documentos y deseas que sea retirado o citado de otro modo, no dudes en contactar.
+> Todo el contenido se comparte bajo un enfoque educativo. Si eres autor de alguno de los documentos y deseas que sea retirado o citado de otro modo, no dudes en escribirme.
 
 
 
