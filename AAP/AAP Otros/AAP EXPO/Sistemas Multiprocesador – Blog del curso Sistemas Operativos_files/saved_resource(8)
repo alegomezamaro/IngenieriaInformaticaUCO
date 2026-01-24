@@ -1,0 +1,1924 @@
+/* global wpcom_reblog */
+
+var jetpackLikesWidgetBatch = [];
+var jetpackLikesMasterReady = false;
+
+// Due to performance problems on pages with a large number of widget iframes that need to be loaded,
+// we are limiting the processing at any instant to unloaded widgets that are currently in viewport,
+// plus this constant that will allow processing of widgets above and bellow the current fold.
+// This aim of it is to improve the UX and hide the transition from unloaded to loaded state from users.
+var jetpackLikesLookAhead = 2000; // pixels
+
+// Keeps track of loaded comment likes widget so we can unload them when they are scrolled out of view.
+var jetpackCommentLikesLoadedWidgets = [];
+
+var jetpackLikesDocReadyPromise = new Promise( resolve => {
+	if ( document.readyState !== 'loading' ) {
+		resolve();
+	} else {
+		window.addEventListener( 'DOMContentLoaded', () => resolve() );
+	}
+} );
+
+function JetpackLikesPostMessage( message, target ) {
+	if ( typeof message === 'string' ) {
+		try {
+			message = JSON.parse( message );
+		} catch ( e ) {
+			return;
+		}
+	}
+
+	if ( target && typeof target.postMessage === 'function' ) {
+		try {
+			target.postMessage(
+				JSON.stringify( {
+					type: 'likesMessage',
+					data: message,
+				} ),
+				'*'
+			);
+		} catch ( e ) {
+			return;
+		}
+	}
+}
+
+function JetpackLikesBatchHandler() {
+	const requests = [];
+	document.querySelectorAll( 'div.jetpack-likes-widget-unloaded' ).forEach( widget => {
+		if ( jetpackLikesWidgetBatch.indexOf( widget.id ) > -1 ) {
+			return;
+		}
+
+		if ( ! jetpackIsScrolledIntoView( widget ) ) {
+			return;
+		}
+
+		jetpackLikesWidgetBatch.push( widget.id );
+
+		var regex = /like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/,
+			match = regex.exec( widget.id ),
+			info;
+
+		if ( ! match || match.length !== 5 ) {
+			return;
+		}
+
+		info = {
+			blog_id: match[ 2 ],
+			width: widget.width,
+		};
+
+		if ( 'post' === match[ 1 ] ) {
+			info.post_id = match[ 3 ];
+		} else if ( 'comment' === match[ 1 ] ) {
+			info.comment_id = match[ 3 ];
+		}
+
+		info.obj_id = match[ 4 ];
+
+		requests.push( info );
+	} );
+
+	if ( requests.length > 0 ) {
+		JetpackLikesPostMessage(
+			{ event: 'initialBatch', requests: requests },
+			window.frames[ 'likes-master' ]
+		);
+	}
+}
+
+function JetpackLikesMessageListener( event ) {
+	let message = event && event.data;
+	if ( typeof message === 'string' ) {
+		try {
+			message = JSON.parse( message );
+		} catch ( err ) {
+			return;
+		}
+	}
+
+	const type = message && message.type;
+	const data = message && message.data;
+
+	if ( type !== 'likesMessage' || typeof data.event === 'undefined' ) {
+		return;
+	}
+
+	// We only allow messages from one origin
+	const allowedOrigin = 'https://widgets.wp.com';
+	if ( allowedOrigin !== event.origin ) {
+		return;
+	}
+
+	switch ( data.event ) {
+		case 'masterReady':
+			jetpackLikesDocReadyPromise.then( () => {
+				jetpackLikesMasterReady = true;
+
+				const stylesData = {
+					event: 'injectStyles',
+				};
+				const sdTextColor = document.querySelector( '.sd-text-color' );
+				const sdLinkColor = document.querySelector( '.sd-link-color' );
+				const sdTextColorStyles = ( sdTextColor && getComputedStyle( sdTextColor ) ) || {};
+				const sdLinkColorStyles = ( sdLinkColor && getComputedStyle( sdLinkColor ) ) || {};
+
+				if ( document.querySelectorAll( 'iframe.admin-bar-likes-widget' ).length > 0 ) {
+					JetpackLikesPostMessage( { event: 'adminBarEnabled' }, window.frames[ 'likes-master' ] );
+
+					const bgSource = document.querySelector(
+						'#wpadminbar .quicklinks li#wp-admin-bar-wpl-like > a'
+					);
+
+					const wpAdminBar = document.querySelector( '#wpadminbar' );
+
+					stylesData.adminBarStyles = {
+						background: bgSource && getComputedStyle( bgSource ).background,
+						isRtl: wpAdminBar && getComputedStyle( wpAdminBar ).direction === 'rtl',
+					};
+				}
+
+				// enable reblogs if they are enabled for the page
+				if ( document.body.classList.contains( 'jetpack-reblog-enabled' ) ) {
+					JetpackLikesPostMessage( { event: 'reblogsEnabled' }, window.frames[ 'likes-master' ] );
+				}
+
+				stylesData.textStyles = {
+					color: sdTextColorStyles[ 'color' ],
+					fontFamily: sdTextColorStyles[ 'font-family' ],
+					fontSize: sdTextColorStyles[ 'font-size' ],
+					direction: sdTextColorStyles[ 'direction' ],
+					fontWeight: sdTextColorStyles[ 'font-weight' ],
+					fontStyle: sdTextColorStyles[ 'font-style' ],
+					textDecoration: sdTextColorStyles[ 'text-decoration' ],
+				};
+
+				stylesData.linkStyles = {
+					color: sdLinkColorStyles[ 'color' ],
+					fontFamily: sdLinkColorStyles[ 'font-family' ],
+					fontSize: sdLinkColorStyles[ 'font-size' ],
+					textDecoration: sdLinkColorStyles[ 'text-decoration' ],
+					fontWeight: sdLinkColorStyles[ 'font-weight' ],
+					fontStyle: sdLinkColorStyles[ 'font-style' ],
+				};
+
+				JetpackLikesPostMessage( stylesData, window.frames[ 'likes-master' ] );
+
+				JetpackLikesBatchHandler();
+			} );
+
+			break;
+
+		case 'showLikeWidget': {
+			const placeholder = document.querySelector( `#${ data.id } .likes-widget-placeholder` );
+			if ( placeholder ) {
+				placeholder.style.display = 'none';
+			}
+			break;
+		}
+
+		case 'showCommentLikeWidget': {
+			const placeholder = document.querySelector( `#${ data.id } .likes-widget-placeholder` );
+			if ( placeholder ) {
+				placeholder.style.display = 'none';
+			}
+			break;
+		}
+
+		case 'killCommentLikes':
+			// If kill switch for comment likes is enabled remove all widgets wrappers and `Loading...` placeholders.
+			document
+				.querySelectorAll( '.jetpack-comment-likes-widget-wrapper' )
+				.forEach( wrapper => wrapper.remove() );
+			break;
+
+		case 'clickReblogFlair':
+			if ( wpcom_reblog && typeof wpcom_reblog.toggle_reblog_box_flair === 'function' ) {
+				wpcom_reblog.toggle_reblog_box_flair( data.obj_id, data.post_id );
+			}
+			break;
+
+		case 'hideOtherGravatars': {
+			const container = document.querySelector( '#likes-other-gravatars' );
+			if ( ! container ) {
+				break;
+			}
+
+			if ( container.style.display === 'block' ) {
+				container.style.display = 'none';
+			}
+			break;
+		}
+
+		case 'showOtherGravatars': {
+			const container = document.querySelector( '#likes-other-gravatars' );
+			if ( ! container ) {
+				break;
+			}
+
+			const newLayout = container.classList.contains( 'wpl-new-layout' );
+
+			const list = container.querySelector( 'ul' );
+
+			container.style.display = 'none';
+			list.innerHTML = '';
+
+			if ( newLayout ) {
+				container
+					.querySelectorAll( '.likes-text span' )
+					.forEach( item => ( item.textContent = data.totalLikesLabel ) );
+			} else {
+				container
+					.querySelectorAll( '.likes-text span' )
+					.forEach( item => ( item.textContent = data.total ) );
+			}
+
+			( data.likers || [] ).forEach( async liker => {
+				if ( liker.profile_URL.substr( 0, 4 ) !== 'http' ) {
+					// We only display gravatars with http or https schema
+					return;
+				}
+
+				try {
+					const response = await fetch( liker.avatar_URL, { method: 'HEAD' } );
+					if ( !response.ok ) {
+						// Image doesn't exist, don't create the element
+						return;
+					}
+				} catch ( error ) {
+					// Error occurred while checking image existence, don't create the element
+					return;
+				}
+
+				const element = document.createElement( 'li' );
+				if ( newLayout ) {
+					element.innerHTML = `
+					<a href="${ encodeURI( liker.profile_URL ) }" rel="nofollow" target="_parent" class="wpl-liker">
+						<img src="${ encodeURI( liker.avatar_URL ) }"
+							alt=""
+							style="width: 28px; height: 28px;" />
+						<span></span>
+					</a>
+				`;
+				} else {
+					element.innerHTML = `
+					<a href="${ encodeURI( liker.profile_URL ) }" rel="nofollow" target="_parent" class="wpl-liker">
+						<img src="${ encodeURI( liker.avatar_URL ) }"
+							alt=""
+							style="width: 30px; height: 30px; padding-right: 3px;" />
+					</a>
+				`;
+				}
+
+				list.append( element );
+
+				// Add some extra attributes through native methods, to ensure strings are sanitized.
+				element.classList.add( liker.css_class );
+				element.querySelector( 'img' ).alt = liker.name;
+				if ( newLayout ) {
+					element.querySelector( 'span' ).innerText = liker.name;
+				}
+			} );
+
+			const containerStyle = getComputedStyle( container );
+			const isRtl = containerStyle.direction === 'rtl';
+
+			const el = document.querySelector( `*[name='${ data.parent }']` );
+			const rect = el.getBoundingClientRect();
+			const win = el.ownerDocument.defaultView;
+			const offset = {
+				top: rect.top + win.pageYOffset,
+				left: rect.left + win.pageXOffset,
+			};
+
+			if ( newLayout ) {
+				container.style.top = offset.top + data.position.top - 1 + 'px';
+
+				if ( isRtl ) {
+					const visibleAvatarsCount = data && data.likers ? Math.min( data.likers.length, 5 ) : 0;
+					// 24px is the width of the avatar + 4px is the padding between avatars
+					container.style.left = offset.left + data.position.left + 24 * visibleAvatarsCount + 4 + 'px';
+					container.style.transform = 'translateX(-100%)';
+				} else {
+					container.style.left = offset.left + data.position.left + 'px';
+				}
+			} else {
+				container.style.left = offset.left + data.position.left - 10 + 'px';
+				container.style.top = offset.top + data.position.top - 33 + 'px';
+			}
+
+			// Container width - padding
+			const initContainerWidth = data.width - 20;
+			const rowLength = Math.floor( initContainerWidth / 37 );
+			// # of rows + (avatar + avatar padding) + text above + container padding
+			let height = Math.ceil( data.likers.length / rowLength ) * 37 + 17 + 22;
+			if ( height > 204 ) {
+				height = 204;
+			}
+
+			if ( ! newLayout ) {
+				// Avatars + padding
+				const containerWidth = rowLength * 37 + 13;
+				container.style.height = height + 'px';
+				container.style.width = containerWidth + 'px';
+
+				const listWidth = rowLength * 37;
+				list.style.width = listWidth + 'px';
+			}
+
+			container.style.display = 'block';
+		}
+	}
+}
+
+window.addEventListener( 'message', JetpackLikesMessageListener );
+
+document.addEventListener( 'click', e => {
+	const container = document.querySelector( '#likes-other-gravatars' );
+
+	if ( container && ! container.contains( e.target ) ) {
+		container.style.display = 'none';
+	}
+} );
+
+function JetpackLikesWidgetQueueHandler() {
+	var wrapperID;
+
+	if ( ! jetpackLikesMasterReady ) {
+		setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+		return;
+	}
+
+	// Restore widgets to initial unloaded state when they are scrolled out of view.
+	jetpackUnloadScrolledOutWidgets();
+
+	var unloadedWidgetsInView = jetpackGetUnloadedWidgetsInView();
+
+	if ( unloadedWidgetsInView.length > 0 ) {
+		// Grab any unloaded widgets for a batch request
+		JetpackLikesBatchHandler();
+	}
+
+	for ( var i = 0, length = unloadedWidgetsInView.length; i <= length - 1; i++ ) {
+		wrapperID = unloadedWidgetsInView[ i ].id;
+
+		if ( ! wrapperID ) {
+			continue;
+		}
+
+		jetpackLoadLikeWidgetIframe( wrapperID );
+	}
+}
+
+function jetpackLoadLikeWidgetIframe( wrapperID ) {
+	if ( typeof wrapperID === 'undefined' ) {
+		return;
+	}
+
+	const wrapper = document.querySelector( '#' + wrapperID );
+	wrapper.querySelectorAll( 'iframe' ).forEach( iFrame => iFrame.remove() );
+
+	const placeholder = wrapper.querySelector( '.likes-widget-placeholder' );
+
+	// Post like iframe
+	if ( placeholder && placeholder.classList.contains( 'post-likes-widget-placeholder' ) ) {
+		const postLikesFrame = document.createElement( 'iframe' );
+
+		postLikesFrame.classList.add( 'post-likes-widget', 'jetpack-likes-widget' );
+		postLikesFrame.name = wrapper.dataset.name;
+		postLikesFrame.src = wrapper.dataset.src;
+		postLikesFrame.height = '55px';
+		postLikesFrame.width = '100%';
+		postLikesFrame.frameBorder = '0';
+		postLikesFrame.scrolling = 'no';
+		postLikesFrame.title = wrapper.dataset.title;
+
+		placeholder.after( postLikesFrame );
+	}
+
+	// Comment like iframe
+	if ( placeholder.classList.contains( 'comment-likes-widget-placeholder' ) ) {
+		const commentLikesFrame = document.createElement( 'iframe' );
+
+		commentLikesFrame.class = 'comment-likes-widget-frame jetpack-likes-widget-frame';
+		commentLikesFrame.name = wrapper.dataset.name;
+		commentLikesFrame.src = wrapper.dataset.src;
+		commentLikesFrame.height = '18px';
+		commentLikesFrame.width = '100%';
+		commentLikesFrame.frameBorder = '0';
+		commentLikesFrame.scrolling = 'no';
+
+		wrapper.querySelector( '.comment-like-feedback' ).after( commentLikesFrame );
+
+		jetpackCommentLikesLoadedWidgets.push( commentLikesFrame );
+	}
+
+	wrapper.classList.remove( 'jetpack-likes-widget-unloaded' );
+	wrapper.classList.add( 'jetpack-likes-widget-loading' );
+
+	wrapper.querySelector( 'iframe' ).addEventListener( 'load', e => {
+		JetpackLikesPostMessage(
+			{ event: 'loadLikeWidget', name: e.target.name, width: e.target.width },
+			window.frames[ 'likes-master' ]
+		);
+
+		wrapper.classList.remove( 'jetpack-likes-widget-loading' );
+		wrapper.classList.add( 'jetpack-likes-widget-loaded' );
+	} );
+}
+
+function jetpackGetUnloadedWidgetsInView() {
+	const unloadedWidgets = document.querySelectorAll( 'div.jetpack-likes-widget-unloaded' );
+
+	return [ ...unloadedWidgets ].filter( item => jetpackIsScrolledIntoView( item ) );
+}
+
+function jetpackIsScrolledIntoView( element ) {
+	const top = element.getBoundingClientRect().top;
+	const bottom = element.getBoundingClientRect().bottom;
+
+	// Allow some slack above and bellow the fold with jetpackLikesLookAhead,
+	// with the aim of hiding the transition from unloaded to loaded widget from users.
+	return top + jetpackLikesLookAhead >= 0 && bottom <= window.innerHeight + jetpackLikesLookAhead;
+}
+
+function jetpackUnloadScrolledOutWidgets() {
+	for ( let i = jetpackCommentLikesLoadedWidgets.length - 1; i >= 0; i-- ) {
+		const currentWidgetIframe = jetpackCommentLikesLoadedWidgets[ i ];
+
+		if ( ! jetpackIsScrolledIntoView( currentWidgetIframe ) ) {
+			const widgetWrapper =
+				currentWidgetIframe &&
+				currentWidgetIframe.parentElement &&
+				currentWidgetIframe.parentElement.parentElement;
+
+			// Restore parent class to 'unloaded' so this widget can be picked up by queue manager again if needed.
+			widgetWrapper.classList.remove( 'jetpack-likes-widget-loaded' );
+			widgetWrapper.classList.remove( 'jetpack-likes-widget-loading' );
+			widgetWrapper.classList.add( 'jetpack-likes-widget-unloaded' );
+
+			// Bring back the loading placeholder into view.
+			widgetWrapper
+				.querySelectorAll( '.comment-likes-widget-placeholder' )
+				.forEach( item => ( item.style.display = 'block' ) );
+
+			// Remove it from the list of loaded widgets.
+			jetpackCommentLikesLoadedWidgets.splice( i, 1 );
+
+			// Remove comment like widget iFrame.
+			currentWidgetIframe.remove();
+		}
+	}
+}
+
+var jetpackWidgetsDelayedExec = function ( after, fn ) {
+	var timer;
+	return function () {
+		clearTimeout( timer );
+		timer = setTimeout( fn, after );
+	};
+};
+
+var jetpackOnScrollStopped = jetpackWidgetsDelayedExec( 250, JetpackLikesWidgetQueueHandler );
+
+// Load initial batch of widgets, prior to any scrolling events.
+JetpackLikesWidgetQueueHandler();
+
+// Add event listener to execute queue handler after scroll.
+window.addEventListener( 'scroll', jetpackOnScrollStopped, true );
+;
+window.addEventListener('DOMContentLoaded', function () {
+	// Lazy load the comment form when clicking the comment field
+	const commentForm = document.querySelector('#commentform');
+	if (commentForm) {
+		// only load Verbum if the comment field is visible or the browser doesn't support IntersectionObserver
+		if (window.IntersectionObserver) {
+			new IntersectionObserver(function (entries) {
+				if (entries.some((el) => el.isIntersecting)) {
+					const startedLoadingAt = Date.now();
+
+					WP_Enqueue_Dynamic_Script.loadScript('verbum').then(() => {
+						const finishedLoadingAt = Date.now();
+
+						VerbumComments.fullyLoadedTime =
+							finishedLoadingAt - startedLoadingAt;
+					});
+					this.disconnect();
+				}
+			}).observe(commentForm);
+		} else {
+			WP_Enqueue_Dynamic_Script.loadScript('verbum');
+		}
+	}
+});
+;
+/**
+ * Comment Likes - JavaScript
+ *
+ * This handles liking and unliking comments, as well as viewing who has
+ * liked a particular comment.
+ *
+ * @dependency  Swipe (dynamically loaded when needed)
+ *
+ * @package     Comment_Likes
+ * @subpackage  JavaScript
+ */
+(function () {
+	function init() {
+		let extWin;
+		let extWinCheck;
+		let commentLikeEvent;
+
+		// Only run once.
+		if (window.comment_likes_loaded) {
+			return;
+		}
+		window.comment_likes_loaded = true;
+
+		// Client-side cache of who liked a particular comment to avoid
+		// having to hit the server multiple times for the same data.
+		const commentLikeCache = {};
+
+		let swipeLibPromise;
+
+		// Load the Swipe library, if it's not already loaded.
+		function swipeLibLoader() {
+			if (!swipeLibPromise) {
+				swipeLibPromise = new Promise((resolve, reject) => {
+					if (window.Swipe) {
+						resolve(window.Swipe);
+					} else {
+						const swipeScript = document.createElement('script');
+						swipeScript.src = comment_like_text.swipeUrl;
+						swipeScript.async = true;
+						document.body.appendChild(swipeScript);
+						swipeScript.addEventListener('load', () => resolve(window.Swipe));
+						swipeScript.addEventListener('error', error => reject(error));
+					}
+				});
+			}
+			return swipeLibPromise;
+		}
+
+		/**
+		 * Parse the comment ID from a comment like link.
+		 */
+		function getCommentId(link) {
+			const commentId =
+				link && link.getAttribute('href') && link.getAttribute('href').split('like_comment=');
+			return commentId[1].split('&_wpnonce=')[0];
+		}
+
+		/**
+		 * Handle an ajax action on the comment like link.
+		 */
+		function handleLinkAction(link, action, commentId, callback) {
+			const nonce =
+				link && link.getAttribute('href') && link.getAttribute('href').split('_wpnonce=')[1];
+
+			fetch('/wp-admin/admin-ajax.php', {
+				method: 'POST',
+				body: new URLSearchParams({
+					action: action,
+					_wpnonce: nonce,
+					like_comment: commentId,
+					blog_id: Number(link.dataset.blog),
+				}),
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+					'X-Requested-With': 'XMLHttpRequest',
+					Accept: 'application/json',
+					'cache-control': 'no-cache',
+					pragma: 'no-cache',
+				},
+			})
+				.then(response => response.json())
+				.then(callback);
+		}
+
+		function startPolling() {
+			// Append cookie polling login iframe to this window to wait for user to finish logging in (or cancel)
+			const loginIframe = document.createElement('iframe');
+			loginIframe.id = 'wp-login-polling-iframe';
+			loginIframe.src = 'https://wordpress.com/public.api/connect/?iframe=true';
+			document.body.appendChild(loginIframe);
+			loginIframe.style.display = 'none';
+		}
+
+		function stopPolling() {
+			const iframe = document.querySelector('#wp-login-polling-iframe');
+			if (iframe) {
+				iframe.remove();
+			}
+		}
+
+		function hide(el) {
+			if (el && el.style) {
+				el.style.display = 'none';
+			}
+		}
+
+		function show(el) {
+			if (el && el.style) {
+				el.style.removeProperty('display');
+			}
+		}
+
+		// Overlay used for displaying comment like info.
+		class Overlay {
+			constructor() {
+				// Overlay element.
+				this.el = document.createElement('div');
+				this.el.classList.add('comment-likes-overlay');
+				document.body.appendChild(this.el);
+				hide(this.el);
+
+				this.el.addEventListener('mouseenter', () => {
+					// Don't hide the overlay if the user is mousing over it.
+					overlay.cancelHide();
+				});
+
+				this.el.addEventListener('mouseleave', () => overlay.requestHide());
+
+				// Inner contents of overlay.
+				this.innerEl = null;
+
+				// Instance of the Swipe library.
+				this.swipe = null;
+
+				// Timeout used for hiding the overlay.
+				this.hideTimeout = null;
+			}
+
+			// Initialise the overlay for use, removing any old content.
+			clear() {
+				// Unload any previous instance of Swipe (to avoid leaking a global
+				// event handler). This is done before clearing the contents of the
+				// overlay because Swipe expects the slides to still be present.
+				if (this.swipe) {
+					this.swipe.kill();
+					this.swipe = null;
+				}
+				this.el.innerHTML = '';
+				this.innerEl = document.createElement('div');
+				this.innerEl.classList.add('inner');
+				this.el.appendChild(this.innerEl);
+			}
+
+			/**
+			 * Construct a list (<ul>) of user (gravatar, name) details.
+			 *
+			 * @param  data     liker data returned from the server
+			 * @param  klass    CSS class to apply to the <ul> element
+			 * @param  start    index of user to start at
+			 * @param  length   number of users to include in the list
+			 *
+			 * @return          A container element with the list
+			 */
+			getUserBits(data, klass, start, length) {
+				start = start || 0;
+				let last = start + (length || data.length);
+				last = last > data.length ? data.length : last;
+				const container = document.createElement('div');
+				container.classList.add('liker-list');
+				let html = `<ul class="${klass || ''}">`;
+				for (let i = start; i < last; ++i) {
+					const user = data[i];
+					html += `
+						<li>
+							<a rel="nofollow" title="${user.display_name_esc}" href="${user.profile_url_esc}">
+								<img src="${user.avatar_url_esc}" alt="${user.display_name_esc}" />
+								<span class="user-name">${user.display_name_esc}</span>
+							</a>
+						</li>
+					`;
+				}
+				html += '</ul>';
+				container.innerHTML = html;
+				return container;
+			}
+
+			/**
+			 * Render the display of who has liked this comment. The type of
+			 * display depends on how many people have liked the comment.
+			 * If more than 10 people have liked the comment, this function
+			 * renders navigation controls and sets up the Swipe library for
+			 * changing between pages.
+			 *
+			 * @param link  the element over which the user is hovering
+			 * @param data  the results retrieved from the server
+			 */
+			showLikes(link, data) {
+				this.clear();
+
+				link.dataset.likeCount = data.length;
+				if (data.length === 0) {
+					// No likers after all.
+					hide(this.el);
+					return;
+				}
+
+				this.innerEl.style.padding = '12px';
+
+				if (data.length < 6) {
+					// Only one column needed.
+					this.innerEl.style.maxWidth = '200px';
+					this.innerEl.innerHTML = '';
+					this.innerEl.appendChild(this.getUserBits(data, 'single'));
+					this.setPosition(link);
+				} else if (data.length < 11) {
+					// Two columns, but only one page.
+					this.innerEl.innerHTML = '';
+					this.innerEl.appendChild(this.getUserBits(data, 'double'));
+					this.setPosition(link);
+				} else {
+					// Multiple pages.
+					this.renderLikesWithPagination(data, link);
+				}
+			}
+
+			/**
+			 * Render multiple pages of likes with pagination controls.
+			 * This function is intended to be called by `showLikes` above.
+			 *
+			 * @param data  the results retrieved from the server
+			 */
+			renderLikesWithPagination(data, link) {
+				swipeLibLoader().then(() => {
+					const page_count = Math.ceil(data.length / 10);
+					// Swipe requires two nested containers.
+					const swipe = document.createElement('div');
+					swipe.classList.add('swipe');
+					this.innerEl.appendChild(swipe);
+
+					const wrap = document.createElement('div');
+					wrap.classList.add('swipe-wrap');
+					swipe.appendChild(wrap);
+
+					for (let i = 0; i < page_count; ++i) {
+						wrap.appendChild(this.getUserBits(data, 'double', i * 10, 10));
+					}
+
+					/**
+					 * Navigation controls.
+					 * This is based on the Newdash controls found in
+					 *    reader/recommendations-templates.php
+					 */
+					const nav = document.createElement('nav');
+					nav.classList.add('slider-nav');
+
+					let navContents = `
+						<a href="#" class="prev">
+							<span class="noticon noticon-previous" title="Previous" alt="<"></span>
+						</a>
+						<span class="position">
+					`;
+					for (let i = 0; i < page_count; ++i) {
+						navContents += `<em data-page="${i}" class="${i === 0 ? 'on' : ''}">&bull;</em>`;
+					}
+					navContents += `
+						</span>
+						<a href="#" class="next">
+							<span class="noticon noticon-next" title="Next" alt=">"></span>
+						</a>
+					`;
+					this.innerEl.appendChild(nav);
+					nav.innerHTML = navContents;
+
+					/** Set up Swipe. **/
+					// Swipe cannot be set up successfully unless its container
+					// is visible, so we show it now.
+					show(this.el);
+					this.setPosition(link);
+
+					this.swipe = new Swipe(swipe, {
+						callback: function (pos) {
+							// Update the pagination indicators.
+							//
+							// If there are exactly two pages, Swipe has a weird
+							// special case where it duplicates both pages and
+							// can return index 2 and 3 even though those aren't
+							// real pages (see swipe.js, line 47). To deal with
+							// this, we use the expression `pos % page_count`.
+							pos = pos % page_count;
+							nav.querySelectorAll('em').forEach(em => {
+								const page = Number(em.dataset.page);
+								em.setAttribute('class', pos === page ? 'on' : '');
+							});
+						},
+					});
+
+					nav.querySelectorAll('em').forEach(em => {
+						em.addEventListener('click', e => {
+							// Go to the page corresponding to the indicator clicked.
+							this.swipe.slide(Number(em.dataset.page));
+							e.preventDefault();
+						});
+					});
+					// Previous and next buttons.
+					nav.querySelector('.prev').addEventListener('click', e => {
+						this.swipe.prev();
+						e.preventDefault();
+					});
+					nav.querySelector('.next').addEventListener('click', e => {
+						this.swipe.next();
+						e.preventDefault();
+					});
+				});
+			}
+
+			/**
+			 * Open the overlay and show a loading message.
+			 */
+			showLoadingMessage(link) {
+				this.clear();
+				this.innerEl.textContent = comment_like_text.loading;
+				this.setPosition(link);
+			}
+
+			/**
+			 * Position the overlay near the current comment.
+			 *
+			 * @param link  element near which to position the overlay
+			 */
+			setPosition(link) {
+				// Prepare a down arrow icon for the bottom of the overlay.
+				const icon = document.createElement('span');
+				this.el.appendChild(icon);
+				icon.classList.add('icon', 'noticon', 'noticon-downarrow');
+				icon.style.textShadow = '0px 1px 1px rgb(223, 223, 223)';
+
+				const rect = link.getBoundingClientRect();
+				const win = document.defaultView;
+				const offset = {
+					top: rect.top + win.scrollY,
+					left: rect.left + win.scrollX,
+				};
+
+				// Take measurements with the element fully visible.
+				show(this.el);
+				let left = offset.left - (this.el.offsetWidth - link.offsetWidth) / 2;
+				left = left < 5 ? 5 : left;
+				let top = offset.top - this.el.offsetHeight + 5;
+				hide(this.el);
+
+				const adminBar = document.querySelector('#wpadminbar');
+
+				// Check if the overlay would appear off the screen.
+				if (top < win.scrollY + ((adminBar && adminBar.offsetHeight) || 0)) {
+					// We'll display the overlay beneath the link instead.
+					top = offset.top + link.offsetHeight;
+					// Instead of using the down arrow icon, use an up arrow.
+					icon.remove();
+					this.el.prepend(icon);
+					icon.classList.remove('noticon-downarrow');
+					icon.classList.add('noticon-uparrow');
+					icon.style.textShadow = '0px -1px 1px rgb(223, 223, 223)';
+					icon.style.verticalAlign = 'bottom';
+				}
+
+				this.el.style.left = `${left}px`;
+				this.el.style.top = `${top}px`;
+				show(this.el);
+
+				// The height of the arrow icon differs slightly between browsers,
+				// so we compute the margin here to make sure it isn't disjointed
+				// from the overlay.
+				icon.style.marginTop = `${icon.scrollHeight - 26}px`;
+				icon.style.marginBottom = `${20 - icon.scrollHeight}px`;
+
+				// Position the arrow to be horizontally centred on the link.
+				icon.style.paddingLeft = `${
+					offset.left - left + (link.offsetWidth - icon.scrollWidth) / 2
+				}px`;
+			}
+
+			/**
+			 * Return whether the overlay is visible.
+			 */
+			isVisible() {
+				return this.el.style.getPropertyValue('display') !== 'none';
+			}
+
+			/**
+			 * Request that the overlay be hidden after a short delay.
+			 */
+			requestHide() {
+				if (this.hideTimeout !== null) {
+					return;
+				}
+				this.hideTimeout = setTimeout(() => {
+					hide(this.el);
+					this.clear();
+				}, 300);
+			}
+
+			/**
+			 * Cancel a request to hide the overlay.
+			 */
+			cancelHide() {
+				if (this.hideTimeout !== null) {
+					clearTimeout(this.hideTimeout);
+					this.hideTimeout = null;
+				}
+			}
+		}
+
+		// Overlay used for displaying comment like info.
+		const overlay = new Overlay();
+
+		// The most recent comment for which the user has requested to see
+		// who liked it.
+		var relevantComment;
+
+		// Precache after this timeout.
+		var precacheTimeout = null;
+
+		/**
+		 * Fetch the like data for a particular comment.
+		 */
+		function fetchLikeData(link, commentId) {
+			commentLikeCache[commentId] = null;
+
+			const container = link && link.parentElement && link.parentElement.parentElement;
+			const star = container.querySelector('a.comment-like-link');
+			star &&
+				handleLinkAction(star, 'view_comment_likes', commentId, data => {
+					// Populate the cache.
+					commentLikeCache[commentId] = data;
+
+					// Only show the overlay if the user is interested.
+					if (overlay.isVisible() && relevantComment === commentId) {
+						overlay.showLikes(link, data);
+					}
+				});
+		}
+
+		function readCookie(c) {
+			const nameEQ = c + '=';
+			const cookieStrings = document.cookie.split(';');
+
+			for (let i = 0; i < cookieStrings.length; i++) {
+				let cookieString = cookieStrings[i];
+				while (cookieString.charAt(0) === ' ') {
+					cookieString = cookieString.substring(1, cookieString.length);
+				}
+				if (cookieString.indexOf(nameEQ) === 0) {
+					const chunk = cookieString.substring(nameEQ.length, cookieString.length);
+					const pairs = chunk.split('&');
+					const cookieData = {};
+					for (let num = pairs.length - 1; num >= 0; num--) {
+						const pair = pairs[num].split('=');
+						cookieData[pair[0]] = decodeURIComponent(pair[1]);
+					}
+					return cookieData;
+				}
+			}
+			return null;
+		}
+
+		function getServiceData() {
+			const data = readCookie('wpc_wpc');
+			if (data === null || typeof data.access_token === 'undefined' || !data.access_token) {
+				return false;
+			}
+			return data;
+		}
+
+		function readMessage(msg) {
+			const event = msg.data;
+
+			if (typeof event.event === 'undefined') {
+				return;
+			}
+
+			if (event.event === 'login' && event.success) {
+				extWinCheck = setInterval(function () {
+					if (!extWin || extWin.closed) {
+						clearInterval(extWinCheck);
+						if (getServiceData()) {
+							// Load page in an iframe to get the current comment nonce
+							const nonceIframe = document.createElement('iframe');
+							nonceIframe.id = 'wp-login-comment-nonce-iframe';
+							nonceIframe.style.display = 'none';
+							nonceIframe.src = commentLikeEvent + '';
+							document.body.appendChild(nonceIframe);
+
+							const commentLikeId = (commentLikeEvent + '')
+								.split('like_comment=')[1]
+								.split('&_wpnonce=')[0];
+							let c;
+
+							// Set a 5 second timeout to redirect to the comment page without doing the Like as a fallback
+							const commentLikeTimeout = setTimeout(() => {
+								window.location = commentLikeEvent;
+							}, 5000);
+
+							// Check for a new nonced redirect and use that if available before timing out
+							const commentLikeCheck = setInterval(() => {
+								const iframe = document.querySelector('#wp-login-comment-nonce-iframe');
+								if (iframe) {
+									c = iframe.querySelector(`#comment-like-${commentLikeId} .comment-like-link`);
+								}
+								if (c && typeof c.href !== 'undefined') {
+									clearTimeout(commentLikeTimeout);
+									clearInterval(commentLikeCheck);
+									window.location = c.href;
+								}
+							}, 100);
+						}
+					}
+				}, 100);
+
+				if (extWin) {
+					if (!extWin.closed) {
+						extWin.close();
+					}
+					extWin = false;
+				}
+
+				stopPolling();
+			}
+		}
+
+		if (typeof window.postMessage !== 'undefined') {
+			window.addEventListener('message', e => {
+				let message = e && e.data;
+				if (typeof message === 'string') {
+					try {
+						message = JSON.parse(message);
+					} catch (err) {
+						return;
+					}
+				}
+
+				const type = message && message.type;
+				if (type === 'loginMessage') {
+					readMessage(message);
+				}
+			});
+		}
+
+		document.body.addEventListener('click', e => {
+			let target = e.target;
+
+			// Don't do anything when clicking on the "X people" link.
+			if (target.matches('p.comment-likes a.view-likers')) {
+				e.preventDefault();
+				return;
+			}
+
+			// Retrieve the surrounding paragraph to the star, if it hasn't been liked.
+			const notLikedPar = target.closest('p.comment-not-liked');
+
+			// Return if not clicking on star or surrounding paragraph.
+			if (!target.matches('a.comment-like-link') && !notLikedPar) {
+				return;
+			}
+
+			// When a comment hasn't been liked, make the text clickable, too.
+			if (notLikedPar) {
+				target = notLikedPar.querySelector('a.comment-like-link');
+				if (!target) {
+					return;
+				}
+			}
+
+			if (target.classList.contains('needs-login')) {
+				e.preventDefault();
+				commentLikeEvent = target;
+				if (extWin) {
+					if (!extWin.closed) {
+						extWin.close();
+					}
+					extWin = false;
+				}
+
+				stopPolling();
+
+				const url = 'https://wordpress.com/public.api/connect/?action=request&service=wordpress';
+				extWin = window.open(
+					url,
+					'likeconn',
+					'status=0,toolbar=0,location=1,menubar=0,directories=0,resizable=1,scrollbars=1,height=560,width=500'
+				);
+
+				startPolling();
+
+				return false;
+			}
+
+			// Record that the user likes or does not like this comment.
+			const commentId = getCommentId(target);
+			target.classList.add('loading');
+
+			let commentEl = document.querySelector(`p#comment-like-${commentId}`);
+			// Determine whether to like or unlike based on whether the comment is
+			// currently liked.
+			const action =
+				commentEl && commentEl.dataset.liked === 'comment-liked'
+					? 'unlike_comment'
+					: 'like_comment';
+			handleLinkAction(target, action, commentId, data => {
+				// Invalidate the like cache for this comment.
+				delete commentLikeCache[commentId];
+
+				const countEl = document.querySelector(`#comment-like-count-${data.context}`);
+				if (countEl) {
+					countEl.innerHTML = data.display;
+				}
+
+				commentEl = document.querySelector(`p#comment-like-${data.context}`);
+				if (action === 'like_comment') {
+					commentEl.classList.remove('comment-not-liked');
+					commentEl.classList.add('comment-liked');
+					commentEl.dataset.liked = 'comment-liked';
+				} else {
+					commentEl.classList.remove('comment-liked');
+					commentEl.classList.add('comment-not-liked');
+					commentEl.dataset.liked = 'comment-not-liked';
+				}
+
+				// Prefetch new data for this comment (if there are likers left).
+				const parent = target.closest('.comment-likes');
+				const link = parent && parent.querySelector('a.view-likers');
+				if (link) {
+					fetchLikeData(link, commentId);
+				}
+
+				target.classList.remove('loading');
+			});
+			e.preventDefault();
+			e.stopPropagation();
+		});
+
+		document.body.addEventListener(
+			'mouseenter',
+			function (e) {
+				if (!e.target.matches('p.comment-likes a.view-likers')) {
+					return;
+				}
+				// Show the user a list of who has liked this comment.
+
+				const link = e.target;
+				if (Number(link.dataset.likeCount || 0) === 0) {
+					// No one has liked this comment.
+					return;
+				}
+
+				// Don't hide the overlay.
+				overlay.cancelHide();
+
+				// Get the comment ID.
+				const container = link.parentElement && link.parentElement.parentElement;
+				const star = container && container.querySelector('a.comment-like-link');
+				const commentId = star && getCommentId(star);
+				relevantComment = commentId;
+
+				// Check if the list of likes for this comment is already in
+				// the cache.
+				if (commentId in commentLikeCache) {
+					const entry = commentLikeCache[commentId];
+					// Only display the likes if the ajax request is
+					// actually done.
+					if (entry !== null) {
+						overlay.showLikes(link, entry);
+					} else {
+						// Make sure the overlay is visible (in case
+						// the user moved the mouse away while loading
+						// but then came back before it finished
+						// loading).
+						overlay.showLoadingMessage(link);
+					}
+					return;
+				}
+
+				// Position the "Loading..." overlay.
+				overlay.showLoadingMessage(link);
+
+				// Fetch the data.
+				fetchLikeData(link, commentId);
+			},
+			true
+		);
+
+		document.body.addEventListener(
+			'mouseleave',
+			e => {
+				if (!e.target.matches('p.comment-likes a.view-likers')) {
+					return;
+				}
+				// User has moved cursor away - hide the overlay.
+				overlay.requestHide();
+			},
+			true
+		);
+
+		document.body.addEventListener(
+			'mouseenter',
+			e => {
+				if (!e.target.matches('.comment') || !e.target.querySelector('a.comment-like-link')) {
+					return;
+				}
+				// User is moving over a comment - precache the comment like data.
+				if (precacheTimeout !== null) {
+					clearTimeout(precacheTimeout);
+					precacheTimeout = null;
+				}
+
+				const star = e.target.querySelector('a.comment-like-link');
+				const parent = star.closest('.comment-likes');
+				const link = parent && parent.querySelector('a.view-likers');
+				if (!link || Number(link.dataset.likeCount || 0) === 0) {
+					// No likes.
+					return;
+				}
+				const commentId = getCommentId(star);
+				if (commentId in commentLikeCache) {
+					// Already in cache.
+					return;
+				}
+
+				precacheTimeout = setTimeout(() => {
+					precacheTimeout = null;
+					if (commentId in commentLikeCache) {
+						// Was cached in the interim.
+						return;
+					}
+					fetchLikeData(link, commentId);
+				}, 1000);
+			},
+			true
+		);
+	}
+
+	if (document.readyState !== 'loading') {
+		init();
+	} else {
+		document.addEventListener('DOMContentLoaded', init);
+	}
+})();
+;
+/**
+ * File navigation.js.
+ *
+ * Handles toggling the navigation menu for small screens and enables TAB key
+ * navigation support for dropdown menus.
+ */
+( function() {
+	var container, button, menu, links, subMenus, i, len;
+
+	container = document.getElementById( 'site-navigation' );
+	if ( ! container ) {
+		return;
+	}
+
+	button = container.getElementsByTagName( 'button' )[0];
+	if ( 'undefined' === typeof button ) {
+		return;
+	}
+
+	menu = container.getElementsByTagName( 'ul' )[0];
+
+	// Hide menu toggle button if menu is empty and return early.
+	if ( 'undefined' === typeof menu ) {
+		button.style.display = 'none';
+		return;
+	}
+
+	menu.setAttribute( 'aria-expanded', 'false' );
+	if ( -1 === menu.className.indexOf( 'nav-menu' ) ) {
+		menu.className += ' nav-menu';
+	}
+
+	button.onclick = function() {
+		if ( -1 !== container.className.indexOf( 'toggled' ) ) {
+			container.className = container.className.replace( ' toggled', '' );
+			button.setAttribute( 'aria-expanded', 'false' );
+			menu.setAttribute( 'aria-expanded', 'false' );
+		} else {
+			container.className += ' toggled';
+			button.setAttribute( 'aria-expanded', 'true' );
+			menu.setAttribute( 'aria-expanded', 'true' );
+		}
+	};
+
+	// Get all the link elements within the menu.
+	links    = menu.getElementsByTagName( 'a' );
+	subMenus = menu.getElementsByTagName( 'ul' );
+
+	// Set menu items with submenus to aria-haspopup="true".
+	for ( i = 0, len = subMenus.length; i < len; i++ ) {
+		subMenus[i].parentNode.setAttribute( 'aria-haspopup', 'true' );
+	}
+
+	// Each time a menu link is focused or blurred, toggle focus.
+	for ( i = 0, len = links.length; i < len; i++ ) {
+		links[i].addEventListener( 'focus', toggleFocus, true );
+		links[i].addEventListener( 'blur', toggleFocus, true );
+	}
+
+	/**
+	 * Sets or removes .focus class on an element.
+	 */
+	function toggleFocus() {
+		var self = this;
+
+		// Move up through the ancestors of the current link until we hit .nav-menu.
+		while ( -1 === self.className.indexOf( 'nav-menu' ) ) {
+
+			// On li elements toggle the class .focus.
+			if ( 'li' === self.tagName.toLowerCase() ) {
+				if ( -1 !== self.className.indexOf( 'focus' ) ) {
+					self.className = self.className.replace( ' focus', '' );
+				} else {
+					self.className += ' focus';
+				}
+			}
+
+			self = self.parentElement;
+		}
+	}
+
+// Fix child menus for touch devices.
+	function fixMenuTouchTaps( container ) {
+		var touchStartFn,
+		    parentLink = container.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' );
+
+		if ( 'ontouchstart' in window ) {
+			touchStartFn = function( e ) {
+				var menuItem = this.parentNode;
+
+				if ( ! menuItem.classList.contains( 'focus' ) ) {
+					e.preventDefault();
+					for( var i = 0; i < menuItem.parentNode.children.length; ++i ) {
+						if ( menuItem === menuItem.parentNode.children[i] ) {
+							continue;
+						}
+						menuItem.parentNode.children[i].classList.remove( 'focus' );
+					}
+					menuItem.classList.add( 'focus' );
+				} else {
+					menuItem.classList.remove( 'focus' );
+				}
+			};
+
+			for ( var i = 0; i < parentLink.length; ++i ) {
+				parentLink[i].addEventListener( 'touchstart', touchStartFn, false )
+			}
+		}
+	}
+
+	fixMenuTouchTaps( container );
+} )();
+;
+(function ($) {
+	var $header = $('.header-top:first'),
+		$headerHeight = $('.header-top').innerHeight(),
+		$headerOffset = $('.custom-header').innerHeight(),
+		$headerHiddenClass = 'site-header-hidden',
+		$headerFixedClass = 'site-header-fixed',
+		$navigation = $('.main-navigation'),
+		$navMenuItem = $navigation.find('.menu-item'),
+		navigationHeight,
+		navigationOuterHeight,
+		navPadding,
+		navMenuItemHeight,
+		idealNavHeight,
+		navIsNotTooTall;
+
+	// adjust header margin based on height of menu
+	function adjustHeaderMargin() {
+		// check to see if on mobile by checking menu-toggle display
+		if ('none' === $('.menu-toggle').css('display')) {
+			// Don't define this 'til we're using it, it may change
+			$headerHeight = $('.header-top').innerHeight();
+
+			// if yes, we want to bump the custom header down a bit, so the menu doesn't cut it off
+			$('.custom-header-image').css('margin-top', $headerHeight);
+		}
+	}
+
+	// Make sure the nav isn't taller than two rows
+	navigationHeight = $navigation.height();
+	navMenuItemHeight = $navMenuItem.outerHeight() * 3;
+	idealNavHeight = navMenuItemHeight;
+	navIsNotTooTall = navigationHeight <= idealNavHeight;
+
+	//we add the scroll class to the navs
+	function adjustScrollClass() {
+		// Make sure we're not on a mobile screen
+		if ('none' === $('.menu-toggle').css('display')) {
+			if (
+				$(window).scrollTop() <= $headerOffset &&
+				$header.hasClass($headerFixedClass)
+			) {
+				// accounts for empty or removed custom header image
+				if (0 !== $headerOffset) {
+					$header.removeClass($headerFixedClass);
+					$header.addClass($headerHiddenClass);
+				}
+			} else if ($(window).scrollTop() >= $headerOffset) {
+				//If the scroll is more than the custom header
+
+				// Make sure the menu is not too tall
+				if (navIsNotTooTall || navMenuItemHeight == 0) {
+					// Don't define this 'til we're using it, it may change
+					$headerHeight = $('.header-top').innerHeight(true);
+
+					// If not, fix that header!
+					$header.addClass($headerFixedClass);
+					$header.removeClass($headerHiddenClass);
+					$('.custom-header').css('margin-top', $headerHeight);
+				}
+			} else {
+				//If not we remove it
+				$header.removeClass($headerFixedClass);
+				$header.removeClass($headerHiddenClass);
+				$('.custom-header').css('margin-top', 'auto');
+			}
+		}
+	}
+
+	// Check to see if iOS device
+	// iOS devices make a mess of background-attachment: fixed and background-size: cover
+
+	function checkiOS() {
+		return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+	}
+
+	/*
+	 * Test if background-attachment: fixed is supported.
+	 * @link http://stackoverflow.com/questions/14115080/detect-support-for-background-attachment-fixed
+	 */
+	function supportsFixedBackground() {
+		var el = document.createElement('div'),
+			isSupported;
+
+		try {
+			if (!('backgroundAttachment' in el.style) || checkiOS()) {
+				return false;
+			}
+			el.style.backgroundAttachment = 'fixed';
+			isSupported = 'fixed' === el.style.backgroundAttachment;
+			return isSupported;
+		} catch (e) {
+			return false;
+		}
+	}
+
+	// Let's fire some JavaScript!
+	$(document).ready(function () {
+		// On load, we want to adjust the header margin
+		adjustHeaderMargin();
+		adjustScrollClass();
+
+		// We also want to check the device, and add a class if not iOS:
+		if (false === supportsFixedBackground()) {
+			document.documentElement.className += ' no-background-fixed';
+		}
+	});
+
+	// On scroll, we want to stick/unstick the header
+	$(window).on('scroll', function () {
+		adjustScrollClass();
+	});
+
+	// we also want to do the same on window rezize
+	$(window).on('resize', function () {
+		setTimeout(adjustHeaderMargin, 500);
+	});
+
+	// Use mutant observer to check when .wf-active is added to theme for Custom Fonts.
+	// That way we can make sure the header is the correct height when it happens.
+	var MutationObserver =
+		window.MutationObserver ||
+		window.WebKitMutationObserver ||
+		window.MozMutationObserver;
+
+	$.fn.attrchange = function (callback) {
+		if (MutationObserver) {
+			var options = {
+				subtree: false,
+				attributes: true,
+			};
+
+			var observer = new MutationObserver(function (mutations) {
+				mutations.forEach(function (e) {
+					callback.call(e.target, e.attributeName);
+				});
+			});
+
+			return this.each(function () {
+				observer.observe(this, options);
+			});
+		}
+	};
+
+	$('html').attrchange(function (attrName) {
+		if (attrName == 'class' && $('html').hasClass('wf-active')) {
+			adjustHeaderMargin();
+		}
+	});
+})(jQuery);
+;
+/**
+ * File skip-link-focus-fix.js.
+ *
+ * Helps with accessibility for keyboard only users.
+ *
+ * Learn more: https://git.io/vWdr2
+ */
+( function() {
+	var isWebkit = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) > -1,
+	    isOpera  = navigator.userAgent.toLowerCase().indexOf( 'opera' )  > -1,
+	    isIe     = navigator.userAgent.toLowerCase().indexOf( 'msie' )   > -1;
+
+	if ( ( isWebkit || isOpera || isIe ) && document.getElementById && window.addEventListener ) {
+		window.addEventListener( 'hashchange', function() {
+			var id = location.hash.substring( 1 ),
+				element;
+
+			if ( ! ( /^[A-z0-9_-]+$/.test( id ) ) ) {
+				return;
+			}
+
+			element = document.getElementById( id );
+
+			if ( element ) {
+				if ( ! ( /^(?:a|select|input|button|textarea)$/i.test( element.tagName ) ) ) {
+					element.tabIndex = -1;
+				}
+
+				element.focus();
+			}
+		}, false );
+	}
+})();
+;
+/*! This file is auto-generated */
+window.addComment=function(v){var I,C,h,E=v.document,b={commentReplyClass:"comment-reply-link",commentReplyTitleId:"reply-title",cancelReplyId:"cancel-comment-reply-link",commentFormId:"commentform",temporaryFormId:"wp-temp-form-div",parentIdFieldId:"comment_parent",postIdFieldId:"comment_post_ID"},e=v.MutationObserver||v.WebKitMutationObserver||v.MozMutationObserver,r="querySelector"in E&&"addEventListener"in v,n=!!E.documentElement.dataset;function t(){d(),e&&new e(o).observe(E.body,{childList:!0,subtree:!0})}function d(e){if(r&&(I=g(b.cancelReplyId),C=g(b.commentFormId),I)){I.addEventListener("touchstart",l),I.addEventListener("click",l);function t(e){if((e.metaKey||e.ctrlKey)&&13===e.keyCode)return C.removeEventListener("keydown",t),e.preventDefault(),C.submit.click(),!1}C&&C.addEventListener("keydown",t);for(var n,d=function(e){var t=b.commentReplyClass;e&&e.childNodes||(e=E);e=E.getElementsByClassName?e.getElementsByClassName(t):e.querySelectorAll("."+t);return e}(e),o=0,i=d.length;o<i;o++)(n=d[o]).addEventListener("touchstart",a),n.addEventListener("click",a)}}function l(e){var t,n,d=g(b.temporaryFormId);d&&h&&(g(b.parentIdFieldId).value="0",t=d.textContent,d.parentNode.replaceChild(h,d),this.style.display="none",n=(d=(d=g(b.commentReplyTitleId))&&d.firstChild)&&d.nextSibling,d&&d.nodeType===Node.TEXT_NODE&&t&&(n&&"A"===n.nodeName&&n.id!==b.cancelReplyId&&(n.style.display=""),d.textContent=t),e.preventDefault())}function a(e){var t=g(b.commentReplyTitleId),t=t&&t.firstChild.textContent,n=this,d=m(n,"belowelement"),o=m(n,"commentid"),i=m(n,"respondelement"),r=m(n,"postid"),n=m(n,"replyto")||t;d&&o&&i&&r&&!1===v.addComment.moveForm(d,o,i,r,n)&&e.preventDefault()}function o(e){for(var t=e.length;t--;)if(e[t].addedNodes.length)return void d()}function m(e,t){return n?e.dataset[t]:e.getAttribute("data-"+t)}function g(e){return E.getElementById(e)}return r&&"loading"!==E.readyState?t():r&&v.addEventListener("DOMContentLoaded",t,!1),{init:d,moveForm:function(e,t,n,d,o){var i,r,l,a,m,c,s,e=g(e),n=(h=g(n),g(b.parentIdFieldId)),y=g(b.postIdFieldId),p=g(b.commentReplyTitleId),u=(p=p&&p.firstChild)&&p.nextSibling;if(e&&h&&n){void 0===o&&(o=p&&p.textContent),a=h,m=b.temporaryFormId,c=g(m),s=(s=g(b.commentReplyTitleId))?s.firstChild.textContent:"",c||((c=E.createElement("div")).id=m,c.style.display="none",c.textContent=s,a.parentNode.insertBefore(c,a)),d&&y&&(y.value=d),n.value=t,I.style.display="",e.parentNode.insertBefore(h,e.nextSibling),p&&p.nodeType===Node.TEXT_NODE&&(u&&"A"===u.nodeName&&u.id!==b.cancelReplyId&&(u.style.display="none"),p.textContent=o),I.onclick=function(){return!1};try{for(var f=0;f<C.elements.length;f++)if(i=C.elements[f],r=!1,"getComputedStyle"in v?l=v.getComputedStyle(i):E.documentElement.currentStyle&&(l=i.currentStyle),(i.offsetWidth<=0&&i.offsetHeight<=0||"hidden"===l.visibility)&&(r=!0),"hidden"!==i.type&&!i.disabled&&!r){i.focus();break}}catch(e){}return!1}}}}(window);;
+!function(){"use strict";var e,n,t={998:function(e,n,t){t.d(n,{B$:function(){return _},NZ:function(){return i},Uq:function(){return a},a3:function(){return u},d6:function(){return c},hA:function(){return l},j4:function(){return s},pM:function(){return o},zq:function(){return r}});var o={NOTICE:"notice",GENERAL_SETTINGS:"general-settings",PURPOSE_SETTINGS:"purpose-settings",VENDORS_SETTINGS:"vendors-settings",HIDDEN:""},r=258,i="en",u={1:!0,2:!0,3:!0,4:!0,7:!0,9:!0,10:!0},l={2:!0,7:!0,9:!0,10:!0},c={UI_SHOWN:"cmpuishown",LOADED:"tcloaded",USER_ACTION_COMPLETE:"useractioncomplete"},a={VISIBLE:"visible",HIDDEN:"hidden",DISABLED:"disabled"},s={STUB:"stub",LOADED:"loaded",ERROR:"error"},_="euconsent-v2"},748:function(e,n,t){t.d(n,{HY:function(){return u.HY},Vx:function(){return L},n4:function(){return x},az:function(){return u.az},ZP:function(){return ie},Gp:function(){return N},Vo:function(){return R},I4:function(){return k},d4:function(){return y},sO:function(){return b},eJ:function(){return h}});var o,r,i,u=t(400),l=0,c=[],a=u.YM.__b,s=u.YM.__r,_=u.YM.diffed,f=u.YM.__c,d=u.YM.unmount;function p(e,n){u.YM.__h&&u.YM.__h(r,e,l||n),l=0;var t=r.__H||(r.__H={__:[],__h:[]});return e>=t.__.length&&t.__.push({}),t.__[e]}function h(e){return l=1,v(O,e)}function v(e,n,t){var i=p(o++,2);return i.t=e,i.__c||(i.__=[t?t(n):O(void 0,n),function(e){var n=i.t(i.__[0],e);i.__[0]!==n&&(i.__=[n,i.__[1]],i.__c.setState({}))}],i.__c=r),i.__}function y(e,n){var t=p(o++,3);!u.YM.__s&&A(t.__H,n)&&(t.__=e,t.__H=n,r.__H.__h.push(t))}function m(e,n){var t=p(o++,4);!u.YM.__s&&A(t.__H,n)&&(t.__=e,t.__H=n,r.__h.push(t))}function b(e){return l=5,g((function(){return{current:e}}),[])}function g(e,n){var t=p(o++,7);return A(t.__H,n)&&(t.__=e(),t.__H=n,t.__h=e),t.__}function k(e,n){return l=8,g((function(){return e}),n)}function C(){for(var e;e=c.shift();)if(e.__P)try{e.__H.__h.forEach(S),e.__H.__h.forEach(E),e.__H.__h=[]}catch(n){e.__H.__h=[],u.YM.__e(n,e.__v)}}u.YM.__b=function(e){r=null,a&&a(e)},u.YM.__r=function(e){s&&s(e),o=0;var n=(r=e.__c).__H;n&&(n.__h.forEach(S),n.__h.forEach(E),n.__h=[])},u.YM.diffed=function(e){_&&_(e);var n=e.__c;n&&n.__H&&n.__H.__h.length&&(1!==c.push(n)&&i===u.YM.requestAnimationFrame||((i=u.YM.requestAnimationFrame)||function(e){var n,t=function(){clearTimeout(o),w&&cancelAnimationFrame(n),setTimeout(e)},o=setTimeout(t,100);w&&(n=requestAnimationFrame(t))})(C)),r=null},u.YM.__c=function(e,n){n.some((function(e){try{e.__h.forEach(S),e.__h=e.__h.filter((function(e){return!e.__||E(e)}))}catch(t){n.some((function(e){e.__h&&(e.__h=[])})),n=[],u.YM.__e(t,e.__v)}})),f&&f(e,n)},u.YM.unmount=function(e){d&&d(e);var n,t=e.__c;t&&t.__H&&(t.__H.__.forEach((function(e){try{S(e)}catch(e){n=e}})),n&&u.YM.__e(n,t.__v))};var w="function"==typeof requestAnimationFrame;function S(e){var n=r,t=e.__c;"function"==typeof t&&(e.__c=void 0,t()),r=n}function E(e){var n=r;e.__c=e.__(),r=n}function A(e,n){return!e||e.length!==n.length||n.some((function(n,t){return n!==e[t]}))}function O(e,n){return"function"==typeof n?n(e):n}function P(e,n){for(var t in n)e[t]=n[t];return e}function I(e,n){for(var t in e)if("__source"!==t&&!(t in n))return!0;for(var o in n)if("__source"!==o&&e[o]!==n[o])return!0;return!1}function L(e){this.props=e}(L.prototype=new u.wA).isPureReactComponent=!0,L.prototype.shouldComponentUpdate=function(e,n){return I(this.props,e)||I(this.state,n)};var T=u.YM.__b;u.YM.__b=function(e){e.type&&e.type.__f&&e.ref&&(e.props.ref=e.ref,e.ref=null),T&&T(e)};var M="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function N(e){function n(n){var t=P({},n);return delete t.ref,e(t,n.ref||null)}return n.$$typeof=M,n.render=n,n.prototype.isReactComponent=n.__f=!0,n.displayName="ForwardRef("+(e.displayName||e.name)+")",n}var H=function(e,n){return null==e?null:(0,u.bR)((0,u.bR)(e).map(n))},D={map:H,forEach:H,count:function(e){return e?(0,u.bR)(e).length:0},only:function(e){var n=(0,u.bR)(e);if(1!==n.length)throw"Children.only";return n[0]},toArray:u.bR},U=u.YM.__e;u.YM.__e=function(e,n,t,o){if(e.then)for(var r,i=n;i=i.__;)if((r=i.__c)&&r.__c)return null==n.__e&&(n.__e=t.__e,n.__k=t.__k),r.__c(e,n);U(e,n,t,o)};var j=u.YM.unmount;function x(){this.__u=0,this.t=null,this.__b=null}function V(e){var n=e.__.__c;return n&&n.__e&&n.__e(e)}function R(e){var n,t,o;function r(r){if(n||(n=e()).then((function(e){t=e.default||e}),(function(e){o=e})),o)throw o;if(!t)throw n;return(0,u.az)(t,r)}return r.displayName="Lazy",r.__f=!0,r}function B(){this.u=null,this.o=null}u.YM.unmount=function(e){var n=e.__c;n&&n.__R&&n.__R(),n&&!0===e.__h&&(e.type=null),j&&j(e)},(x.prototype=new u.wA).__c=function(e,n){var t=n.__c,o=this;null==o.t&&(o.t=[]),o.t.push(t);var r=V(o.__v),i=!1,u=function(){i||(i=!0,t.__R=null,r?r(l):l())};t.__R=u;var l=function(){if(!--o.__u){if(o.state.__e){var e=o.state.__e;o.__v.__k[0]=function e(n,t,o){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map((function(n){return e(n,t,o)})),n.__c&&n.__c.__P===t&&(n.__e&&o.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=o)),n}(e,e.__c.__P,e.__c.__O)}var n;for(o.setState({__e:o.__b=null});n=o.t.pop();)n.forceUpdate()}},c=!0===n.__h;o.__u++||c||o.setState({__e:o.__b=o.__v.__k[0]}),e.then(u,u)},x.prototype.componentWillUnmount=function(){this.t=[]},x.prototype.render=function(e,n){if(this.__b){if(this.__v.__k){var t=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=function e(n,t,o){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach((function(e){"function"==typeof e.__c&&e.__c()})),n.__c.__H=null),null!=(n=P({},n)).__c&&(n.__c.__P===o&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map((function(n){return e(n,t,o)}))),n}(this.__b,t,o.__O=o.__P)}this.__b=null}var r=n.__e&&(0,u.az)(u.HY,null,e.fallback);return r&&(r.__h=null),[(0,u.az)(u.HY,null,n.__e?null:e.children),r]};var Y=function(e,n,t){if(++t[1]===t[0]&&e.o.delete(n),e.props.revealOrder&&("t"!==e.props.revealOrder[0]||!e.o.size))for(t=e.u;t;){for(;t.length>3;)t.pop()();if(t[1]<t[0])break;e.u=t=t[2]}};function F(e){return this.getChildContext=function(){return e.context},e.children}function z(e){var n=this,t=e.i;n.componentWillUnmount=function(){(0,u.sY)(null,n.l),n.l=null,n.i=null},n.i&&n.i!==t&&n.componentWillUnmount(),e.__v?(n.l||(n.i=t,n.l={nodeType:1,parentNode:t,childNodes:[],appendChild:function(e){this.childNodes.push(e),n.i.appendChild(e)},insertBefore:function(e,t){this.childNodes.push(e),n.i.appendChild(e)},removeChild:function(e){this.childNodes.splice(this.childNodes.indexOf(e)>>>1,1),n.i.removeChild(e)}}),(0,u.sY)((0,u.az)(F,{context:n.context},e.__v),n.l)):n.l&&n.componentWillUnmount()}(B.prototype=new u.wA).__e=function(e){var n=this,t=V(n.__v),o=n.o.get(e);return o[0]++,function(r){var i=function(){n.props.revealOrder?(o.push(r),Y(n,e,o)):r()};t?t(i):i()}},B.prototype.render=function(e){this.u=null,this.o=new Map;var n=(0,u.bR)(e.children);e.revealOrder&&"b"===e.revealOrder[0]&&n.reverse();for(var t=n.length;t--;)this.o.set(n[t],this.u=[1,0,this.u]);return e.children},B.prototype.componentDidUpdate=B.prototype.componentDidMount=function(){var e=this;this.o.forEach((function(n,t){Y(e,t,n)}))};var q="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,W=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|marker(?!H|W|U)|overline|paint|stop|strikethrough|stroke|text(?!L)|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,$="undefined"!=typeof document,G=function(e){return("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/i:/fil|che|ra/i).test(e)};u.wA.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach((function(e){Object.defineProperty(u.wA.prototype,e,{configurable:!0,get:function(){return this["UNSAFE_"+e]},set:function(n){Object.defineProperty(this,e,{configurable:!0,writable:!0,value:n})}})}));var Z=u.YM.event;function J(){}function X(){return this.cancelBubble}function Q(){return this.defaultPrevented}u.YM.event=function(e){return Z&&(e=Z(e)),e.persist=J,e.isPropagationStopped=X,e.isDefaultPrevented=Q,e.nativeEvent=e};var K,ee={configurable:!0,get:function(){return this.class}},ne=u.YM.vnode;u.YM.vnode=function(e){var n=e.type,t=e.props,o=t;if("string"==typeof n){var r=-1===n.indexOf("-");for(var i in o={},t){var l=t[i];$&&"children"===i&&"noscript"===n||"value"===i&&"defaultValue"in t&&null==l||("defaultValue"===i&&"value"in t&&null==t.value?i="value":"download"===i&&!0===l?l="":/ondoubleclick/i.test(i)?i="ondblclick":/^onchange(textarea|input)/i.test(i+n)&&!G(t.type)?i="oninput":/^onfocus$/i.test(i)?i="onfocusin":/^onblur$/i.test(i)?i="onfocusout":/^on(Ani|Tra|Tou|BeforeInp|Compo)/.test(i)?i=i.toLowerCase():r&&W.test(i)?i=i.replace(/[A-Z0-9]/,"-$&").toLowerCase():null===l&&(l=void 0),o[i]=l)}"select"==n&&o.multiple&&Array.isArray(o.value)&&(o.value=(0,u.bR)(t.children).forEach((function(e){e.props.selected=-1!=o.value.indexOf(e.props.value)}))),"select"==n&&null!=o.defaultValue&&(o.value=(0,u.bR)(t.children).forEach((function(e){e.props.selected=o.multiple?-1!=o.defaultValue.indexOf(e.props.value):o.defaultValue==e.props.value}))),e.props=o,t.class!=t.className&&(ee.enumerable="className"in t,null!=t.className&&(o.class=t.className),Object.defineProperty(o,"className",ee))}e.$$typeof=q,ne&&ne(e)};var te=u.YM.__r;u.YM.__r=function(e){te&&te(e),K=e.__c};var oe={ReactCurrentDispatcher:{current:{readContext:function(e){return K.__n[e.__c].props.value}}}};function re(e){return!!e&&e.$$typeof===q}u.HY;var ie={useState:h,useReducer:v,useEffect:y,useLayoutEffect:m,useRef:b,useImperativeHandle:function(e,n,t){l=6,m((function(){return"function"==typeof e?(e(n()),function(){return e(null)}):e?(e.current=n(),function(){return e.current=null}):void 0}),null==t?t:t.concat(e))},useMemo:g,useCallback:k,useContext:function(e){var n=r.context[e.__c],t=p(o++,9);return t.c=e,n?(null==t.__&&(t.__=!0,n.sub(r)),n.props.value):e.__},useDebugValue:function(e,n){u.YM.useDebugValue&&u.YM.useDebugValue(n?n(e):e)},version:"17.0.2",Children:D,render:function(e,n,t){return null==n.__k&&(n.textContent=""),(0,u.sY)(e,n),"function"==typeof t&&t(),e?e.__c:null},hydrate:function(e,n,t){return(0,u.ZB)(e,n),"function"==typeof t&&t(),e?e.__c:null},unmountComponentAtNode:function(e){return!!e.__k&&((0,u.sY)(null,e),!0)},createPortal:function(e,n){return(0,u.az)(z,{__v:e,i:n})},createElement:u.az,createContext:u.kr,createFactory:function(e){return u.az.bind(null,e)},cloneElement:function(e){return re(e)?u.Tm.apply(null,arguments):e},createRef:u.Vf,Fragment:u.HY,isValidElement:re,findDOMNode:function(e){return e&&(e.base||1===e.nodeType&&e)||null},Component:u.wA,PureComponent:L,memo:function(e,n){function t(e){var t=this.props.ref,o=t==e.ref;return!o&&t&&(t.call?t(null):t.current=null),n?!n(this.props,e)||!o:I(this.props,e)}function o(n){return this.shouldComponentUpdate=t,(0,u.az)(e,n)}return o.displayName="Memo("+(e.displayName||e.name)+")",o.prototype.isReactComponent=!0,o.__f=!0,o},forwardRef:N,flushSync:function(e,n){return e(n)},unstable_batchedUpdates:function(e,n){return e(n)},StrictMode:u.HY,Suspense:x,SuspenseList:B,lazy:R,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:oe}},400:function(e,n,t){t.d(n,{HY:function(){return m},Tm:function(){return R},Vf:function(){return y},YM:function(){return r},ZB:function(){return V},az:function(){return h},bR:function(){return A},h:function(){return h},kr:function(){return B},sY:function(){return x},wA:function(){return b}});var o,r,i,u,l,c,a,s={},_=[],f=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function d(e,n){for(var t in n)e[t]=n[t];return e}function p(e){var n=e.parentNode;n&&n.removeChild(e)}function h(e,n,t){var r,i,u,l={};for(u in n)"key"==u?r=n[u]:"ref"==u?i=n[u]:l[u]=n[u];if(arguments.length>2&&(l.children=arguments.length>3?o.call(arguments,2):t),"function"==typeof e&&null!=e.defaultProps)for(u in e.defaultProps)void 0===l[u]&&(l[u]=e.defaultProps[u]);return v(e,l,r,i,null)}function v(e,n,t,o,u){var l={type:e,props:n,key:t,ref:o,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==u?++i:u};return null==u&&null!=r.vnode&&r.vnode(l),l}function y(){return{current:null}}function m(e){return e.children}function b(e,n){this.props=e,this.context=n}function g(e,n){if(null==n)return e.__?g(e.__,e.__.__k.indexOf(e)+1):null;for(var t;n<e.__k.length;n++)if(null!=(t=e.__k[n])&&null!=t.__e)return t.__e;return"function"==typeof e.type?g(e):null}function k(e){var n,t;if(null!=(e=e.__)&&null!=e.__c){for(e.__e=e.__c.base=null,n=0;n<e.__k.length;n++)if(null!=(t=e.__k[n])&&null!=t.__e){e.__e=e.__c.base=t.__e;break}return k(e)}}function C(e){(!e.__d&&(e.__d=!0)&&u.push(e)&&!w.__r++||c!==r.debounceRendering)&&((c=r.debounceRendering)||l)(w)}function w(){for(var e;w.__r=u.length;)e=u.sort((function(e,n){return e.__v.__b-n.__v.__b})),u=[],e.some((function(e){var n,t,o,r,i,u;e.__d&&(i=(r=(n=e).__v).__e,(u=n.__P)&&(t=[],(o=d({},r)).__v=r.__v+1,M(u,r,o,n.__n,void 0!==u.ownerSVGElement,null!=r.__h?[i]:null,t,null==i?g(r):i,r.__h),N(t,r),r.__e!=i&&k(r)))}))}function S(e,n,t,o,r,i,u,l,c,a){var f,d,p,h,y,b,k,C=o&&o.__k||_,w=C.length;for(t.__k=[],f=0;f<n.length;f++)if(null!=(h=t.__k[f]=null==(h=n[f])||"boolean"==typeof h?null:"string"==typeof h||"number"==typeof h||"bigint"==typeof h?v(null,h,null,null,h):Array.isArray(h)?v(m,{children:h},null,null,null):h.__b>0?v(h.type,h.props,h.key,null,h.__v):h)){if(h.__=t,h.__b=t.__b+1,null===(p=C[f])||p&&h.key==p.key&&h.type===p.type)C[f]=void 0;else for(d=0;d<w;d++){if((p=C[d])&&h.key==p.key&&h.type===p.type){C[d]=void 0;break}p=null}M(e,h,p=p||s,r,i,u,l,c,a),y=h.__e,(d=h.ref)&&p.ref!=d&&(k||(k=[]),p.ref&&k.push(p.ref,null,h),k.push(d,h.__c||y,h)),null!=y?(null==b&&(b=y),"function"==typeof h.type&&h.__k===p.__k?h.__d=c=E(h,c,e):c=O(e,h,p,C,y,c),"function"==typeof t.type&&(t.__d=c)):c&&p.__e==c&&c.parentNode!=e&&(c=g(p))}for(t.__e=b,f=w;f--;)null!=C[f]&&("function"==typeof t.type&&null!=C[f].__e&&C[f].__e==t.__d&&(t.__d=g(o,f+1)),U(C[f],C[f]));if(k)for(f=0;f<k.length;f++)D(k[f],k[++f],k[++f])}function E(e,n,t){for(var o,r=e.__k,i=0;r&&i<r.length;i++)(o=r[i])&&(o.__=e,n="function"==typeof o.type?E(o,n,t):O(t,o,o,r,o.__e,n));return n}function A(e,n){return n=n||[],null==e||"boolean"==typeof e||(Array.isArray(e)?e.some((function(e){A(e,n)})):n.push(e)),n}function O(e,n,t,o,r,i){var u,l,c;if(void 0!==n.__d)u=n.__d,n.__d=void 0;else if(null==t||r!=i||null==r.parentNode)e:if(null==i||i.parentNode!==e)e.appendChild(r),u=null;else{for(l=i,c=0;(l=l.nextSibling)&&c<o.length;c+=2)if(l==r)break e;e.insertBefore(r,i),u=i}return void 0!==u?u:r.nextSibling}function P(e,n,t){"-"===n[0]?e.setProperty(n,t):e[n]=null==t?"":"number"!=typeof t||f.test(n)?t:t+"px"}function I(e,n,t,o,r){var i;e:if("style"===n)if("string"==typeof t)e.style.cssText=t;else{if("string"==typeof o&&(e.style.cssText=o=""),o)for(n in o)t&&n in t||P(e.style,n,"");if(t)for(n in t)o&&t[n]===o[n]||P(e.style,n,t[n])}else if("o"===n[0]&&"n"===n[1])i=n!==(n=n.replace(/Capture$/,"")),n=n.toLowerCase()in e?n.toLowerCase().slice(2):n.slice(2),e.l||(e.l={}),e.l[n+i]=t,t?o||e.addEventListener(n,i?T:L,i):e.removeEventListener(n,i?T:L,i);else if("dangerouslySetInnerHTML"!==n){if(r)n=n.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("href"!==n&&"list"!==n&&"form"!==n&&"tabIndex"!==n&&"download"!==n&&n in e)try{e[n]=null==t?"":t;break e}catch(e){}"function"==typeof t||(null!=t&&(!1!==t||"a"===n[0]&&"r"===n[1])?e.setAttribute(n,t):e.removeAttribute(n))}}function L(e){this.l[e.type+!1](r.event?r.event(e):e)}function T(e){this.l[e.type+!0](r.event?r.event(e):e)}function M(e,n,t,o,i,u,l,c,a){var s,_,f,p,h,v,y,g,k,C,w,E=n.type;if(void 0!==n.constructor)return null;null!=t.__h&&(a=t.__h,c=n.__e=t.__e,n.__h=null,u=[c]),(s=r.__b)&&s(n);try{e:if("function"==typeof E){if(g=n.props,k=(s=E.contextType)&&o[s.__c],C=s?k?k.props.value:s.__:o,t.__c?y=(_=n.__c=t.__c).__=_.__E:("prototype"in E&&E.prototype.render?n.__c=_=new E(g,C):(n.__c=_=new b(g,C),_.constructor=E,_.render=j),k&&k.sub(_),_.props=g,_.state||(_.state={}),_.context=C,_.__n=o,f=_.__d=!0,_.__h=[]),null==_.__s&&(_.__s=_.state),null!=E.getDerivedStateFromProps&&(_.__s==_.state&&(_.__s=d({},_.__s)),d(_.__s,E.getDerivedStateFromProps(g,_.__s))),p=_.props,h=_.state,f)null==E.getDerivedStateFromProps&&null!=_.componentWillMount&&_.componentWillMount(),null!=_.componentDidMount&&_.__h.push(_.componentDidMount);else{if(null==E.getDerivedStateFromProps&&g!==p&&null!=_.componentWillReceiveProps&&_.componentWillReceiveProps(g,C),!_.__e&&null!=_.shouldComponentUpdate&&!1===_.shouldComponentUpdate(g,_.__s,C)||n.__v===t.__v){_.props=g,_.state=_.__s,n.__v!==t.__v&&(_.__d=!1),_.__v=n,n.__e=t.__e,n.__k=t.__k,n.__k.forEach((function(e){e&&(e.__=n)})),_.__h.length&&l.push(_);break e}null!=_.componentWillUpdate&&_.componentWillUpdate(g,_.__s,C),null!=_.componentDidUpdate&&_.__h.push((function(){_.componentDidUpdate(p,h,v)}))}_.context=C,_.props=g,_.state=_.__s,(s=r.__r)&&s(n),_.__d=!1,_.__v=n,_.__P=e,s=_.render(_.props,_.state,_.context),_.state=_.__s,null!=_.getChildContext&&(o=d(d({},o),_.getChildContext())),f||null==_.getSnapshotBeforeUpdate||(v=_.getSnapshotBeforeUpdate(p,h)),w=null!=s&&s.type===m&&null==s.key?s.props.children:s,S(e,Array.isArray(w)?w:[w],n,t,o,i,u,l,c,a),_.base=n.__e,n.__h=null,_.__h.length&&l.push(_),y&&(_.__E=_.__=null),_.__e=!1}else null==u&&n.__v===t.__v?(n.__k=t.__k,n.__e=t.__e):n.__e=H(t.__e,n,t,o,i,u,l,a);(s=r.diffed)&&s(n)}catch(e){n.__v=null,(a||null!=u)&&(n.__e=c,n.__h=!!a,u[u.indexOf(c)]=null),r.__e(e,n,t)}}function N(e,n){r.__c&&r.__c(n,e),e.some((function(n){try{e=n.__h,n.__h=[],e.some((function(e){e.call(n)}))}catch(e){r.__e(e,n.__v)}}))}function H(e,n,t,r,i,u,l,c){var a,_,f,d=t.props,h=n.props,v=n.type,y=0;if("svg"===v&&(i=!0),null!=u)for(;y<u.length;y++)if((a=u[y])&&"setAttribute"in a==!!v&&(v?a.localName===v:3===a.nodeType)){e=a,u[y]=null;break}if(null==e){if(null===v)return document.createTextNode(h);e=i?document.createElementNS("http://www.w3.org/2000/svg",v):document.createElement(v,h.is&&h),u=null,c=!1}if(null===v)d===h||c&&e.data===h||(e.data=h);else{if(u=u&&o.call(e.childNodes),_=(d=t.props||s).dangerouslySetInnerHTML,f=h.dangerouslySetInnerHTML,!c){if(null!=u)for(d={},y=0;y<e.attributes.length;y++)d[e.attributes[y].name]=e.attributes[y].value;(f||_)&&(f&&(_&&f.__html==_.__html||f.__html===e.innerHTML)||(e.innerHTML=f&&f.__html||""))}if(function(e,n,t,o,r){var i;for(i in t)"children"===i||"key"===i||i in n||I(e,i,null,t[i],o);for(i in n)r&&"function"!=typeof n[i]||"children"===i||"key"===i||"value"===i||"checked"===i||t[i]===n[i]||I(e,i,n[i],t[i],o)}(e,h,d,i,c),f)n.__k=[];else if(y=n.props.children,S(e,Array.isArray(y)?y:[y],n,t,r,i&&"foreignObject"!==v,u,l,u?u[0]:t.__k&&g(t,0),c),null!=u)for(y=u.length;y--;)null!=u[y]&&p(u[y]);c||("value"in h&&void 0!==(y=h.value)&&(y!==e.value||"progress"===v&&!y||"option"===v&&y!==d.value)&&I(e,"value",y,d.value,!1),"checked"in h&&void 0!==(y=h.checked)&&y!==e.checked&&I(e,"checked",y,d.checked,!1))}return e}function D(e,n,t){try{"function"==typeof e?e(n):e.current=n}catch(e){r.__e(e,t)}}function U(e,n,t){var o,i;if(r.unmount&&r.unmount(e),(o=e.ref)&&(o.current&&o.current!==e.__e||D(o,null,n)),null!=(o=e.__c)){if(o.componentWillUnmount)try{o.componentWillUnmount()}catch(e){r.__e(e,n)}o.base=o.__P=null}if(o=e.__k)for(i=0;i<o.length;i++)o[i]&&U(o[i],n,"function"!=typeof e.type);t||null==e.__e||p(e.__e),e.__e=e.__d=void 0}function j(e,n,t){return this.constructor(e,t)}function x(e,n,t){var i,u,l;r.__&&r.__(e,n),u=(i="function"==typeof t)?null:t&&t.__k||n.__k,l=[],M(n,e=(!i&&t||n).__k=h(m,null,[e]),u||s,s,void 0!==n.ownerSVGElement,!i&&t?[t]:u?null:n.firstChild?o.call(n.childNodes):null,l,!i&&t?t:u?u.__e:n.firstChild,i),N(l,e)}function V(e,n){x(e,n,V)}function R(e,n,t){var r,i,u,l=d({},e.props);for(u in n)"key"==u?r=n[u]:"ref"==u?i=n[u]:l[u]=n[u];return arguments.length>2&&(l.children=arguments.length>3?o.call(arguments,2):t),v(e.type,l,r||e.key,i||e.ref,null)}function B(e,n){var t={__c:n="__cC"+a++,__:e,Consumer:function(e,n){return e.children(n)},Provider:function(e){var t,o;return this.getChildContext||(t=[],(o={})[n]=this,this.getChildContext=function(){return o},this.shouldComponentUpdate=function(e){this.props.value!==e.value&&t.some(C)},this.sub=function(e){t.push(e);var n=e.componentWillUnmount;e.componentWillUnmount=function(){t.splice(t.indexOf(e),1),n&&n.call(e)}}),e.children}};return t.Provider.__=t.Consumer.contextType=t}o=_.slice,r={__e:function(e,n,t,o){for(var r,i,u;n=n.__;)if((r=n.__c)&&!r.__)try{if((i=r.constructor)&&null!=i.getDerivedStateFromError&&(r.setState(i.getDerivedStateFromError(e)),u=r.__d),null!=r.componentDidCatch&&(r.componentDidCatch(e,o||{}),u=r.__d),u)return r.__E=r}catch(n){e=n}throw e}},i=0,b.prototype.setState=function(e,n){var t;t=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=d({},this.state),"function"==typeof e&&(e=e(d({},t),this.props)),e&&d(t,e),null!=e&&this.__v&&(n&&this.__h.push(n),C(this))},b.prototype.forceUpdate=function(e){this.__v&&(this.__e=!0,e&&this.__h.push(e),C(this))},b.prototype.render=m,u=[],l="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,w.__r=0,a=0}},o={};function r(e){var n=o[e];if(void 0!==n)return n.exports;var i=o[e]={id:e,exports:{}};return t[e](i,i.exports,r),i.exports}r.m=t,r.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(n,{a:n}),n},r.d=function(e,n){for(var t in n)r.o(n,t)&&!r.o(e,t)&&Object.defineProperty(e,t,{enumerable:!0,get:n[t]})},r.f={},r.e=function(e){return Promise.all(Object.keys(r.f).reduce((function(n,t){return r.f[t](e,n),n}),[]))},r.u=function(e){return{143:"app",571:"settings",664:"notice"}[e]+".bundle.js?id="+{143:"e35200214361273c289a",571:"24241b066ced1469b2b2",664:"88cd53b05c01260db74e"}[e]},r.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},e={},n="a8c-cmp:",r.l=function(t,o,i,u){if(e[t])e[t].push(o);else{var l,c;if(void 0!==i)for(var a=document.getElementsByTagName("script"),s=0;s<a.length;s++){var _=a[s];if(_.getAttribute("src")==t||_.getAttribute("data-webpack")==n+i){l=_;break}}l||(c=!0,(l=document.createElement("script")).charset="utf-8",l.timeout=120,r.nc&&l.setAttribute("nonce",r.nc),l.setAttribute("data-webpack",n+i),l.src=t),e[t]=[o];var f=function(n,o){l.onerror=l.onload=null,clearTimeout(d);var r=e[t];if(delete e[t],l.parentNode&&l.parentNode.removeChild(l),r&&r.forEach((function(e){return e(o)})),n)return n(o)},d=setTimeout(f.bind(null,void 0,{type:"timeout",target:l}),12e4);l.onerror=f.bind(null,l.onerror),l.onload=f.bind(null,l.onload),c&&document.head.appendChild(l)}},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.p="/",function(){var e={968:0};r.f.j=function(n,t){var o=r.o(e,n)?e[n]:void 0;if(0!==o)if(o)t.push(o[2]);else{var i=new Promise((function(t,r){o=e[n]=[t,r]}));t.push(o[2]=i);var u=r.p+r.u(n),l=new Error;r.l(u,(function(t){if(r.o(e,n)&&(0!==(o=e[n])&&(e[n]=void 0),o)){var i=t&&("load"===t.type?"missing":t.type),u=t&&t.target&&t.target.src;l.message="Loading chunk "+n+" failed.\n("+i+": "+u+")",l.name="ChunkLoadError",l.type=i,l.request=u,o[1](l)}}),"chunk-"+n,n)}};var n=function(n,t){var o,i,u=t[0],l=t[1],c=t[2],a=0;if(u.some((function(n){return 0!==e[n]}))){for(o in l)r.o(l,o)&&(r.m[o]=l[o]);if(c)c(r)}for(n&&n(t);a<u.length;a++)i=u[a],r.o(e,i)&&e[i]&&e[i][0](),e[i]=0},t=self.webpackChunka8c_cmp=self.webpackChunka8c_cmp||[];t.forEach(n.bind(null,0)),t.push=n.bind(null,t.push.bind(t))}(),function(){var e=r(400),n=r(748);function t(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var o=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,o,r;return n=e,r=[{key:"decode",value:function(n){for(var t="",o=0;o<n.length;o++){for(var r=e.dictionary.indexOf(n[o]).toString(2),i=6-r.length,u=0;u<i;u++)t+="0";t+=r}return t}},{key:"encode",value:function(n){for(var t="",o=24-n.length%24,r=0;r<o;r++)n+="0";for(var i=0;i<n.length;i+=6)t+=e.dictionary[parseInt(n.substr(i,6),2)];return t}}],(o=null)&&t(n.prototype,o),r&&t(n,r),Object.defineProperty(n,"prototype",{writable:!1}),e}();function i(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}o.dictionary="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";var u=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"decode",value:function(e){return parseInt(e,2)}},{key:"encode",value:function(e,n){for(var t="",o=e.toString(2),r=n-o.length,i=0;i<r;i++)t+="0";return t+o}}],(t=null)&&i(n.prototype,t),o&&i(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function l(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var c=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"decode",value:function(e){return new Date(100*u.decode(e))}},{key:"encode",value:function(e){return u.encode(Math.round(e.getTime()/100),36)}}],(t=null)&&l(n.prototype,t),o&&l(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function a(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var s=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"decode",value:function(e){return String.fromCharCode(u.decode(e)+65)}},{key:"encode",value:function(e){return u.encode(e.charCodeAt(0)-65,6)}}],(t=null)&&a(n.prototype,t),o&&a(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function _(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var f=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"decode",value:function(e){return[s.decode(e.substring(0,6)),s.decode(e.substring(6))].join("")}},{key:"encode",value:function(e){return s.encode(e[0],6)+s.encode(e[1],6)}}],(t=null)&&_(n.prototype,t),o&&_(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function d(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var p=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"decode",value:function(e){return"1"===e}},{key:"encode",value:function(e){return e?"1":"0"}}],(t=null)&&d(n.prototype,t),o&&d(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function h(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var v=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"decode",value:function(e){for(var n={},t=0;t<e.length;t++)"1"===e[t]&&(n[t+1]=!0);return n}},{key:"encode",value:function(e,n){for(var t="",o=1;o<=n;o++)t+=e[o]?"1":"0";return t}}],(t=null)&&h(n.prototype,t),o&&h(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function y(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var m=function(){function e(n){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e),this.bitString=n,this.position=0}var n,t,o;return n=e,(t=[{key:"advance",value:function(e){this.position+=e}},{key:"getPosition",value:function(){return this.position}},{key:"peekToEnd",value:function(){return this.bitString.substring(this.position)}},{key:"popBits",value:function(e){var n=this.bitString.substring(this.position,this.position+e);return this.advance(e),n}}])&&y(n.prototype,t),o&&y(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function b(e){return function(e){if(Array.isArray(e))return g(e)}(e)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(e)||function(e,n){if(!e)return;if("string"==typeof e)return g(e,n);var t=Object.prototype.toString.call(e).slice(8,-1);"Object"===t&&e.constructor&&(t=e.constructor.name);if("Map"===t||"Set"===t)return Array.from(e);if("Arguments"===t||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t))return g(e,n)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function g(e,n){(null==n||n>e.length)&&(n=e.length);for(var t=0,o=new Array(n);t<n;t++)o[t]=e[t];return o}function k(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var C=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"decode",value:function(e){var n=new m(e),t=u.decode(n.popBits(16));if(!p.decode(n.popBits(1)))return{value:v.decode(n.popBits(t)),bitLength:n.getPosition()};for(var o={},r=u.decode(n.popBits(12)),i=0;i<r;i++){var l=p.decode(n.popBits(1)),c=u.decode(n.popBits(16));if(l)for(var a=u.decode(n.popBits(16)),s=c;s<=a;s++)o[s]=!0;else o[c]=!0}return{value:o,bitLength:n.getPosition()}}},{key:"encode",value:function(e){var n="",t=Math.max.apply(Math,b(Object.keys(e)).concat([0]));n+=u.encode(t,16);for(var o="",r=[],i=[],l=1;l<=t;l++)o+=e[l]?"1":"0",e[l]&&(0==i.length&&i.push(l),e[l+1]||(i.push(l),r.push(i),i=[]));return 45*r.length<o.length?(n+=p.encode(!0,1),n+=u.encode(r.length,12),r.forEach((function(e){var t=e[0]!==e[1];n+=p.encode(t,1),n+=u.encode(e[0],16),t&&(n+=u.encode(e[1],16))}))):n+=p.encode(!1,1)+o,n}}],(t=null)&&k(n.prototype,t),o&&k(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function w(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var S=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,r;return n=e,r=[{key:"deserialize",value:function(n){var t=new m(o.decode(n));return e.decodeFields(e.fieldMap,t)}},{key:"decodeFields",value:function(n,t){var o={};return n.forEach((function(n){if(n.children)o[n.key]=e.decodeFields(n.children,t);else if(void 0===n.bitLength){var r=n.codec.decode(t.peekToEnd());o[n.key]=r.value,t.advance(r.bitLength)}else o[n.key]=n.codec.decode(t.popBits(n.bitLength))})),o}},{key:"serialize",value:function(n){var t=e.encodeFields(e.fieldMap,n);return o.encode(t)}},{key:"encodeFields",value:function(n,t){var o="";return n.forEach((function(n){n.children?o+=e.encodeFields(n.children,t[n.key]):void 0===n.bitLength?o+=n.codec.encode(t[n.key]):o+=n.codec.encode(t[n.key],n.bitLength)})),o}}],(t=null)&&w(n.prototype,t),r&&w(n,r),Object.defineProperty(n,"prototype",{writable:!1}),e}();S.fieldMap=[{key:"version",codec:u,bitLength:6},{key:"created",codec:c,bitLength:36},{key:"lastUpdated",codec:c,bitLength:36},{key:"cmpId",codec:u,bitLength:12},{key:"cmpVersion",codec:u,bitLength:12},{key:"consentScreen",codec:u,bitLength:6},{key:"consentLanguage",codec:f,bitLength:12},{key:"vendorListVersion",codec:u,bitLength:12},{key:"tcfPolicyVersion",codec:u,bitLength:6},{key:"isServiceSpecific",codec:p,bitLength:1},{key:"useNonStandardStacks",codec:p,bitLength:1},{key:"specialFeatureOptins",codec:v,bitLength:12},{key:"purpose",children:[{key:"consents",codec:v,bitLength:24},{key:"legitimateInterests",codec:v,bitLength:24}]},{key:"purposeOneTreatment",codec:p,bitLength:1},{key:"publisherCC",codec:f,bitLength:12},{key:"vendor",children:[{key:"consents",codec:C},{key:"legitimateInterests",codec:C}]},{key:"numPubRestrictions",codec:u,bitLength:12}];var E=function(e){return e&&decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(e).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null},A=r(998);function O(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var P=function(){function e(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e)}var n,t,o;return n=e,o=[{key:"getUTCDay",value:function(e){return new Date(Date.UTC(e.getUTCFullYear(),e.getUTCMonth(),e.getUTCDate()))}}],(t=null)&&O(n.prototype,t),o&&O(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function I(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var L=function(){function e(n){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,e),this.version=2,this.created=P.getUTCDay(new Date),this.lastUpdated=this.created,this.cmpId=A.zq,this.cmpVersion=2,this.consentScreen=0,this.consentLanguage=n.consentLanguage,this.vendorListVersion=n.gvlVersion,this.tcfPolicyVersion=4,this.isServiceSpecific=!0,this.useNonStandardStacks=!1,this.specialFeatureOptins={},this.purpose={consents:{},legitimateInterests:A.hA},this.purposeOneTreatment=!0,this.publisherCC="US",this.vendor={consents:{},legitimateInterests:n.vendorsLegInterest},this.nonIABVendor={consents:{}},this.analyticsConsent=!0,this.numPubRestrictions=0}var n,t,o;return n=e,(t=[{key:"useConsentFrom",value:function(e){this.purpose=e.purpose,this.vendor=e.vendor,this.nonIABVendor=e.nonIABVendor,this.analyticsConsent=e.analyticsConsent}}])&&I(n.prototype,t),o&&I(n,o),Object.defineProperty(n,"prototype",{writable:!1}),e}();function T(e,n){var t=Object.keys(e);if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(e);n&&(o=o.filter((function(n){return Object.getOwnPropertyDescriptor(e,n).enumerable}))),t.push.apply(t,o)}return t}function M(e){for(var n=1;n<arguments.length;n++){var t=null!=arguments[n]?arguments[n]:{};n%2?T(Object(t),!0).forEach((function(n){N(e,n,t[n])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(t)):T(Object(t)).forEach((function(n){Object.defineProperty(e,n,Object.getOwnPropertyDescriptor(t,n))}))}return e}function N(e,n,t){return n in e?Object.defineProperty(e,n,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[n]=t,e}function H(e,n){for(var t=0;t<n.length;t++){var o=n[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}var D=function(){function t(){!function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}(this,t),this.config=this.loadConfiguration(),r.p=this.config.modulePath,this.acceptAllHandler=this.acceptAllHandler.bind(this),this.rejectAllHandler=this.rejectAllHandler.bind(this),this.saveHandler=this.saveHandler.bind(this),this.fetchGlobalVendorListHandler=this.fetchGlobalVendorListHandler.bind(this),this.closeHandler=this.closeHandler.bind(this),this.model={},this.listeners=[],this.eventStatus=A.d6.UI_SHOWN,this.displayStatus=A.Uq.VISIBLE,this.cmpStatus=A.j4.LOADED,this.init()}var i,u,l;return i=t,u=[{key:"init",value:function(){var e=this,n=E(A.B$),t=this.config.nonIABCookieName&&E(this.config.nonIABCookieName),r=this.config.analyticsConsentCookieName&&E(this.config.analyticsConsentCookieName);n?(this.model=S.deserialize(n),this.model.nonIABVendor={consents:t?C.decode(o.decode(t)).value:{}},this.model.analyticsConsent="0"!==r):this.model=new L(this.config),!n||this.config.nonIABCookieName&&!t||this.config.analyticsConsentCookieName&&!r?document.addEventListener("DOMContentLoaded",(function(){e.renderApp(A.pM.NOTICE),e.bumpStat("wordads_cmp_view","no_cookie")})):this.config.consentMaxAgeDays&&this.model.lastUpdated.getTime()+864e5*this.config.consentMaxAgeDays<Date.now()?document.addEventListener("DOMContentLoaded",(function(){e.renderApp(A.pM.NOTICE),e.bumpStat("wordads_cmp_view","cookie_expired")})):(this.eventStatus=A.d6.LOADED,this.displayStatus=A.Uq.DISABLED);var i=window.__tcfapi("getQueue");window.__tcfapi=this.commandHandler.bind(this),i.forEach((function(n){window.__tcfapi.apply(e,n)}))}},{key:"loadConfiguration",value:function(){var e=JSON.parse(document.getElementById("cmp-configuration").innerText);return{gvlVersion:parseInt(e.gvlVersion),consentLanguage:e.consentLanguage,locale:e.locale,nonIABVendorsAll:e.nonIABVendorsAll&&C.decode(o.decode(e.nonIABVendorsAll)).value,vendorsAll:C.decode(o.decode(e.vendorsAll)).value,vendorsLegInterest:C.decode(o.decode(e.vendorsLegInterest)).value,ajaxNonce:e.ajaxNonce,modulePath:e.modulePath,gvlPath:e.gvlPath,noticeAsModal:e.noticeAsModal,skipConsentSave:e.skipConsentSave,generalSettingsEnabled:e.generalSettingsEnabled,manualClose:void 0!==e.manualClose&&e.manualClose,nonIABCookieName:e.nonIABCookieName,consentMaxAgeDays:parseInt(e.consentMaxAgeDays),analyticsConsentCookieName:e.analyticsConsentCookieName,_:e._}}},{key:"getAppContainer",value:function(){var e="cmp-app-container",n=document.getElementById(e);return n||((n=document.createElement("div")).id=e,document.body.appendChild(n),n)}},{key:"renderApp",value:function(t){var o=arguments.length>1&&void 0!==arguments[1]&&arguments[1],i=(0,n.Vo)((function(){return r.e(143).then(r.bind(r,241))}));(0,e.sY)((0,e.h)(n.n4,null,(0,e.h)(i,{model:this.model,acceptAll:this.acceptAllHandler,rejectAll:this.rejectAllHandler,save:this.saveHandler,fetchGlobalVendorList:this.fetchGlobalVendorListHandler,path:this.config.modulePath,_:this.config._,mode:t,noticeAsModal:this.config.noticeAsModal,generalSettingsEnabled:this.config.generalSettingsEnabled,manualClose:this.config.manualClose,closable:o,closed:this.closeHandler})),this.getAppContainer())}},{key:"showUi",value:function(){this.displayStatus!==A.Uq.VISIBLE&&(this.renderApp(this.config.generalSettingsEnabled?A.pM.GENERAL_SETTINGS:A.pM.PURPOSE_SETTINGS,!0),this.bumpStat("wordads_cmp_view","cookie"),this.eventStatus=A.d6.UI_SHOWN,this.displayStatus=A.Uq.VISIBLE,this.notify())}},{key:"closeUi",value:function(){(0,e.sY)(null,this.getAppContainer())}},{key:"bumpStat",value:function(e,n){var t={};t["x_"+e]=n,window._stq=window._stq||[],window._stq.push(["extra",t])}},{key:"setConsentCookie",value:function(e){var n;if(!this.config.skipConsentSave){var t=new XMLHttpRequest;t.open("POST","/wp-admin/admin-ajax.php",!0),t.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),(e=null!==(n=e)&&void 0!==n?n:{}).action="gdpr_set_consent",e.security=this.config.ajaxNonce,e.consent=S.serialize(this.model);var o=Object.keys(e).map((function(n){return n+"="+encodeURIComponent(e[n])})).join("&");t.send(o)}}},{key:"fetchGlobalVendorListHandler",value:function(){var e=this,n=new XMLHttpRequest;return new Promise((function(t,o){n.onreadystatechange=function(){4===n.readyState&&(200===this.status?t(JSON.parse(this.response)):o({status:n.status,statusText:n.statusText}))},n.open("GET",e.config.gvlPath,!0),n.send()}))}},{key:"acceptAllHandler",value:function(){this.model=new L(this.config),this.model.purpose={consents:A.a3,legitimateInterests:A.hA},this.model.vendor={consents:this.config.vendorsAll,legitimateInterests:this.config.vendorsLegInterest},this.model.nonIABVendor={consents:this.config.nonIABVendorsAll||{}},this.model.analyticsConsent=!0,this.eventStatus=A.d6.USER_ACTION_COMPLETE,this.displayStatus=A.Uq.HIDDEN,this.notify(),this.setConsentCookie({type:"accept_all"})}},{key:"rejectAllHandler",value:function(){this.model=new L(this.config),this.model.purpose={consents:{},legitimateInterests:A.hA},this.model.vendor={consents:{},legitimateInterests:this.config.vendorsLegInterest},this.model.nonIABVendor={consents:{}},this.model.analyticsConsent=!1,this.eventStatus=A.d6.USER_ACTION_COMPLETE,this.displayStatus=A.Uq.HIDDEN,this.notify(),this.setConsentCookie({type:"reject_all"})}},{key:"saveHandler",value:function(e){this.model=new L(this.config),this.model.useConsentFrom(e),this.eventStatus=A.d6.USER_ACTION_COMPLETE,this.displayStatus=A.Uq.HIDDEN,this.notify(),this.setConsentCookie({type:"custom"})}},{key:"closeHandler",value:function(){this.displayStatus=A.Uq.HIDDEN}},{key:"getTCData",value:function(){return{tcString:S.serialize(this.model),tcfPolicyVersion:this.model.tcfPolicyVersion,cmpId:this.model.cmpId,cmpVersion:this.model.cmpVersion,gdprApplies:!0,eventStatus:this.eventStatus,cmpStatus:this.cmpStatus,isServiceSpecific:this.model.isServiceSpecific,useNonStandardStacks:this.model.useNonStandardStacks,publisherCC:this.model.publisherCC,purposeOneTreatment:this.model.purposeOneTreatment,purpose:this.model.purpose,vendor:this.model.vendor,specialFeatureOptins:this.model.specialFeatureOptins}}},{key:"getNonIABVendorConsents",value:function(){return{gdprApplies:!0,nonIabVendorConsents:this.model.nonIABVendor.consents}}},{key:"getExtraConsents",value:function(){return{gdprApplies:!0,nonIabVendorConsents:this.model.nonIABVendor.consents,analyticsConsent:this.model.analyticsConsent}}},{key:"notify",value:function(){var e=this.getTCData();this.listeners.forEach((function(n){e.listenerId=n.listenerId,n.callback(e,!0)}))}},{key:"addListener",value:function(e){var n=Math.floor(999999*Math.random()),t={listenerId:n,callback:e};return this.listeners.push(t),n}},{key:"removeListener",value:function(e){this.listeners=this.listeners.filter((function(n){return n.listenerId!==e}))}},{key:"commandHandler",value:function(){var e=arguments.length<=0?void 0:arguments[0],n=arguments.length<=2?void 0:arguments[2],t=arguments.length<=3?void 0:arguments[3];if("ping"===e){var o={gdprApplies:!0,cmpLoaded:!0,cmpStatus:this.cmpStatus,displayStatus:this.displayStatus,apiVersion:"2",cmpVersion:this.model.cmpVersion,cmpId:this.model.cmpId,gvlVersion:this.model.vendorListVersion,tcfPolicyVersion:this.model.tcfPolicyVersion};"function"==typeof n&&n(o,!0)}else if("addEventListener"===e){var r=this.addListener(n);n(M(M({},this.getTCData()),{},{listenerId:r}),!0)}else"removeEventListener"===e?(this.removeListener(t),n(!0)):"getTCData"===e?"function"==typeof n&&n(this.getTCData(),!0):"getNonIABVendorConsents"===e?"function"==typeof n&&n(this.getNonIABVendorConsents(),!0):"getExtraConsents"===e?"function"==typeof n&&n(this.getExtraConsents(),!0):"showUi"===e||"displayConsentUi"===e?this.showUi():"closeUi"===e&&this.closeUi()}}],u&&H(i.prototype,u),l&&H(i,l),Object.defineProperty(i,"prototype",{writable:!1}),t}();new D}()}();;
+/**
+ * Observe how the user enters content into the comment form in order to determine whether it's a bot or not.
+ *
+ * Note that no actual input is being saved here, only counts and timings between events.
+ */
+
+( function() {
+	// Passive event listeners are guaranteed to never call e.preventDefault(),
+	// but they're not supported in all browsers.  Use this feature detection
+	// to determine whether they're available for use.
+	var supportsPassive = false;
+
+	try {
+		var opts = Object.defineProperty( {}, 'passive', {
+			get : function() {
+				supportsPassive = true;
+			}
+		} );
+
+		window.addEventListener( 'testPassive', null, opts );
+		window.removeEventListener( 'testPassive', null, opts );
+	} catch ( e ) {}
+
+	function init() {
+		var input_begin = '';
+
+		var keydowns = {};
+		var lastKeyup = null;
+		var lastKeydown = null;
+		var keypresses = [];
+
+		var modifierKeys = [];
+		var correctionKeys = [];
+
+		var lastMouseup = null;
+		var lastMousedown = null;
+		var mouseclicks = [];
+
+		var mousemoveTimer = null;
+		var lastMousemoveX = null;
+		var lastMousemoveY = null;
+		var mousemoveStart = null;
+		var mousemoves = [];
+
+		var touchmoveCountTimer = null;
+		var touchmoveCount = 0;
+
+		var lastTouchEnd = null;
+		var lastTouchStart = null;
+		var touchEvents = [];
+
+		var scrollCountTimer = null;
+		var scrollCount = 0;
+
+		var correctionKeyCodes = [ 'Backspace', 'Delete', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown' ];
+		var modifierKeyCodes = [ 'Shift', 'CapsLock' ];
+
+		var forms = document.querySelectorAll( 'form[method=post]' );
+
+		for ( var i = 0; i < forms.length; i++ ) {
+			var form = forms[i];
+
+			var formAction = form.getAttribute( 'action' );
+
+			// Ignore forms that POST directly to other domains; these could be things like payment forms.
+			if ( formAction ) {
+				// Check that the form is posting to an external URL, not a path.
+				if ( formAction.indexOf( 'http://' ) == 0 || formAction.indexOf( 'https://' ) == 0 ) {
+					if ( formAction.indexOf( 'http://' + window.location.hostname + '/' ) != 0 && formAction.indexOf( 'https://' + window.location.hostname + '/' ) != 0 ) {
+						continue;
+					}
+				}
+			}
+
+			form.addEventListener( 'submit', function () {
+				var ak_bkp = prepare_timestamp_array_for_request( keypresses );
+				var ak_bmc = prepare_timestamp_array_for_request( mouseclicks );
+				var ak_bte = prepare_timestamp_array_for_request( touchEvents );
+				var ak_bmm = prepare_timestamp_array_for_request( mousemoves );
+
+				var input_fields = {
+					// When did the user begin entering any input?
+					'ak_bib': input_begin,
+
+					// When was the form submitted?
+					'ak_bfs': Date.now(),
+
+					// How many keypresses did they make?
+					'ak_bkpc': keypresses.length,
+
+					// How quickly did they press a sample of keys, and how long between them?
+					'ak_bkp': ak_bkp,
+
+					// How quickly did they click the mouse, and how long between clicks?
+					'ak_bmc': ak_bmc,
+
+					// How many mouseclicks did they make?
+					'ak_bmcc': mouseclicks.length,
+
+					// When did they press modifier keys (like Shift or Capslock)?
+					'ak_bmk': modifierKeys.join( ';' ),
+
+					// When did they correct themselves? e.g., press Backspace, or use the arrow keys to move the cursor back
+					'ak_bck': correctionKeys.join( ';' ),
+
+					// How many times did they move the mouse?
+					'ak_bmmc': mousemoves.length,
+
+					// How many times did they move around using a touchscreen?
+					'ak_btmc': touchmoveCount,
+
+					// How many times did they scroll?
+					'ak_bsc': scrollCount,
+
+					// How quickly did they perform touch events, and how long between them?
+					'ak_bte': ak_bte,
+
+					// How many touch events were there?
+					'ak_btec' : touchEvents.length,
+
+					// How quickly did they move the mouse, and how long between moves?
+					'ak_bmm' : ak_bmm
+				};
+
+				for ( var field_name in input_fields ) {
+					var field = document.createElement( 'input' );
+					field.setAttribute( 'type', 'hidden' );
+					field.setAttribute( 'name', field_name );
+					field.setAttribute( 'value', input_fields[ field_name ] );
+					this.appendChild( field );
+				}
+			}, supportsPassive ? { passive: true } : false  );
+
+			form.addEventListener( 'keydown', function ( e ) {
+				// If you hold a key down, some browsers send multiple keydown events in a row.
+				// Ignore any keydown events for a key that hasn't come back up yet.
+				if ( e.key in keydowns ) {
+					return;
+				}
+
+				var keydownTime = ( new Date() ).getTime();
+				keydowns[ e.key ] = [ keydownTime ];
+
+				if ( ! input_begin ) {
+					input_begin = keydownTime;
+				}
+
+				// In some situations, we don't want to record an interval since the last keypress -- for example,
+				// on the first keypress, or on a keypress after focus has changed to another element. Normally,
+				// we want to record the time between the last keyup and this keydown. But if they press a
+				// key while already pressing a key, we want to record the time between the two keydowns.
+
+				var lastKeyEvent = Math.max( lastKeydown, lastKeyup );
+
+				if ( lastKeyEvent ) {
+					keydowns[ e.key ].push( keydownTime - lastKeyEvent );
+				}
+
+				lastKeydown = keydownTime;
+			}, supportsPassive ? { passive: true } : false  );
+
+			form.addEventListener( 'keyup', function ( e ) {
+				if ( ! ( e.key in keydowns ) ) {
+					// This key was pressed before this script was loaded, or a mouseclick happened during the keypress, or...
+					return;
+				}
+
+				var keyupTime = ( new Date() ).getTime();
+
+				if ( 'TEXTAREA' === e.target.nodeName || 'INPUT' === e.target.nodeName ) {
+					if ( -1 !== modifierKeyCodes.indexOf( e.key ) ) {
+						modifierKeys.push( keypresses.length - 1 );
+					} else if ( -1 !== correctionKeyCodes.indexOf( e.key ) ) {
+						correctionKeys.push( keypresses.length - 1 );
+					} else {
+						// ^ Don't record timings for keys like Shift or backspace, since they
+						// typically get held down for longer than regular typing.
+
+						var keydownTime = keydowns[ e.key ][0];
+
+						var keypress = [];
+
+						// Keypress duration.
+						keypress.push( keyupTime - keydownTime );
+
+						// Amount of time between this keypress and the previous keypress.
+						if ( keydowns[ e.key ].length > 1 ) {
+							keypress.push( keydowns[ e.key ][1] );
+						}
+
+						keypresses.push( keypress );
+					}
+				}
+
+				delete keydowns[ e.key ];
+
+				lastKeyup = keyupTime;
+			}, supportsPassive ? { passive: true } : false  );
+
+			form.addEventListener( "focusin", function ( e ) {
+				lastKeydown = null;
+				lastKeyup = null;
+				keydowns = {};
+			}, supportsPassive ? { passive: true } : false  );
+
+			form.addEventListener( "focusout", function ( e ) {
+				lastKeydown = null;
+				lastKeyup = null;
+				keydowns = {};
+			}, supportsPassive ? { passive: true } : false  );
+		}
+
+		document.addEventListener( 'mousedown', function ( e ) {
+			lastMousedown = ( new Date() ).getTime();
+		}, supportsPassive ? { passive: true } : false  );
+
+		document.addEventListener( 'mouseup', function ( e ) {
+			if ( ! lastMousedown ) {
+				// If the mousedown happened before this script was loaded, but the mouseup happened after...
+				return;
+			}
+
+			var now = ( new Date() ).getTime();
+
+			var mouseclick = [];
+			mouseclick.push( now - lastMousedown );
+
+			if ( lastMouseup ) {
+				mouseclick.push( lastMousedown - lastMouseup );
+			}
+
+			mouseclicks.push( mouseclick );
+
+			lastMouseup = now;
+
+			// If the mouse has been clicked, don't record this time as an interval between keypresses.
+			lastKeydown = null;
+			lastKeyup = null;
+			keydowns = {};
+		}, supportsPassive ? { passive: true } : false  );
+
+		document.addEventListener( 'mousemove', function ( e ) {
+			if ( mousemoveTimer ) {
+				clearTimeout( mousemoveTimer );
+				mousemoveTimer = null;
+			}
+			else {
+				mousemoveStart = ( new Date() ).getTime();
+				lastMousemoveX = e.offsetX;
+				lastMousemoveY = e.offsetY;
+			}
+
+			mousemoveTimer = setTimeout( function ( theEvent, originalMousemoveStart ) {
+				var now = ( new Date() ).getTime() - 500; // To account for the timer delay.
+
+				var mousemove = [];
+				mousemove.push( now - originalMousemoveStart );
+				mousemove.push(
+					Math.round(
+						Math.sqrt(
+							Math.pow( theEvent.offsetX - lastMousemoveX, 2 ) +
+							Math.pow( theEvent.offsetY - lastMousemoveY, 2 )
+						)
+					)
+				);
+
+				if ( mousemove[1] > 0 ) {
+					// If there was no measurable distance, then it wasn't really a move.
+					mousemoves.push( mousemove );
+				}
+
+				mousemoveStart = null;
+				mousemoveTimer = null;
+			}, 500, e, mousemoveStart );
+		}, supportsPassive ? { passive: true } : false  );
+
+		document.addEventListener( 'touchmove', function ( e ) {
+			if ( touchmoveCountTimer ) {
+				clearTimeout( touchmoveCountTimer );
+			}
+
+			touchmoveCountTimer = setTimeout( function () {
+				touchmoveCount++;
+			}, 500 );
+		}, supportsPassive ? { passive: true } : false );
+
+		document.addEventListener( 'touchstart', function ( e ) {
+			lastTouchStart = ( new Date() ).getTime();
+		}, supportsPassive ? { passive: true } : false );
+
+		document.addEventListener( 'touchend', function ( e ) {
+			if ( ! lastTouchStart ) {
+				// If the touchstart happened before this script was loaded, but the touchend happened after...
+				return;
+			}
+
+			var now = ( new Date() ).getTime();
+
+			var touchEvent = [];
+			touchEvent.push( now - lastTouchStart );
+
+			if ( lastTouchEnd ) {
+				touchEvent.push( lastTouchStart - lastTouchEnd );
+			}
+
+			touchEvents.push( touchEvent );
+
+			lastTouchEnd = now;
+
+			// Don't record this time as an interval between keypresses.
+			lastKeydown = null;
+			lastKeyup = null;
+			keydowns = {};
+		}, supportsPassive ? { passive: true } : false );
+
+		document.addEventListener( 'scroll', function ( e ) {
+			if ( scrollCountTimer ) {
+				clearTimeout( scrollCountTimer );
+			}
+
+			scrollCountTimer = setTimeout( function () {
+				scrollCount++;
+			}, 500 );
+		}, supportsPassive ? { passive: true } : false );
+	}
+
+	/**
+	 * For the timestamp data that is collected, don't send more than `limit` data points in the request.
+	 * Choose a random slice and send those.
+	 */
+	function prepare_timestamp_array_for_request( a, limit ) {
+		if ( ! limit ) {
+			limit = 100;
+		}
+
+		var rv = '';
+
+		if ( a.length > 0 ) {
+			var random_starting_point = Math.max( 0, Math.floor( Math.random() * a.length - limit ) );
+
+			for ( var i = 0; i < limit && i < a.length; i++ ) {
+				rv += a[ random_starting_point + i ][0];
+
+				if ( a[ random_starting_point + i ].length >= 2 ) {
+					rv += "," + a[ random_starting_point + i ][1];
+				}
+
+				rv += ";";
+			}
+		}
+
+		return rv;
+	}
+
+	if ( document.readyState !== 'loading' ) {
+		init();
+	} else {
+		document.addEventListener( 'DOMContentLoaded', init );
+	}
+})();;
+!function(){var e=document.currentScript;function t(t){var n=document.createElement("script"),o=e||document.getElementsByTagName("script")[0];n.setAttribute("async",!0),n.setAttribute("src",t),o.parentNode.insertBefore(n,o)}function n(e,t){return Element.prototype.matches?e.matches(t):Element.prototype.msMatchesSelector?e.msMatchesSelector(t):void 0}function o(e,t){if(e.closest)return e.closest(t);var o=e;do{if(n(o,t))return o;o=o.parentElement||o.parentNode}while(null!==o&&1===o.nodeType);return null}function i(e,t){for(var n=0;n<e.length;n++)t(e[n],n,e)}var r=".sharing-hidden .inner",s="data-sharing-more-button-id";function a(e){this.button=e,this.pane=o(e,"div").querySelector(r),this.openedBy=null,this.recentlyOpenedByHover=!1,a.instances.push(this),this.pane.setAttribute(s,a.instances.length-1),this.attachHandlers()}if(a.instances=[],a.hoverOpenDelay=200,a.recentOpenDelay=400,a.hoverCloseDelay=300,a.instantiateOrReuse=function(e){var t=o(e,"div").querySelector(r),n=t&&t.getAttribute(s),i=a.instances[n];return i||new a(e)},a.getButtonInstanceFromPane=function(e){var t=e&&e.getAttribute(s);return a.instances[t]},a.closeAll=function(){for(var e=0;e<a.instances.length;e++)a.instances[e].close()},a.prototype.open=function(){var e,t,n=[0,0];function o(e){var t=e.getBoundingClientRect();return[t.left+(window.scrollX||window.pageXOffset||0),t.top+(window.scrollY||window.pageYOffset||0)]}function i(e,t){return parseInt(getComputedStyle(e).getPropertyValue(t)||0)}for(e=o(this.button),t=this.button.offsetParent||document.documentElement;t&&(t===document.body||t===document.documentElement)&&"static"===getComputedStyle(t).getPropertyValue("position");)t=t.parentNode;t&&t!==this.button&&1===t.nodeType&&(n=[(n=o(t))[0]+i(t,"border-left-width"),n[1]+i(t,"border-top-width")]);var r,s=e[0]-n[0]-i(this.button,"margin-left"),a=e[1]-n[1]-i(this.button,"margin-top");this.pane.style.left=s+"px",this.pane.style.top=a+this.button.offsetHeight+3+"px",(r=this.pane)&&r.style.removeProperty("display")},a.prototype.close=function(){var e;(e=this.pane)&&(e.style.display="none"),this.openedBy=null},a.prototype.toggle=function(){var e;(e=this.pane)&&"none"!==e.style.display?this.close():this.open()},a.prototype.nonHoverOpen=function(){clearTimeout(this.openTimer),clearTimeout(this.closeTimer),this.recentlyOpenedByHover?(this.recentlyOpenedByHover=!1,clearTimeout(this.hoverOpenTimer),this.open()):this.toggle()},a.prototype.resetCloseTimer=function(){clearTimeout(this.closeTimer),this.closeTimer=setTimeout(this.close.bind(this),a.hoverCloseDelay)},a.prototype.attachHandlers=function(){this.buttonClick=function(e){e.preventDefault(),e.stopPropagation(),this.openedBy="click",this.nonHoverOpen()}.bind(this),this.buttonKeydown=function(e){13!==e.keyCode&&32!==e.keyCode||(e.preventDefault(),e.stopPropagation(),this.openedBy="keydown",this.nonHoverOpen())}.bind(this),this.buttonEnter=function(){this.openedBy||(this.openTimer=setTimeout(function(){this.open(),this.openedBy="hover",this.recentlyOpenedByHover=!0,this.hoverOpenTimer=setTimeout(function(){this.recentlyOpenedByHover=!1}.bind(this),a.recentOpenDelay)}.bind(this),a.hoverOpenDelay)),clearTimeout(this.closeTimer)}.bind(this),this.buttonLeave=function(){"hover"===this.openedBy&&this.resetCloseTimer(),clearTimeout(this.openTimer)}.bind(this),this.paneEnter=function(){clearTimeout(this.closeTimer)}.bind(this),this.paneLeave=function(){"hover"===this.openedBy&&this.resetCloseTimer()}.bind(this),this.documentClick=function(){this.close()}.bind(this),this.button.addEventListener("click",this.buttonClick),this.button.addEventListener("keydown",this.buttonKeydown),document.addEventListener("click",this.documentClick),void 0===document.ontouchstart&&(this.button.addEventListener("mouseenter",this.buttonEnter),this.button.addEventListener("mouseleave",this.buttonLeave),this.pane.addEventListener("mouseenter",this.paneEnter),this.pane.addEventListener("mouseleave",this.paneLeave))},window.sharing_js_options&&window.sharing_js_options.counts){var c={done_urls:[],get_counts:function(){var e,n,o,i,r;if("undefined"!=typeof WPCOM_sharing_counts)for(e in WPCOM_sharing_counts)if(o=WPCOM_sharing_counts[e],void 0===c.done_urls[o]){for(i in n={pinterest:[window.location.protocol+"//api.pinterest.com/v1/urls/count.json?callback=WPCOMSharing.update_pinterest_count&url="+encodeURIComponent(e)]})if(document.querySelector("a[data-shared=sharing-"+i+"-"+o+"]")){for(;r=n[i].pop();)t(r);window.sharing_js_options.is_stats_active&&c.bump_sharing_count_stat(i)}c.done_urls[o]=!0}},update_pinterest_count:function(e){void 0!==e.count&&1*e.count>0&&c.inject_share_count("sharing-pinterest-"+WPCOM_sharing_counts[e.url],e.count)},inject_share_count:function(e,t){i(document.querySelectorAll("a[data-shared="+e+"] > span"),(function(e){var n,o=e.querySelector(".share-count");(n=o)&&n.parentNode&&n.parentNode.removeChild(n);var i=document.createElement("span");i.className="share-count",i.textContent=c.format_count(t),e.appendChild(i)}))},format_count:function(e){return e<1e3?e:e>=1e3&&e<1e4?String(e).substring(0,1)+"K+":"10K+"},bump_sharing_count_stat:function(e){(new Image).src=document.location.protocol+"//pixel.wp.com/g.gif?v=wpcom-no-pv&x_sharing-count-request="+e+"&r="+Math.random()}};window.WPCOMSharing=c}function u(e,t){e.setAttribute("jetpack-share-click-count",t)}function d(e){var t=e.getAttribute("jetpack-share-click-count");return null===t?0:parseInt(t,10)}function l(e,t){var n,o=new XMLHttpRequest;o.open("POST",e,!0),o.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),o.setRequestHeader("x-requested-with","XMLHttpRequest"),o.send((n=t,(encodeURIComponent("email-share-nonce")+"="+encodeURIComponent(n)).replace(/%20/g,"+")))}function h(){p()}function p(){window.WPCOMSharing&&window.WPCOMSharing.get_counts(),i(document.querySelectorAll(".sharedaddy a"),(function(e){var t=e.getAttribute("href");t&&-1!==t.indexOf("share=")&&-1===t.indexOf("&nb=1")&&e.setAttribute("href",t+"&nb=1")})),i(document.querySelectorAll(".sharedaddy a.sharing-anchor"),(function(e){a.instantiateOrReuse(e)})),void 0!==document.ontouchstart&&document.body.classList.add("jp-sharing-input-touch"),i(document.querySelectorAll(".sharedaddy ul"),(function(e){"true"!==e.getAttribute("data-sharing-events-added")&&(e.setAttribute("data-sharing-events-added","true"),i(e.querySelectorAll("a.share-print"),(function(e){e.addEventListener("click",(function(t){t.preventDefault(),t.stopPropagation();var n=e.getAttribute("href")||"",i=function(){if(-1===n.indexOf("#print")){var e=(new Date).getTime();t=e,o=n,(i=document.createElement("iframe")).setAttribute("style","position:fixed; top:100; left:100; height:1px; width:1px; border:none;"),i.setAttribute("id","printFrame-"+t),i.setAttribute("name",i.getAttribute("id")),i.setAttribute("src",o),i.setAttribute("onload",'frames["printFrame-'+t+'"].focus();frames["printFrame-'+t+'"].print();'),document.body.appendChild(i)}else window.print();var t,o,i},s=o(e,r);if(s){var c=a.getButtonInstanceFromPane(s);c&&(c.close(),i())}else i()}))})),i(e.querySelectorAll("a.share-press-this"),(function(e){e.addEventListener("click",(function(t){t.preventDefault(),t.stopPropagation();var n="";if(window.getSelection?n=window.getSelection():document.getSelection?n=document.getSelection():document.selection&&(n=document.selection.createRange().text),n){var o=e.getAttribute("href");e.setAttribute("href",o+"&sel="+encodeURI(n))}window.open(e.getAttribute("href"),"t","toolbar=0,resizable=1,scrollbars=1,status=1,width=720,height=570")||(document.location.href=e.getAttribute("href"))}))})),i(e.querySelectorAll("a.share-email"),(function(t){u(t,0);var n,o,r=t.getAttribute("data-email-share-nonce"),s=t.getAttribute("data-email-share-track-url");r&&s&&(n=s,o=window.location.protocol+"//"+window.location.hostname+"/",0===String(n).indexOf(o))&&t.addEventListener("click",(function(){var n;u(n=t,d(n)+1),d(t)>2&&function(e,t){var n=t.parentElement;if(n.classList.contains("sd-content")){i(n.querySelectorAll(".share-email-error"),(function(e){e.parentElement.removeChild(e)}));var o=document.createElement("div");o.className="share-email-error";var r=document.createElement("h6");r.className="share-email-error-title",r.innerText=e.getAttribute("data-email-share-error-title"),o.appendChild(r);var s=document.createElement("p");s.className="share-email-error-text",s.innerText=e.getAttribute("data-email-share-error-text"),o.appendChild(s),n.appendChild(o)}}(t,e),l(s,r)}))})))})),i(document.querySelectorAll("li.share-email, li.share-custom a.sharing-anchor"),(function(e){e.classList.add("share-service-visible")}))}"loading"!==document.readyState?h():document.addEventListener("DOMContentLoaded",h),document.body.addEventListener("is.post-load",p)}();;

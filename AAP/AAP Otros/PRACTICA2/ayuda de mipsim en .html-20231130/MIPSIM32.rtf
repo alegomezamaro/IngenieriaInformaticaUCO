@@ -1,0 +1,569 @@
+{\rtf1\ansi\deff2
+{\fonttbl{\f0\froman CG Times;}{\f1\fmodern Courier New;}{\f2\fswiss Arial;}}
+{\stylesheet{\fs16 \snext0 Normal;}
+}\pard\plain
+{\up $}
+\pard\tx4535 \f1\fs16 
+\par {\up #}
+\f2\fs20 \{bml bm0.bmp\}\fs24 Table of Contents:\f1 
+\par \pard\tx2545\tx4535 
+\par \pard\tqr\tx565\tx705\tx3115 \f2\fs18 \tab 1.\tab \uldb About MIPSim\plain\fs18 :\tab a brief description of MIPSim
+\par \tab 2.\tab \uldb Getting started\plain\fs18 :\tab first test of the programs functionality
+\par \tab 3.\tab \uldb Tutorial\plain\fs18 :\tab a step by step introduction to working with MIPSim
+\par \tab 4.\tab \uldb The main window\plain\fs18 :\tab description of the main window as appearing after the start
+\par \tab 5.\tab \uldb The assembler\plain\fs18 :\tab how to edit, load and store the programs you simulate
+\par \tab 6.\tab \uldb The data window\plain\fs18 :\tab displaying and editing the data memory\'92s contents
+\par \tab 7.\tab \uldb The register window\plain\fs18 :\tab displaying and editing the register\'92s contents
+\par \pard\tqr\tx565\tx705\tx3115 \tab 8.\tab \uldb Printing\plain\fs18 :\tab how to print out the schem{\up K}
+atic\'92s state
+\par \tab 9.\tab \uldb Troubleshooting\plain\fs18 :\tab ... just in case
+\par \tab 10.\tab \uldb Deinstalling MIPSim\plain\fs18 
+\par \pard\tx565\tx705\tx2975\tx3115 
+\par \pard\tqr\tx565\tx705\tx3115 \tab 11.\tab \uldb The schematic\plain\fs18 :\tab about MIPSim\'92s processor schematic and its components
+\par \pard\tx845\tx2545\tx2975 \tab \uldb Arithmetic Logic Unit\plain\fs18 
+\par \tab \uldb Adder\plain\fs18 
+\par \tab \uldb Constant Value\plain\fs18 
+\par \tab \uldb Instruction Memory\plain\fs18 
+\par \tab \uldb Data Memory\plain\fs18 
+\par \tab \uldb Register\plain\fs18 
+\par \tab \uldb And Gate\plain\fs18 
+\par \tab \uldb Sign Extension Unit\plain\fs18 
+\par \tab \uldb Multiplexor\plain\fs18 
+\par \tab \uldb Control Unit\plain\fs18 
+\par \tab \uldb Latch\plain\fs18 
+\par \tab \uldb Program Counter\plain\fs18 
+\par \pard\tx565\tx2545\tx2975 \fs16 
+\par \pard \fs20 \tab \page
+{\up +}
+\pard \f1 
+\par \f2 \{bml bm0.bmp\}{\up #}
+\fs24 About MIPSim\ul 
+\par \plain\fs20 
+\par \fs18 MIPSim is intended to be a supplement to the book:
+\par 
+\par \pard\tx275 \b \tab Computer Organization an Design
+\par \tab The Hardware/Software Interface
+\par \pard \plain\fs18 
+\par by \b John L. Hennessy\plain\fs18  and \b David A. Patterson\plain\fs18 .
+\par 
+\par While this book is an excellent introduction to the basics of computer architecture, experience shows that many students, especially those coming from less hardware-oriented studies, encounter difficulties in understanding the consequences and even concepts of pipelining. Presenting the dynamic process of instructions floating through a pipeline using cycle diagrams often appears somewhat clumsy to students with little or no previous knowledge of computer architecture and digital logic design.
+\par \pard 
+\par MIPSim was designed to offer a more feasible way of demonstrating a pipelined architecture.
+\par It simulates and visualizes what happens within a pipeline similar to the pipelines presented in the above mentioned book and thus may hopefully aid its readers in understanding the basics of pipelining.
+\par The user can write small programs (although currently there is only a subset of the MIPS instruction set implemented) and watch the pipeline doing its work, modify the program and the content of data memory and register file \'91on the fly\'92 and go on simulating to see the effects.
+\par \pard \fs20 
+\par \pard\brdrt\brdrs 
+\par \pard\brdrb\brdrs \fs16 \{bml bm1.bmp\}Vienna University of Technology\line
+Institut f\'fcr Technische Informatik\line
+Prof. Herbert Gr\'fcnbacher\line
+\fs12 \line
+\fs16 Treitlstra\'dfe 3/182-2\line
+A-1040 Vienna/Austria\line
+\fs12 \line
+\fs16 Tel.: +43 (1) 58801 - 8150  Fax.: +43 (1) 5869697\line
+email: hg@vlsivie.tuwien.ac.at\line
+http://www.vlsivie.tuwien.ac.at/welcome.html\line
+\fs20 
+\par \pard 
+\par \page
+{\up +}
+\pard 
+\par {\up #}
+\{bml bm0.bmp\}\plain\f0\fs20  \f2\fs24 Getting started\ul 
+\par \plain\fs20 
+\par \fs18 If you should encounter problems in running this program, please see chapter 9:\uldb  Troubleshooting\plain\fs18 .
+\par 
+\par 
+\par For a quick test of the programs functionality, there is an example program to demonstrate the simulator.
+\par To load it:
+\par 
+\par \pard\tx565\tx845 \tab 1.\tab select FILES from the main menu
+\par \tab 2.\tab select OPEN from the drop-down menu
+\par \tab 3.\tab in the file-listbox, double-click on \i demo.mp\plain\fs18 
+\par \tab \tab or
+\par \tab \tab select it and click the OK-button.
+\par \pard 
+\par The listbox at the left of the schematic should contain some opcodes.
+\par 
+\par To start the simulation, first drag the opcode-arrow \{bmc bm2.bmp\} at the arrow on its right side onto the first opcode (in case it isn\'92t already there) to instruct MIPSim it should start with this one (this symbol indicates the line at which the opcodes leave the listbox).
+\par 
+\par Now click on the Simulation-Start button \{bmc bm3.bmp\} or select SIMULATION from the main menu and then START from the drop-down menu.
+\par \pard 
+\par You should now see the instructions \'91floating\'92 through the pipeline, i.e. being shifted through the top line of the schematic. Each instruction entering the pipeline has a certain color assigned, and the buses and connections are continually redrawn in the same color to reflect the \'91flow\'92 of the corresponding signals.
+\par 
+\par If the pipeline works, you can start with the \uldb tutorial\plain\fs18 .. In case of troubles see chapter 9: \uldb Troubleshooting\plain\fs18 .
+\par \fs24 
+\par \page
+{\up +}
+\pard \plain\f0\fs20 
+\par {\up #}
+\f2 \{bml bm0.bmp\}\fs24 Tutorial\ul\fs28 
+\par \plain\fs20 
+\par \fs18 This tutorial provides a brief introduction to simulating with MIPSim.
+\par 
+\par When you start MIPSim, the \uldb main window\plain\fs18  pops up.
+\par You see the the schematic of the processor with all buses in grey, indicating that their state is undefined as no instructions are in the pipeline.
+\par 
+\par There are three special symbols within the schematic:
+\par The instruction memory (labeled \i instr.\plain\fs18 ), the register file (\i register\plain\fs18 ), and the data memory (\i data\plain\fs18 ).
+\par \pard Clicking on one of these symbols opens a dialog which lets you modify its contents.
+\par 
+\par \{bml bm4.bmp\}To enter a small program, click on the instruction memory symbol within the schematic.
+\par 
+\par The \uldb assembler window\plain\fs18  appears.
+\par After clicking on a field within the opcode-column, it receives the caret and you can edit its contents.
+\par Now click on the topmost field in the opcode-column and type:
+\par \line
+LW $1,0($0)
+\par 
+\par then press <ENTER>.
+\par MIPSim performs a syntax-check, and if the input is correct, the caret is set to the next line (within the opcode column).
+\par \pard 
+\par Now try an incorrect input, for example:
+\par 
+\par ADD $1\tab \tab (correct opcode, but wrong parameter format)
+\par 
+\par On<ENTER>, a window pops up, stating that the input was syntactically incorrect and, as MIPSim recognizes the ADD opcode, displaying the expected format.\line
+\line
+In case of an incorrect input, the caret remains within the current field and the text is selected for overwrite to let you correct its contents.\line
+If you clear the input with the <DEL> key and press <ENTER>, MIPSim reverts to the instruction that was previously entered for this memory location. If you enter a single blank, MIPSim replaces the instruction with a NOP.\line
+ \line
+\line
+Now please enter the following lines immediately below the LW $1,0($0):
+\par \pard 
+\par NOP
+\par NOP
+\par NOP
+\par ADD $3,$1,$2
+\par SUB $4,$1,$2
+\par OR $5,$1,$2
+\par 
+\par 
+\par Click on the close-button, and the assembler dialog disappears.
+\par 
+\par Back in the main window, you should see the previously entered assembler statements listed in the listbox to the left of the schematic (maybe you need to scroll up to see the top line).
+\par 
+\par This listbox also contains the opcode arrow \{bmc bm2.bmp\}, which indicates the line where the opcodes leave the listbox to enter the pipeline. Make sure it is positioned on the first line (the LW-instruction); if necessary, drag it at its right edge.
+\par \pard 
+\par The short example program loads a value from the data memory into register $1 and then performs some operations based on the values in registers $1 and $2. Therefore we need to enter the initial values for those registers.
+\par 
+\par The value for register $1 is loaded from the data memory, so we have to put a value into the appropriate memory location.
+\par 
+\par \{bml bm5.bmp\}The contents of the data memory can be examined and modified in a similar way as with the instruction memory, namely by clicking on the data memory symbol (labeled \i data\plain\fs18 ).
+\par \pard 
+\par The \uldb data window\plain\fs18  pops up:
+\par 
+\par 
+\par The listbox shows the data memory\'92s contents. You may modify any of the words, just click on it and edit the text. The numbers are always given in hexadecimal format.
+\par So, click on the leftmost value within the first line, which is the data word at address 0, and enter 5. Then click on the close-button, and the data dialog should disappear.
+\par \fs24 
+\par \fs18 \{bml bm6.bmp\}The value for register $2 must be entered directly into the register. To do so, click on the register file.
+\par \pard 
+\par The \uldb register window\plain\fs18  pops up:
+\par 
+\par You see editable fields for each register (except $0, which is hardwired to 0).
+\par Click on the value of $2 and enter 3 and hit <RETURN> (again, values are given in hexadecimal).
+\par 
+\par Now, we have the initial values for the two registers we use. You could close the register window now (by clicking on the close-button in the upper right corner, by clicking on the register button in the toolbar, or by clicking on the register file symbol within the schematic. However, to provide the opportunity of watching the registers contents change on running a program, you can also keep the register dialog open. Just resize it so that the registers you\'92re interested in are visible and move the dialog to an appropriate place.
+\par \pard 
+\par Make sure the opcode arrow is positioned on the first line (the LW-instruction); if necessary, drag it at its right edge.
+\par Now we are ready to start the simulation.
+\par 
+\par So, click on the play-button \{bmc bm3.bmp\}. The first instruction should immediately shift into the pipeline, and you should see the signals on the buses in the same color as the opcode appearing in the line above the schematic. In play mode, you can watch the signals propagate on the buses. Slow mode \{bmc bm7.bmp\} and fast mode \{bmc bm8.bmp\} offer different signal propagation speeds. However, if you just want to see the results of each step, you can use the step-button \{bmc bm9.bmp\}.
+\par \pard 
+\par When the instructions reach the write-back stage, the register contents should be updated accordingly in the register dialog.
+\par 
+\par Wait until the last instruction has shifted through the pipeline (only NOP\'92s left in the top line), then stop the pipeline by clicking on the stop button \{bmc bm10.bmp\}. The listbox scrolls back up to the first opcode and all buses now appear in grey indicating an undefined state.
+\par 
+\par The results should be in the registers $3,$4, and $5.
+\par 
+\par 
+\par \pard\brdrt\brdrs 
+\par \pard We have watched the signals shift through the pipeline stages and got the expected results in the registers.
+\par 
+\par Now, let\'92s take a closer look at the pipeline\'92s work.
+\par 
+\par Make sure the program is reset and the opcode arrow is located at the first instruction (LW).
+\par Now click once onto the step-button within the toolbar \{bmc bm9.bmp\}.
+\par 
+\par The LW-instruction enters the instruction fetch (IF) stage of the pipeline.
+\par Click repeatedly on the step-button until the ADD-instruction is in the execution stage (EX).
+\par \pard 
+\par MIPSim enables you to inspect the current state of each bus. Click (with the left mouse button), for example, once on each of the two \uldb ALU\plain\fs18 -inputs and once on the ALU-output.
+\par For each of the buses, a label pops up, displaying the current state of the bus in hexadecimal, and the value of the output bus should be the sum of the values of the input buses.
+\par Likewise, you can inspect any other bus within the schematic.
+\par 
+\par Now click once again on the step-button. The labels are updated automatically when the state of the bus changes. So, when simulating, you can activate the labels on the buses you are interested in and MIPSim updates the values as the instructions shift along.
+\par \pard 
+\par To hide a label, just click once on it, and it disappears.
+\par Alternatively, by clicking on the clear labels button \{bmc bm11.bmp\}, all labels can be removed.
+\par 
+\par \pard\brdrt\brdrs 
+\par \pard In this example, we have three NOPs after the load instruction. Their purpose is to delay the execution of the commands referencing the loaded value until the registers are updated accordingly. Now lets see what would happen without them:
+\par Mark the ADD, SUB and OR instructions, i.e. click the left mouse button on the line containing the ADD statement (preferably within the address column) and move the mouse to the line with the OR statement, then release the mouse button. These three lines should appear in red. Now, drag them up right behind the LW instruction: click the \i right\plain\fs18  mouse button on one of the marked instructions and move the mouse up. MIPSim draws an insertion mark where the lines will be inserted upon releasing the mouse button. So, move the mouse up until the insertion mark is right behind the LW instructions and then release the mouse button.
+\par \pard 
+\par Now, clear the values in the registers $3-$5 to zero, either by directly entering the zeroes or by clicking the clear button in the register dialog and reentering the value 3 for register $2.
+\par 
+\par You may want to inspect the write inputs and the outputs of the \uldb register file\plain\fs18 ,so click on them once to get the labels.
+\par 
+\par Start the simulation again, and you will see the processor calculating nonsense, because the result from the LW instruction is not written to the register file on time.
+\par \pard 
+\par Alternatively, instead of moving the NOPs, you can use the opcode-arrow \{bmc bm2.bmp\} to modify the order of execution: To do so, simulate in single step mode using the step-button \{bmc bm9.bmp\}, and right after the first step drag the opcode-arrow from the first NOP directly onto the ADD-instruction, thus omitting the NOPs from execution.
+\par 
+\par With the presented features, you can write your own programs and examine what the pipeline does.
+\par There are also some more examples (demo1 - demo3) you may want to try out.
+\par \pard 
+\par The contents of the instruction and data memories as well as the content of the register file may be saved/loaded separately by clicking the save/load buttons. LOAD/SAVE from the FILE menu loads/saves the contents of all three of them.
+\par 
+\par \page
+{\up +}
+\pard \fs20 
+\par {\up #}
+\{bml bm0.bmp\}\plain\f0\fs20  \f2\fs24 The main window\ul\fs28 
+\par \plain\fs20 
+\par \fs18 The main window ist mostly occupied by the processor schematic. It shows the five stages (labeled right above) of the processor, each reduced to the most relevant architectural units : the\uldb  PC\plain\fs18 , the \uldb instruction\plain\fs18  an \uldb data\plain\fs18  memory, the \uldb ALU\plain\fs18 , the \uldb main control unit\plain\fs18 , the \uldb register file\plain\fs18  each separated by \uldb latches\plain\fs18 .
+\par 
+\par \pard\brdrt\brdrs 
+\par \pard \{bml bm12.bmp\} The listbox to the left of the schematic shows the content of the instruction memory as an assembler program. The listbox scrolls up as the simulation goes on, and the instructions \'91move\'92 into the pipeline, each in the corresponding color.\line
+The arrow-symbol \{bmc bm2.bmp\} marks the line where the opcodes \'91leave\'92 the listbox. By dragging it at the right edge it can be moved up and down the listbox, thus making it possible to determine how many of the previous and following lines of code should be visible. It can also be used to select the next opcode to enter the pipeline. Note: The opcode arrow does not scroll along with the listbox content. So, upon scrolling the listbox, you may have to adjust its position.
+\par \pard 
+\par \pard\brdrt\brdrs 
+\par \pard Above the schematic, right below the caption of the main window, there is the toolbar:
+\par 
+\par It gives quick access to the most common commands, namely (from left to right):
+\par 
+\par \{bml bm13.bmp\} Open the assembler window.
+\par \{bml bm14.bmp\} Open the register window.
+\par \{bml bm15.bmp\} Open the data memory window.
+\par 
+\par \{bml bm11.bmp\} Remove all labels from the schematic.
+\par 
+\par \{bml bm3.bmp\} Start the simulation.
+\par \{bml bm16.bmp\} Pause the simulation.
+\par \{bml bm10.bmp\} Stop the simulation.
+\par \{bml bm8.bmp\} Simulate fast.
+\par \{bml bm7.bmp\} Simulate slow.
+\par \pard \{bml bm9.bmp\} Perform a single step.
+\par 
+\par \{bml bm17.bmp\} Print the current schematic state (including labels).
+\par \{bml bm18.bmp\} Display the about dialog.
+\par \{bml bm19.bmp\} Display this online help.
+\par 
+\par \page
+{\up +}
+\pard \fs20 
+\par {\up #}
+\fs16 \{bml bm13.bmp\}\fs24 The assembler window\ul\fs28 
+\par \plain\fs20 
+\par \fs18 Within the assembler window, you can enter and modify the contents of the program memory.
+\par It can be opened in one of three ways:
+\par \pard\tx705\tx985 
+\par \pard\tx275\tx705 1. Via the main menu by selecting INSTRUCTION MEMORY/VIEW.
+\par \pard\tx425\tx705 2. By clicking on the assembler button \{bmc bm13.bmp\} in the toolbar
+\par 3. Or by clicking on the symbol labeled \'91instruction memory\'92 within the schematic.
+\par \pard 
+\par 
+\par The listbox on the left contains the actual program. It consists of four columns:
+\par 
+\par \pard\tx425 \tab address: displays the (byte) address.
+\par \tab label: displays a label used as a branch or jump target.
+\par \tab opcode: The opcode itself.
+\par \tab word: The opcode in hexadecimal (four bytes).
+\par \pard 
+\par You can change the content of any field in the label, opcode and word columns by selecting it and editing the text; the address column is read only.
+\par 
+\par The labels entered in the label column may be used as the destination address in a BEQ or a BNEQ instruction. However, as this is a line-by-line assembler, each label has to be defined before it can be referenced.
+\par 
+\par When you enter an opcode in the opcode-column, MIPSim automatically performs a syntax check and notifies you if the entry is syntactically incorrect.
+\par \pard 
+\par The listbox on the right shows the available instructions as well as their syntax (this is just informational; selecting instructions will \i not\plain\fs18  copy them to the assembler listbox).
+\par 
+\par 
+\par The OK button \{bmc bm20.bmp\} closes the window.
+\par 
+\par With the clear all button \{bmc bm21.bmp\}, the instruction memory content may be reset to contain all zeroes, ie. NOPs.
+\par 
+\par The load button opens a file dialog displaying all previously saved programs in the active path (*.mp).
+\par To load one, double-click it or select it and click the OK button.
+\par \pard 
+\par Click \{bmc bm22.bmp\} if you want to save the current program to disk. In the file dialog, enter the name to be used and click ok (or press ENTER). MIPSim will ask for confirmation if the given file already exists.
+\par \page
+{\up +}
+\pard \fs20 
+\par {\up #}
+\fs16 \{bml bm15.bmp\}\plain\f0\fs20  \f2\fs24 The data window\ul\fs28 
+\par \plain\fs20 
+\par \fs18 This window may be used to display and modify the contents of the data memory.
+\par It can be opened in one of three ways:
+\par \pard\tx705\tx985 
+\par 1. Via the main menu by selecting DATA MEMORY and then VIEW from the popup menu.
+\par 2. By clicking on the data memory button \{bmc bm15.bmp\} in the toolbar
+\par 3. Or by clicking on the symbol labeled \'91data memory\'92 within the schematic.
+\par \pard 
+\par The listbox contains four columns of data words a line, each preceded by the adress of the first data word. You can edit any data word by clicking on it. Number format is hexadecimal.
+\par 
+\par The OK button \{bmc bm20.bmp\} closes the window.
+\par 
+\par With the clear all button \{bmc bm21.bmp\}, the data memory content may be reset to contain all zeroes.
+\par 
+\par The load button opens a file dialog displaying all previously saved memory files (*.md).
+\par To load one, double-click it or select it and click the OK button.
+\par \pard 
+\par Click \{bmc bm22.bmp\} if you want to save the current data memory content to disk. In the file dialog, enter the name to be used and click ok (or press ENTER).
+\par \page
+{\up +}
+\pard \fs20 
+\par {\up #}
+\fs16 \{bml bm14.bmp\}\plain\f0\fs20  \f2\fs24 The register window\ul\fs28 
+\par \plain\fs20 
+\par \fs18 \{bml bm23.bmp\}This window displays the contents of the registers and lets you modify them by clicking on a value.\line
+It can be opened in one of three ways:\line
+\line
+1. Via the main menu by selecting REGISTERS and VIEW from the popup-menu.\line
+2. By clicking on the registers button \{bmc bm14.bmp\} in the toolbar\line
+3. Or by clicking on the symbol labeled \'91register file\'92 within the schematic.\line
+\line
+\line
+Click the load button \{bmc bm24.bmp\} to open a file dialog in which you can select a *.mr-file containing previously saved register contents.\line
+\line
+The clear button \{bmc bm25.bmp\} resets all register\'92s contents to zero.\line
+\line
+By clicking the save button \{bmc bm26.bmp\}, you may enter a filename under which the current register contents are saved.\line
+\line
+\line
+\page
+{\up +}
+{\up #}
+\pard \fs24 Printing\ul\fs28 
+\par \plain\fs20 
+\par \fs18 By selecting PRINT in the FILE menu, you can send the current state of the pipeline to the printer.
+\par The schematic is then printed along with the opcode line above it. It is automatically scaled to fit the paper format.
+\par \plain\f0\fs20 
+\par \page
+{\up +}
+\pard 
+\par {\up #}
+\f2\fs16 \{bml bm27.bmp\}\plain\f0\fs20  \f2\fs24 Troubleshooting\ul\fs28 
+\par \plain\fs24 
+\par \fs18 Known problems:
+\par 
+\par Schematic:
+\par 
+\par The schematic resembles to the examples in the Hennessy/Patterson book, but there are some (although negligible) differences, e.g.: the ALU control bus consists of four bits. This could possibly cause some confusion.
+\par 
+\par Forwarding within the register file is implemented, so the register file supplies the correct value if the instruction in the ID stage reads a register written by the instruction in the WB stage.
+\par \pard 
+\par You cannot display more than one label per bus. Please note: A bus segment ending in a branch is not regarded as a separate bus (which could have its own label) but rather a part of one of the buses leading further.
+\par Therefore, with the two control-lines in the WB-stage (mtr and mw), when you click up a label on the bus-segment before they branch out, you will only get a label for the mtr-signal.
+\par 
+\par Assembler:
+\par 
+\par The processing of labels is quite coarse. As MIPSim utilizes a line-by-line assembler (definitely not designed for complex programs), labels have to be defined before they can be used. On forward references, you may have to enter a dummy address and change it to the destination label later on.
+\par \pard 
+\par Be careful when moving lines. Currently, references out of or into the moved part of the program are \i not\plain\fs18  automatically updated. You may have to enter the correct addresses or labels again.
+\par 
+\par If you want to select lines in order to move them, do not begin the selection in the edit field currently having the caret, because this mouse click will be interpreted as a caret movement within the field rather than the begin of a selection. It is recommended to select lines by clicking on them within the address column, as the address is read only and thus can never have the caret.
+\par \pard 
+\par In case the caret is in an edit field within a selected line, this edit field will appear in black rather than red.
+\par 
+\par \pard\tx1835 
+\par Problems actually running MIPSim:
+\par 
+\par MIPSim does not need an installation procedure. Just create a subdirectory, copy or unzip the files into it, and run the executable (you may want to set up an icon). However, the \i ra_cpu.sch\plain\fs18  file and the help file must be located in the same directory as the executable.
+\par 
+\par The are two separate versions of MIPSim, a 16bit version for Windows 3.1 and a 32bit version for Windows NT (which could also be used with Windows 95). Make sure to use the correct version for your system. (The 16bit version should work with NT, but in order to run the 32bit version under Windows 3.1, you will need the Win32s-extension, which is freely available from Microsoft.).
+\par \pard\tx1835 
+\par In case MIPSim does not run at all, try to unzip the appropriate version (mipsim16.zip or mipsim32.zip) again into an empty directory. After that, this directory should contain at least the following files:
+\par 
+\par 1. mipsim32.exe(or mipsim16.exe for the 16bit version).
+\par 2. mipsim32.hlp (or mipsim16.hlp for the 16bit version).
+\par \pard 3. ra_cpu.sch
+\par 
+\par There should also be some more files containing some example programs. However, only the three files named above are absolutely necessary in order to run MIPSim. If one of these files is missing, the zip-file is incomplete and you will need to download it again.
+\par 
+\par If this does not fix the problem contact:
+\par 
+\par \pard\brdrt\brdrs \fs20 
+\par \pard\brdrb\brdrs \fs16 \{bml bm1.bmp\}Vienna University of Technology\line
+Institut f\'fcr Technische Informatik\line
+Prof. Herbert Gr\'fcnbacher\line
+\fs12 \line
+\fs16 Treitlstra\'dfe 3/182-2\line
+A-1040 Vienna/Austria\line
+\fs12 \line
+\fs16 Tel.: +43 (1) 58801 - 8150  Fax.: +43 (1) 5869697\line
+email: hg@vlsivie.tuwien.ac.at\line
+http://www.vlsivie.tuwien.ac.at/welcome.html\line
+\fs20 
+\par \pard \plain\f0\fs24 
+\par \page
+{\up +}
+\pard \fs20 
+\par {\up #}
+\f2\fs24 Deinstalling MIPSim\ul\fs28 
+\par \plain\fs24 
+\par \pard\tx1835 \fs18 To deinstall MIPsim, just remove the files mipsim32.* (or mipsim16.* for the 16 bit version) and ra_cpu.sch along with any *.mp, *.md and *.mr files containing MIPSim programs. Apart from these, MIPSim itself does not leave any other files on your harddisk.
+\par \pard 
+\par \page
+{\up +}
+{\up $}
+\pard\tx1985\tx2545\tx4535 \plain\f0\fs20 \line
+{\up #}
+{\up K}
+\f2\fs24 The schematic\fs28 
+\par \pard\tx1985\tx4535 \f1\fs24 
+\par \f2\fs18 MIPSim was designed to support readers of the book \'84Computer Organization and Design - The Hardware/Software Interface\'93 by Hennessy/Patterson in understanding the concept of a pipeline. Therefore, the schematic utilized in MIPSim is very similar to the ones presented by Hennessy/Patterson, especially in the chapters 5 and 6.
+\par The current version leaves forwarding and hazard detection out to keep the schematic as simple as possible.
+\par 
+\par 
+\par See:  chapters 5 and 6 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \pard\tx1985\tx4535 \f1 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2\fs24 Arithmetic Logic Unit (ALU)\fs28 
+\par \f1\fs24 
+\par 
+\par \f2\fs18 The ALU in this simulator can perform various operations on 32-bit values. The \uldb Control Unit\plain\fs18  determines the operation to be performed via the 4-bit \i Alu operation bus.\plain\fs18 
+\par \i Carry\plain\fs18  and \i Overflow\plain\fs18  are not implemented.
+\par 
+\par 
+\par See: pages 182 and 278 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1 
+\par 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2\fs24 Adder\f1 
+\par 
+\par \fs22 
+\par \f2\fs18 This simulator contains two 32-bit adders: One in the IF stage to increment the \uldb PC\plain\fs18 , and the other in the EX stage to add the sign-extended 16-bit offset to the\uldb  PC\plain\fs18 .
+\par 
+\par See: pages 175 and 277 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1\fs24 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2 Constant Value\f1 
+\par 
+\par 
+\par \f2\fs18 This symbol shows that the corresponding input is \'91hard-wired\'92.
+\par \f1\fs24 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2 Instruction Memory (IM)\f1 
+\par \fs22 
+\par \f2\fs18 The instruction memory in the IF stage is addressed by the \uldb PC\plain\fs18  and delivers the corresponding 32-bit value to the IF/ID-Latch
+\par 
+\par 
+\par See: pages 272 and 277 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1\fs24 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2 Data Memory (DM)\f1 
+\par \f2\fs22 
+\par \fs18 On the zero-to-one transition of the MemWrite input the 32-bit value on the data input is stored at the address on the address input.
+\par 
+\par See: pages 272 and 280 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1\fs24 
+\par 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 {\up K}
+\f2 Register File\f1 
+\par \f2\fs22 
+\par \fs18 The register file in this simulator contains 32 32-bit registers.\line
+Register 0 is hardwired to zero.\line
+\line
+See: pages 272,278 and 279 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1\fs24 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2 And-Gate\f1 
+\par \fs22 
+\par \f2\fs18 Produces the logical \'91and\'92 of all of it\'92s inputs. In this case it combines the Zero output of the \uldb ALU\plain\fs18  and the branch bit from the \uldb Control Unit\plain\fs18  to select the appropriate \uldb PC\plain\fs18  value.
+\par 
+\par See: page 184 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 {\up K}
+\f2\fs24 Sign Extension Unit\f1 
+\par \fs22 
+\par \f2\fs18 Extends the 16-bit offset value contained in the opcode to 32 bit so that it can be added to the current address, which is 32 bit.\f1 
+\par 
+\par \f2 See: page 280 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1\fs24 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2 Multiplexor (MUX)\f1 
+\par \fs22 
+\par \f2\fs18 Used to select an arbitrary input to be fed through to the output. In this schematic, multiplexers are used to distribute the control signals according to the respective opcode.
+\par 
+\par 
+\par See: page 184 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 {\up K}
+\f2\fs24 Control Unit (CU)\f1 
+\par \fs22 
+\par \f2\fs18 From the opcode word as its input, the Control Unit generates several signals to control the operation of most of the elements in the schematic.
+\par 
+\par 
+\par See: pages 291-306 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2\fs24 Latch\f1 
+\par \fs22 
+\par \f2\fs18 The latches are used to store the signals computed within one stage until the next stage cycle begins, when they are fed through to the following stage.
+\par 
+\par 
+\par See: Appendix B page 22 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \f1\fs24 
+\par \page
+{\up +}
+{\up $}
+{\up #}
+\pard\tx1985\tx4535 \f2 Program Counter (PC)\f1 
+\par \f2\fs22 
+\par \fs18 The program counter is a special latch which is used to store the current address.
+\par 
+\par 
+\par See: page 277 in :
+\par \'84Computer Organization and Design - The Hardware/Software Interface\'93 Hennessy/Patterson
+\par \pard \plain\f0\fs20 
+\par 
+\par \page
+}

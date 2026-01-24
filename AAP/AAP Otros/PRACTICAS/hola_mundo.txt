@@ -1,0 +1,10 @@
+.data
+str: .asciiz "Hola Mundo en MIPS32\n"
+.text
+main: la $a0, str
+#si hag0 str+1 No me imprime la H de Hola 
+li $v0, 4 
+#le_meto_el_valor_4_a_v0_pq_asi_el_syscall_imprime_lo_que_haya_en_a0.
+syscall
+li $v0, 10
+syscall
