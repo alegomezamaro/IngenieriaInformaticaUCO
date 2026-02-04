@@ -1,0 +1,24 @@
+Este proyecto es una plantilla para la ejecución de las prácticas de Sistemas Empotrados que se ha verificado que funciona en nuestra placa MCB2300.
+Esta práctica tiene como objetivo configurar el controlador de interrupciones vectorizadas (VIC) del LPC2378, se generan dos señales con un solo timer
+hardware (T0) usando los timers software y atención por interrupciones (IRS separada en IRQ.c), finalmente diseñar y verificar un programa de aplicación utilizando el osciloscopio.
+
+Nombre y apellidos: Lucía Alba Rueda y Alejandro Gómez Amaro
+
+Ficheros a realizar:
+
+* Practica5.c: Fichero fuente principal (main).
+* Practica5.h: Fichero header para definiciones y funciones.
+* HAL.c: Fichero Hardware Abstract Layer (capa de abstración del hardware). Funciones generales que acceden al hardware.
+* misTipos.h: Fichero header con las definiciones de los tipos de variables a utilizar en todo el proyecto.
+* IRQ.c: Rutinas de servicio de interrupción (ISR) y configuración del VIC
+
+Ficheros de Keil para el microcontrolador LPC2378:
+
+* LPC2300.s
+* LPC23xx.h
+
+Ficheros generales a incluir en cada proyecto:
+
+* Retarget.c
+* Serial.c
+* stdio.h

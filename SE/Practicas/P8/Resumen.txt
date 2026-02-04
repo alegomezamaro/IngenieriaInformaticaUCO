@@ -1,0 +1,23 @@
+En esta práctica se configura el canal AD0.0 para digitalizar la entrada del potenciómetro y enviar el resultado de 10 bits (0x000–0x3FF) por puerto serie,
+el proceso utiliza el Timer 0 en modo sondeo para temporizar las conversiones controladas por software. La implementación emplea HAL.c, serial.c y retarget.c ,
+verificando en el terminal que los valores hexadecimales responden correctamente a la variación de tensión de 0 a 3.3 V.
+
+Nombre y apellidos: Lucía Alba Rueda y Alejandro Gómez Amaro
+
+Ficheros a realizar:
+
+* Practica8.c: Fichero fuente principal (main).
+* Practica8.h: Fichero header para definiciones y funciones.
+* HAL.c: Fichero Hardware Abstract Layer (capa de abstración del hardware). Funciones generales que acceden al hardware.
+* misTipos.h: Fichero header con las definiciones de los tipos de variables a utilizar en todo el proyecto.
+
+Ficheros de Keil para el microcontrolador LPC2378:
+
+* LPC2300.s
+* LPC23xx.h
+
+Ficheros generales a incluir en cada proyecto:
+
+* Retarget.c
+* Serial.c
+* stdio.h

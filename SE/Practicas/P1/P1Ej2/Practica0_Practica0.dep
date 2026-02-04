@@ -1,0 +1,5 @@
+Dependencies for Project 'Practica0', Target 'Practica0': (DO NOT MODIFY !)
+F (.\LPC2300.s)(0x4A02D6A8)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips--pd "__UVISION_VERSION SETA 525"--list .\lpc2300.lst --xref -o .\lpc2300.o --depend .\lpc2300.d)
+F (.\Practica0.c)(0x65EECA4A)(--c99 -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\practica0.o --omf_browse .\practica0.crf --depend .\practica0.d)
+I (D:\Keil_5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+F (.\Resumen.txt)(0x65EECA4A)()

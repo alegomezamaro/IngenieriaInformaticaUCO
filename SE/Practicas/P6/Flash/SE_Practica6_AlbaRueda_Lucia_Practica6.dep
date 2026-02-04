@@ -1,0 +1,15 @@
+Dependencies for Project 'SE_Practica6_AlbaRueda_Lucia', Target 'Practica6': (DO NOT MODIFY !)
+F (.\LPC2300.s)(0x6911D205)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips--pd "__UVISION_VERSION SETA 525"-o .\flash\lpc2300.o --depend .\flash\lpc2300.d)
+F (.\Retarget.c)(0x6911D205)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\retarget.o --omf_browse .\flash\retarget.crf --depend .\flash\retarget.d)
+I (D:\Keil_5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (D:\Keil_5\ARM\ARMCC\include\rt_misc.h)(0x599F218E)
+I (D:\Keil_5\ARM\ARMCC\include\stddef.h)(0x599F218C)
+I (D:\Keil_5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+F (.\Serial.c)(0x6911D205)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\serial.o --omf_browse .\flash\serial.crf --depend .\flash\serial.d)
+I (D:\Keil_5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+F (.\Practica6.c)(0x691AF3AB)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\practica6.o --omf_browse .\flash\practica6.crf --depend .\flash\practica6.d)
+I (D:\Keil_5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (D:\Keil_5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+I (misTipos.h)(0x691AEB0B)
+F (.\HAL.c)(0x691AEB92)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\hal.o --omf_browse .\flash\hal.crf --depend .\flash\hal.d)
+F (.\Resumen.txt)(0x6911D205)()

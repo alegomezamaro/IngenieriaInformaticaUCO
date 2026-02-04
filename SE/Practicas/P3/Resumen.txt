@@ -1,0 +1,22 @@
+Este proyecto es una plantilla para la ejecución de las prácticas de Sistemas Empotrados que se ha verificado que funciona en nuestra placa MCB2300.
+Al principio de este fichero de texto, meramente informativo, se debe incluir un breve resumen de los objetivos a realizar en cada una de las prácticas.
+
+Nombre y apellidos: 
+
+Ficheros a realizar:
+
+* PracticaX.c: Fichero fuente principal (main).
+* PracticaX.h: Fichero header para definiciones y funciones.
+* HAL.c: Fichero Hardware Abstract Layer (capa de abstración del hardware). Funciones generales que acceden al hardware.
+* misTipos.h: Fichero header con las definiciones de los tipos de variables a utilizar en todo el proyecto.
+
+Ficheros de Keil para el microcontrolador LPC2378:
+
+* LPC2300.s
+* LPC23xx.h
+
+Ficheros generales a incluir en cada proyecto:
+
+* Retarget.c
+* Serial.c
+* stdio.h

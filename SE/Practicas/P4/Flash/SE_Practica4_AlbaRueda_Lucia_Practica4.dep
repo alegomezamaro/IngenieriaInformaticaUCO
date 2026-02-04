@@ -1,0 +1,17 @@
+Dependencies for Project 'SE_Practica4_AlbaRueda_Lucia', Target 'Practica4': (DO NOT MODIFY !)
+F (.\LPC2300.s)(0x69087A6A)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips--pd "__UVISION_VERSION SETA 525"-o .\flash\lpc2300.o --depend .\flash\lpc2300.d)
+F (.\Retarget.c)(0x69087A6A)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\retarget.o --omf_browse .\flash\retarget.crf --depend .\flash\retarget.d)
+I (D:\Keil_5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (D:\Keil_5\ARM\ARMCC\include\rt_misc.h)(0x599F218E)
+I (D:\Keil_5\ARM\ARMCC\include\stddef.h)(0x599F218C)
+I (D:\Keil_5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+F (.\Serial.c)(0x69087A6A)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\serial.o --omf_browse .\flash\serial.crf --depend .\flash\serial.d)
+I (D:\Keil_5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+F (.\Practica4.c)(0x69087A94)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\practica4.o --omf_browse .\flash\practica4.crf --depend .\flash\practica4.d)
+I (D:\Keil_5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (D:\Keil_5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+I (Practica4.h)(0x69087AA8)
+I (misTipos.h)(0x69087A6A)
+F (.\HAL.c)(0x69087A6A)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -ID:\Keil_5\ARM\RV31\INC-ID:\Keil_5\ARM\CMSIS\Include-ID:\Keil_5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\hal.o --omf_browse .\flash\hal.crf --depend .\flash\hal.d)
+I (D:\Keil_5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+F (.\Resumen.txt)(0x69087A6A)()

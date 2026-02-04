@@ -1,0 +1,17 @@
+Dependencies for Project 'SE_Practica4_AlbaRueda_Lucia', Target 'Practica4': (DO NOT MODIFY !)
+F (.\LPC2300.s)(0x559D21C2)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips--pd "__UVISION_VERSION SETA 525"-o .\flash\lpc2300.o --depend .\flash\lpc2300.d)
+F (.\Retarget.c)(0x559D21C2)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\retarget.o --omf_browse .\flash\retarget.crf --depend .\flash\retarget.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (C:\Keil_v5\ARM\ARMCC\include\rt_misc.h)(0x599F218E)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599F218C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+F (.\Serial.c)(0x559D21C2)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\serial.o --omf_browse .\flash\serial.crf --depend .\flash\serial.d)
+I (C:\Keil_v5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+F (.\Practica4.c)(0x69087F1B)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\practica4.o --omf_browse .\flash\practica4.crf --depend .\flash\practica4.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (C:\Keil_v5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+I (Practica4.h)(0x69087F50)
+I (misTipos.h)(0x66FD303C)
+F (.\HAL.c)(0x69087F92)(--c99 -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="525"-o .\flash\hal.o --omf_browse .\flash\hal.crf --depend .\flash\hal.d)
+I (C:\Keil_v5\ARM\INC\Philips\LPC23xx.H)(0x559D2F68)
+F (.\Resumen.txt)(0x69088046)()

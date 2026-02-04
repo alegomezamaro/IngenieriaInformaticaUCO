@@ -1,0 +1,12 @@
+/********************************************************************************/
+/* MICROCONTROLADORES.															*/
+/* 3º de Graduado en Ingeniería Electrónica Industrial.							*/
+/* Universidad de Córdoba.														*/
+/********************************************************************************/
+/* Práctica 0: Introdución a la herramienta Keil uVision 5						*/
+/* Nombre y apellidos:															*/
+/* Fecha: 11 de marzo de 2024													*/
+/********************************************************************************/
+
+En este pequeño ejercicio se genera una señal cuadrada por el puerto P2.0.
+Sirve simplemente para iniciar el estudio de la herramienta software Keil uVision.
