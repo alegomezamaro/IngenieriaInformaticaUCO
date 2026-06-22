@@ -1,0 +1,65 @@
+<test v="2.0"><p><t>Cuestionario Tema 5 STR</t><d/><a>PAPAPAPAPAPALOMARES</a><c>15</c><v/><p/><m/><e>G8k9YaXnMFf571i</e><r>37141155299935</r></p><f/><c><c><t>0</t><p> Si tenemos un sistema cuya memoria se ha subdividido en 5 bloques con un tamaño 
+preestablecido, que pueden ser asignados a cualquier tarea del sistema, ¿qué tipo de 
+sistema de memoria tenemos? </p><c>1211</c><r><o> Es un sistema con particiones fijas con colas fijas. </o><o> Es un sistema con particiones fijas con colas variables. </o><o> Es un sistema con particiones variables sin colas. </o><o> Es un sistema con particiones variables con colas fijas. </o></r><l/></c><c><t>0</t><p> Si tenemos un sistema cuya memoria se ha subdividido en 5 bloques con un tamaño 
+preestablecido y cada bloque tiene su propio listado de procesos que pueden utilizar dicho 
+bloque de memoria, ¿qué tipo de sistema de memoria tenemos?</p><c>1211</c><r><o> Es un sistema con particiones variables con colas fijas.</o><o> Es un sistema con particiones fijas con colas fijas.</o><o> Es un sistema con particiones fijas con colas variables. </o><o> Es un sistema con particiones variables sin colas. </o></r><l/></c><c><t>0</t><p> ¿Qué ventaja tiene poner el Sistema Operativo en una partición situada en las primeras 
+direcciones de la memoria principal y los drives en otra partición situada en las últimas 
+direcciones? </p><c>1121</c><r><o> Permiten a las tareas de usuario acceder a los drives de manera más eficiente, ya que al 
+estar en una partición en las últimas posiciones de memoria, las direcciones de las 
+funciones de los drives son fijas y conocidas. </o><o> No tiene ningún beneficio particular, sería igual de efectivo que cualquier otra 
+configuración de particiones en memoria. </o><o> Deja una partición para tareas de usuario acotada entre dos particiones con protección de 
+memoria, limitando el efecto de fallos de punteros. </o><o> Permite el acceso más rápido al Sistema Operativo, ya que se encuentra en las primeras 
+posiciones de memoria y su direccionamiento es más eficiente.</o></r><l/></c><c><t>0</t><p> ¿Qué módulo del Administrador de Tareas es el encargado de modificar los registros de la 
+CPU para la ejecución de un nuevo proceso? </p><c>1112</c><r><o>Planificador  </o><o> Es una función realizada a medias entre todos los módulos que componen el 
+Administrador de Tareas.</o><o> No es una función del Administrador de Tareas.</o><o>Despachador  </o></r><l/></c><c><t>0</t><p> ¿Qué módulo del Administrador de Tareas es el encargado de actualizar los datos de 
+tiempo de ejecución acumulado de los procesos?</p><c>2111</c><r><o>Planificador  </o><o>No es una función del Administrador de Tareas</o><o> Despachador </o><o> Es una función realizada a medias entre todos los módulos que componen el 
+Administrador de Tareas. </o></r><l/></c><c><t>0</t><p> ¿Qué módulo del Administrador de Tareas es el encargado de ordenar las tareas activas?</p><c>1211</c><r><o> No es una función del Administrador de Tareas.</o><o>Planificador  </o><o>Es una función realizada a medias entre todos los módulos que componen el 
+Administrador de Tareas.  </o><o> Despachador</o></r><l/></c><c><t>0</t><p> ¿Qué módulo del Administrador de Tareas es el encargado de determinar si un proceso ha 
+agotado su quantum de tiempo? </p><c>1112</c><r><o>No es una función del Administrador de Tareas.</o><o> Despachador  </o><o>Es una función realizada a medias entre todos los módulos que componen el 
+Administrador de Tareas. </o><o> Planificador  </o></r><h>Según Gemini Planificador.
+Según documento de test Despachador.
+Razonamiento: Aunque el Administrador de Tareas se activa con el reloj , la decisión basada en la política de planificación (cuánto tiempo le toca a cada una) es competencia del Planificador. (Pág. 16).</h><l/></c><c><t>0</t><p> ¿Qué tipo de objeto planificable sería el que se encargase de la gestión y manejo de señales 
+entre procesos?</p><c>1121</c><r><o> Proceso  </o><o>Proceso ligero  </o><o> Hilo kernel  </o><o> Hilo de usuario</o></r><l/></c><c><t>0</t><p> ¿Qué tipo de objeto planificable sería el más recomendable para que una aplicación de 
+usuario se active al detectar una persona mediante un sensor de presencia conectado al 
+sistema? </p><c>1112</c><r><o> Hilo kernel </o><o>Hilo de usuario </o><o> Proceso </o><o> Proceso ligero</o></r><l/></c><c><t>0</t><p>¿Qué tipo de objeto planificable sería el más recomendable para permitir a una aplicación 
+de usuario de Realidad Virtual realizar los cálculos de la generación de los objetos 
+virtuales según la orientación del usuario mientras que se están mostrando las imágenes 
+generadas previamente en las gafas virtuales?</p><c>1112</c><r><o>Hilos kernel</o><o> Procesos  </o><o> Hilos de usuario</o><o> Procesos ligeros</o></r><h>Según Gemini Procesos ligeros.
+Según documento de test Hilos de usuario.
+Razonamiento: Mostrar imágenes requiere recursos del sistema. Los hilos de usuario bloquearían todo el proceso en cada llamada al sistema. Los procesos ligeros permiten que un hilo siga calculando mientras el otro se encarga de la salida gráfica de forma independiente. (Pág. 44 y 50).</h><l/></c><c><t>0</t><p>Además de los cambios necesarios en el Sistema Operativo, ¿es necesario hacer alguna 
+modificación en las tareas si queremos pasar de un sistema de particiones fijas a otro de 
+particiones variables? </p><c>1211</c><r><o> Sólo hay que realizar cambios para garantizar la protección de memoria, que basta con 
+realizar una recompilación del código fuente incluyendo un parámetro para el compilador 
+sin necesidad de tocar el código. </o><o> Si el sistema de memoria era de particiones fijas con colas variables, no hace falta hacer 
+cambios adicionales, más allá de la petición inicial de memoria al administrador. </o><o> No es necesario realizar ningún cambio en las tareas de usuario porque lo único relevante 
+es que el código fuente ya se ha compilado para esa arquitectura concreta del procesador. </o><o>Es necesario cambiar las funciones de direcciones relativas a absolutas, para permitir la 
+reubicación. </o></r><l/></c><c><t>0</t><p>De entre todas las capas software existentes en un sistema informático, ¿cuál es la que 
+permite acceder a un dispositivo específico del hardware de un sistema? </p><c>1211</c><r><o> Aplicaciones de usuario </o><o> BIOS </o><o>El sistema de ficheros </o><o>El administrador de tareas </o></r><l/></c><c><t>0</t><p>¿Qué módulo del Sistema Operativo se ejecuta periódicamente con un ciclo constante?</p><c>2111</c><r><o> El módulo scheduler</o><o>El módulo dispatcher</o><o> El Administrador de Memoria</o><o> El administrador de Entrada/Salida</o></r><h>Según Gemini (y ChatGPT y Copilot del documento) El módulo scheduler.
+Según documento de test  El Administrador de Memoria.
+Razonamiento: El Administrador de Tareas se activa con cada interrupción de reloj , momento en el cual se evalúa si el Planificador debe actuar para decidir el siguiente turno de ejecución. (Pág. 16).</h><l/></c><c><t>0</t><p> ¿Qué módulo del Sistema Operativo es responsable de establecer las prioridades de los 
+procesos de un sistema? </p><c>2111</c><r><o> El Administrador de Tareas. </o><o> El Administrador de Memoria. </o><o>El Administrador de Prioridades. </o><o>El Administrador de Procesamiento de CPU. </o></r><h>Según Gemini (y Copilot del documento y documento) El Administrador de Tareas. 
+Según ChatGPT del documento de test  El Administrador de Procesamiento de CPU. 
+Razonamiento: El Administrador de Tareas (o núcleo) es el módulo que debe asignar prioridades y almacenarlas en el bloque de control de la tarea (TCB). (Pág. 10 y 19).</h><l/></c><c><t>0</t><p> ¿Qué mecanismo es el más recomendable para llevar la gestión de particiones variables si 
+únicamente queremos tener una alta velocidad de respuesta a peticiones de asignación de 
+memoria? </p><c>1112</c><r><o>Todos alcanzan el mismo grado de precisión. </o><o>El método de mapa de bits.</o><o>El método de listas enlazadas.</o><o> El método de los colegas.</o></r><h>Según Gemini (y documento) El método de los colegas. 
+Según ChatGPT del documento de test  El método de listas enlazadas.
+Según Copilot del documento de test  El método de mapa de bits.
+Razonamiento: Los apuntes destacan que la ventaja principal de este método es su "rapidez" , a pesar de su mala utilización de memoria. (Pág. 34).</h><l/></c><c><t>0</t><p>¿Qué mecanismo es el más recomendable para llevar la gestión de particiones variables si 
+queremos tener, a la vez, un control muy preciso de la cantidad de memoria utilizada y 
+una alta velocidad de respuesta a peticiones de asignación de memoria? </p><c>1121</c><r><o> Todos alcanzan el mismo grado de precisión. </o><o> El método de mapa de bits. </o><o> El método de listas enlazadas.</o><o> El método de los colegas.</o></r><h>Según Gemini (y documento)  El método de listas enlazadas. 
+Según ChatGPT del documento de test   El método de los colegas.
+Según Copilot del documento de test  El método de mapa de bits.
+Razonamiento: El método de los colegas pierde precisión por la fragmentación interna. Las listas enlazadas permiten un control exacto de los segmentos y mantienen la velocidad mediante algoritmos como quick fit. (Págs. 32 y 34).</h><l/></c><c><t>0</t><p> ¿En qué estado se encontraría un proceso cuyo código se repite de manera cíclica en un 
+sistema con planificación RMA, que acaba de ejecutarse cumpliendo su deadline y aún no 
+ha sido lanzada en un nuevo instante de repetición? </p><c>1112</c><r><o>Estado existente.  </o><o>Estado no existente. </o><o>Estado activo. </o><o>Estado suspendido.</o></r><l/></c><c><t>0</t><p> ¿En qué estado se encontraría un proceso cuyo código se repite de manera cíclica en un 
+sistema con planificación RMA, pero que no puede ejecutarse porque no han 
+proporcionado el valor del período de repetición?</p><c>1112</c><r><o> Estado no existente.</o><o> Estado preparado. </o><o> Estado bloqueado.</o><o>Estado existente. </o></r><h>Según Gemini Estado existente. 
+Según el documento de test  Estado bloqueado.
+Razonamiento: En planificación RMA, la prioridad se deriva del período. Si falta el período, la tarea no tiene prioridad asignada, lo que define exactamente el estado Existente. (Pág. 17).</h><l/></c><c><t>0</t><p> ¿En qué estado se encontraría un proceso cuyo código se repite de manera cíclica en un 
+sistema con planificación RMA cuando otra tarea de mayor prioridad lo interrumpe para 
+ejecutarse? </p><c>1211</c><r><o>Estado no existente. </o><o>Estado preparado. </o><o>Estado bloqueado. </o><o>Estado existente. </o></r><l/></c><c><t>0</t><p> ¿Qué ventajas presenta el uso del acceso directo a la BIOS desde las aplicaciones de 
+usuario? </p><c>2111</c><r><o> Permite una ejecución más rápida de los accesos a los dispositivos.</o><o>Consiguen acceder de manera segura a más dispositivos en paralelo, ya que unas tareas 
+accederían a dispositivos a través del Sistema Operativo y otras tareas accederían 
+directamente a través de la BIOS. </o><o> Consigue evitar el control del Sistema Operativo, por lo que se logra desbloquear 
+dispositivos que el Sistema Operativo bloquea. </o><o> Permite variar el control de prioridades de dispositivos en Sistemas Operativos que no 
+tienen implementada esta función</o></r><l/></c></c><i/></test>

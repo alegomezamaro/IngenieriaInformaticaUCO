@@ -1,0 +1,6 @@
+menu "Configuración Práctica 1 parte 3"
+ config GPIO_PIN
+ int "GPIO Pin"
+ range 1 39
+ default 13
+endmenu

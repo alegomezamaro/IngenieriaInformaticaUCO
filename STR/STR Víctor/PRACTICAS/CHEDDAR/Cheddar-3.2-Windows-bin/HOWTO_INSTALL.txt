@@ -1,0 +1,81 @@
+
+This file gives installation rules for Cheddar on various targets
+
+
+
+
+With VirtualBox, on any computer (PC linux or windows, or Mac, or whatever you want) :
+======================================================================================
+
+
+You should be able to run Cheddar on any computer with VirtualBox.
+For such a purpose:
+1) Download the cheddar_tutorial.vdi file and copy it on your 
+computer.
+2) Define a Linux/ubuntu machine with enough memory and launch it.
+3) When login prompt appears, you can connect to this linux machine either with a french or a english
+keyboard (see on the right top part of the window to select keyword layout).
+4) The login to use is 'cheddar' and the password is 'cheddar' also
+5) When logged, launch a terminal and do
+
+source cheddar.bash
+
+6) Then, in this terminal, you can actually run cheddar as follows :
+
+cheddar  &
+
+
+
+For Windows :
+=============
+
+To install Cheddar in windows boxes, just unzip the
+zip file. For win32 boxes, all necessary DLL are
+provided into the zip file.
+
+Then, you can directly click on the binary 'cheddar.exe' 
+of this folder to launch Cheddar.
+
+
+For Linux :
+=============
+
+1) Untar the binaries in the target directory
+2) To be able to run cheddar, the shell variables of the file cheddar.bash
+must be set. For such a purpose : set 
+CHEDDAR_INSTALL_PATH of cheddar.bash to the location where you
+have unzip the Cheddar tar ball
+3) put cheddar.bash in your configuration login shell (e.g. .bashrc or
+.profile or .tcsh for example) or use the source shell command as follow :
+
+source cheddar.bash
+
+4) Then, you can actually run cheddar as follows :
+
+cheddar &
+
+
+Known issues:
+=============
+
+1) Some texts, fonts  and pixmaps do not appear in the Cheddar editor :
+- Please check that your linux installation contains GTK 2.0 libraries
+- Please also check Cheddar FAQ for font selection with GTK 2.0
+
+2) GNAT 2014 and gcc ABI compatibility problem on Fedora 24 and Mint 18.1 (64 bits)
+- cd gnat-2014/libexec/gcc/x86_64-pc-linux-gnu/4.7.4/ld 
+  mv ld ld-orig
+
+3) Missing library in Mint 18.1
+- sudo apt-get install gcc-multilib
+
+4) Ocarina is not compiled together with Cheddar on Mint 18.1
+
+Contact :
+=========
+Feel free to contact us if you have any problems.
+
+Cheddar's mailing list (cheddar@listes.univ-brest.fr, need a subscription before posting).
+
+
+

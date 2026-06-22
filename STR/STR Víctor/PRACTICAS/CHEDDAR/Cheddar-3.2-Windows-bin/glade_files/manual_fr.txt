@@ -1,0 +1,81 @@
+This is a short overview of each menu item of Cheddar.
+Please, refer to the user's guide and the tutorials for further reading.
+
+---------------------------------------------------------------------
+
+File Menu
+---------
+
+1. New : create a new CheddarADL architecture model/XML project.
+2. Open : load an existing CheeddarADL architecture model/XML project file into the editor.
+3. Save : save the current CheeddarADL architecture model/XML project into the current file.
+4. Save : save the current CheeddarADL architecture model/XML project into a file with a new file name.
+5. AADL : 
+     5.1 AADL import : load an AADL model and convert it into Cheddar ADL.
+     5.2 AADL export : translate a Cheddar ADL model and write its AADL translation in a file. 
+     5.3 Export property sets used by Cheddar.
+     5.4 Export standard AADL property set.
+     5.5 Customize how AADL services work.
+6. Exit : Quit the Cheddar's toolset.
+
+
+Edit Menu
+---------
+
+1. Software : create/update software entities of CheddarADL
+2. Hardware : create/update hardware entities of CheddarADL
+2. Deployement : create/update deployement entities of CheddarADL
+
+
+
+Tools Menu
+----------
+
+1. Clear work space : cleanup the working area (drawing and text areas). Do not change anything on the project itself. 
+2. Scheduling :  services to performa scheduling analysis
+      2.1 Scheduling simulation : compute and draw scheduling simulation. This menu allows the user to customize the way the scheduling simulation is computed.
+      2.2 Scheduling feasibility : compute some basics feasibility tests on all processors. Feasibility test computed there are utilization factor test and response time test.
+      2.3 Priority assignments : service to assign priorities to task
+            2.3.1 Rate Monotonic  
+            2.3.2 Deadline Monotonic
+            2.3.3 Audsley algorithm
+            2.3.3 Audsley with CRPD, PT :
+            2.3.3 Audsley with CRPD, PT-simplified :
+            2.3.3 Audsley with CRPD, Tree : 
+      2.4 Transaction : worst case response time analysis with transaction
+      2.5 Event table services : services to handle  event tables.
+         2.5.1 Compute scheduling and generate event table : compute the scheduling and produce the event table.
+         2.5.2 Draw time line from event table : draw time line from the last computed or loaded scheduling/event table.
+         2.5.3 Run analysis on event table : perform analysis on the last computed or loaded scheduling/event table.
+         2.5.4 Export event table : save the last scheduling/event table on a file in a XML format.
+      2.6 Partitionning : provide some services to assign tasks on a set of processor.
+            2.6.1 Best Fit : assign tasks on the set of processor according to the Best Fit algorithm. 
+            2.6.2 General Task : assign tasks on the set of processor according to the General Task algorithm.
+            2.6.3 Next Fit : assign tasks on the set of processor according to the Next Fit algorithm.
+            2.6.4 First Fit : assign tasks on the set of processor according to the First Fit algorithm.
+            2.6.5 Small Task : assign tasks on the set of processor according to the Small Task algorithm.
+      2.7 Scheduling Options : customize how the scheduling simulation will be performed.
+3. Resource  : resource analysis services
+      3.1 Worst Case Blocking Time : compute worst case resources blocking time according to PCP and PIP protocols without computing the scheduling 
+      3.2 Looking for priority inversion from simulation : run analysis on a previously computed scheduling to look for high priority tasks blocked by lower priority task on resource entities.
+      3.3 Looking for priority inversion from simulation : run analysis on a previously computed scheduling to look for tasks blocked for ever on shared reousrces.
+4. Buffer : analysis services related to buffer entities
+      4.1 Buffer simulation : compute buffer utilization factor and message waiting time from a given scheduling simulation. 
+      4.2 Buffer feasibility tests : compute bound on buffer utilization factor and essage waiting time without computing scheduling
+5. Precedencies  : algorithms that can schedule or check feasibility of a tasks set with dependencies
+      5.1 Chetto/Blazewicz modifications on priorities : create independent task set from a dependent task set by a modification oe task priorities according to precedency constraints.
+      5.2 Chetto/Blazewicz modifications on deadlines : create independent task set from a dependent task set by a modification oe task deadlines according to precedency constraints.
+      5.3 End to End response time : compute response time from a set of task with precendency relationships by Holistic analysis.
+6. Memory footprint analysis :
+7. Density tools :
+8. Cache : 
+
+
+Help Menu
+---------
+
+1. About Cheddar : provides version number of this running Cheddar toolset
+2. Manual : this window !
+3. Scheduling references : gives all publication references applied to perform analysis
+
+

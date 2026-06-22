@@ -1,0 +1,8 @@
+menu "Configuración Práctica 1 parte 3"
+    config GPIO_PIN
+        int "GPIO Pin"
+        range 1 39
+        default 13
+        help
+            Número de puerto de entrada/salida de propósito general (GPIO) donde se conecta la señal del pulsador
+endmenu

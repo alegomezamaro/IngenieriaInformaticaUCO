@@ -1,0 +1,240 @@
+<test v="2.0"><p><t>Cuestionario Tema 2 STR</t><d/><a>PAPAPAPAPAPALOMARES</a><c>15</c><v/><m/><e>0ZHDXfnF2Jo6AjD</e><r>15822204454757</r></p><f><a>50</a><c>次正常</c></f><c><c><t>0</t><p>Teniendo en cuenta las definiciones puestas a continuación, seleccione cuál de las siguientes asignaciones en ADA son correctas.
+type Weight is digits 4 range 0.0 .. 200.0; 
+type Height is digits 4 range 0.0 .. 200.0; 
+w0, w1: Weight; 
+h0, h1: Height; </p><c>1112</c><r><o>w0 := 75.4; 
+h0 := 180.0; 
+h1 := w0 + 100.0;  (No, w0 es distinto tipo que h1) </o><o>w0 := 75.4; 
+h0 := 180.0; 
+h1 := w0 + h0/10.0;  (No, w0 es distinto tipo que h1) </o><o>w0 := 75.4; 
+h0 := 180.0; 
+h1 := h0 + 52.0;  (No, la suma se sale del rango) </o><o>w0 := 75.4; 
+h0 := 180.0; 
+h1 := h0 + h0/10.0; </o></r><f>-0.5</f></c><c><t>0</t><p>Seleccione qué definiciones y sentencias en ADA se utilizarían para definir un rango de 
+números reales con precisión de milésima entre -99 y 99. </p><c>1121</c><r><o>type Dato is digits 5 range -99.999 .. 99.999; </o><o>type Dato is digits 0.001 range -99.999 .. 99.999; </o><o>type Dato is delta 0.001 range -99.999 .. 99.999; </o><o>type Dato is delta 5 range 0.001; </o></r><f>-0.5</f></c><c><t>0</t><p>Seleccione el lenguaje de programación que tiene una mayor flexibilidad. </p><c>1121</c><r><o>SQL </o><o>Python </o><o>C </o><o>Java </o></r><f>-0.5</f></c><c><t>0</t><p>Escoja el lenguaje de programación que presenta mayor nivel de simplicidad para obtener 
+un registro concreto de una base de datos. </p><c>1121</c><r><o>ADA  </o><o>C++ </o><o>SQL  </o><o>Ensamblador </o></r><f>-0.5</f></c><c><t>0</t><p>Indique qué característica se está potenciando cuando un lenguaje de programación obliga 
+al programador a especificar todos y cada uno de los parámetros de una función. </p><c>2111</c><r><o>Modularidad  </o><o>Legibilidad</o><o>Simplicidad </o><o>Flexibilidad </o></r><f>-0.5</f></c><c><t>0</t><p>Seleccione qué característica no favorece la legibilidad. </p><c>1121</c><r><o>Poder usar comentarios multilínea.</o><o>Poder utilizar mayúsculas y minúsculas en las variables. </o><o>Utilizar saltos a direcciones absolutas dentro del código.</o><o>Poder definir tipos de datos abstractos.  </o></r><f>-0.5</f></c><c><t>0</t><p>El método de Newton es un método matemático iterativo para encontrar los ceros de una 
+función f(x) derivable. Es decir, va aproximando de manera iterativa la resolución de una 
+función para encontrar un valor que haga cero a dicha función. Necesita la función 
+original (f(x)) y la primera derivada de la función (df(x)). Parte de un valor inicial, 
+habitualmente x=0, y obtiene el nuevo valor como xi+1 = xi + f(xi)/df(xi). Si la diferencia es 
+inferior a un error determinado, se finaliza. 
+Tómese float fabs(float x) como la función que devuelve el valor absoluto de la variable. 
+Indique cuál de los siguientes códigos que buscan el 0 de una función por el Método de 
+Newton es preferible en aras de la característica de la eficacia del código.</p><c>2111</c><r><o>float f (float x); // Function f(x). Externally defined
+float df (float x); // Derivative of f(x). Externally defined
+float fabs (float x); // Absolute value of x. Externally defined
+
+float x = 0.0, xnew, xold;
+float error = 0.001;
+
+int main() {
+    xnew = xold = x;
+
+    for (i = 0; i &lt; 1000; i++) {
+        xnew = xold + f(xold)/df(xold);
+
+        if (fabs(xnew - xold) &lt; error) break;
+    }
+
+    x = xnew;
+
+    printf("%f\n", x);
+
+    return 0;
+}</o><o>float f (float x); // Function f(x). Externally defined
+float df (float x); // Derivative of f(x). Externally defined
+float fabs (float x); // Absolute value of x. Externally defined
+
+float x = 0.0, xnew, xold;
+float error = 0.001;
+
+int main() {
+    xold = xnew = x;
+
+    iteration: xnew = xold + f(xold)/df(xold);
+
+    if (fabs(xnew - xold) &gt; error)
+        goto iteration;
+
+    x = xnew;
+
+    printf("%f\n", x);
+
+    return 0;
+}</o><o>float f (float x); // Function f(x). Externally defined
+float df (float x); // Derivative of f(x). Externally defined
+float fabs (float x); // Absolute value of x. Externally defined
+
+float x = 0.0, xnew, xold;
+float error = 0.001;
+
+int main() {
+    xold = x;
+    xnew = xold + 2*error;
+
+    while (fabs(xnew - xold) &lt; error) {
+        xnew = xold + f(xold)/df(xold);
+    }
+
+    x = xnew;
+
+    printf("%f\n", x);
+
+    return 0;
+}</o><o>float f (float x); // Function f(x). Externally defined
+float df (float x); // Derivative of f(x). Externally defined
+float fabs (float x); // Absolute value of x. Externally defined
+
+float x = 0.0, xnew, xold;
+float error = 0.001;
+
+int main() {
+    xold = xnew = x;
+
+    do {
+        xnew = xold + f(xold)/df(xold);
+    } while (fabs(xnew - xold) &gt; error);
+
+    x = xnew;
+
+    printf("%f\n", x);
+
+    return 0;
+}</o></r><f>-0.5</f></c><c><t>0</t><p>De los siguientes lenguajes de programación, seleccione aquel que presente menor nivel de 
+seguridad. </p><c>1112</c><r><o>Fortran</o><o>C</o><o>Python </o><o>Ensamblador </o></r><f>-0.5</f></c><c><t>0</t><p>¿Qué tipo de sistema sería el más recomendable para poner una aplicación de tiempo real 
+que controle la velocidad de rotación en función del peso en un sistema empotrado dentro 
+de una lavadora inteligente?</p><c>1211</c><r><o>Un ejecutable con enlaces dinámicos. </o><o>Un ejecutable stand-alone.</o><o>Un ejecutable con integración completa de servicios. </o><o>Un Sistema Operativo en Tiempo Real con la aplicación como un servicios del Sistema 
+Operativo con carga y descarga a demanda. </o></r><f>-0.5</f></c><c><t>0</t><p>Indique qué característica del lenguaje hace que sea posible que un mismo programa se 
+pueda ejecutar en un procesador de 32 bits y en uno de 64 bits. </p><c>1121</c><r><o>Seguridad  </o><o>Eficacia</o><o>Portabilidad </o><o>Flexibilidad</o></r><f>-0.5</f></c><c><t>0</t><p>Supongamos que se ha producido un error en una función. Si dicha función no tiene 
+manejador de excepciones para la excepción que se ha producido, seleccione cuál de las 
+siguientes acciones se realizaría. </p><c>1121</c><r><o>Se comienza a evaluar la pila de llamadas comenzando desde el main o desde el 
+procedimiento donde haya un manejador “catch-all”. En cuanto se encuentre una función 
+con un manejador para la excepción generada, se le da control y en caso de no encontrar, 
+se ejecuta el manejador catch-all o el del Sistema Operativo, si no existía. </o><o>Primero, busca si existe un manejador “catch-all” en toda la pila de llamadas de 
+funciones. Si existe, se sube la pila de llamada de funciones hasta ese manejador y se le 
+da control. En caso contrario, se le da control al manejador del Sistema Operativo, que 
+habitualmente aborta la ejecución del proceso. </o><o>Primero, busca en la función llamadora de la actual y ejecuta el manejador de 
+excepciones de esa función. Si no existe o no se maneja la excepción que se ha lanzado, 
+se pasa al superior, hasta que llegue al nivel del Sistema Operativo, donde se abortaría la 
+ejecución del proceso. </o><o>Primero, evalúa si en toda la pila de llamadas a la función hay algún manejador activo. Si 
+hay uno, se le da control a él. Si hay más de uno, se ejecuta el que esté más arriba de la 
+pila, cuando finaliza, se ejecuta el siguiente, hasta que todos los manejadores se terminan 
+de ejecutar. Si no hay ninguno, se ejecuta el manejador del Sistema Operativo, abortando 
+la ejecución del proceso. </o></r><f>-0.5</f></c><c><t>0</t><p>En ADA, ¿qué característica se favorece al permitir indicar un número de la siguientes 
+manera 2#1001_0001#? </p><c>1112</c><r><o>Portabilidad</o><o>Modularidad</o><o>Simplicidad</o><o>Legibilidad</o></r><f>-0.5</f></c><c><t>0</t><p>¿Qué debe proporcionar un lenguaje de programación en relación a los errores que se 
+produzcan mientras los programas se ejecutan? </p><c>1211</c><r><o>Un manejador “catch-all” que capture todos los errores en el nivel del main. </o><o>Un soporte de gestión de excepciones flexible, con baja sobrecarga y de fácil uso.</o><o>Un mecanismo de fail-safe que permita cerrar la aplicación de manera segura. </o><o>Compiladores que permitan detectar posibles errores en tiempo de compilación y, en su 
+caso, permitan identificar funciones que no tengan manejadores de excepciones que 
+puedan lanzarse en un determinado trozo de código. </o></r><f>-0.5</f></c><c><t>0</t><p>Indique cuál de las siguientes sentencias daría error al utilizar un lenguaje con 
+tipificación fuerte de datos. </p><c>1121</c><r><o>float max (int v0, char v1);
+
+int main() {
+    int a = 1;
+    char b = 2;
+
+    float c;
+
+    c = max(a, b);
+
+    return 0;
+}</o><o>float transf(int v0);
+float transf(char v1);
+
+int main() {
+    int a = 1, b = 2;
+
+    float c;
+
+    c = transf(a) + transf(b);
+
+    printf("%f\n", c);
+
+    return 0;
+}</o><o>int equal (int a, char b) {
+
+    if (a == b)
+    
+        return 1;
+        
+    else
+    
+        return 0;
+
+}</o><o>int main() {
+
+    int a = 1;
+    
+    char b = 1;
+    
+    float c;
+    
+    c = (float) (a + (int)b);
+    
+    if (c == 2.0)
+    
+        printf("Ok!");
+        
+    else
+    
+        printf("Error!");
+        
+    return 0;
+
+}</o></r><f>-0.5</f></c><c><t>0</t><p>¿Qué característica es la que se busca en un lenguaje de programación que sea capaz de 
+proporcionar una medida precisa de la computación de los diferentes módulos?</p><c>2111</c><r><o>Eficacia</o><o>Simplicidad </o><o>Modularidad</o><o>Portabilidad</o></r><f>-0.5</f></c><c><t>0</t><p>Indica cuál de los siguientes códigos de datos podría tener problemas de portabilidad 
+dependiendo del sistema en el que se ejecute. </p><c>1112</c><r><o>#include &lt;stdio.h&gt;
+
+int main() {
+    float a = 1.9;
+    int b;
+
+    b = (int) (a + 0.5);
+
+    if (b == 2)
+        printf("Ok!");
+    else
+        printf("Error!");
+
+    return 0;
+}</o><o>#include &lt;stdio.h&gt;
+
+int main() {
+    float a = 1.9;
+    int b;
+
+    b = (int) (a) + 1;
+
+    if (b == 2)
+        printf("Ok!");
+    else
+        printf("Error!");
+
+    return 0;
+}</o><o>#include &lt;stdio.h&gt;
+
+int main() {
+    float a = 1.9;
+    int b;
+
+    b = (int) (a);
+
+    if (b == 1)
+        printf("Ok!");
+    else
+        printf("Error!");
+
+    return 0;
+}</o><o>#include &lt;stdio.h&gt;
+
+int main() {
+    float a = 1.9, b;
+
+    b = a + 0.1;
+
+    if (b == 2.0)
+        printf("Ok!");
+    else
+        printf("Error!");
+
+    return 0;
+}</o></r><f>-0.5</f></c></c><i/></test>

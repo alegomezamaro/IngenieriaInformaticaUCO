@@ -1,0 +1,161 @@
+
+[1]    Preemptive and Non-Preemptive
+       Real Time Uni-Processor Scheduling.
+       L. George, N. Rivierre and M. Spuri.
+       INRIA Research Report number 2966.
+       September 1996.
+
+[2]    Holistic Schedulability Analysis for 
+       Distributed Hard Real-Time Systems.
+       K. Tindell and J. Clark.
+       Microprocessing and Microprogramming 
+       40:117-134. 1994.
+
+[3]    Priority Inheritance Protocols : An 
+       Approach to Real Time Synchronization.
+       L. Sha, R. Rajkumar and J.P. Lehoczky.
+       IEEE Transactions on computers,
+       39(9):1175-1185. 1990.
+
+[4]    About Bounds of Buffers Shared by
+       Periodic Tasks : the IRMA project.
+       J. Legrand, F. Singhoff, L Nana, 
+       L. Marce, F. Dupont and H. Hafidi.
+       In the 15th IEEE Euromicro, WIP
+       Real Time Systems Conference, 2003.
+
+[5]    Scheduling dependant tasks with
+       Different Arrival Times to Meet Deadlines.
+       J. Blazewicz.
+       In. Gelende H. Beilner (eds), 
+       Modeling and Performance Evaluation
+       of Computer Systems. Amsterdam 1976
+
+[6]    Dynamic Scheduling of Real Time
+       Tasks Under Precedence Constraints.
+       H. Chetto, M. Silly and T. Bouchentouf.
+       RTS International Journal of Time
+       Critical Computing Systems. 2(3):181-194,
+       September 1990.
+
+[7]    Scheduling Algorithms for multi-Programming
+       in a hard-real-time envirronment.
+       C. L. Liu and J. W. Layland.
+       Journal of the ACM, 20 (1):46--61,1973.
+
+[8]    On non preemptive Scheduling of periodic and
+       Sporadic Tasks
+       K. Jeffay, D.Stanat, C. Martel. 
+       in Proc. Of IEEE Real Time Systems Symposium
+       San Antonio, Texas, December 1991
+
+[9]    Assigning Real-Time Tasks to Homogeneous
+       Multiprocessor Systems .
+       A. Burchard, Y. Oh. Liebeherr, and S. H. Son 
+       Technical Report CS-94-01, 
+       University of Virginia, 
+       1994, Department of Computer Science. 
+
+[10]   Tight Performance Bounds of Heuristics 
+       for a Real-Time Scheduling Problem.
+       Y. Oh and S. H. Son. 
+       Technical Report CS93-24, 
+       University of Virginia, 
+       1993, Department of Computer Science.
+
+[11]   Performance Analysis of Buffers Shared 
+       by Independent Periodic Tasks.
+       J. Legrand, F. Singhoff, L Nana
+       and L. Marce
+       LISyC Technical report number legrand-02-2004, 
+       University of Brest, 
+       2005, Department of Computer Science.
+
+[12]   Queueing systems. Volume I : Theory 
+       L. Kleinrock.
+       A Wiley interscience publication.
+
+[13]   Analyse de tampons partages 
+       par des taches periodiques et independantes.
+       J. Legrand, F. Singhoff, L Nana
+       and L. Marce.
+       LISyC Technical report number legrand-01-2005, 
+       University of Brest, 
+       2005, Department of Computer Science.
+
+[14]   Extending Rate Monotonic Analysis 
+       when Tasks Share Buffers.
+       F. Singhoff, J. Legrand,  L Nana 
+       and L. Marce.
+       In the DAta Systems in Aerospace conference
+       (DASIA'2004), ESA Publication Division
+        - Nice (France), 2004.
+
+[15]   Cheddar : a Flexible Real Time
+       Scheduling Framework. 
+       F. Singhoff, J. Legrand,  L Nana 
+       and L. Marce
+       In the ACM SIGADA Conference, Atlanta,
+       15-18 November, 2004.
+       Also published in the SIGADA Ada Letters.
+
+[16]   Scheduling and Memory requirement
+       analysis with AADL.
+       F. Singhoff, J. Legrand,  L Nana 
+       and L. Marce.
+       In the ACM SIGADA Conference, Atlanta,
+       November, 2005.
+
+[17]   Faisabilite d'une application de supervision : 
+       le projet IRMA.
+       J. Legrand, F. Singhoff, L. Nana 
+       and L. Marce.
+       11th Conference RTS embedded systems 2003,
+       Paris (France). April 2003.
+
+[18]   Limitation of the Hyper-Period in 
+       Real-Time Periodic Task Set Generation.
+       J. Goossens and C. Macq.
+       9th Conference RTS embedded systems 2001,
+       Paris (France). Page 133-148.
+
+[19]   Rate Monotonic vs. EDF: Judgment Day.
+       G. Buttazzo.
+       Real-Time Systems, Vol. 29, 
+       Issue 1, pp. 5-26, January 2005.
+
+[20]   Analysis of cache-related preemption delay.
+       in fixed-priority preemptive scheduling.
+       Lee, Chang-Gun, et al.
+       Computers, IEEE Transactions on 47.6, 
+       (1998): 700-713.
+
+[21]   Periodicity of real-time schedules for 
+       dependent periodic tasks on identical 
+       multiprocessor platforms.
+       J. Goossens, E. Grolleau, L. Cucu-Grosjean,
+       Journal of Real-Time Sys, 52:808-832, 2016
+
+[22]   Preemptively Scheduling Hard-Real-Time Sporadic 
+       Tasks on One Processor.	
+       S.K. Baruah, A.K. Mok and L.E. Rosier.
+       Real-Time Systems Symposium, pp182-190, 1990
+	   
+[23]   Bounding memory interference delay in COTS-based 
+       multi-core systems. 
+       Kim, H., De Niz, D., Andersson, B., Klein, M., 
+       Mutlu, O., & Rajkumar, R. 
+       In 2014 IEEE 19th RTAS conference, 145-154.
+
+[24]   Secure computer system: Unified exposition and
+       multics interpretation.
+       D Elliott Bell and Leonard J La Padula. 
+       Technical report, MITRE CORP BEDFORD MA, 1976.
+
+[25]   Integrity considerations for secure computer systems. 
+       Kenneth J Biba. 
+       Technical report,
+       MITRE CORP BEDFORD MA, 1977.
+
+
+
