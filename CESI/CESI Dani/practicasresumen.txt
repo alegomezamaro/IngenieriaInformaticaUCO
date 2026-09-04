@@ -1,0 +1,364 @@
+------------PRACTICA1------------
+Cuestiones a destacar de la práctica1deCESIS:
+1 ¿Qué documento debemos tener siempre para analizar la compatibilidad entre los diversos
+componentes de un ordenador de tipo sobremesa?
+
+El documento que debemos de tener siempre para analizar la compatibilidad entre diversos
+componentes de un ordenador de sobremesa es el manual de la placa base del modelo concreto.
+
+2 ¿Qué factores nos pueden condicionar a la hora de seleccionar un procesador? (sólo CPU, sin
+gráfica incorporada, comunicaciones, etc.)
+
+Los factores que nos pueden condicionar a la hora de seleccionar un procesador son la velocidad de
+reloj, el número de núcleos, el consumo energético, el número de hilos, la caché, su
+arquitectura, etc.
+
+3 ¿Qué factores nos pueden condicionar a la hora de seleccionar un módulo de RAM?
+
+Los factores que nos pueden condicionar a la hora de seleccionar un módulo de RAM son la
+velocidad de transmisión, su capacidad, el tipo (DDR), el formato (DIMMO¡), la latencia (cl),
+etc.
+
+4 ¿Cual es más antiguo, el cable de datos paralelo IDE–ATA o el cable serie SATA?
+
+El cable más antiguo es el cable IDE–ATA.
+·SATA: SERIAL–ATA.
+·PATA: PARALEL–ATA.
+
+5 El equipo realiza una serie de pitidos al encender. ¿para qué sirven y como puedo saber su
+significado?
+
+Dependiendo del tipo de pitido significa una cosa u otra, existe un código de pitidos que depende
+del fabricante de la placa y de la BIOS, que sirve para saber si hay algún error o si por el
+contrario funciona de manera correcta.
+
+6 Mi equipo informático arranca siempre con la fecha reseteada y/o mal. ¿a qué se puede deber?
+
+Si su equipo informático arranca siempre con la fecha reseteada y/o mal, puede deberse a que se
+haya ido la silla de la placa base o a que se fue la BIOS.
+
+7 Tengo en mis manos un equipo informático y querría saber si puedo usarlo bajo GNU/Linux,
+¿cual sería la forma más fácil?
+
+La forma más fácil para saber si se puede usar un equipo informático bajo un determinado sistema
+operativo es probándolo.
+
+
+
+8. ¿Para qué sirve el disipador?
+
+Sirve para bajar la temperatura en algunos dispositivos electrónicos. Transfiere el calor de la
+parte caliente del componente, al aire.
+
+
+9. ¿Para qué sirve el disipador?
+
+Sirve para bajar la temperatura en algunos dispositivos electrónicos. Transfiere el calor de la
+parte caliente del componente, al aire.
+
+10. Una vez ensamblado el PC, en el arranque y en general, ¿Qué significa 1
+”beep” en el arranque y cuál puede ser la causa? ¿Y 2 ”beeps”? ¿Y 5 ”beeps”?
+
+El significado del "beep" puede cambiar dependiendo la duración de los mismos.
+Si escuchamos 1 corto, significa que todo está correcto. Si escuchamos 1 contínuo, se debe
+a un suministro eléctrico inadecuado de la línea eléctrica o bien de la fuente de
+alimentación. Si escuchamos 1 largo pero que se corta, puede ser que alguna ranura de
+memoria RAM esté defectuosa o bien la memoria esté conectada incorrectamente.
+Si escuchamos 2, ocurre lo mismo. Si escuchamos uno largo y uno corto, puede ser un
+posible error en la placa o en la propia BIOS. Si escuchamos 2 cortos, es un error en la
+paridad de memoria.
+Por último si escuchamos 5 "beeps", significa que el procesador o la tarjeta gráfica se
+encuentran bloqueados.
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+
+-----PRACTICA2----
+Cuestiones práctica 2 CESI:
+1. ¿Qué es una máquina virtual? Diferénciala en su definición de un contenedor de software como
+Docker.
+
+Una máquina virtual es un entorno de software que emula un sistema completo de hardware físico,
+permitiendo ejecutar un sistema operativo y aplicaciones de forma independiente y asilado del
+sistema operativo base. Una VM incluye un sistema operativo invitado, su propio kernel, y un
+conjunto completo de recursos virtualizados (CPU, memoria, almacenamiento).
+Máquina virtual vs Docker:
+Máquina virtual: Requiere un hipervisor para gestionar múltiples VMs y virtualiza todo el
+hardware. Es más pesada en términos de recursos.
+Contenedor (Docker): Comparte el kernel del sistema operativo anfitrión y virtualiza a nivel de
+sistema operativo. Es más ligera y eficiente en recursos, pero está más limitada al entorno del
+anfitrión. Proporciona una capa adicional de abstracción y automatización de virtualización de
+aplicaciones en múltiples sistemas operativos.
+
+2. ¿Como definirías el Hipervisor?
+
+El hipervisor es un software o firmware que permite la creación y gestión de máquinas virtuales,
+proporcionando a cada VM acceso aislado y controlado a los recursos físicos del hardware
+subyacente.
+
+Virtualización completa, de hardware o nativa: El hipervisor simula un hardware
+suficiente para permitir un sistema operativo no adaptado que es ejecutado de forma
+aislada.
+- Virtualización parcial o paravirtualización: El hipervisor ofrece un interfaz especial
+para acceder a los recursos. Esto hace que el sistema operativo tenga que
+responder a llamadas especiales o “hypercalls”.
+- Emulación: El hipervisor imita por medio de software una arquitectura al completo.
+Así puede hacer creer a los programas y sistemas operativos diseñados para una
+arquitectura en específico que son ejecutados sobre ella
+
+3. ¿Cual es la gran diferencia entre QEMU y Virtualbox como herramientas de virtualización?
+
+QEMU: Es un emulador que simula completamente el hardware, lo que permite ejecutar sistemas
+operativos de distintas arquitecturas. Puede usarse con o sin KVM (Kernel-based Virtual Machine)
+para acelerar la virtualización.
+VirtualBox: Es una herramienta de virtualización optimizada para entornos de escritorio. No
+soporta emulación completa de hardware como QEMU y depende del hardware del sistema
+anfitrión.
+
+4. ¿En qué se caracteriza una distribución de GNU/Linux con una política de publicación de rolling
+release? ¿Qué problema podríamos encontrar en servidores?
+
+Rolling Release: Se caracteriza por proporcionar actualizaciones continuas y frecuentes sin
+necesidad de versiones mayores. Los paquetes se actualizan a medida que están disponibles.
+Problemas en servidores: Estas actualizaciones constantes pueden introducir bugs, inestabilidad o
+problemas de compatibilidad en entornos de producción, donde la estabilidad es crucial.
+
+5. ¿En qué consiste el particionado de disco en un sistema GNU/Linux?
+
+El particionado de disco consiste en dividir un disco físico en secciones lógicas (particiones),
+permitiendo organizar y gestionar mejor el sistema de archivos. En GNU/Linux, las particiones
+comunes incluyen:
+• / (root): Sistema principal.
+• /home: Directorios personales de los usuarios.
+• /var: Archivos temporales y logs.
+• Partición de intercambio (swap): Espacio en disco para memoria virtual.
+
+6. ¿Qué utilidad puede tener el montar en una partición independiente la carpeta /home?
+
+Montar /home en una partición independiente permite:
+• Preservar los datos personales de los usuarios al reinstalar o actualizar el sistema operativo.
+• Mejorar la seguridad y estabilidad al evitar que los usuarios llenen el espacio del sistema
+principal.
+• Facilitar backups y migraciones.
+
+7. Ordéname de más a menos seguras estas conexiones:
+
+SSH con usuario y contraseña, telnet, SSH con claveSSH.
+De mayor a menor seguridad:
+1. SSH con clave: Usa claves públicas/privadas, lo que reduce el riesgo frente a ataques de fuerza
+bruta.
+2. SSH con usuario y contraseña: Más seguro que Telnet, pero susceptible a ataques de fuerza
+bruta si la contraseña es débil.
+3. Telnet: Inseguro porque transmite datos en texto plano, incluyendo contraseñas.
+
+
+8. A qué obedecen las siglas LAMP cuando hablamos de instalar las herramientas necesarias para
+un servidor web.
+Cuando hablamos de instalar las herramientas necesarias para un servidor web, las siglas LAMP se
+refieren a:
+• Linux: Sistema operativo.
+• Apache: Servidor web.
+• MySQL: Sistema de gestión de bases de datos.
+• PHP/Python: Lenguaje de programación para aplicaciones web dinámicas.
+
+9. ¿Cual es la forma más rápida y directa de comprobar que nuestro servidor web puede ejecutar
+código PHP?
+
+La forma más rápida y directa de comprobar que nuestro servidor web puede ejecutar código PHP:
+1. Crear un archivo llamado info.php en la raíz del servidor web con el siguiente contenido
+<?php phpinfo(); ?>
+2. Abrir el archivo en un navegador web apuntando a la dirección del servidor, por ejemplo:
+http://localhost/info.php
+Si el archivo muestra información detallada sobre PHP, significa que el servidor puede ejecutar
+código PHP correctamente. 
+
+10-¿Cuál es la diferencia entre e VMWare y su diferencia con Player?
+
+VirtualBox es una solución gratuita y de código abierto, que permite crear y ejecutar
+máquinas virtuales. También permite ejecutar varias máquinas al mismo tiempo. VMWare
+Player por otro lado estaría más limitado ya que solo puede ejecutar máquinas virtuales que
+hayan sido creadas con VMWare Workstation. Workstation necesita una licencia de pago
+para ser utilizado, pero tiene mejores prestaciones que VirtualBox, lo que permite trabajar
+con máquinas más complejas.
+
+11: ¿Qué es LVM? ¿Qué ventaja tiene para un servidor de gama baja?
+
+Es una implementación de gestor de volúmenes lógicos para Linux. Las ventajas que tiene
+para un servidor de gama baja es que nos permite relocalizar el espacio libre con facilidad
+en caso de que un volumen lógico se quede sin tamaño.
+
+12 ¿Qué diferencia existe entre telnet y ssh?
+
+Con SSH se realiza una conexión segura al servidor, sin embargo con Telnet se expone
+toda la información que intercambiamos con el servidor. Es por esto que es recomendable
+usar SSH frente a Telnet
+
+
+12: ¿Qué instalamos con el servicio LAMP?
+
+El servicio LAMP es una plataforma compuesta por:
+- Linux - El sistema operativo base
+- Apache - El servidor.
+- MySQL - El servidor de base de datos.
+- PHP - Lenguaje de programación utilizado.
+El acrónimo está formado por las iniciales de cada una de las herramientas utilizadas.
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+----PRACTICA3-------------------------
+
+
+
+1: Liste los argumentos de apt necesarios para instalar, buscar y
+eliminar paquetes (Pista: man apt-get ; man apt-cache; man yum)
+
+En Ubuntu:
+- Instalar: apt-get install
+- Eliminar: apt-get remove
+- Buscar: apt-get search
+
+
+
+
+2:Liste los argumentos de yum necesarios para instalar, buscar y
+eliminar paquetes (Pista: man yum)
+
+
+Instalar Paquetes :yum install nombre_paquete
+Buscar Paquetes: yum search término_de_búsqueda
+Eliminar Paquetes: yum remove nombre_paquete
+
+
+3: ¿Cómo se denominan y por quién pueden ser usados los puertos
+comprendidos entre 1024 y 65535?
+
+Se denominan “puertos azarosos” y pueden ser usados libremente por las aplicaciones del
+sistema.
+
+
+4: ¿Para que sirve la opción -X? ¿Qué ocurre si ejecutamos el comando
+gedit?
+
+Sirve para ejecutar aplicaciones gráficas a través de SSH en una máquina remota
+exportando la pantalla a nuestro escritorio. Si ejecutas gedit es posible que no funcione
+correctamente
+
+5: ¿Qué archivo es el que contiene la configuración de sshd?
+
+La configuración de sshd está localizada en /etc/ssh/sshd_config.
+
+
+
+6: Existen dos modos de conexión FTP, detalle el funcionamiento de cada
+uno y sus diferencias.
+
+Existen dos modos: el pasivo y el activo. El activo utiliza el puerto 20 para la transferencia
+de datos mientras que transmitirá los comandos utilizando el puerto 21. Utiliza también un
+puerto aleatorio P superior al 1023 para la transferencia de comandos y un P+1 para la de
+datos. El modo pasivo utiliza el 21 también para comandos, pero cambia el puerto 20 del
+activo por uno con rango Q superior a 1023. La principal diferencia en las que radican es en
+los puertos utilizados y en los comandos que envían, PORT es enviado por el activo y PASV
+por el pasivo
+
+
+7: Para qué sirve ftp put?
+
+Sirve para subir archivos al servidor ftp.
+
+8: ¿Qué es un servidor ftp?
+
+El Protocolo de transferencia de archivos (en inglés File Transfer Protocol o FTP) es un
+protocolo de red para la transferencia de archivos entre sistemas conectados a una red TCP
+(Transmission Control Protocol), basado en la arquitectura cliente-servidor.
+
+9: Diga un tipo de programa para trabajar con servidores ftp.
+
+FileZilla
+
+---------------------------------------------------------------------------------------------------------------
+
+
+----PRACTICA4-----------------
+
+1: Inspeccione algunos de los archivos y directorios anteriores, indique qué
+representa cada uno y realice un resumen de la actividad actual de su sistema Ubuntu
+y CentOS.
+
+- /proc/[pid]/status - Sirve para ver las variables relacionadas con los parámetros de
+memoria.
+- /proc/ksmg - Últimos comandos ejecutados por el kernel.
+- /proc/cpuinfo - Información sobre el procesador
+- /proc/modules - Indica los módulos del núcleo que se han cargado.
+
+2: Indique las distintas opciones que dispone sar así como una descripción
+de cada una de ellas. (Pista: man sar)
+
+
+- sar -c: Comprueba estadísticas de llamadas a sistema
+- sar -m: Comprueba la comunicación entre procesos
+- sar - p: Comprueba la actividad de carga de páginas en la memoria.
+- sar -d: Monitorea la actividad del disco
+- sar -g: Monitorea extracción y páginas de memoria
+- sar -k: Comprueba la asignación de memoria de núcleo
+- sar -a: Monitorea el acceso a archivos
+- sar -b: Monitorea la actividad de memoria intermedia
+- sar -q: Comprueba la actividad de cola
+- sar -r: Comprueba la memoria no utilizada
+- sar -u: Comprueba el uso de cpu
+
+3: Enumere y muestre las características más importantes de otras
+herramientas de monitorización para Linux (al menos 3).
+
+iostat: Genera informes de actividad de la CPU y de la actividad de E/S.
+top: Sirve para saber que procesos hay en ejecución y cuanta memoria consumen.
+netstat: Monitorea la conexión red en un sistema operativo
+
+
+4. Enumere y muestre las características más importantes de otras
+herramientas de monitorización para Windows (al menos 3).
+
+Rainmeter: Aplicación que permite monitorizar tu PC mediante el uso de gadgets.
+HWiNFO: Uno de los programas más utilizados que permite monitorizar nuestro hardware
+con una interfaz simple y sencilla.
+BatteryMon: Esta herramienta se usa para monitorizar el uso de baterías en portátiles.
+
+5. ¿Cuál podría ser una alternativa para monitorizar el consumo de nuestra memoria en
+Linux?
+
+Usar el comando free.
+
+6: Indique una señal que pueda significar que la CPU no está funcionando
+correctamente.
+
+Si el CPU se encuentra siempre al 100%, incluso si está realizando operaciones de poco
+peso en la misma
+
+----------------------------------------------------------------------------------------------
+
+1: Describa las características principales de la suite y describa los
+parámetros, carga que usan de prueba y tipo de test de al menos 3 benchmarks que
+contempla la suite.
+
+Las principales características de Phoronix son:
+- Es Multiplataforma y fácil de usar: Aunque es muy popular en Linux, también
+funciona con Mac OS y con Windows.
+- Es código abierto.
+- Puede monitorear varios sensores del sistema como CPU, lectura/escritura del
+disco, consumo de batería, etc.
+- Trae 450 perfiles de prueba y más de 100 suites de prueba.
+
+Los parámetros que utiliza son:
+- phoronix-test-suite install [test | suite]: Instalará el test o la suite indicada.
+- phoronix-test-suite run [test | suite]: Lanzará la ejecución del test o la suite indicada. -
+- phoronix-test-suite info [test | suite]: Mostrará información sobre el test o la suite. -
+- phoronix-test-suite detailed-system-info: Mostrará la información sobre el sistema.
+
+3 benchmarks de Phoronix:
+- CacheBench
+- Encode-MP3
+- Bork
+
