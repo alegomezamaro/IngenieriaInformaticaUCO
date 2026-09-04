@@ -1,0 +1,46 @@
+menu "Mi Menu de Configuración"
+
+# Este bloque permite elegir entre a, b, o c si MI_OPCION_ABC está habilitado
+config MI_OPCION_ABC
+    tristate "Elige una opción (a, b, c)"
+    default y
+    help
+        Elige entre las opciones a, b o c.
+
+if MI_OPCION_ABC
+
+choice
+    prompt "Elige tu opción"
+    default OPCION_A
+
+config OPCION_A
+    bool "Opción A"
+
+config OPCION_B
+    bool "Opción B"
+
+config OPCION_C
+    bool "Opción C"
+
+endchoice
+
+endif
+
+# Submenu para opciones adicionales
+menu "Submenu Ejemplo"
+    config MI_SUBMENU_OPCION
+        bool "Una opción en submenu"
+        default y
+        help
+            Esta es una opción dentro de un submenu.
+
+    config MI_SUBMENU_OPCION_NUMERICA
+        int "Configura un valor numérico"
+        default 5
+        range 1 10
+        help
+            Configura un valor entre 1 y 10.
+endmenu
+
+endmenu
+

@@ -1,0 +1,39 @@
+menu "Configuracion Practica 1.2"
+
+    config MI_VARIABLE_BOOL
+        bool "Activar saludo especial"
+        default y
+        help
+            Activa o desactiva un mensaje extra en el terminal.
+
+    config MI_VARIABLE_INT
+        int "Numero de repeticiones"
+        range 1 10
+        default 3
+        help
+            Define cuántas veces se repetirá el mensaje.
+
+    config MI_VARIABLE_STRING
+        string "Nombre del usuario"
+        default "Estudiante STR"
+        help
+            El nombre que aparecerá en el printf.
+
+    config MI_VARIABLE_HEX
+        hex "Codigo Hexadecimal (Ejemplo)"
+        default 0xAABBCC
+        help
+            Variable para probar valores hexadecimales.
+
+    choice TIPO_PLACA
+        prompt "Selecciona la version de hardware"
+        default PLACA_V1
+
+        config PLACA_V1
+            bool "Hardware Version 1.0"
+
+        config PLACA_V2
+            bool "Hardware Version 2.0"
+    endchoice
+
+endmenu

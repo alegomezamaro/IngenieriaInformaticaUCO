@@ -1,0 +1,232 @@
+<?xml version="1.0" standalone="yes"?>  
+<?xml-stylesheet type="text/xsl" href="cheddar_project.xsl"?>
+<!DOCTYPE cheddar [  
+<!ELEMENT name (#PCDATA) > 
+<!ELEMENT scheduler (#PCDATA) > 
+<!ELEMENT parameter (#PCDATA) > 
+<!ELEMENT network_link (#PCDATA) > 
+<!ELEMENT offset (#PCDATA) > 
+<!ELEMENT period (#PCDATA) > 
+<!ELEMENT capacity (#PCDATA) > 
+<!ELEMENT deadline (#PCDATA) > 
+<!ELEMENT blocking_time (#PCDATA) > 
+<!ELEMENT policy (#PCDATA) > 
+<!ELEMENT priority (#PCDATA) > 
+<!ELEMENT cpu_name (#PCDATA) > 
+<!ELEMENT address_space_name (#PCDATA) > 
+<!ELEMENT jitter (#PCDATA) > 
+<!ELEMENT seed (#PCDATA) > 
+<!ELEMENT predictable_seed (#PCDATA) > 
+<!ELEMENT activation_rule (#PCDATA) > 
+<!ELEMENT state (#PCDATA) > 
+<!ELEMENT protocol (#PCDATA) > 
+<!ELEMENT size (#PCDATA) > 
+<!ELEMENT qs (#PCDATA) > 
+<!ELEMENT time (#PCDATA) > 
+<!ELEMENT buffer_user (#PCDATA) >  
+<!ELEMENT resource_user (#PCDATA) >  
+<!ELEMENT event_Analyzer (#PCDATA) >  
+<!ELEMENT type (#PCDATA) >  
+<!ELEMENT text_memory_size (#PCDATA) >  
+<!ELEMENT heap_memory_size (#PCDATA) >  
+<!ELEMENT stack_memory_size (#PCDATA) >  
+<!ELEMENT data_memory_size (#PCDATA) >  
+<!ELEMENT cheddar (processors, (address_spaces)?, (tasks)?, ((event_analyzers)?|(networks)?|(buffers)?|(resources)?|(messages)?),(dependencies)?  )  >   
+<!ELEMENT processors (processor)+ >  
+<!ELEMENT processor (name|scheduler|network_link) >  
+<!ELEMENT address_spaces (address_space)+ >  
+<!ELEMENT address_space (name|text_memory_size|data_memory_size|stack_memory_size|heap_memory_size) >  
+<!ELEMENT networks (network)+ >  
+<!ELEMENT network (name|type) >  
+<!ELEMENT tasks (task)+>  
+<!ELEMENT task (name|cpu_name|address_space_name|capacity|start_time|(stack_memory_size)?|(text_memory_size)?|(period)?|(deadline)?|(parameters)?|(offsets)?|(jitter)?|(policy)?|(priority)?|(predictable_seed)?|(blocking_time)?|(seed)?
+|(activation_rule)?) >  
+<!ELEMENT offsets (offset)+ >  
+<!ELEMENT parameters (parameter)+ >  
+<!ELEMENT messages (message)+ >  
+<!ELEMENT message (name|size|(period)?|(deadline)?|(jitter)?) >  
+<!ELEMENT buffers (buffer)+ >  
+<!ELEMENT buffer (cpu_name|address_space_name|qs|name|size|(buffer_used_by)?) >  
+<!ELEMENT buffer_used_by (buffer_user)+ >  
+<!ELEMENT resources (resource)+ >  
+<!ELEMENT resource (cpu_name|address_space_name|name|protocol|(state)?|(resource_used_by)?) >  
+<!ELEMENT resource_used_by (resource_user)+ >  
+<!ELEMENT dependencies (dependency)+ >  
+<!ELEMENT event_analyzers (event_analyzer)+ >  
+<!ELEMENT dependency (#PCDATA)  >  
+<!ATTLIST scheduler 
+        quantum CDATA  "0"  
+        is_preemptive CDATA  "PREEMPTIVE"  
+        parametric_file_name CDATA "" >  
+<!ATTLIST event_analyzer  
+        parametric_file_name CDATA "" >  
+<!ATTLIST task  
+        task_type CDATA  "APERIODIC_TYPE"  
+        x CDATA "0"  
+        y CDATA "0" > 
+<!ATTLIST buffer  
+        x CDATA "0" 
+        y CDATA "0" > 
+<!ATTLIST message  
+        x CDATA "0" 
+        y CDATA "0" > 
+<!ATTLIST buffer_user 
+        buffer_role CDATA  "producer" >  
+<!ATTLIST dependency 
+        from_type CDATA "task" 
+        to_type CDATA "task" > 
+<!ATTLIST parameter 
+        parameter_type CDATA  "integer" >  
+] >  
+
+
+
+<cheddar>
+<processors>
+	<processor>
+		<name>src</name>
+		<scheduler> RATE_MONOTONIC_PROTOCOL </scheduler>
+	</processor>
+	<processor>
+		<name>snk</name>
+		<scheduler> RATE_MONOTONIC_PROTOCOL </scheduler>
+	</processor>
+</processors>
+<address_spaces>
+	<address_space>
+		<name>ea_snk</name>
+		<cpu_name>snk</cpu_name>
+		<text_memory_size> 0</text_memory_size>
+		<stack_memory_size> 0</stack_memory_size>
+		<data_memory_size> 0</data_memory_size>
+		<heap_memory_size> 0</heap_memory_size>
+	</address_space>
+	<address_space>
+		<name>ea_sr</name>
+		<cpu_name>sr</cpu_name>
+		<text_memory_size> 0</text_memory_size>
+		<stack_memory_size> 0</stack_memory_size>
+		<data_memory_size> 0</data_memory_size>
+		<heap_memory_size> 0</heap_memory_size>
+	</address_space>
+</address_spaces>
+
+<tasks>
+	<task x=" 130" y=" 243"  task_type="PERIODIC_TYPE" >
+		<cpu_name>sr</cpu_name>
+		<address_space_name>ea_src</address_space_name>
+		<name>buffer_consumer</name>
+		<capacity> 5</capacity>
+		<start_time> 0</start_time>
+		<policy>SCHED_FIFO</policy>
+		<deadline> 10</deadline>
+		<blocking_time> 0</blocking_time>
+		<priority> 1</priority>
+		<text_memory_size> 0</text_memory_size>
+		<stack_memory_size> 0</stack_memory_size>
+		<period> 10</period>
+		<jitter> 0</jitter>
+	</task>
+	<task x=" 475" y=" 158"  task_type="PERIODIC_TYPE" >
+		<cpu_name>snk</cpu_name>
+		<address_space_name>ea_snk</address_space_name>
+		<name>receiver1</name>
+		<capacity> 5</capacity>
+		<start_time> 0</start_time>
+		<policy>SCHED_FIFO</policy>
+		<deadline> 10</deadline>
+		<blocking_time> 0</blocking_time>
+		<priority> 1</priority>
+		<text_memory_size> 0</text_memory_size>
+		<stack_memory_size> 0</stack_memory_size>
+		<period> 10</period>
+		<jitter> 0</jitter>
+	</task>
+	<task x=" 187" y=" 44"  task_type="PERIODIC_TYPE" >
+		<cpu_name>snk</cpu_name>
+		<address_space_name>ea_snk</address_space_name>
+		<name>receiver2</name>
+		<capacity> 3</capacity>
+		<start_time> 0</start_time>
+		<policy>SCHED_FIFO</policy>
+		<deadline> 15</deadline>
+		<blocking_time> 0</blocking_time>
+		<priority> 1</priority>
+		<text_memory_size> 0</text_memory_size>
+		<stack_memory_size> 0</stack_memory_size>
+		<period> 15</period>
+		<jitter> 0</jitter>
+	</task>
+	<task x=" 214" y=" 144"  task_type="PERIODIC_TYPE" >
+		<cpu_name>src</cpu_name>
+		<address_space_name>ea_src</address_space_name>
+		<name>sender1</name>
+		<capacity> 3</capacity>
+		<start_time> 0</start_time>
+		<policy>SCHED_FIFO</policy>
+		<deadline> 10</deadline>
+		<blocking_time> 0</blocking_time>
+		<priority> 1</priority>
+		<text_memory_size> 0</text_memory_size>
+		<stack_memory_size> 0</stack_memory_size>
+		<period> 10</period>
+		<jitter> 0</jitter>
+	</task>
+	<task x=" 437" y=" 27"  task_type="PERIODIC_TYPE" >
+		<cpu_name>src</cpu_name>
+		<address_space_name>ea_src</address_space_name>
+		<name>sender2</name>
+		<capacity> 3</capacity>
+		<start_time> 0</start_time>
+		<policy>SCHED_FIFO</policy>
+		<deadline> 15</deadline>
+		<blocking_time> 0</blocking_time>
+		<priority> 1</priority>
+		<text_memory_size> 0</text_memory_size>
+		<stack_memory_size> 0</stack_memory_size>
+		<period> 15</period>
+		<jitter> 0</jitter>
+	</task>
+</tasks>
+<buffers>
+	<buffer x=" 10" y=" 150" >
+		<cpu_name>src</cpu_name>
+		<address_space_name>ea_src</address_space_name>
+		<name>b1</name>
+		<size> 100</size>
+		<qs>QS_MM1</qs>
+		<buffer_used_by>
+			<buffer_user> sender1   1   1 </buffer_user>
+			<buffer_user buffer_role="consumer"> buffer_consumer   1   1 </buffer_user>
+		</buffer_used_by>
+	</buffer>
+</buffers>
+<messages>
+	<message x=" 288" y=" 71" >
+		<name>m2</name>
+		<size> 2</size>
+		<deadline> 0</deadline>
+		<response_time> 0</response_time>
+		<communication_time> 0</communication_time>
+	</message>
+	<message x=" 342" y=" 239" >
+		<name>m1</name>
+		<size> 1</size>
+		<deadline> 0</deadline>
+		<response_time> 0</response_time>
+		<communication_time> 0</communication_time>
+	</message>
+</messages>
+<dependencies>
+	<dependency to_type="message"> sender2 m2 </dependency>
+	<dependency from_type="message"> m2 receiver2 </dependency>
+	<dependency to_type="message"> sender1 m1 </dependency>
+	<dependency from_type="message"> m1 receiver1 </dependency>
+	<dependency to_type="buffer"> sender1 b1 </dependency>
+	<dependency from_type="buffer"> b1 buffer_consumer </dependency>
+</dependencies>
+</cheddar>
+
+
+
+

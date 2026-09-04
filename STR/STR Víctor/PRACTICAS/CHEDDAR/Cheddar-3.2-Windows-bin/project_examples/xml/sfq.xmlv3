@@ -1,0 +1,122 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE Cheddar_ADL SYSTEM "cheddar_adl.dtd">
+<?xml-stylesheet type="text/xsl" href="cheddar_adl.xsl"?>
+<cheddar>
+  <core_units>
+    <core_unit id=" 16">
+      <object_type>CORE_OBJECT_TYPE</object_type>
+      <name>core1</name>
+      <scheduling>
+        <scheduling_parameters>
+          <quantum>0</quantum>
+          <preemptive_type>PREEMPTIVE</preemptive_type>
+          <capacity>0</capacity>
+          <user_defined_scheduler_source_file_name>  sfq0.parametric-cpu.sc </user_defined_scheduler_source_file_name>
+          <scheduler_type> pipeline_User_Defined_Protocol </scheduler_type>
+          <period>0</period>
+          <priority>0</priority>
+          <start_time>0</start_time>
+        </scheduling_parameters>
+      </scheduling>
+      <speed>1</speed>
+    </core_unit>
+  </core_units>
+  <address_spaces>
+    <address_space id=" 18">
+      <object_type>ADDRESS_SPACE_OBJECT_TYPE</object_type>
+      <name>ea_sfq0</name>
+      <cpu_name>sfq0</cpu_name>
+      <text_memory_size>0</text_memory_size>
+      <stack_memory_size>0</stack_memory_size>
+      <data_memory_size>0</data_memory_size>
+      <heap_memory_size>0</heap_memory_size>
+      <scheduling>
+        <scheduling_parameters>
+          <quantum>0</quantum>
+          <scheduler_type>NO_SCHEDULING_PROTOCOL</scheduler_type>
+          <preemptive_type>PREEMPTIVE</preemptive_type>
+          <capacity>0</capacity>
+          <period>0</period>
+          <priority>0</priority>
+          <start_time>0</start_time>
+        </scheduling_parameters>
+      </scheduling>
+    </address_space>
+  </address_spaces>
+  <processors>
+    <mono_core_processor id=" 17">
+      <object_type>PROCESSOR_OBJECT_TYPE</object_type>
+      <name>sfq0</name>
+      <network>a_network</network>
+      <processor_type>MONOCORE_TYPE</processor_type>
+      <migration_type>NO_MIGRATION_TYPE</migration_type>
+      <core ref=" 16"/>
+    </mono_core_processor>
+  </processors>
+  <tasks>
+    <periodic_task id=" 19">
+      <object_type>TASK_OBJECT_TYPE</object_type>
+      <cpu_name>sfq0</cpu_name>
+      <address_space_name>ea_sfq0</address_space_name>
+      <name>A</name>
+      <capacity> 1</capacity>
+      <priority> 1</priority>
+      <period> 4</period>
+      <deadline> 4</deadline>
+      <task_type>PERIODIC_TYPE</task_type>
+      <start_time>0</start_time>
+      <blocking_time>10</blocking_time>
+      <policy>SCHED_FIFO</policy>
+      <parameters>
+        <parameter>
+          <name>weight</name>
+          <type_of_parameter>integer_PARAMETER</type_of_parameter>
+          <integer_value>1</integer_value>
+        </parameter>
+      </parameters>
+      <text_memory_size>0</text_memory_size>
+      <stack_memory_size>0</stack_memory_size>
+      <criticality>0</criticality>
+      <context_switch_overhead>0</context_switch_overhead>
+    </periodic_task>
+    <aperiodic_task id=" 20">
+      <object_type>TASK_OBJECT_TYPE</object_type>
+      <cpu_name>sfq0</cpu_name>
+      <address_space_name>ea_sfq0</address_space_name>
+      <name>B</name>
+      <capacity> 2</capacity>
+      <priority> 1</priority>
+      <task_type>aperiodic_TYPE</task_type>
+      <deadline>5</deadline>
+      <start_time>0</start_time>
+      <parameters>
+        <parameter>
+          <parameter_name>weight</parameter_name>
+          <type_of_parameter>integer_PARAMETER</type_of_parameter>
+          <integer_value>1</integer_value>
+        </parameter>
+      </parameters>
+      <policy>SCHED_FIFO</policy>
+      <text_memory_size>0</text_memory_size>
+      <stack_memory_size>0</stack_memory_size>
+      <criticality>0</criticality>
+      <context_switch_overhead>0</context_switch_overhead>
+    </aperiodic_task>
+    <aperiodic_task id=" 21">
+      <object_type>TASK_OBJECT_TYPE</object_type>
+      <cpu_name>sfq0</cpu_name>
+      <address_space_name>ea_sfq0</address_space_name>
+      <name>C</name>
+      <capacity> 2</capacity>
+      <priority> 1</priority>
+      <task_type>aperiodic_TYPE</task_type>
+      <parameters>
+        <parameter>
+          <parameter_name>weight</parameter_name>
+          <type_of_parameter>integer_PARAMETER</type_of_parameter>
+          <integer_value>1</integer_value>
+        </parameter>
+      </parameters>
+    </aperiodic_task>
+  </tasks>
+</cheddar>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test de Tiempo de Respuesta — RMA</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f5f5f3;
+      color: #1a1a18;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      border: 0.5px solid #ddddd8;
+      padding: 2rem 2.5rem;
+    }
+    h1 { font-size: 20px; font-weight: 500; margin-bottom: 4px; }
+    .sub { font-size: 13px; color: #888780; margin-bottom: 1.8rem; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th {
+      text-align: left;
+      padding: 8px 10px;
+      font-weight: 500;
+      font-size: 11px;
+      color: #888780;
+      border-bottom: 0.5px solid #ddddd8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 8px 10px;
+      border-bottom: 0.5px solid #ddddd8;
+      vertical-align: middle;
+    }
+    input[type=number] {
+      width: 76px;
+      padding: 5px 8px;
+      font-size: 14px;
+      border: 0.5px solid #ddddd8;
+      border-radius: 8px;
+      background: #fafaf8;
+      color: #1a1a18;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input[type=number]:focus { border-color: #888780; }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .badge-pri  { background: #f1efe8; color: #5f5e5a; }
+    .badge-ok   { background: #eaf3de; color: #3b6d11; }
+    .badge-fail { background: #fcebeb; color: #a32d2d; }
+    .badge-pend { background: #f1efe8; color: #888780; }
+
+    .btn-row { display: flex; gap: 10px; margin-top: 1.25rem; flex-wrap: wrap; }
+    button {
+      padding: 7px 18px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 0.5px solid #b4b2a9;
+      background: #fff;
+      color: #1a1a18;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    button:hover { background: #f1efe8; }
+    button:active { transform: scale(0.98); }
+    button.primary {
+      background: #1a1a18;
+      color: #fff;
+      border-color: #1a1a18;
+    }
+    button.primary:hover { background: #444441; }
+
+    .steps-box {
+      background: #fafaf8;
+      border: 0.5px solid #ddddd8;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 13px;
+      color: #5f5e5a;
+      font-family: 'Courier New', monospace;
+      line-height: 1.9;
+      display: none;
+    }
+    .steps-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a1a18;
+      margin-bottom: 10px;
+      font-family: system-ui, sans-serif;
+    }
+    .task-block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid #ddddd8; }
+    .task-block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .task-label { font-family: system-ui, sans-serif; font-weight: 600; font-size: 13px; color: #1a1a18; margin-bottom: 4px; }
+    .ok-line   { color: #3b6d11; font-family: system-ui, sans-serif; font-size: 12px; margin-top: 2px; }
+    .fail-line { color: #a32d2d; font-family: system-ui, sans-serif; font-size: 12px; margin-top: 2px; }
+
+    .summary {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      display: none;
+    }
+    .summary.ok   { background: #eaf3de; color: #3b6d11; border: 0.5px solid #c0dd97; }
+    .summary.fail { background: #fcebeb; color: #a32d2d; border: 0.5px solid #f7c1c1; }
+
+    .util-info {
+      font-size: 12px;
+      color: #888780;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 1.25rem 1rem; }
+      table { font-size: 13px; }
+      input[type=number] { width: 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Test de tiempo de respuesta — RMA</h1>
+    <p class="sub">
+      Planificación por prioridades fijas (Rate Monotonic Analysis). Edita las tareas, periodos y tiempos de ejecución.
+      Las prioridades se asignan automáticamente: menor periodo → mayor prioridad.
+    </p>
+
+    <table id="task-table">
+      <thead>
+        <tr>
+          <th>Tarea</th>
+          <th>Periodo (T)</th>
+          <th>Ejec. (C)</th>
+          <th>Utiliz. C/T</th>
+          <th>Prioridad</th>
+          <th>R<sub>i</sub> (peor caso)</th>
+          <th>R<sub>i</sub> ≤ T<sub>i</sub>?</th>
+        </tr>
+      </thead>
+      <tbody id="task-body"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="padding:8px 10px; font-size:12px; color:#888780;">Utilización total</td>
+          <td id="util-total" style="padding:8px 10px; font-size:13px; font-weight:500;"></td>
+          <td colspan="3" style="padding:8px 10px; font-size:12px; color:#888780;" id="util-limit"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="btn-row">
+      <button class="primary" onclick="calculate()">Calcular R&#x1D62; ↵</button>
+      <button onclick="addTask()">+ Añadir tarea</button>
+      <button onclick="resetTasks()">Restaurar ejemplo</button>
+    </div>
+
+    <div class="summary" id="summary"></div>
+
+    <div class="steps-box" id="steps-box">
+      <div class="steps-title">Iteraciones de cálculo</div>
+      <div id="steps-content"></div>
+    </div>
+  </div>
+
+<script>
+const DEFAULT = [
+  { name:"A", T:20, C:3 },
+  { name:"B", T:30, C:7 },
+  { name:"C", T:10, C:4 },
+  { name:"D", T:40, C:5 },
+  { name:"E", T:60, C:3 },
+];
+
+let tasks = DEFAULT.map(t => ({...t}));
+
+function assignPriorities() {
+  const sorted = [...tasks].sort((a,b) => a.T - b.T);
+  tasks.forEach(t => {
+    t.priority = sorted.length - sorted.findIndex(s => s.name === t.name);
+  });
+}
+
+function utilTotal() {
+  return tasks.reduce((s,t) => s + t.C/t.T, 0);
+}
+
+function liuLayland(n) {
+  return n * (Math.pow(2, 1/n) - 1);
+}
+
+function renderTable() {
+  assignPriorities();
+  const body = document.getElementById("task-body");
+  body.innerHTML = "";
+  tasks.forEach((t, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><input type="text" value="${t.name}" style="width:44px;padding:5px 6px;font-size:14px;border:0.5px solid #ddddd8;border-radius:8px;background:#fafaf8;color:#1a1a18;outline:none;" onchange="tasks[${i}].name=this.value; renderTable();" /></td>
+      <td><input type="number" min="1" value="${t.T}" onchange="tasks[${i}].T=+this.value; renderTable();" /></td>
+      <td><input type="number" min="1" value="${t.C}" onchange="tasks[${i}].C=+this.value; renderTable();" /></td>
+      <td style="color:#5f5e5a;">${(t.C/t.T).toFixed(3)}</td>
+      <td><span class="badge badge-pri">${t.priority}</span></td>
+      <td id="R-${i}"><span class="badge badge-pend">—</span></td>
+      <td id="OK-${i}"><span class="badge badge-pend">—</span></td>
+    `;
+    if (tasks.length > 1) {
+      const del = document.createElement("td");
+      del.innerHTML = `<button onclick="removeTask(${i})" style="padding:3px 8px;font-size:12px;color:#a32d2d;border-color:#f7c1c1;">✕</button>`;
+      tr.appendChild(del);
+    }
+    body.appendChild(tr);
+  });
+
+  const U = utilTotal();
+  const lim = liuLayland(tasks.length);
+  document.getElementById("util-total").textContent = U.toFixed(4);
+  document.getElementById("util-limit").innerHTML =
+    `Límite Liu &amp; Layland (N=${tasks.length}): ${lim.toFixed(4)} — ${U <= lim ? "✓ garantizado" : "⚠ no garantizado (usar test R)"}`;
+
+  document.getElementById("steps-box").style.display = "none";
+  document.getElementById("summary").style.display = "none";
+}
+
+function ceil(a, b) { return Math.ceil(a / b); }
+
+function computeR(task, higherPrio) {
+  let R = task.C;
+  const MAX = task.T;
+  let steps = [];
+  for (let iter = 0; iter < 200; iter++) {
+    let val = task.C;
+    let parts = [`C=${task.C}`];
+    higherPrio.forEach(h => {
+      const c = ceil(R, h.T);
+      const inc = c * h.C;
+      val += inc;
+      parts.push(`⌈${R}/${h.T}⌉·${h.C} = ${c}·${h.C} = ${inc}`);
+    });
+    steps.push({ R_in: R, expr: parts.join(" + "), result: val });
+    if (val === R) return { R, steps, ok: R <= task.T };
+    if (val > MAX) return { R: val, steps, ok: false };
+    R = val;
+  }
+  return { R, steps, ok: false };
+}
+
+function calculate() {
+  assignPriorities();
+  const byPrio = [...tasks].map((t,i)=>({...t, idx:i})).sort((a,b)=>b.priority-a.priority);
+  let stepsHTML = "";
+  let allOk = true;
+
+  byPrio.forEach((task, pos) => {
+    const higher = byPrio.slice(0, pos);
+    const { R, steps, ok } = computeR(task, higher);
+    if (!ok) allOk = false;
+
+    const Rcell = document.getElementById("R-" + task.idx);
+    const OKcell = document.getElementById("OK-" + task.idx);
+
+    Rcell.innerHTML = `<strong style="font-size:14px;">${R}</strong>`;
+    OKcell.innerHTML = ok
+      ? `<span class="badge badge-ok">✓ ${R} ≤ ${task.T}</span>`
+      : `<span class="badge badge-fail">✗ ${R} > ${task.T}</span>`;
+
+    stepsHTML += `<div class="task-block">`;
+    stepsHTML += `<div class="task-label">Tarea ${task.name} (C=${task.C}, T=${task.T}, prioridad ${task.priority})</div>`;
+    steps.forEach(s => {
+      const conv = s.result === s.R_in;
+      stepsHTML += `R = ${s.R_in}? → ${s.expr} = ${s.result}${conv ? " ✓" : ""}<br>`;
+    });
+    stepsHTML += `<div class="${ok ? "ok-line" : "fail-line"}">R<sub>${task.name}</sub> = ${R} ${ok ? `≤ ${task.T} ✓ planificable` : `> ${task.T} ✗ no planificable`}</div>`;
+    stepsHTML += `</div>`;
+  });
+
+  document.getElementById("steps-content").innerHTML = stepsHTML;
+  document.getElementById("steps-box").style.display = "block";
+
+  const sumEl = document.getElementById("summary");
+  sumEl.style.display = "block";
+  if (allOk) {
+    sumEl.className = "summary ok";
+    sumEl.textContent = "✓ Conjunto de tareas planificable con RMA — todos los tiempos de respuesta son menores o iguales a sus periodos.";
+  } else {
+    sumEl.className = "summary fail";
+    sumEl.textContent = "✗ Conjunto de tareas NO planificable con RMA — alguna tarea supera su plazo.";
+  }
+}
+
+function addTask() {
+  const letters = "FGHIJKLMNOPQRSTUVWXYZ";
+  const used = tasks.map(t => t.name);
+  const name = letters.split("").find(l => !used.includes(l)) || "T" + tasks.length;
+  tasks.push({ name, T: 20, C: 2 });
+  renderTable();
+}
+
+function removeTask(i) {
+  tasks.splice(i, 1);
+  renderTable();
+}
+
+function resetTasks() {
+  tasks = DEFAULT.map(t => ({...t}));
+  renderTable();
+}
+
+renderTable();
+</script>
+</body>
+</html>

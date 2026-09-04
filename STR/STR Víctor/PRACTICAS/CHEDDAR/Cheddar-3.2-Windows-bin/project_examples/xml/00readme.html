@@ -1,0 +1,105 @@
+
+
+This file contains a description of the files 
+provided in the "project_examples" directory.
+
+
+<h3>
+I. Examples of application modeling and analysing
+</h3>
+
+<ul>
+<li> periodic.xml :  basic demonstration with a simple set of 3 independant periodic task
+with a mono processor architecture
+<li> multiprocessor.xml :  basic demonstration with a simple set of 3 independant periodic task
+with a multi processor architecture
+<li> rts03.xml :  demonstration presented during the conference RTS'2003
+<li> demo_tni.xml : demonstration presented during a working group
+			during a research contract between TNI
+			and the LISyC Team
+<li> pilot.xml : temporal validation of Pilot : a mobile robot
+		control system designed by the EA 2215 team
+<li> arin653.xml : Cheddar project described in the paper 
+		published in the ACM SIGADA'04 (Atlanta)
+</ul>
+
+
+<h3>
+II. Examples of user-defined schedulers 
+</h3>
+
+<ul>
+<li> dm.sc : a file which implements the Deadline Monotonic
+		scheduler
+<li> rm.sc : a file which implements the Rate Monotonic
+		scheduler
+<li> edf.sc : a file which implements the Earliest Deadline
+		First scheduler
+<li> llf.sc : a file which implements the Least Laxity First
+		scheduler
+<li> hpf1.sc and hpf2.sc : two different ways to code a Highiest Priority
+			First scheduler
+<li> arinc.sc : modeling of a ARINC 653 partition scheduler
+<li> schedule_according_to_criticity.parametric-cpu.sc : show how to define User's defined
+		parameters : this scheduler is used by criticity.xml and schedule tasks
+		according thier a criticity level
+<li> non_preemptive_llf.sc (and its XML examples file non_preemptive_llf.xml) :
+		Example of a LLF scheduler with no preemption when to tasks have the 
+		same laxity value
+<li> ts.sc : it's a time sharing scheduler. The processor is given to the task which
+		ran the least frequently.
+<li> fcfs.sc : First come/first served scheduling policy.
+<li> short.sc : Schedule first the shortest job (with the smallest capacity)
+<li> dvd0.parametric-cpu.sc : Dynamic value density scheduler of the York
+		University (see docs/YCS-98-310.pdf)
+<li> mllf.sc : Models "Modified Least Laxity First" with f=0.5;
+		(see also mllf.xml and docs/brylawski.pdf)
+<li> muf.sc : Maximum urgency scheduler (see also muf.xml and docs/sysengr91.pdf
+<li> cyclic_executive.sc : example of a	off line scheduling of a set of task. The static scheduling is defined in this .sc file in order to generate a schedule of T1 and T2 as follows : T1, T2, T1, T1, T2, T1, ...
+This .sc file works with cyclic.xml
+</ul>
+
+
+<h3>
+III. Examples of user-defined event analyzers
+</h3>
+
+<ul>
+<li> number_of_activations.sc : show how to compute the number of task activation
+	from a scheduling simulation
+<li> jitter.sc : compute from a scheduling simulation the jitter beetwen the ends
+		of two tasks
+<li> buffer_size.sc : compute from a scheduling simulation the number of byte
+		in a buffer 
+</ul>
+
+<h3>
+IV.  Examples of user-defined task model
+</h3>
+
+<ul>
+<li> activations.sc : show how to define user defined static and dynamic task activations 
+<li> random_capacity.sc : example of a task model with capacity varying randomly
+	in a given time interval
+<li> increasing_capacity.sc : example of a task model with capacity which is incremented
+	at each task activation
+<li> bursty.sc : example of a bursty task activation
+<li> dynamic_activation.sc : a second example of dynamic task arrival pattern
+<li> rm_auto.xml : an example of Rate Monotonic scheduler modeled with the Cheddar automaton language
+</ul>
+
+
+
+<h3>
+V.  XML files tools
+</h3>
+
+<ul>
+<li> cheddar_event_table.dtd : DTD of an event table exported by Cheddar
+		(an event table is the data structur storing a scheduling
+		into Cheddar).
+<li> cheddar_project.dtd : DTD of an application modeled by Cheddar
+<li> cheddar_project.xls and cheddar_project.ccs : necessary files 
+		to display a XML Cheddar project file with an Internet
+		browser.
+</ul>

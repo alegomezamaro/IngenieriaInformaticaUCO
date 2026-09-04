@@ -1,0 +1,105 @@
+<test v="2.0"><p><t>Preguntas Extra STR Tema 2</t><d/><a/><c/><v/><e>5Fpx8oZKoM0KMOx</e><r>117158660590404</r></p><f/><c><c><t>0</t><p>Teniendo en cuenta las definiciones puestas a continuación, seleccione cuál de las
+siguientes asignaciones en ADA son correctas.
+
+type Weight is digits 4 range 0.0 .. 200.0;
+type Height is digits 4 range 0.0 .. 200.0;
+
+w0, w1: Weight;
+h0, h1: Height;</p><c>1112</c><r><o>w0 := 75.4;
+h0 := 180.0;
+h1 := w0 + 100.0; </o><o>w0 := 75.4;
+h0 := 180.0;
+h1 := w0 + h0/10.0; </o><o>w0 := 75.4;
+h0 := 180.0;
+h1 := h0 + 52.0; </o><o>w0 := 75.4;
+h0 := 180.0;
+h1 := h0 + h0/10.0;</o></r></c><c><t>0</t><p>Seleccione qué definiciones y sentencias en ADA se utilizarían para definir un rango de
+números reales con precisión de milésima entre -99 y 99.</p><c>1121</c><r><o>type Dato is digits 5 range -99.999 .. 99.999;</o><o>type Dato is digits 0.001 range -99.999 .. 99.999;</o><o>type Dato is delta 0.001 range -99.999 .. 99.999;</o><o>type Dato is delta 5 range 0.001;</o></r></c><c><t>0</t><p>Escoja el lenguaje de programación que presenta mayor nivel de simplicidad para obtener
+un registro concreto de una base de datos.</p><c>1121</c><r><o>Ensamblador</o><o>ADA</o><o>SQL</o><o>C++</o></r></c><c><t>0</t><p>Seleccione el lenguaje de programación que tiene una mayor flexibilidad.</p><c>1121</c><r><o>SQL</o><o>Python</o><o>C</o><o>Java</o></r></c><c><t>0</t><p>Indique qué característica se está potenciando cuando un lenguaje de programación obliga
+al programador a especificar todos y cada uno de los parámetros de una función.</p><c>2111</c><r><o>Modularidad</o><o>Legibilidad</o><o>Simplicidad</o><o>Flexibilidad </o></r></c><c><t>0</t><p>Seleccione qué característica no favorece la legibilidad.</p><c>1121</c><r><o>Poder usar comentarios multilínea.</o><o>Poder utilizar mayúsculas y minúsculas en las variables.</o><o>Utilizar saltos a direcciones absolutas dentro del código</o><o>Poder definir tipos de datos abstractos</o></r></c><c><t>0</t><p>De los siguientes lenguajes de programación, seleccione aquel que presente menor nivel de
+seguridad.</p><c>1112</c><r><o>Fortran</o><o>C</o><o>Python</o><o>Ensamblador </o></r></c><c><t>0</t><p>¿Qué tipo de sistema sería el más recomendable para poner una aplicación de tiempo real que controle la velocidad de rotación en función del peso en un sistema empotrado dentro de una lavadora inteligente?</p><c>1211</c><r><o>Un ejecutable con enlaces dinámicos.</o><o>Un ejecutable stand-alone.</o><o>Un ejecutable con integración completa de servicios.</o><o>Un Sistema Operativo en Tiempo Real con la aplicación como un servicios del Sistema Operativo con carga y descarga a demanda.</o></r></c><c><t>0</t><p>Indique qué característica del lenguaje hace que sea posible que un mismo programa se pueda ejecutar en un procesador de 32 bits y en uno de 64 bits. </p><c>1121</c><r><o>Seguridad</o><o>Eficacia</o><o>Portabilidad</o><o>Flexibilidad </o></r></c><c><t>0</t><p>Supongamos que se ha producido un error en una función. Si dicha función no tiene
+manejador de excepciones para la excepción que se ha producido, seleccione cuál de las
+siguientes acciones se realizaría.</p><c>1121</c><r><o>Se comienza a evaluar la pila de llamadas comenzando desde el main o desde el
+procedimiento donde haya un manejador “catch-all”. En cuanto se encuentre una función
+con un manejador para la excepción generada, se le da control y en caso de no encontrar,
+se ejecuta el manejador catch-all o el del Sistema Operativo, si no existía.</o><o>Primero, busca si existe un manejador “catch-all” en toda la pila de llamadas de
+funciones. Si existe, se sube la pila de llamada de funciones hasta ese manejador y se le
+da control. En caso contrario, se le da control al manejador del Sistema Operativo, que
+habitualmente aborta la ejecución del proceso.</o><o>Primero, busca en la función llamadora de la actual y ejecuta el manejador de
+excepciones de esa función. Si no existe o no se maneja la excepción que se ha lanzado,
+se pasa al superior, hasta que llegue al nivel del Sistema Operativo, donde se abortaría la
+ejecución del proceso.</o><o>Primero, evalúa si en toda la pila de llamadas a la función hay algún manejador activo. Si
+hay uno, se le da control a él. Si hay más de uno, se ejecuta el que esté más arriba de la
+pila, cuando finaliza, se ejecuta el siguiente, hasta que todos los manejadores se terminan
+de ejecutar. Si no hay ninguno, se ejecuta el manejador del Sistema Operativo, abortando
+la ejecución del proceso.</o></r></c><c><t>0</t><p>En ADA, ¿qué característica se favorece al permitir indicar un número de la siguientes
+manera 2#1001_0001#?</p><c>1112</c><r><o>Portabilidad</o><o>Modularidad</o><o>Simplicidad</o><o>Legibilidad </o></r></c><c><t>0</t><p>¿Qué debe proporcionar un lenguaje de programación en relación a los errores que se
+produzcan mientras los programas se ejecutan?</p><c>1211</c><r><o>Un manejador “catch-all” que capture todos los errores en el nivel del main.</o><o>Un soporte de gestión de excepciones flexible, con baja sobrecarga y de fácil uso.</o><o>Un mecanismo de fail-safe que permita cerrar la aplicación de manera segura.</o><o>Compiladores que permitan detectar posibles errores en tiempo de compilación y, en su
+caso, permitan identificar funciones que no tengan manejadores de excepciones que
+puedan lanzarse en un determinado trozo de código.</o></r></c><c><t>0</t><p>¿Qué característica es la que se busca en un lenguaje de programación que sea capaz de
+proporcionar una medida precisa de la computación de los diferentes módulos?</p><c>2111</c><r><o>Eficacia</o><o>Simplicidad</o><o>Modularidad</o><o>Portabilidad </o></r></c><c><t>0</t><p>En ADA, si intentas definir una función de la siguiente manera: 'function Calcular(X: in out Integer) return Integer is...', ¿qué ocurrirá durante la compilación?</p><c>1121</c><r><o>Se compilará correctamente si el cuerpo de la función no modifica a X.
+</o><o>Solo dará error si se intenta llamar a la función desde una expresión matemática.
+</o><o>Se producirá un error porque las funciones solo admiten parámetros de modo 'in'.
+</o><o>Se producirá un error porque falta la palabra clave 'procedure'.
+</o></r></c><c><t>0</t><p>¿Cuál es la principal ventaja de utilizar un ejecutable 'stand-alone' en un sistema crítico de tiempo real?</p><c>2111</c><r><o>Mayor predecibilidad y rapidez al conocerse todas las direcciones de memoria en tiempo de compilación.
+</o><o>Permite actualizar el sistema operativo sin necesidad de recompilar la aplicación.
+</o><o>Facilita la depuración de errores de segmentación mediante el uso de símbolos dinámicos.
+</o><o>Reduce significativamente el tamaño total del código almacenado en la memoria ROM.
+</o></r></c><c><t>0</t><p>Se lanza una excepción en un bloque interno. Si no hay manejador en ese bloque, ¿cuál es el orden exacto de búsqueda de ADA para propagar el error?</p><c>1121</c><r><o>Busca en orden alfabético todos los procedimientos definidos en el mismo paquete.
+</o><o>Salta directamente al manejador del Sistema Operativo para abortar el proceso.
+</o><o>Busca en la pila de llamadas (procedimientos llamadores) hasta encontrar un manejador o llegar al main.
+</o><o>Reinicia el bloque actual esperando que el error haya sido transitorio.
+</o></r></c><c><t>0</t><p>En el contexto de la 'Eficacia' de un lenguaje para STR, ¿qué factor dificulta más la predicción exacta del tiempo de ejecución?</p><c>1112</c><r><o>El uso de tipos modulares para aritmética cíclica.
+</o><o>La declaración de constantes al inicio del programa.
+</o><o>La inclusión de comentarios multilínea en el código fuente.
+</o><o>El uso de bucles de tipo 'while' con condiciones que dependen de datos externos.</o></r></c><c><t>0</t><p>¿Cuál es la sintaxis correcta en ADA para asignar valores a un registro 'Posicion' con campos 'X' e 'Y' mediante un agregado por nombre?</p><c>1112</c><r><o>P := (10, 20);
+</o><o>P.X := 10; P.Y := 20;
+</o><o>P := {X: 10, Y: 20};
+</o><o>P := (X =&gt; 10, Y =&gt; 20);</o></r></c><c><t>0</t><p>Si un microcontrolador de una lavadora inteligente no tiene un Sistema Operativo previo, ¿cómo se incluye la funcionalidad mínima necesaria para ejecutar la aplicación?</p><c>2111</c><r><o>La aplicación debe incluir un pequeño kernel o funciones del SO integradas en el ejecutable final.
+</o><o>Se debe instalar Windows CE por separado antes de cargar el programa.
+</o><o>El lenguaje ADA genera automáticamente un SO completo en el disco duro.
+</o><o>No es necesario, el procesador puede leer el código ADA directamente sin ayuda.
+</o></r></c><c><t>0</t><p>¿Por qué definir un tipo de dato real usando solo 'digits' puede causar problemas de portabilidad entre una máquina de 32 bits y otra de 64 bits?</p><c>1112</c><r><o>Porque el compilador de 64 bits no permite el uso de números reales.
+</o><o>Porque los números reales en 32 bits siempre se redondean a cero.
+</o><o>Porque ADA solo es portable si se usan números enteros estrictos.
+</o><o>Porque la precisión solicitada puede implicar diferentes rangos de valores máximos según la arquitectura.</o></r></c><c><t>0</t><p>Dada la instrucción: 'loop ... exit when d = 0; ... end loop;', ¿cuál es su comportamiento?</p><c>1112</c><r><o>Solo funciona si el bucle es de tipo 'for'.
+</o><o>Dará un error de compilación porque falta el 'until'.
+</o><o>Es un bucle infinito porque d nunca cambia de valor.
+</o><o>Es un bucle condicional que finaliza en cuanto la variable d toma el valor cero.</o></r></c><c><t>0</t><p>Un lenguaje que obliga a especificar parámetros de entrada y salida potencia la 'Modularidad' porque:</p><c>1211</c><r><o>Reduce la cantidad de líneas de código necesarias para definir una función.
+</o><o>Define una interfaz clara y precisa que permite compilar y depurar módulos de forma separada.
+</o><o>Permite que cualquier parte del programa acceda a las variables internas del módulo.
+</o><o>Evita que el programador tenga que usar comentarios descriptivos.</o></r></c><c><t>0</t><p>¿Cuál es la diferencia fundamental entre un tipo real de coma fija ('delta') y uno de coma flotante ('digits') en ADA?</p><c>1121</c><r><o>
+La coma fija solo sirve para números positivos y la flotante para negativos.</o><o>ADA solo permite el uso de 'delta' en sistemas operativos de tiempo real.
+</o><o>La coma fija garantiza una precisión absoluta constante, mientras que la flotante garantiza una precisión relativa.
+</o><o>La coma flotante es mucho más lenta de procesar en cualquier hardware.
+</o></r></c><c><t>0</t><p>En un bloque 'case', si se utiliza la cláusula 'when others =&gt; null;', ¿qué efecto tiene en el programa?</p><c>1121</c><r><o>Lanza una excepción si el valor cae en esa rama.
+</o><o>Obliga a que el usuario introduzca un valor por teclado.
+</o><o>Garantiza que el 'case' sea exhaustivo sin realizar ninguna acción para los valores no especificados.
+</o><o>Detiene la ejecución del bucle actual inmediatamente.</o></r></c><c><t>0</t><p>El modelo de 'Terminación o Escape' en la gestión de excepciones implica que:</p><c>1211</c><r><o>El manejador reintenta la instrucción fallida hasta que funcione.
+</o><o>Tras ejecutar el manejador, el control nunca vuelve al punto donde se produjo la excepción.
+</o><o>El programa se cierra y borra todos los datos de la memoria.
+</o><o>La excepción se ignora y el programa sigue como si nada hubiera pasado.
+</o></r></c><c><t>0</t><p>¿Cómo se accede correctamente al elemento de la tercera fila y cuarta columna de una matriz bidimensional 'M' en ADA?</p><c>1121</c><r><o>M{3, 4}
+</o><o>M.get(3, 4)
+</o><o>M(3, 4)
+</o><o>M[3][4]</o></r></c><c><t>0</t><p>Si un lenguaje permite saltos a direcciones absolutas de memoria, ¿cuál es el mayor riesgo para la 'Legibilidad'?</p><c>1112</c><r><o>Solo se podrán usar variables de tipo entero.
+</o><o>El compilador producirá errores de tipos constantes.
+</o><o>El programa ocupará más espacio en la memoria RAM.
+</o><o>El código se vuelve difícil de entender sin documentación externa sobre el hardware.</o></r></c><c><t>0</t><p>En ADA, ¿qué tipo de dato permite agrupar variables de distintos tipos bajo una sola entidad lógica?</p><c>1211</c><r><o>Array
+</o><o>Record
+</o><o>Modular</o><o>Enumerado</o></r></c><c><t>0</t><p>¿Cuál es la función principal de un 'compilador cruzado' (cross-compiler)?</p><c>2111</c><r><o>Generar ejecutables para una máquina con arquitectura distinta a la que realiza la compilación.
+</o><o>Traducir automáticamente código de C++ a ADA para mejorar la seguridad.
+</o><o>Permitir que el código se ejecute en internet sin ser descargado.
+</o><o>Verificar que no haya errores de lógica en el algoritmo del programador.</o></r></c><c><t>0</t><p>Dada la declaración: 'procedure Reset (V: in out Integer);', ¿cuál es el privilegio del procedimiento sobre V?</p><c>1112</c><r><o>V solo puede ser modificado si es igual a cero.
+</o><o>V se convierte en una variable global para todo el paquete.
+</o><o>Solo puede asignarle un valor, pero no leer el que tenía antes.
+</o><o>Puede leer el valor actual de V y también asignarle uno nuevo.</o></r></c><c><t>0</t><p>¿Por qué se dice que ADA no distingue entre mayúsculas y minúsculas en sus identificadores?</p><c>1112</c><r><o>Para obligar a los programadores a escribir todo en mayúsculas.
+</o><o>Porque el lenguaje ADA está basado en el código Morse.
+</o><o>Porque los procesadores de 32 bits no pueden procesar letras minúsculas.
+</o><o>Para evitar errores causados por variables con nombres similares que solo difieren en la capitalización.</o></r></c><c><t>0</t><p>¿Qué ocurre si una aplicación de Tiempo Real produce un error de ejecución (como división por cero) y no tiene un sistema de gestión de excepciones?</p><c>1112</c><r><o>El compilador detecta el error antes de que el programa se ejecute.
+</o><o>El procesador corrige el error automáticamente usando inteligencia artificial.
+</o><o>La división por cero da como resultado el número infinito y el programa sigue.
+</o><o>Se muestra un mensaje de error y se aborta el programa, lo cual es inaceptable en STR.</o></r></c><c><t>0</t><p>En ADA, ¿qué palabra clave se utiliza para definir un tipo de dato que es un puntero a otro objeto?</p><c>1112</c><r><o>pointer
+</o><o>ref
+</o><o>address
+</o><o>access</o></r></c></c><i/></test>

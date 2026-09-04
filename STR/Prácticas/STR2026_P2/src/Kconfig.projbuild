@@ -1,0 +1,8 @@
+menu "Configuración Práctica 2"
+
+    config MATRIX_SIZE
+        int "Tamaño de la matriz"
+        default 10
+        help
+            Establece el tamaño (N x N) para las matrices en la prueba de rendimiento de multiplicación.
+endmenu

@@ -1,0 +1,78 @@
+.titre {
+	font-size: 12pt;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-decoration: underline;
+	background-color: #999999;
+}
+
+.sommaire_titre {
+	font-size: 9pt;
+	background-color: #999999;
+	color: #111111;
+}
+
+.element {
+	font-size: 10pt;
+	font-weight: bold;
+	background-color: #BBBBBB;
+	color: #555555;
+}
+
+.sommaire_element {
+	font-size: 9pt;
+	background-color: #BBBBBB;
+	color: #333333;
+}
+
+.element_content {
+	font-size: 9pt;
+	background-color: #EEEEEE;
+}
+
+.retour_sommaire {
+	font-size: 8pt;
+	font-style: italic;
+}
+
+.text {
+	font-size: 9pt;
+	background-color: #EEDDDD;
+	color: #003300;
+}
+
+.attribut {
+	background-color: #D0E0D0;
+}
+
+.enfant {
+	background-color: #DDDDEE;
+}
+
+.nom {
+	font-size: 9pt;
+	color: #773333;
+}
+
+.valeur {
+	font-size: 9pt;
+	color: #447744;
+}
+
+.boite {
+	border: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+}
+
+body {
+	font-family: Courier;
+	font-size: 9pt;
+	background-color: #FFFFFF;
+}
+
+a {
+	font-family: Courier;
+}
+a:link, a:active, a:visited { text-decoration: none; font-weight: normal; color: #3333AA; }
+a:hover { text-decoration: underline; font-weight: normal; color: #000088; }

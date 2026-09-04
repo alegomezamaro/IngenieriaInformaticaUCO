@@ -1,0 +1,81 @@
+<test v="2.0"><p><t>Cuestionario Tema 3 STR</t><d/><a>PAPAPAPAPAPALOMARES</a><c>15</c><v/><e>ZojRuQs39zTkmKH</e><r>30474184653813</r></p><f/><c><c><t>0</t><p>¿Qué mecanismo es el que realiza mediante instrucciones software el chequeo del valor de
+una determinada variable modificable externamente utilizando bucles?</p><c>1112</c><r><o>Transferencia condicional</o><o>RTI</o><o>DMA</o><o>Espera ocupada</o></r></c><c><t>0</t><p>¿Qué estructura de tiempo real sería la mejor para una sistema en el que se controle el
+sistema de riego de un huerto personal con un sensor de iluminación, otro sensor de
+temperatura, dos sensores de humedad (uno situado al inicio de la línea de riego y otro al
+final de la misma), un microcontrolador y un relé de apertura/cierre de una bomba de
+riego de agua?</p><c>2111</c><r><o>Un sistema centralizado </o><o>Un sistema jerárquico</o><o>Un sistema piramidal</o><o>Un sistema distribuido</o></r></c><c><t>0</t><p>¿Qué método de transferencia de datos sería el más eficiente para el mecanismo de
+cancelación de eco de un sistema de videoconferencia compuesto por un micrófono y un
+altavoz?</p><c>1211</c><r><o>El mecanismo DMA realizaría las activaciones cuando se detecte que el usuario comienza
+o para de hablar. Una vez se tiene ese instante cubierto, las transferencias de información
+ya se pueden hacer por el mecanismo de muestreo.</o><o>Sería necesario incorporar el mecanismo de interrupciones para detectar cuándo comienza
+o para de hablar el usuario junto con el método DMA para realizar la transferencia de
+datos del sonido captado.</o><o>El mecanismo de interrupciones permitiría detectar el inicio o final del habla del usuario,
+mientras que el mecanismo de muestreo realizaría las transferencias de datos desde el
+micrófono hasta la tarea de cancelación de eco.</o><o>Se utilizaría un mecanismo de espera ocupada para comprobar cuándo comienza o
+para de hablar el usuario, junto con el mecanismo de interrupciones para ir
+realizando las transferencias de datos necesarias.</o></r></c><c><t>0</t><p>¿Qué ocurre en un sistema de interrupciones basado en codificador de prioridad cuando
+dos señales de interrupción se activan? </p><c>1211</c><r><o>Que la señal IRQ se activa para notificar a la CPU que existe, al menos, una solicitud de
+interrupción y se selecciona el vector de interrupción asociado al dispositivo de mayor
+número, que coincide con el más prioritario.</o><o>Que se activa la señal IRQ para notificar a la CPU que existe, al menos, una solicitud de
+interrupción y el programador del sistema habrá diseñado el decodificador para que genere
+una solicitud de vector de interrupción sólo una de las dos señales activas, la que haya
+decidido el diseñador del sistema. </o><o>Que la señal IRQ se activa para notificar a la CPU que existe, al menos, una solicitud de
+interrupción y se selecciona el vector de interrupción asociado al dispositivo de menor
+número, que coincide con el más prioritario.</o><o>Que la señal IRQ se activar para notificar a la CPU que existe, al menos, una solicitud de
+interrupción y, mediante un registro adicional, se selecciona el vector de interrupción
+asociado al dispositivo que coincide con el indicado en el registro adicional, que es
+considerado como prioritario.</o></r></c><c><t>0</t><p>¿Por qué el Bus Máster de un sistema Daisy Chain de una cadena de n dispositivos debe
+desactivar la señal GRANT durante n ciclos y reactivarlo posteriormente, cuando se
+detecta una activación de interrupción en el bus REQ?</p><c>1121</c><r><o>Para que le dé tiempo a que el último dispositivo de la cadena pueda desactivar el REQ del
+bus común y activar su IEO.</o><o>Para que todos los dispositivos desactiven sus IRQ y puedan activar REQ
+simultáneamente, de tal manera que el dispositivo con mayor prioridad tendrá que esperar
+menos ciclos para obtener el GRANT y activar el IEO de la cadena.</o><o>Para garantizar que cualquier dispositivo pueda parar la ejecución de sus RTI y se ponga a
+ejecutar el dispositivo más prioritario de los activos.</o><o>Para que el IEO del dispositivo activo pueda cerrar la cadena y desactivar el REQ del
+dispositivo posterior.</o></r></c><c><t>0</t><p>¿Cuál de los siguientes procedimientos de respuesta a una interrupción no se produce?</p><c>1112</c><r><o>Se genera una instrucción virtual dentro del flujo de instrucciones, con el comando de
+acción que se desea.</o><o>Se ejecuta la instrucción que se encuentre en una dirección de memoria prefijada con
+anterioridad.</o><o>Se altera el valor del contador de programa con una dirección de memoria que se calcula a
+partir de un registro y alguna función matemática tomando como parámetro el número de
+la interrupción que se ha activado.</o><o>Cargar un registro con el contenido de la interrupción y ejecutar el contenido de
+dicho registro.</o></r></c><c><t>0</t><p>¿Qué estructura de tiempo real es la más recomendable para un sistema de procesamiento
+en la nube para la búsqueda de transacciones de múltiples clientes y proveedores, para la
+comprobación de que las transacciones de clientes casan con las de los proveedores y que
+estos tarifican y que se pagan los impuestos correctamente, adicionalmente todo este
+sistema está compuesto por tareas de respaldo redundantes?</p><c>1112</c><r><o>Un sistema centralizado</o><o>Un sistema piramidal</o><o>Un sistema jerárquico</o><o>Un sistema distribuido </o></r></c><c><t>0</t><p>Indique cuál de las siguientes afirmaciones es correcta, cuando en mitad de la ejecución de
+una instrucción en ensamblador se produce una interrupción.</p><c>2111</c><r><o>No pasa nada hasta que finaliza la ejecución de la instrucción en ensamblador, luego salta
+a ejecutar la RTI, pero sólo si es la NMI o si IF está a 1</o><o>Finaliza la ejecución de la instrucción de ensamblador al completo. Después salta a
+ejecutar la RTI, si es la interrupción NMI. Si no lo es, pero IF vale 1, entonces se ejecuta la
+instrucción IRQ.</o><o>Interrumpe la instrucción actual inmediatamente, salta a ejecutar la NMI, y si IRQ está
+activa, entonces se ejecuta la RTI asociada a IF.</o><o>Inmediatamente salta a ejecutar la RTI, salvo que IF valga 0, en cuyo caso, sólo se ejecuta
+la RTI si es una interrupción NMI.</o></r></c><c><t>0</t><p>¿Qué método de transferencia de datos sería el más eficiente para un sistema de control
+digital de la temperatura del agua de una pecera para evitar que el agua pueda salirse de
+los rangos de temperatura superior e inferior para la vida de los peces?</p><c>1211</c><r><o>Método DMA por burst mode</o><o>Método de interrupciones</o><o>Método de muestreo</o><o>Método DMA por cycle stealing</o></r></c><c><t>0</t><p>Indique qué solución es la más apropiada para desarrollar un sistema de detección de
+intrusos que active una alarma sonora si no se introduce un código en un panel de acceso
+antes de 30 segundos de haberse detectado la apertura de la puerta. </p><c>1121</c><r><o>Utilizar un oscilador de alta precisión con un período de 30 segundos.</o><o>Utilizar una tarea que utilizando un mecanismo de transferencia condicional se encargue
+de chequear si la clave se ha introducido y si ha transcurrido el tiempo.</o><o>Utilizar un watchdog timer con una temporización de 30 segundos.</o><o>Utilizar una tarea que se encargue de ir chequeando mediante espera ocupada si se ha
+introducido la clave y el tiempo transcurrido.</o></r></c><c><t>0</t><p>¿Qué estructura de tiempo real es la más recomendable para un sistema de blockchain
+para soporte de Bitcoin con tareas tanto de validación de transacciones como de minado en
+una granja de servidores de altas prestaciones?</p><c>1211</c><r><o>Un sistema piramidal</o><o>Un sistema distribuido</o><o>Un sistema centralizado</o><o>Un sistema jerárquico</o></r></c><c><t>0</t><p>¿Por qué el DMA debe devolver el control de bus a la CPU cada cierto número de ciclos,
+aunque no haya terminado de hacer todas las transferencias?</p><c>1112</c><r><o>Porque si no, la CPU no podría ejecutar la siguiente instrucción del programa que esté
+ejecutando.</o><o>No es cierto. Sólo es necesario que el DMA devuelva el control a la CPU si ésta necesita
+acceder a una dirección de memoria que no esté en su caché local.</o><o>Es necesario para impedir que la espera ocupada tenga deadlocks.</o><o>Se hace para permitir que el manejador de interrupciones pueda acceder a la CPU.</o></r><h>¿?</h></c><c><t>0</t><p>¿Qué método de transferencia de datos sería el más eficiente para el envío de los
+fotogramas de un vídeo de un sistema de alarma por detección de movimiento?</p><c>1112</c><r><o>Método de interrupciones</o><o>Método de espera ocupada</o><o>Método de transferencia condicional</o><o>Método DMA</o></r></c><c><t>0</t><p>¿Qué estructura de tiempo real es la más recomendable para el control de una planta de
+ensamblaje compuesto por tres etapas consecutivas, cada una con su propio autómata
+programable, en la que la primera etapa se encarga de realizar las soldaduras de una
+placa, tras lo cual se pasa a la segunda estación en la que se realiza un ensamblado
+automático dentro de una carcasa y por último, se pasa al último paso en el que se realiza el
+ensamblado de dicho material, además este sistema contiene un mecanismo de descarte, si
+una pieza falla en alguno de los pasos para descartar el procesado en los pasos posteriores?</p><c>2111</c><r><o>Un sistema jerárquico</o><o>Un sistema distribuido</o><o>Un sistema monolítico</o><o>Un sistema centralizado</o></r></c><c><t>0</t><p>¿Qué método de transferencia de datos sería el más eficiente para interconectar dos tareas
+que están en ejecución paralela, la primera proporciona un dato que es utilizada por la
+segunda tarea para realizar un cálculo asociado?</p><c>1121</c><r><o>Método DMA por burst mode</o><o>Método DMA por cycle stealing</o><o>Método de muestreo</o><o>Método de interrupciones </o></r></c><c><t>0</t><p>¿Qué estructura de tiempo real es la más recomendable para un sistema de un robot para
+la limpieza de una habitación, compuesto por dos sensores de ultrasonidos, cuatro sensores
+de infrarrojos, una brújula, cinco motores paso a paso y un microprocesador?</p><c>1112</c><r><o> Un sistema piramidal</o><o>Un sistema jerárquico</o><o>Un sistema distribuido</o><o>Un sistema centralizado</o></r></c><c><t>0</t><p>¿Qué método de transferencia de datos sería el más eficiente para implementar un juego
+del bingo, en el que una tarea genera números aleatorios y otras tareas comparan dichos
+números con los que tienen en sus boletos, que fueron generados aleatoriamente al inicio?</p><c>1121</c><r><o>Método de interrupciones</o><o>Método DMA por burst mode</o><o>Método de muestreo</o><o>Método DMA por cycle stealing</o></r></c><c><t>0</t><p>¿Qué estructura de tiempo real es la más recomendable para un sistema de iluminación
+viaria y de calles de farolas de una urbanización, cada farola con un sistema electrónico
+compuesto por un sensor de iluminación, otro de presencia, un microcontrolador y un
+variador de intensidad para la regulación lumínica de la farola, que permita encender al
+100% de su capacidad lumínica si detectan personas o vehículos en cada zona, iluminando
+al 75% la siguiente zona a la que se dirijan los vehículos o peatones, bajando al 50% la
+iluminación de la zona anterior por la que han pasado, manteniendo al 25% las zonas
+donde no se detecte movimiento durante al menos 5 minutos?</p><c>1112</c><r><o>Un sistema integrado</o><o>Un sistema monolítico</o><o>Un sistema centralizado</o><o>Un sistema jerárquico</o></r></c><c><t>0</t><p>¿Qué método de transferencia de datos sería el más eficiente para un sistema de alarma
+por detección de apertura de una puerta?</p><c>2111</c><r><o>Método de interrupciones</o><o>Método DMA por cycle stealing</o><o>Método de muestreo</o><o>Método DMA por burst mode</o></r></c></c><i/></test>

@@ -1,0 +1,74 @@
+
+Cheddar is mainly designed and developed by :
+
+F. Singhoff <singhoff@univ-brest.fr>
+J. Legrand <jerome.legrand@ellidiss.com>
+H. Nam Tran <hai-nam.tran@univ-brest.fr>
+A. Plantec <plantec@univ-brest.fr>
+S. Rubini <rubini@univ-brest.fr>
+
+
+Other contributors :
+
+
+J. Ait Oufella
+L. Allache
+Y. Allain
+I. Atchadam
+M. Auer
+M. Baert
+S. Bothorel
+R. Bouaziz
+E. Cadour
+F. Charlet
+N. Chauvin
+P.V. Chinh
+R. Couillet
+V. Cuiec
+P. Dissaux
+S. Demurget
+B. Djika
+M. Dridi
+S. Edzang
+C. Fotsing
+R. Frin
+V. Gaudel
+D. Geffroy
+M. Gning
+W. Guillo
+S. Herry
+T. Huertas
+J. Hugues
+A. Huopana
+H. Ihamouten
+M. Kerboeuf
+H. Lapinoja
+G. Laurens
+A. Le bot 
+L. Lemarchand
+S. Li
+H. Martin
+L. Moal
+L. Morin
+M. F. Mouflih
+C. Muller
+C. Mouden
+P. Normand
+V.A. Nicolas
+M. Nivala
+G. Oliva
+R. Prevot
+A. Sylia 
+D. Saulnier
+M. Strauss
+F. Touahria
+E. Thomas
+N. Vienne
+E. Vilain
+N.H. Vuong
+B. Zalila
+P. Zhang
+
+
+
+

@@ -1,0 +1,75 @@
+#include "implementation.oil"
+
+CPU ATMEL_AT91SAM7S256 // CPU del Lego NXT
+{
+  OS LEJOS_OSEK
+    {
+      STATUS = EXTENDED;
+      STARTUPHOOK = FALSE;
+      ERRORHOOK = FALSE;
+      SHUTDOWNHOOK = FALSE;
+      PRETASKHOOK = FALSE;
+      POSTTASKHOOK = FALSE;
+      USEGETSERVICEID = FALSE;
+      USEPARAMETERACCESS = FALSE;
+      USERESSCHEDULER = FALSE;
+    };
+
+  APPMODE sample_appmode1{}; // Modo de aplicacion por defecto.
+
+  TASK Avance
+  {
+    AUTOSTART = TRUE
+    {
+      APPMODE = sample_appmode1;
+    };  // Autoinicio en modo de aplicacion descrito
+        // Si no se desea que se autoarranque: AUTOSTART = FALSE;
+
+    PRIORITY  = 1;
+    ACTIVATION  = 1;
+    SCHEDULE  = FULL;
+    STACKSIZE   = 512;
+  };
+
+  TASK Final
+  {
+    AUTOSTART = FALSE;
+    PRIORITY  = 3;
+    ACTIVATION  = 1;
+    SCHEDULE  = FULL;
+    STACKSIZE   = 512;
+  };
+
+  TASK Calibrar
+  {
+    AUTOSTART = FALSE;
+    PRIORITY  = 2;
+    ACTIVATION  = 1; //Activaciones simultaneas
+    SCHEDULE  = FULL; //apropiativa o no
+    STACKSIZE   = 512;
+  };
+
+
+  COUNTER contador
+  {
+    MINCYCLE = 1; //ciclos minimos para la activacion de la alarma
+    MAXALLOWEDVALUE = 10000; //ciclos maximos para la activacion de la alarma
+    TICKSPERBASE = 1; //1tick = 1ms
+  };
+
+  ALARM alarma
+  {
+    COUNTER = contador;
+    ACTION = ACTIVATETASK
+    {
+      TASK = Calibrar;
+    };
+
+    AUTOSTART = TRUE
+    {
+      ALARMTIME = 1; //tiempo de activacion de la primera vez
+      CYCLETIME = 50; //cuanto tarda en volverse a activar
+      APPMODE = sample_appmode1;
+    };
+  };
+};
